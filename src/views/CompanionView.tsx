@@ -398,10 +398,9 @@ I have complete, grounded context across all course lecture slides, notes, and t
                   {m.role === 'user' ? (
                     <p className="whitespace-pre-wrap">{m.content}</p>
                   ) : (
-                    <div
-                      className="notes-prose text-ink"
-                      dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }}
-                    />
+                    <div className="notes-prose text-ink">
+                      {renderMarkdown(m.content).content}
+                    </div>
                   )}
                 </div>
               </div>
@@ -720,10 +719,9 @@ I have complete, grounded context across all course lecture slides, notes, and t
                 <div className="text-[11px] font-semibold uppercase tracking-wider text-indigo-700">
                   Ideal 10/10 Examiner Model Answer
                 </div>
-                <div
-                  className="notes-prose text-[12.5px] text-ink leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdown(graderResult.modelAnswer) }}
-                />
+                <div className="notes-prose text-[12.5px] text-ink leading-relaxed">
+                  {renderMarkdown(graderResult.modelAnswer).content}
+                </div>
               </div>
             </div>
           )}

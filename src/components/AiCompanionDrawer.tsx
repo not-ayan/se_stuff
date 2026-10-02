@@ -327,10 +327,9 @@ export const AiCompanionDrawer: React.FC<AiCompanionDrawerProps> = ({
                     {m.role === 'user' ? (
                       <p className="whitespace-pre-wrap">{m.content}</p>
                     ) : (
-                      <div
-                        className="notes-prose text-ink"
-                        dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }}
-                      />
+                      <div className="notes-prose text-ink">
+                        {renderMarkdown(m.content).content}
+                      </div>
                     )}
                     {m.meta?.autoSwitched && (
                       <div className="mt-1 text-[10px] text-sky-700 font-mono">
@@ -508,10 +507,9 @@ export const AiCompanionDrawer: React.FC<AiCompanionDrawerProps> = ({
 
                   <div className="rounded-xl border border-line bg-canvas p-3 text-[11.5px] space-y-1">
                     <div className="font-semibold text-indigo-700">10/10 Model Answer:</div>
-                    <div
-                      className="notes-prose text-ink"
-                      dangerouslySetInnerHTML={{ __html: renderMarkdown(graderResult.modelAnswer) }}
-                    />
+                    <div className="notes-prose text-ink">
+                      {renderMarkdown(graderResult.modelAnswer).content}
+                    </div>
                   </div>
                 </div>
               )}
