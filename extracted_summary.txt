@@ -1,0 +1,3193 @@
+=== FILE: SoftEngg - Intro.pdf ===
+--- Page 1 ---
+1 
+1 
+S Roy 
+Sikkim (Central) University 
+Gangtok, Sikkim 
+ 
+sroy01@cus.ac.in  
+What is Software Engineering?  
+Programs vs. Software Products 
+Evolution of Software Engineering  
+Notable Changes In Software 
+Development Practices  
+Introduction to Life Cycle Models  
+Summary 
+2 
+ 
+3 
+ 
+4 
+
+--- Page 2 ---
+2 
+ Engineering approach to develop software. 
+ Building Construction Analogy. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Systematic collection of past experience: 
+ 
+ techniques,  
+ methodologies, 
+ guidelines. 
+5 
+ Heavy use of past experience: 
+ Past experience is systematically arranged. 
+ 
+ Theoretical basis and quantitative techniques provided. 
+ Many are just thumb rules. 
+ Tradeoff between alternatives  
+ Pragmatic approach to cost-effectiveness 
+6 
+7 
+Art 
+Craft 
+Engineering 
+Esoteric Past 
+ Experience 
+Systematic Use of Past 
+Experience and Scientific Basis 
+Technology 
+Time 
+Unorganized Use of 
+ Past Experience 
+To acquire skills to develop large 
+programs.   
+ Exponential growth in complexity and difficulty level 
+with size.  
+ 10K vs 1000K LOC 
+ 
+ 
+ 
+ The ad hoc approach breaks down when  
+size of software increases: --- “One thorn  
+of experience is worth a whole wilderness of warning.” 
+8 
+
+--- Page 3 ---
+3 
+ Ability to solve complex programming problems:  
+ abstraction and decomposition  
+ How to break large projects into smaller and manageable parts?  
+ 
+ 
+ 
+ Learn techniques of:  
+ specification, design, interface development, testing, 
+project management, etc. 
+9 
+To  acquire skills to be a better 
+programmer:  
+ Higher Productivity  
+ Better Quality Programs 
+10 
+Software products: 
+ 
+ fail to meet user requirements. 
+ frequently crash. 
+ expensive. 
+ difficult to alter, debug, and enhance. 
+ often delivered late. 
+ use resources non-optimally. 
+11 
+ 12 
+Year 
+Hw cost 
+Sw cost 
+Relative Cost of Hardware and Software 
+1960 1999 
+--- Page 4 ---
+4 
+Larger problems,  
+Lack of adequate training in 
+software engineering, 
+Increasing skill shortage,  
+Low productivity improvements. 
+13 
+ Usually small in size 
+ Author himself is sole 
+user 
+ Single developer 
+ Lacks proper user 
+interface 
+ Lacks proper 
+documentation 
+ Ad hoc development.   
+ Large 
+ Large number of users 
+ 
+ Team of developers 
+ Well-designed interface 
+ 
+ Well documented & 
+user-manual prepared 
+ Systematic development 
+14 
+ Computer systems engineering:  
+ encompasses software engineering. 
+ 
+ Many products require development of software 
+as well as specific hardware to run it:  
+  a coffee vending machine,  
+ a mobile communication product, etc.  
+15 
+ The high-level problem: 
+ 
+ deciding which tasks are to be solved by software  
+ which ones by hardware. 
+16 
+--- Page 5 ---
+5 
+ Often, hardware and software are developed 
+together: 
+ Hardware simulator is used during software 
+development. 
+ Integration of  hardware and software. 
+ Final system testing 
+17 
+ 18 
+Feasibility  
+Study 
+Requirements Analysis and Specification 
+Hardware Software Partitioning 
+Hardware 
+Development 
+Software 
+Development Integration  
+and Testing 
+Project   Management 
+Early Computer Programming 
+(1950s): 
+Programs were being written in 
+assembly language.  
+Programs were limited to  about a 
+few hundreds of lines of assembly 
+code. 
+19 
+ 40 
+Object-Oriented 
+Ad hoc 
+Data flow-based 
+Data structure-
+based 
+Control flow-
+based 
+--- Page 6 ---
+6 
+A lot of effort and attention is now 
+being paid to:  
+ requirements specification.  
+Also, now there is a distinct design 
+phase: 
+ standard design techniques are being 
+used. 
+41 
+During all stages of  development 
+process: 
+Periodic reviews are being carried out  
+Software testing has become 
+systematic: 
+standard testing techniques are 
+available.  
+42 
+Because of good documentation: 
+ fault diagnosis and maintenance are 
+smoother now. 
+Several metrics are being used:  
+ help in software project management, 
+quality assurance, etc.  
+43 
+Projects are being thoroughly 
+planned:  
+ estimation,  
+ scheduling,  
+ monitoring mechanisms.  
+Use of CASE tools. 
+44 
+--- Page 7 ---
+7 
+Software life cycle (or software process): 
+ series of identifiable stages that a 
+software product undergoes during its life 
+time:  
+ Feasibility study 
+ requirements analysis and specification,  
+ design,  
+ coding,  
+ testing 
+ maintenance. 
+45 
+A software life cycle model (or  
+process model): 
+ a descriptive and diagrammatic model of 
+software life cycle: 
+ identifies all the activities required for product 
+development,  
+ establishes a precedence ordering among the different 
+activities, 
+ Divides life cycle into phases.   
+46 
+A written description: 
+ forms a common understanding of 
+activities among the software developers. 
+ helps  in identifying inconsistencies, 
+redundancies, and omissions in the 
+development process.  
+ Helps in tailoring a process model for 
+specific projects. 
+47 
+The development team must identify 
+a suitable life cycle model: 
+ and then adhere to it. 
+ Primary advantage of adhering to a life 
+cycle model: 
+ helps development of software in a systematic 
+and  disciplined manner. 
+48 
+--- Page 8 ---
+8 
+When a program is developed by 
+a single programmer ---  
+he has the freedom to decide his 
+exact steps.  
+49 
+When a software product is being 
+developed by a team:   
+ there must be a precise understanding 
+among team members as to when to do 
+what,  
+ otherwise it would lead to chaos and 
+project  failure.  
+50 
+ Many life cycle models have been proposed.  
+ We will confine our attention to a few important and 
+commonly used models.  
+ classical waterfall model 
+ iterative waterfall,  
+ evolutionary,  
+ prototyping, and  
+ spiral model 
+51 
+ R. Mall, “Fundamentals of Software Engineering,” 
+Prentice-Hall of India, 1999, CHAPTER 1. 
+52 
+
+==================================================
+
+=== FILE: LECT2_LifeCycleModels_Redesigned.pdf ===
+--- Page 1 ---
+02-09-2026
+1
+S O F T W A R E  E N G I N E E R I N G
+Life Cycle Models
+Understanding, choosing, and applying software development process models
+Swarup Roy  ·  Tezpur University
+F O U N D A T I O N S
+The Software Life Cycle
+A series of identifiable stages that a software product undergoes 
+during its lifetime
+Six stages: feasibility study, requirements analysis & specification, 
+design, coding, testing, and maintenance
+Life Cycle Models 2
+--- Page 2 ---
+02-09-2026
+2
+F O U N D A T I O N S
+What Is a Life Cycle Model?
+A descriptive and diagrammatic model of the software life cycle
+Identifies all the activities required for product development
+Establishes a precedence ordering among the different activities
+Divides the life cycle into phases — which the development team 
+must identify, and then adhere to
+Life Cycle Models 3
+F O U N D A T I O N S
+Why Model the Life Cycle?
+A written description builds a common understanding of activities 
+among developers
+Helps identify inconsistencies, redundancies, and omissions in the 
+development process
+Helps tailor a process model to the needs of a specific project
+Life Cycle Models 4
+--- Page 3 ---
+02-09-2026
+3
+F O U N D A T I O N S
+Why It Matters More in a Team
+Single Programmer Development Team
+Has the freedom to decide the exact steps to follow. Must share a precise, common understanding of who does what and when.
+No coordination with anyone else is required. Without a shared life-cycle model, that coordination breaks down — team-based 
+projects (not solo work) drift into chaos and project failure.
+Correction from the source slide: it is unmanaged team development, not solo development, that leads to chaos.
+Life Cycle Models 5
+F O U N D A T I O N S
+Five Life Cycle Models We Will Cover
+Classical 
+Waterfall
+Sequential, six phases, 
+no way back
+Iterative 
+Waterfall
+Same six phases, with 
+feedback loops
+Prototyping
+Build small, learn fast, 
+then build for real
+Evolutionary
+Grow the system 
+release by release
+Spiral
+Manage risk, one loop 
+at a time
+Life Cycle Models 6
+--- Page 4 ---
+02-09-2026
+4
+01
+M O D E L  0 1  O F  0 5
+Classical Waterfall Model
+The original, idealized model — six phases, one after another, with a document at the end of each.
+C L A S S I C A L  W A T E R F A L L  M O D E L
+Six Sequential Phases
+1
+Feasibility Study →
+2
+Requirements 
+Analysis & 
+Specification
+→
+3
+Design →
+4
+Coding & Unit 
+Testing →
+5
+Integration & System 
+Testing →
+6
+Maintenance
+Each phase starts only after the previous one is complete — the classical model has no way back.
+Life Cycle Models 8
+--- Page 5 ---
+02-09-2026
+5
+C L A S S I C A L  W A T E R F A L L  M O D E L
+Relative Effort Across Phases
+5
+10
+12
+15
+18
+40
+Feasibility Requirements Design Coding Testing Maintenance
+Phases from feasibility study to testing are known as the development phases
+Among all life-cycle phases, maintenance consumes the maximum effort
+Among the development phases, testing consumes the maximum effort
+(Illustrative proportions, not exact published percentages)
+Life Cycle Models 9
+C L A S S I C A L  W A T E R F A L L  M O D E L
+Process Discipline
+Most organizations define standards for the deliverables produced at 
+the end of every phase
+Entry and exit criteria are defined for every phase
+Specific methodologies are prescribed for specification, design, 
+testing, and project management
+Life Cycle Models 10
+--- Page 6 ---
+02-09-2026
+6
+C L A S S I C A L  W A T E R F A L L  M O D E L  ·  W O R K E D  E X A M P L E
+University Examination Portal
+A fixed-scope project, planned and executed through six clear milestones.
+Requirement
+Exam form fill-
+up, admit card, 
+marks entry, 
+result publication
+→
+Design
+Modules, 
+database 
+schema, roles for 
+student, faculty, 
+admin
+→
+Code
+Build form pages, 
+validation, login, 
+and reports
+→
+Test
+Check sample 
+registrations, 
+invalid data, 
+result calculation
+→
+Deploy
+Launch before 
+the examination 
+cycle
+→
+Maintain
+Fix report 
+formats or minor 
+policy updates
+Waterfall is simple to understand and easy to evaluate — but it assumes the requirements are known early.
+Life Cycle Models 11
+F E A S I B I L I T Y  S T U D Y
+Setting the Scope
+Aim: determine whether developing the product is financially 
+worthwhile and technically feasible
+First, get a rough understanding of what the customer wants — the 
+data flowing in, the processing needed, the data flowing out, and the 
+constraints on system behaviour
+Life Cycle Models 12
+--- Page 7 ---
+02-09-2026
+7
+F E A S I B I L I T Y  S T U D Y
+What the Analyst Does
+Explore the Options
+Work out an overall understanding of the problem
+Formulate different solution strategies
+Compare strategies by resources required, cost, and development 
+time
+Decide
+Perform a cost/benefit analysis to pick the best solution
+A project may turn out to be infeasible altogether — due to high 
+cost, resource constraints, or technical limitations
+Life Cycle Models 13
+F E A S I B I L I T Y  S T U D Y  ·  C A S E  S T U D Y
+Galaxy Mining Company Ltd. (GMC)
+CASE STUDY
+GMC runs about 50 mine sites across 8 states. Wanting to speed up compensation payouts for its miners, GMC proposes a Special Provident 
+Fund (SPF) — deducted monthly at each site and deposited with a Central SPF Commissioner (CSPFC), who tracks every miner's insta llments.
+W H A T  H A P P E N S
+GMC hires Adventure Software Inc. to automate SPF record-keeping for every employee
+Expected payoff: less manual bookkeeping, and much faster settlement of claims
+Sanctioned budget: ₹1 million to develop and install the software — the number every feasibility trade-off has to fit
+Life Cycle Models 14
+--- Page 8 ---
+02-09-2026
+8
+R E Q U I R E M E N T S  A N A L Y S I S  &  S P E C I F I C A T I O N
+Understanding What the Customer Wants
+Two Activities
+Requirements gathering and analysis
+Requirements specification
+Four Goals
+Collect all related data from the customer
+Analyse it to clearly understand what the customer wants
+Find inconsistencies and incompleteness in the requirements
+Resolve all inconsistencies and incompleteness
+Life Cycle Models 15
+R E Q U I R E M E N T S  A N A L Y S I S
+Requirements Gathering
+Relevant data is usually collected from end-users through interviews 
+and discussions
+Example: for business accounting software, the analyst interviews 
+every accountant in the organization to learn their requirements
+Life Cycle Models 16
+--- Page 9 ---
+02-09-2026
+9
+R E Q U I R E M E N T S  A N A L Y S I S
+From Raw Interviews to a Clean SRS
+Data collected from users usually contains contradictions and 
+ambiguities — each user has only a partial, incomplete view of the 
+system
+These ambiguities and contradictions must be identified, then 
+resolved through discussion with the customer
+The resolved requirements are organized into a Software 
+Requirements Specification (SRS) document
+Engineers who do this work are designated Analysts
+Life Cycle Models 17
+D E S I G N
+From Specification to Architecture
+What Happens
+The design phase transforms the SRS into a form suitable for 
+implementation in a programming language
+In technical terms, the software architecture is derived from the 
+SRS document
+Two Approaches
+Traditional (function-oriented) approach
+Object-oriented approach
+Life Cycle Models 18
+--- Page 10 ---
+02-09-2026
+10
+D E S I G N  ·  T R A D I T I O N A L  A P P R O A C H
+Structured Analysis
+First of the traditional approach's two activities — the second is 
+structured design
+Identify all the functions to be performed, and the data flow among 
+them
+Recursively decompose each function into sub-functions, and 
+identify data flow among the sub-functions too
+Carried out using Data Flow Diagrams (DFDs)
+Life Cycle Models 19
+D E S I G N  ·  T R A D I T I O N A L  A P P R O A C H
+Structured Design
+Follows structured analysis, and works at two levels of detail
+High-level (architectural) design: decompose the system into 
+modules, and define the invocation relationships among them
+Detailed (low-level) design: design the data structures and algorithms 
+for each module
+Life Cycle Models 20
+--- Page 11 ---
+02-09-2026
+11
+I M P L E M E N T A T I O N
+Coding and Unit Testing
+What Happens
+Translate the software design into source code
+Each module is coded, then documented
+Unit Testing
+Each module is tested independently, as a stand-alone unit, and 
+debugged
+Purpose: verify that individual modules work correctly
+End product: a set of program modules, each already tested on its 
+own
+Life Cycle Models 21
+I N T E G R A T I O N  &  S Y S T E M  T E S T I N G
+Bringing the Modules Together
+Modules are almost never integrated in one shot — integration 
+happens through a number of planned steps
+At each integration step, the partially integrated system is tested
+Once all modules are integrated and tested, system testing is carried 
+out
+Goal of system testing: confirm the system works according to the 
+requirements specified in the SRS document
+Life Cycle Models 22
+--- Page 12 ---
+02-09-2026
+12
+M A I N T E N A N C E
+Life After Delivery
+Maintenance takes far more effort than building the product in the first place — development-to-maintenance effort is typically about 40 : 60.
+Corrective
+Correct errors that were not discovered during 
+development
+Perfective
+Improve the implementation, and enhance the 
+system's functionalities
+Adaptive
+Port the software to a new environment — e.g. 
+a new computer or operating system
+Life Cycle Models 23
+Case Study: Payroll Processing System for a Government College
+Project Details
+A government college wants to replace its old payroll software. The new system
+must calculate monthly salary based on already-established rules: basic pay, DA,
+HRA, deductions, income tax, NPS/PF ,leave deductions, and generate salary
+slips and statutory reports. The requirements are already documented in the
+institution’s service and financial rules. These rules are stable and are unlikely to
+change during the development period.
+About Development Team
+Requirements
+Well documented salary rules; low 
+change expected
+Technology
+Known language, database and 
+reporting tools
+Team expertise
+Built similar payroll systems earlier
+Risk
+Low experimentation; low technical 
+uncertainty
+Feasibility Requirements Design Coding + Unit Test Integration + 
+System Test Maintenance
+Why this sequence works: the team can freeze SRS early, design once, implement predictably, and test against stable rules.
+Case A: Experienced team + familiar technology + fixed rules  →
+Classical Waterfall is appropriate Case B: Fresh team + unclear rules + new technology  → ??
+The development team has previously developed two similar payroll systems
+using the same programming language, database, and reporting
+framework. The team members are experienced with payroll applications
+and understand the relevant salary rules. The customer can provide
+complete requirements and formally approve the SRS before design begins.
+--- Page 13 ---
+02-09-2026
+13
+C L A S S I C A L  W A T E R F A L L  M O D E L
+Merits & Demerits
+MERITS
+✓ Simple to understand and use — each phase has a clear start 
+and end
+✓ Easy to manage: staged deliverables and reviews make 
+progress easy to track
+✓ Forces disciplined documentation at every phase, which helps 
+later maintenance
+✓ Works well for small projects with clear, stable requirements
+DEMERITS
+✗ Idealistic — assumes no defect is ever introduced during 
+development
+✗ No feedback path: a defect found late must be fixed without 
+formally revisiting earlier phases
+✗ The customer sees no working software until very late in the 
+project
+✗ A poor fit when requirements are unclear, incomplete, or 
+likely to change
+Life Cycle Models 24
+02
+M O D E L  0 2  O F  0 5
+Iterative Waterfall Model
+The classical model, made realistic — with feedback paths that let the team fix defects where they 
+were introduced.
+--- Page 14 ---
+02-09-2026
+14
+I T E R A T I V E  W A T E R F A L L  M O D E L
+The Problem With the Classical Model
+The classical waterfall model is idealistic — it assumes no defect 
+is ever introduced during any development activity
+In practice, defects get introduced in almost every phase of the 
+life cycle
+Defects are often detected much later — e.g. a design defect 
+might go unnoticed until coding or testing
+Life Cycle Models 26
+I T E R A T I V E  W A T E R F A L L  M O D E L
+Adding Feedback Paths
+1
+Feasibility Study →
+2
+Requirements 
+Analysis & 
+Specification
+→
+3
+Design →
+4
+Coding & Unit 
+Testing →
+5
+Integration & System 
+Testing →
+6
+Maintenance
+↺ ↺ ↺ ↺ ↺
+Once a defect is found, work returns to the phase where it was introduced —
+and every phase after it is redone.
+Life Cycle Models 27
+
+--- Page 15 ---
+02-09-2026
+15
+I T E R A T I V E  W A T E R F A L L  M O D E L
+Principle: Phase Containment of Errors
+Errors should ideally be detected in the same phase in which they 
+are introduced
+Example: A design problem found during the design phase itself  
+is far cheaper to fix than the same problem found at the end of  
+integration and system testing
+Life Cycle Models 28
+I T E R A T I V E  W A T E R F A L L  M O D E L  ·  E X A M P L E
+Fund Transfer Limit — Retail Banking
+EXAMPLE
+A bank's IT team adds a "daily fund-transfer limit" feature to its net-banking system. During system testing, testers discover that "daily 
+limit" is ambiguous — does it reset at midnight, or 24 hours after the first transfer?
+W H A T  H A P P E N S
+The team traces the ambiguity back to the requirements phase, where it was introduced
+They clarify the rule with the business team ("resets at midnight"), then update the design, code, and test cases
+Because the feedback path exists, only the affected phases are redone — not the whole project
+Life Cycle Models 30
+--- Page 16 ---
+02-09-2026
+16
+I T E R A T I V E  W A T E R F A L L  M O D E L
+Merits & Demerits
+MERITS
+✓ Adds feedback paths, fixing the classical model's biggest 
+weakness
+✓ Errors can be contained close to the phase where they were 
+introduced, reducing rework
+✓ More realistic than the classical model, while staying simple 
+to understand
+✓ The most widely used life-cycle model in practice
+DEMERITS
+✗ Still suitable only for well-understood, relatively stable 
+requirements
+✗ Not a good fit for very large or very risky projects
+✗ The customer still sees no working software until late in the 
+project
+✗ Accommodating a late, large change request is still costly
+Life Cycle Models 29
+03
+M O D E L  0 3  O F  0 5
+Prototyping Model
+Build a quick, rough version first — let real feedback shape the requirements before committing to the 
+real system.
+--- Page 17 ---
+02-09-2026
+17
+P R O T O T Y P I N G  M O D E L
+What Is a Prototype?
+Before starting actual development, a working prototype of the 
+system is built first
+A prototype is a toy implementation: limited functional 
+capabilities, low reliability, and inefficient performance
+Life Cycle Models 32
+P R O T O T Y P I N G  M O D E L
+Why Build One?
+To illustrate to the customer input data formats, messages, 
+reports, or interactive dialogs
+To examine technical issues associated with product development 
+— major design decisions often hinge on things like a hardware 
+controller's response time, or a sorting algorithm's efficiency
+Life Cycle Models 33
+--- Page 18 ---
+02-09-2026
+18
+P R O T O T Y P I N G  M O D E L
+Building the Prototype
+A third reason to prototype: it's rarely possible to "get it right"
+the first time — plan to throw the first version away if you want a
+good final product
+Start with approximate requirements, then carry out a quick 
+design
+Built using short-cuts — inefficient, inaccurate, or dummy
+functions (e.g. a table look-up standing in for a real computation)
+Life Cycle Models 34
+P R O T O T Y P I N G  M O D E L
+Building the Prototype
+--- Page 19 ---
+02-09-2026
+19
+P R O T O T Y P I N G  M O D E L
+The Refinement Cycle
+Quick Design
+Approximate 
+requirements, fast 
+turnaround
+→
+Build 
+Prototype
+Short-cuts allowed 
+— dummy or 
+inefficient 
+functions
+→
+Customer 
+Evaluation
+The customer tries 
+it and gives 
+feedback
+→
+Refine ↺
+Requirements are 
+refined from the 
+feedback — repeat 
+until approved
+Once the customer approves the prototype, the actual system is built using the 
+classical/iterative waterfall approach.
+Life Cycle Models 35
+P R O T O T Y P I N G  M O D E L
+Is the Extra Cost Worth It?
+The requirements analysis and specification phase becomes 
+almost redundant — the approved prototype already reflects all 
+user feedback
+The prototype's design and code are usually thrown away, but the 
+experience gained helps a great deal when building the real 
+product
+Building a prototype adds cost — but overall development cost 
+can still be lower for systems with unclear requirements or 
+unresolved technical issues
+Requirements get properly defined and technical issues resolved 
+early — avoiding what would otherwise surface later as costly 
+change requests
+Life Cycle Models 36
+--- Page 20 ---
+02-09-2026
+20
+P R O T O T Y P I N G  M O D E L  ·  E X A M P L E
+Hospital OPD Token Display
+EXAMPLE
+A hospital wants a screen that calls patients by token number in the outpatient department. Staff  aren't sure what the displa y should 
+look like, or how clearly it should announce each call.
+WHAT HAPPENS
+The team builds a rough screen — dummy tokens, a placeholder alert tone — in a few days
+Life Cycle Models 38
+
+--- Page 21 ---
+02-09-2026
+21
+P R O T O T Y P I N G  M O D E L  ·  E X A M P L E
+Hospital OPD Token Display
+EXAMPLE
+A hospital wants a screen that calls patients by token number in the outpatient department. Staff  aren't sure what the displa y should 
+look like, or how clearly it should announce each call.
+Flag Issues
+Receptionists and nurses try it and flag issues: font too small, alert too soft, no colour cue for "skipped" tokens, Emergency 
+patient arrives
+Requirements are refined over two more quick rounds, then the real system is built using the classical waterfall approach
+Life Cycle Models 38
+
+--- Page 22 ---
+02-09-2026
+22
+P R O T O T Y P I N G  M O D E L
+Merits & Demerits
+MERITS
+✓ Clarifies unclear user requirements through hands-on 
+feedback, before real development starts
+✓ Resolves unclear technical issues early (e.g. algorithm 
+efficiency, response time)
+✓ Reduces the risk of costly, large-scale redesign later in the 
+project
+✓ Improves customer engagement — they see and react to 
+something tangible early
+DEMERITS
+✗ Adds cost and time to build a version that is usually thrown 
+away
+✗ Customers may mistake the rough prototype for the (nearly) 
+finished product
+✗ Risk that a hastily-built prototype design gets carried into the 
+final system
+✗ Needs significant, sustained customer availability for 
+feedback — not always possible
+✗ Unnecessary overhead when requirements are already clear 
+and well understood
+Life Cycle Models 37
+Another Problem: University Smart Campus Platform
+Case: University Smart Campus 
+Platform
+The university wants one integrated 
+platform, but usable services are 
+needed at different points of the 
+semester.
+Digital ID
+ Attendance
+Hostel Complaints
+ Lab Booking
+Certificates
+Each service can be useful by itself, but 
+feedback from real users changes later 
+services.
+Why simple choices struggle
+Fixed full-system handover
+• Too long before students/staff get any usable 
+feature
+• Semester rules and workflows may change 
+before final delivery
+• Late discovery of department-specific needs
+One disposable demonstration
+• A demo clarifies screens, but does not serve 
+real users
+• Working modules must be deployed, tested, 
+and improved
+• Different modules mature at different speeds
+Project realities discovered early
+Core login + ID must go live first
+Departments join in different phases
+Reports change after real usage data
+New policy rules appear each semester
+Training can start before all modules exist
+Useful software grows in visible releases
+V1 V2 V3 V4
+Which development approach lets us deliver useful parts early, learn from real use, and extend the system safely?
+--- Page 23 ---
+02-09-2026
+23
+04
+M O D E L  0 4  O F  0 5
+Evolutionary Model
+Deliver the system in successive, working versions — starting with a core and growing it release by 
+release.
+E V O L U T I O N A R Y  M O D E L
+Grow the System in Releases
+Also called the successive-versions or incremental model.
+Release 1 — Core
+The core modules are built and delivered 
+first
+→
+Release 2 — Grow
+New functionality is added; existing 
+functionality may be enhanced
+→
+Release 3 — Mature
+The skeleton is refined into an increasingly 
+capable, complete system
+Each successive release is itself  a functioning system, capable of  doing useful work.
+Life Cycle Models 40
+--- Page 24 ---
+02-09-2026
+24
+E V O L U T I O N A R Y  M O D E L
+Combining Evolutionary and Iterative
+Many organizations combine iterative and incremental 
+development: a new release may add functionality, and modify 
+functionality already released
+Training can start on an earlier release, and customer feedback is 
+folded into later ones
+Markets can be created for functionality that has never been 
+offered before
+Frequent releases let developers fix unanticipated problems 
+quickly
+Life Cycle Models 42
+E V O L U T I O N A R Y  M O D E L  ·  E X A M P L E
+Campus ERP System
+EXAMPLE
+A university commissions a campus-wide ERP system — far too large to build and deliver in one pass.
+WHAT HAPPENS
+Release 1: student admissions and enrolment — usable from day one
+Release 2: adds fee payment and library modules, informed by feedback from Release 1
+Release 3: adds hostel allocation and placement tracking, completing the core system
+Each release is a working system the university actually uses — not a throwaway demo
+Life Cycle Models 43
+--- Page 25 ---
+02-09-2026
+25
+E V O L U T I O N A R Y  M O D E L
+Merits & Demerits
+MERITS
+✓ Users can experiment with a partially developed system long 
+before the full version ships
+✓ Exact user requirements surface much earlier than in a single, 
+monolithic delivery
+✓ Core modules get tested thoroughly and repeatedly, reducing 
+errors in the final product
+✓ Total project failure is less likely, since a working core is 
+delivered early
+DEMERITS
+✗ Often hard to subdivide a problem into functional units that 
+can be built and delivered incrementally
+✗ Works best for very large problems, where it's easier to find 
+natural modules for incremental delivery
+✗ Harder to fix an overall cost and schedule upfront, since 
+scope is refined release by release
+Life Cycle Models 41
+--- Page 26 ---
+02-09-2026
+26
+05
+M O D E L  0 5  O F  0 5
+Spiral Model
+A risk-driven meta-model — every loop repeats objective-setting, risk analysis, development, and 
+review.
+S P I R A L  M O D E L
+How the Spiral Model Works
+Loops as Phases
+Proposed by Barry Boehm in 1988
+Each loop of the spiral represents a phase of the process
+The innermost loop might address feasibility; the next, 
+requirements; the next, design — and so on
+There are no fixed phases — these are just examples
+Structuring the Project
+The team decides how to structure the project into phases
+Start from a generic model, and add phases for the specific 
+project, or as problems are identified
+Each loop is split into four sectors (quadrants)
+Life Cycle Models 45
+--- Page 27 ---
+02-09-2026
+27
+S P I R A L  M O D E L
+One Model Can Combine Several
+The spiral model can also build a family of related products — each component using whichever life-cycle model suits it best.
+Component P
+Built using the classical waterfall model
+Component Q
+Built using the prototyping model
+Component R
+Built using an evolutionary model
+Together, P, Q, and R combine into the larger application A.
+Life Cycle Models 46
+S P I R A L  M O D E L
+Four Quadrants, Every Loop
+1. Objective Setting
+Identify the objectives of this phase and examine the risks associated 
+with them
+2. Risk Assessment & Reduction
+Analyse each identified risk in detail and take steps to reduce it
+3. Development & Validation
+Develop and validate the next level of the product
+4. Review & Planning
+Review progress with the customer and plan the next iteration
+Life Cycle Models 47
+--- Page 28 ---
+02-09-2026
+28
+S P I R A L  M O D E L
+Risk, in Practice
+Risk: any adverse circumstance that might hamper the successful 
+completion of a software project
+Example: if there's a risk that the requirements are inappropriate, 
+the team may build a prototype to reduce that risk
+With each iteration around the spiral, a progressively more 
+complete version of the software gets built
+Life Cycle Models 48
+S P I R A L  M O D E L
+Spiral as a Meta-Model
+Subsumes all the other models discussed — a single loop of the 
+spiral is essentially the waterfall model
+Uses an evolutionary approach: each iteration through the spiral 
+is an evolutionary level
+Enables the team to understand and react to risk during every 
+iteration
+Uses prototyping as a risk-reduction mechanism, while retaining 
+the waterfall model's step-wise structure
+Life Cycle Models 49
+--- Page 29 ---
+02-09-2026
+29
+LIFE CYCLE MODELS
+Example: Online Examination System for a University
+Why this project is risky
+• 5,000 students may login together
+• Internet interruption can occur
+• Exam security and cheating risk
+• Teachers may disagree on rules
+• Failure during exam is unacceptable
+One loop = one risk-driven round
+Objective
+ Risk
+ Develop / Validate
+ Review / Plan
+The loop may produce feasibility proof,
+requirements, design, or software — depending
+on the current risk.
+Core idea: do not move forward blindly. First reduce the biggest unresolved risk.
+1
+How the online exam system grows outward
+The dominant concern changes, but the four-quadrant thinking repeats.
+Loop 1
+Feasibility
+Proof of feasibility
+Loop 2
+Requirements
+Validated SRS
+Loop 3
+Design
+Validated architecture
+Loop 4
+Build & Test
+Working system
+Loop 5
+Deploy / Improve
+Safer improved system
+Increasing clarity, confidence and completeness
+Software Engineering • Spiral Model 2
+--- Page 30 ---
+02-09-2026
+30
+LOOP 1
+Feasibility — “Should we build this system at all?”
+Dominant concern: Feasibility of an Online Examination System for 5,000 students
+1  Objective
+Can we conduct online examinations for 
+thousands of students?
+2  Risk Analysis
+• Internet may fail.
+• Server may not support 5,000 
+simultaneous students.
+• Cost may be too high.
+Investigate through a small load test with 
+500 simulated students.
+3  Develop & Validate
+We are not developing the whole system 
+yet. We may develop:
+• a small technical experiment
+• a load-testing setup
+• a rough proof-of-concept
+Result: technically feasible.
+4  Review & Plan
+University reviews the result.
+Decision: “Yes, proceed. In the next loop, 
+determine exactly what the system should 
+do. ”
+Key idea: In early loops, “Develop & Validate” may produce a study, experiment, prototype, or report — not full software. 1
+LOOP 2
+Requirements — “What exactly should the system do?”
+Dominant concern: Understanding and validating user requirements
+1  Objective
+Find the requirements. For example:
+• faculty creates examination
+• student logs in
+• questions appear
+• answers autosave
+• exam automatically submits
+• faculty downloads results
+2  Risk Analysis
+• What should happen if a student’s 
+internet disconnects for 5 minutes?
+• Teachers may disagree on whether 
+students can go back to previous 
+questions.
+Clarify these by interviewing users and 
+trying a small interface prototype.3  Develop & Validate
+Develop the requirements specification 
+(SRS), possibly supported by a prototype.
+Validate the requirements with students, 
+teachers, and administrators.
+4  Review & Plan
+The university approves the requirements.
+Decision: “Requirements are sufficiently 
+clear. Next we must determine how to 
+design the system. ”
+Key idea: Here the output is mainly a validated SRS / workflow prototype, not the final software. 2
+--- Page 31 ---
+02-09-2026
+31
+LOOP 3
+Design — “How should we design it?”
+Dominant concern: Choosing a reliable and scalable architecture
+1  Objective
+Design an architecture capable of 
+supporting 5,000 students.
+2  Risk Analysis
+Major risk: “A single server may crash 
+during the examination. ”
+Alternatives considered:
+• Design A: One powerful server
+• Design B: Multiple load-balanced servers
+• Design C: Cloud-based scalable system
+These alternatives may be tested 
+experimentally.
+3  Develop & Validate
+Develop and validate the 
+architecture/design.
+This still does not necessarily mean 
+building the complete application.
+4  Review & Plan
+The architecture is reviewed.
+Decision: “Use cloud servers with load 
+balancing. Now we can develop the actual 
+system. ”
+Key idea: The main output here is a validated architecture and design decisions. 3
+LOOP 4
+Implementation — “Build the actual system”
+Dominant concern: Construction, integration, testing, and readiness for deployment
+1  Objective
+Build and test the examination system.
+2  Risk Analysis
+Potential risks:
+• security vulnerabilities
+• database failure
+• cheating
+• performance problems
+The team evaluates and reduces these 
+risks.3  Develop & Validate
+Now actual coding, integration, and testing 
+occur.
+A working system is produced.
+4  Review & Plan
+The university evaluates the system and 
+plans deployment, enhancements, 
+maintenance, and the next loop if needed.
+Key idea: In this loop, “Develop & Validate” really includes coding, integration, testing, and user acceptance. 4
+--- Page 32 ---
+02-09-2026
+32
+Spiral Model: University Examination System
+KEY UNDERSTANDING
+Why Spiral is not just incremental development
+The product may grow outward, but the driving force is risk.
+Loop Main concern Biggest unresolved risk Validated output
+1 Feasibility Can 5,000 students take exam together? Feasibility proof
+2 Requirements Do users agree on disconnection, autosave and rules? Validated SRS
+3 Design Will architecture survive peak load? Validated architecture
+4 Build & test Will final system be secure and reliable? Working software
+One sentence to remember: Waterfall is phase-driven. Evolutionary is release-driven. Spiral is risk-driven.
+Software Engineering • Spiral Model 7
+--- Page 33 ---
+02-09-2026
+33
+S P I R A L  M O D E L
+Merits & Demerits
+MERITS
+✓ Explicit risk analysis in every loop — the best fit for high-risk, 
+technically challenging projects
+✓ Flexible: subsumes waterfall, prototyping, and evolutionary 
+ideas within one framework
+✓ Strong management control, through a formal review-and-
+plan step at the end of every loop
+✓ Well suited to large, complex projects whose requirements 
+evolve over time
+DEMERITS
+✗ More complex to understand and manage than simpler 
+models
+✗ Demands real risk-analysis expertise — a poor risk 
+assessment can undermine the whole project
+✗ Can be costly and slow for small or low-risk projects
+✗ Not as widely used for ordinary projects, largely because of 
+this complexity
+Life Cycle Models 50
+S P I R A L  M O D E L  ·  E X A M P L E
+Autonomous Drone Delivery Software
+EXAMPLE
+A logistics startup is building flight -control software for autonomous delivery drones — a safety-critical system built on an unproven 
+obstacle-avoidance algorithm.
+WHAT HAPPENS
+Loop 1: identify the biggest risk (can the algorithm avoid obstacles reliably?) and run a small test flight to reduce it
+Loop 2: with that risk reduced, tackle the next one — regulatory compliance — with a focused prototype and review
+Loop 3: expand scope toward the full delivery system, now that the highest risks are under control
+Each loop ends with a customer/stakeholder review before the next, larger loop begins
+Life Cycle Models 51
+--- Page 34 ---
+02-09-2026
+34
+B R I N G I N G  I T  T O G E T H E R
+Choosing the Right Model
+Model Best Suited For Key Strength Key Limitation
+Classical Waterfall Small, well-understood projects with stable 
+requirements
+Simple, disciplined, easy to manage No feedback path — defects are costly 
+to fix late
+Iterative Waterfall The most common case — moderate size, 
+reasonably well-understood requirements
+Feedback paths contain errors close to 
+their source
+Still a poor fit for unclear or fast-
+changing requirements
+Prototyping Projects where user requirements or 
+technical issues are unclear
+Validates requirements and technical 
+risk early, cheaply
+Extra cost; risk of the prototype 
+becoming the product
+Evolutionary Very large projects that decompose into 
+deliverable modules
+Early, working releases reduce overall 
+project risk
+Hard to decompose some problems into 
+clean increments
+Spiral Large, technically challenging, high-risk 
+projects
+Built-in risk analysis every iteration Complex and expensive for small or low-
+risk projects
+Life Cycle Models 52
+Life Cycle Models — Recap
+Five ways to structure the same six phases.
+Classical Waterfall
+ Iterative Waterfall
+ Prototyping
+ Evolutionary
+ Spiral
+S. Roy  ·  Tezpur University  ·  Slide content courtesy Dr. Rajib Mall
+
+==================================================
+
+=== FILE: LECT3_Requirements_Analysis_Specification_Redesigned.pdf ===
+--- Page 1 ---
+31-08-2026
+1
+S O F T W A R E  E N G I N E E R I N G
+Requirements Analysis & 
+Specification
+Turning what the customer wants into a document the whole project can build from
+Swarup Roy  ·  Tezpur University  
+O V E R V I E W
+What We'll Cover
+Requirements 
+Analysis
+The SRS 
+Document
+Types of 
+Requirements
+Good vs Bad 
+SRS
+Decision 
+Logic
+Formal 
+Specification
+Requirements Analysis & Specification 2
+--- Page 2 ---
+31-08-2026
+2
+M O T I V A T I O N
+Many Projects Fail Before Coding Even Starts
+Teams begin implementing the system before determining 
+whether they are building what the customer really wants
+By the time the mismatch surfaces, months of coding effort may 
+already be wasted
+Requirements analysis and specification exist to catch this 
+mismatch early — while it is still cheap to fix
+Requirements Analysis & Specification 3
+01
+P A R T  0 1  O F  0 3
+Requirements Analysis
+Understanding what the customer actually needs, before a single line of design begins.
+--- Page 3 ---
+31-08-2026
+3
+R E Q U I R E M E N T S  A N A L Y S I S
+Two Activities, One Deliverable
+1
+Requirements Gathering & Analysis →
+2
+Requirements Specification →
+3
+SRS Document (Reviewed & 
+Approved)
+The reviewed SRS document forms the basis of  all future development activities — design, coding, and testing all trace back to 
+it.
+Requirements Analysis & Specification 5
+R E Q U I R E M E N T S  A N A L Y S I S
+How Analysts Gather Requirements
+Observation of the existing system or procedures
+Studying documentation of current processes
+Discussion with the customer and end-users
+Analysis of what actually needs to be done, beyond what's simply 
+asked for
+Requirements Analysis & Specification 6
+--- Page 4 ---
+31-08-2026
+4
+R E Q U I R E M E N T S  A N A L Y S I S
+Two Very Different Starting Points
+Automating an Existing System Building Something New
+The analyst can directly observe input/output formats and 
+operational procedures — the task is comparatively easy.
+With no working system to study, gathering requirements 
+demands imagination, creativity, and an experienced analyst 
+with strong interaction skills.
+Either way, gathering the right requirements is rarely as simple as just asking the customer what they want.
+Requirements Analysis & Specification 7
+R E Q U I R E M E N T S  A N A L Y S I S  ·  E X A M P L E
+Two Ways Requirements Go Wrong
+Inconsistent Requirement Incomplete Requirement
+One customer says: 
+“turn off  the heater and open the water shower when 
+temperature > 100°C”. 
+Another says: 
+“turn off  the heater and turn ON the cooler at the same 
+threshold”. 
+The two requirements directly contradict each other.
+The analyst records 
+what happens above 100°C, 
+but never records 
+what should happen when temperature falls below 90°C —
+the heater should turn ON and the shower OFF. The omission 
+is simply an oversight.
+Inconsistency and incompleteness are the two most common defects an analyst must catch before writing the SRS.
+Requirements Analysis & Specification 8
+--- Page 5 ---
+31-08-2026
+5
+R E Q U I R E M E N T S  A N A L Y S I S
+Why Careful Analysis Is Hard
+Without a working model of the problem, a clear, in-depth 
+understanding is genuinely difficult to reach
+Even experienced analysts take considerable time to understand 
+exactly what the customer has in mind
+Some anomalies and inconsistencies are subtle enough to escape 
+even the most experienced eyes
+Building a formal model of the system helps surface many of 
+these subtle issues
+Requirements Analysis & Specification 9
+R E Q U I R E M E N T S  A N A L Y S I S
+Four Questions Every Analyst Must Answer
+What Is the Problem?
+Define the problem precisely before any solution is 
+discussed
+Why Solve It?
+Understand why the problem matters enough to invest 
+in solving it
+What Are the Possible Solutions?
+Explore alternative approaches before committing to 
+one
+What Complexities Might Arise?
+Anticipate the difficulties before they become surprises
+Requirements Analysis & Specification 10
+--- Page 6 ---
+31-08-2026
+6
+R E Q U I R E M E N T S  A N A L Y S I S  ·  P R A C T I C E
+Practice Problem: ATM Cash Withdrawal
+PRACTICE
+A bank wants its ATMs to let a customer withdraw cash. The customer inserts a card, enters a PIN, and requests an amount. The
+system must validate the card and PIN, check that the amount does not exceed the account balance or the daily withdrawal limi t, then 
+dispense the cash and update the balance.
+WHAT HAPPENS
+Your task: write at least three functional requirements in standard SRS "shall" format
+Identify at least two constraints on the system
+Then represent the decision logic as both a decision tree and a decision table
+Requirements Analysis & Specification 11
+R E Q U I R E M E N T S  A N A L Y S I S  ·  P R A C T I C E  — S O L U T I O N
+Solution: ATM Cash Withdrawal — SRS Excerpt
+3.2  FUNCTIONAL REQUIREMENTS
+ID Requirement
+FR-1 The system shall validate the customer's card and PIN before accepting a withdrawal request.
+FR-2 The system shall reject any requested amount that exceeds the available account balance.
+FR-3 The system shall reject any requested amount that would exceed the account's daily withdrawal limit.
+FR-4 The system shall dispense the requested cash and update the account balance only after all validation checks pass.
+3.4  CONSTRAINTS
+The system shall respond to a withdrawal request within 5 seconds under normal network conditions
+Cash may only be dispensed in denominations the ATM's currently loaded cassettes can supply
+The system shall retain the card after 3 consecutive incorrect PIN attempts
+Requirements Analysis & Specification 12
+--- Page 7 ---
+31-08-2026
+7
+02
+P A R T  0 2  O F  0 3
+The SRS Document
+Systematically organising analysed requirements into the document that governs everything that 
+follows.
+T H E  S R S  D O C U M E N T
+Why Write an SRS?
+The main aim of specification is to systematically organise the 
+requirements uncovered during analysis
+And to document those requirements properly, in a form everyone 
+can rely on
+A well-written SRS removes ambiguity before a single design 
+decision is made
+Requirements Analysis & Specification 12
+--- Page 8 ---
+31-08-2026
+8
+T H E  S R S  D O C U M E N T
+Four Roles of the SRS Document
+Statement of User 
+Needs
+ Contract Document
+ Reference Document
+ Definition for 
+Implementation
+Requirements Analysis & Specification 13
+T H E  S R S  D O C U M E N T
+The SRS as a Contract
+Once the SRS is approved by the customer, it becomes a contract 
+between the development team and the customer
+Any later controversies are settled by referring back to the SRS 
+document — not to memory or assumption
+The development team builds strictly according to what the SRS 
+records
+The final product is acceptable as long as it satisfies every 
+requirement recorded in the SRS
+Requirements Analysis & Specification 14
+--- Page 9 ---
+31-08-2026
+9
+T H E  S R S  D O C U M E N T
+Black-Box Specification
+1
+Input Data →
+2
+System S (Black Box) →
+3
+Output Data
+The SRS documents only the visible, external input/output behaviour of  the system — its internal details are deliberately left unspecified.
+Requirements Analysis & Specification 15
+T H E  S R S  D O C U M E N T
+What the SRS Should — and Shouldn't — Say
+The SRS Should
+State clearly WHAT needs to be done
+Use end-user terminology, not implementation jargon
+Serve as a careful, unambiguous contract
+Be written so it can later be turned into a formal specification if 
+needed
+The SRS Should Avoid
+Describing HOW to do it — that's a design decision, not a 
+requirement
+Premature technical detail that restricts the designer's options
+Vague or literary language that different readers could interpret 
+differently
+Requirements Analysis & Specification 16
+--- Page 10 ---
+31-08-2026
+10
+T H E  S R S  D O C U M E N T
+Properties of a Good SRS
+Property What It Means
+Concise & Unambiguous Says exactly what's meant, without excess text or room for misreading
+Specifies What, Not How Describes the required behaviour, not the implementation
+Easy to Change Well-structured enough that one change doesn't ripple unpredictably
+Consistent No two requirements contradict one another
+Complete Nothing important has been left out
+Traceable Each part of the spec can be traced to the design and code that implements it, and 
+back
+Verifiable "The system should be user-friendly" is not verifiable — "response time under 2 
+seconds" is
+Requirements Analysis & Specification 17
+T H E  S R S  D O C U M E N T
+Three Parts of Every SRS
+Functional Requirements
+What the system must do, 
+expressed as input → output 
+transformations
+Nonfunctional Requirements
+Qualities the system must have 
+that aren't a single function
+Constraints
+Things the system should, or 
+should not, do
+Requirements Analysis & Specification 18
+--- Page 11 ---
+31-08-2026
+11
+F U N C T I O N A L  R E Q U I R E M E N T S
+Functional Requirements, Defined
+Every system can be viewed as performing a set of functions 𝒇𝒊
+Each function 𝒇𝒊 transforms a set of input data into 
+corresponding output data
+A high-level requirement may itself consist of several identifiable 
+functions
+Each function is described by its input data, its output data, and 
+the processing needed to get from one to the other.
+Requirements Analysis & Specification 19
+fi
+input output
+F U N C T I O N A L  R E Q U I R E M E N T S  ·  E X A M P L E
+Function F1 — Search Book
+EXAMPLE
+Function F1 of  the Library Management System lets a member search the catalogue by author.
+WHAT HAPPENS
+Input: an author's name
+Processing: match the name against the catalogue
+Output: details of the author's books and their locations in the library
+Requirements Analysis & Specification 20
+--- Page 12 ---
+31-08-2026
+12
+T H E  S R S  D O C U M E N T
+Nonfunctional Requirements & Constraints
+Nonfunctional Requirements Constraints
+Qualities that can't be expressed as a single function: 
+reliability, 
+performance, 
+human-computer interface, 
+interfacing with other systems, 
+security, 
+maintainability, 
+portability, 
+usability.
+Things the system should or should not do: 
+standards compliance, 
+hardware/OS/DBMS to be used, 
+capabilities of  I/O devices, 
+how fast results must be produced, 
+data representation required by an interfaced system.
+Requirements Analysis & Specification 21
+S T A N D A R D  S R S  S T R U C T U R E
+Organization of a Standard SRS Document
+Section Typical Contents
+1. Introduction Purpose, scope, definitions & abbreviations, references, document overview
+2. Overall Description Product perspective, major functions, user characteristics, general constraints and 
+assumptions
+3. Specific Requirements Functional requirements, external interface requirements, performance requirements, 
+design constraints
+4. Appendices / Index Supporting data, glossary, cross-reference index
+This structure follows the same shape as the IEEE 830 standard for SRS documents — a template most real-world SRS 
+documents still follow today.
+Requirements Analysis & Specification 22
+--- Page 13 ---
+31-08-2026
+13
+S A M P L E  S R S  D O C U M E N T
+Excerpt: Requirement F1 — Search Book
+SRS SAMPLE
+A real SRS clause states each requirement precisely, in a standard form — never as vague prose.
+WHAT HAPPENS
+Requirement ID: F1 — Search Book  ·  Priority: High
+Input: author's name (free text, 2–50 characters)
+Output: Title, Author, Publisher, Year of Publication, ISBN, Catalog Number, Shelf Location
+Non-functional note: response returned within 2 seconds for a catalogue of up to 200,000 titles
+Requirements Analysis & Specification 23
+I N D U S T R Y  P R A C T I C E
+What a Real SRS Document Looks Like
+Excerpt from a full SRS built earlier in this course, formatted to the 
+IEEE 830 standard.
+WHAT TO NOTICE
+A clear title block naming the product and version
+Numbered sections and subsections (1, 1.1, 1.2 …) — exactly the IEEE 830 structure 
+covered in this lecture
+A definitions table instead of a wall of prose — precise and easy to scan
+A consistent footer for document identity and traceability
+Requirements Analysis & Specification 26
+--- Page 14 ---
+31-08-2026
+14
+E X A M P L E  F U N C T I O N A L  R E Q U I R E M E N T S
+Req. 1 — Search Book, Formally Specified
+Clause Input → Output
+R.1.1 Input: "search" option selected  → Output: user prompted to enter key words
+R.1.2 Input: key words  → Output: details of all books whose title or author matches any key 
+word (Title, Author, Publisher, Year, ISBN, Catalog No., Location). Processing: search the book 
+list for the keywords.
+Requirements Analysis & Specification 24
+E X A M P L E  F U N C T I O N A L  R E Q U I R E M E N T S
+Req. 1 — Search Book, Formally Specified
+Requirements Analysis & Specification 24
+R.1.1:
+Input: “search” option, 
+Output: user prompted to enter the key words. 
+R.1.2:
+Input: key words
+Output: Details of all books  whose title or author 
+name matches any of the key words.
+Details include: Title, Author Name, Publisher 
+name, Year of Publication, ISBN Number, Catalog
+Number, Location in the Library.
+Processing: Search the book list for the keywords
+--- Page 15 ---
+31-08-2026
+15
+E X A M P L E  F U N C T I O N A L  R E Q U I R E M E N T S
+Req. 2 — Renew Book, Formally Specified
+Clause Input → Output
+R.2.1 Input: "renew" option selected  → Output: user is prompted for membership number and 
+password
+R.2.2 Input: Membership number & password  → Output: list of borrowed books displayed, or an 
+error if the password is invalid. Processing: password validation, search the borrower list.
+R.2.3 Input: User's renewal choices (via renew checkboxes)  → Output: confirmation of books 
+renewed. Processing: update the borrower list.
+Requirements Analysis & Specification 25
+E X A M P L E  F U N C T I O N A L  R E Q U I R E M E N T S
+Req. 2 — Renew Book, Formally Specified
+Requirements Analysis & Specification 25
+R.2.1:
+Input: “renew” option selected,
+Output:  user prompted to enter his membership number and 
+password.
+R2.2:
+Input: membership number and password
+Output: 
+list of the books borrowed by user are displayed. User 
+prompted to enter books to be renewed or 
+user informed about bad password
+Processing: Password validation, search books issued to the user 
+from borrower list and display.
+R2.3:
+Input: user choice for renewal of the books issued to him through 
+mouse clicks in the corresponding renew box.
+Output: Confirmation of the books renewed
+Processing: Renew the books selected by the in the borrower list.
+--- Page 16 ---
+31-08-2026
+16
+G O O D  V S  B A D  S R S
+Examples of a Bad SRS (1 of 2)
+Unstructured Specification
+A narrative essay — one of the worst formats: hard to 
+change, hard to be precise or unambiguous, prone to 
+contradiction
+Noise
+Text present that is simply irrelevant to the problem
+Silence
+Aspects important to the solution are left out entirely
+Overspecification
+Describing HOW to do it — e.g. dictating names be 
+stored in sorted order — needlessly restricts the 
+designer
+Requirements Analysis & Specification 26
+G O O D  V S  B A D  S R S
+Examples of a Bad SRS (2 of 2)
+Contradictions
+The same requirement described differently in two 
+places in the document
+Ambiguity
+Literary or unquantifiable language, like "a good user 
+interface"
+Forward References
+References to something the document only defines 
+later on
+Wishful Thinking
+Describing an aspect for which no realistic solution 
+actually exists
+Requirements Analysis & Specification 27
+--- Page 17 ---
+31-08-2026
+17
+03
+P A R T  0 3  O F  0 3
+Decision Logic & Formal Specification
+Representing complex conditional logic precisely — and, sometimes, mathematically.
+D E C I S I O N  L O G I C
+Representing Complex Processing Logic
+Decision Trees
+Edges represent conditions; leaf nodes represent the 
+action to take
+Decision Tables
+The same condition/action logic laid out as rows in a 
+table — often easier to check for completeness
+Both give a graphic — or tabular — view of  the logic involved in decision-making, and the actions that follow.
+Requirements Analysis & Specification 29
+--- Page 18 ---
+31-08-2026
+18
+D E C I S I O N  L O G I C
+Decision Trees, Defined
+Edges of the tree represent the conditions being tested
+Leaf nodes represent the actions to be performed once a path of 
+conditions is satisfied
+Together they give a clear graphic view of decision logic and its 
+resulting actions
+They work best when the number of conditions and actions is 
+small enough to stay readable as a tree
+Requirements Analysis & Specification 30
+D E C I S I O N  L O G I C  ·  E X A M P L E
+Example: LMS — Three Membership Options
+New Member
+Collects the member's name, 
+address, and phone number
+Renewal
+Validates the member and extends 
+their membership
+Cancel Membership
+Validates the member and closes 
+out their record
+The Library Membership automation Software (LMS) is a small system, but its logic branches exactly the way a real decision tree 
+does.
+Requirements Analysis & Specification 31
+--- Page 19 ---
+31-08-2026
+19
+D E C I S I O N  L O G I C  ·  E X A M P L E
+LMS Options as a Decision Table
+CONDITION ACTION TAKEN
+→New Member: valid details entered Create a membership record and print a bill for 
+the annual charge plus security deposit
+→Renewal: valid member and membership number Update the membership expiry date and print 
+the annual renewal bill
+→Renewal: invalid member Display an error message — no record is 
+changed
+→Cancel Membership: valid member Cancel the membership, print a cheque for the 
+balance due, and delete the record
+Requirements Analysis & Specification 32
+D E C I S I O N  L O G I C  ·  P R A C T I C E  E X A M P L E
+Decision Tree — ATM Cash Withdrawal
+No Yes
+No Yes
+Card & PIN Valid?
+✗ Reject Transaction — Display Error, 
+Retain/Eject Card
+Amount ≤ Balance & Daily Limit?
+✗ Reject — Insufficient Funds / 
+Limit Exceeded
+✓ Dispense Cash, Update Balance, 
+Print Receipt
+Each edge tests one condition; each leaf  is the action taken once the path of  conditions is resolved.
+Requirements Analysis & Specification 36
+--- Page 20 ---
+31-08-2026
+20
+D E C I S I O N  L O G I C  ·  P R A C T I C E  E X A M P L E
+Decision Table — ATM Cash Withdrawal
+Card & PIN Valid? Amount ≤ Balance & Daily Limit? Action
+Y Y Dispense the cash, update the balance, and print a receipt
+Y N Reject: display "insufficient funds / limit exceeded" and return the card
+N — Reject the transaction, display an invalid card/PIN message, and retain or eject the 
+card per policy
+The same branching logic as the decision tree, laid out as rules — easier to scan for a missing or duplicated case.
+Requirements Analysis & Specification 37
+S O F T W A R E  E N G I N E E R I N G
+Formal Specification
+Precise, mathematical requirements — what they are, why they matter, and how to write them
+--- Page 21 ---
+31-08-2026
+21
+W H A T
+What Is Formal Specification?
+A formal specification technique is a mathematical method for 
+describing a system's required behaviour
+It replaces natural-language prose with set theory and predicate 
+logic, so every statement has exactly one meaning
+The system's state is modelled as a set of variables, and each 
+operation is defined by what must be true before and after it runs
+Formal Specification 3
+W H Y
+Why Use Formal Specification?
+Natural-language requirements are easy to write but easy to 
+misread — the same sentence can mean different things to 
+different readers
+A formal specification removes that ambiguity: it can be checked 
+with the same rigour as a mathematical proof
+It lets you verify that an implementation actually satisfies the 
+specification, and prove properties of the specification itself —
+before a line of code is written
+It is most valuable exactly where a mistake is most expensive: 
+safety-critical and high-reliability systems
+Formal Specification 4
+--- Page 22 ---
+31-08-2026
+22
+H O W
+How Is It Done?
+1.  Choose a Notation
+Pick a formal notation with well-
+defined mathematical semantics
+Z notation is one of the most widely 
+used standards for this
+2.  Model the State
+Identify the variables the system needs 
+to remember
+Group them, with their types, into a 
+named "schema"
+3.  Define Each Operation
+State a precondition — what must 
+hold for the operation to run
+State a postcondition — what must be 
+true once it has run
+Formal Specification 5
+02
+P A R T  0 2  O F  0 3
+Z Notation
+A closer look at the standard we'll use to actually write a formal specification.
+--- Page 23 ---
+31-08-2026
+23
+Z  N O T A T I O N
+What Is Z Notation?
+Developed at Oxford University in the early 1980s, built on set 
+theory and first-order predicate logic
+Organises a specification into "schemas" — self-contained boxes 
+that group related declarations and constraints
+Separates the description of state (what the system remembers) 
+from the description of operations (how that state may change)
+Used across industry on safety- and reliability-critical systems, 
+including IBM's CICS transaction processing system
+Formal Specification 7
+Z  N O T A T I O N  ·  R E F E R E N C E
+List of Notations — Types & Schema Conventions
+Symbol / Convention Interpretation
+ℕ,  ℤ Natural numbers, integers — the basic types a declared variable can hold
+Schema box A named box with two parts: declarations on top, predicates (constraints) below
+Δ (Delta) before a name This operation changes the system's state
+Ξ (Xi) before a name This operation reads the state but changes nothing (a query)
+x? An input to the operation
+x! An output from the operation
+x,  x′ The value of x before the operation, and after it (the "primed" value)
+Formal Specification 8
+--- Page 24 ---
+31-08-2026
+24
+Z  N O T A T I O N  ·  R E F E R E N C E
+List of Notations — Logical & Set Operators
+Symbol Interpretation
+∧,  ∨,  ¬ Logical AND, OR, NOT
+⇒,  ⇔ "Implies", and "if and only if"
+∀,  ∃ "For all", and "there exists"
+∈,  ⊆ "Is a member of" a set, and "is a subset of" a set
+∪,  ∩ Set union, and set intersection
+→ A total function from one set to another
+dom, ran The domain (valid inputs) and range (possible outputs) of a function
+Formal Specification 9
+F I R S T- O R D E R  P R E D I C A T E  L O G I C  ·  I N T R O
+Introduction to First-Order Predicate Logic
+A predicate is a statement about one or more objects that is either true 
+or false — e.g. PassedAll(s), Available(b). It becomes an ordinary 
+Boolean once its objects are fixed
+Predicates combine using the connectives ∧ (and), ∨ (or), ¬ (not), ⇒
+(implies), and ⇔ (if and only if) — exactly as in propositional logic
+∀ x ∈ S reads "for every x in S"; ∃ x ∈ S reads "there exists an x in S". 
+Everything after the • is its scope — e.g. in ∀ s ∈ Students •  
+PassedAll(s) ⇒ Graduates(s), the teal part is ∀ s's scope, even past ⇒
+Almost every specification rule has the same shape: ∀ x ∈ Domain • 
+Condition(x) ⇒ Conclusion(x) — "for every x satisfying the condition, 
+the conclusion must follow". Spot the domain, the condition, and the 
+conclusion first, and the formula follows
+Formal Specification 10
+--- Page 25 ---
+31-08-2026
+25
+F I R S T- O R D E R  P R E D I C A T E  L O G I C  ·  G E N E R A L  E X A M P L E
+From a General Statement to Formal Logic
+PLAIN ENGLISH FORMAL LOGIC
+→"Every student ..." ∀ s ∈ Students   — for every student s
+→"... who has passed all exams ..." PassedAll(s)   — a predicate, true when s has passed 
+all exams
+→"... graduates." Graduates(s)   — a predicate, true when s graduates
+→"if ... then ..." ⇒ — logical implication
+→Putting it together: "Every student who has passed all 
+exams graduates." ∀ s ∈ Students • PassedAll(s) ⇒ Graduates(s)
+Formal Specification 11
+F I R S T- O R D E R  P R E D I C A T E  L O G I C  ·  S O F T W A R E  E X A M P L E
+The Same Pattern, Applied to Software
+PLAIN ENGLISH FORMAL LOGIC
+→"Every request ..." ∀ r ∈ Requests   — for every request r
+→"... that fails authentication ..." ¬Authenticated(r)   — negation, using ¬ ("fails" = "is 
+not")
+→"... is rejected." Rejected(r)   — a predicate, true when r is rejected
+→"if ... then ..." ⇒ — logical implication
+→Putting it together: "Every request that fails 
+authentication is rejected." ∀ r ∈ Requests • ¬Authenticated(r) ⇒ Rejected(r)
+Formal Specification 12
+--- Page 26 ---
+31-08-2026
+26
+F O R M A L  L O G I C  ·  T R A N S L A T I O N  G U I D E
+Turning English Into Formal Logic — Key Phrases
+English Phrase (Look For This) Symbol What It Means
+"All", "every", "each" ... ∀ For every element of a set — introduces a universally 
+quantified variable
+"Some", "there exists", "at least one" ... ∃ For at least one element of a set — introduces an 
+existentially quantified variable
+"... and ...", "both ... and ..." ∧ Logical AND — both conditions must hold together
+"... or ...", "either ... or ..." ∨ Logical OR — at least one condition must hold
+"not", "no", "never", "none" ¬ Logical NOT — negates the condition that follows
+"if ... then ...", "... implies ..." ⇒ Implication — whenever the left side is true, the right side 
+must be too
+"... if and only if ..." ⇔ Biconditional — the two sides are always both true or both 
+false
+Exam tip: underline these phrases first in the problem statement, then assemble the formula left to right — quantifier, then condition, then 
+connective.
+Formal Specification 11
+P R A C T I C E  C A S E  S T U D Y  1  ·  L I B R A R Y  S Y S T E M
+Case Study: Library Book-Issue Rule
+PLAIN ENGLISH FORMAL LOGIC
+→"A member may issue a book if ..." ∀ m ∈ Members, b ∈ Books  •  ...  ⇒ MayIssue(m, 
+b)
+→"... the member has no overdue books ..." ¬HasOverdue(m)   — negation, using ¬
+→"... and ..." ∧ — both conditions must hold
+→"... the book is available." Available(b)
+→
+Putting it together: "A member may issue a 
+book if the member has no overdue books and 
+the book is available."
+∀ m ∈ Members, b ∈ Books • (¬HasOverdue(m) ∧
+Available(b)) ⇒ MayIssue(m, b)
+Formal Specification 12
+--- Page 27 ---
+31-08-2026
+27
+P R A C T I C E  C A S E  S T U D Y  2  ·  C O U R S E  R E G I S T R A T I O N
+Case Study: Course-Registration Rule
+PLAIN ENGLISH FORMAL LOGIC
+→"A student can register for a course if ..." ∀ s ∈ Students, c ∈ Courses  •  ...  ⇒
+CanRegister(s, c)
+→"... a seat is available ..." (at least one free seat 
+exists)
+∃ seat ∈ Seats(c) • Free(seat)   — existential, 
+using ∃
+→"... or ..." ∨ — at least one condition must hold
+→"... the student has special permission." HasPermission(s, c)
+→
+Putting it together: "A student can register if a 
+seat is available or the student has special 
+permission."
+∀ s ∈ Students, c ∈ Courses • ((∃ seat ∈ Seats(c) 
+• Free(seat)) ∨ HasPermission(s, c)) ⇒
+CanRegister(s, c)
+Formal Specification 13
+F I R S T- O R D E R  P R E D I C A T E  L O G I C  ·  P R A C T I C E
+More Practice: Statement → Logic
+No breakdown this time — read the statement, then check your own translation against the logic below it.
+“Every employee has a unique employee ID.”
+→ ∀ e1, e2 ∈ Employees • e1 ≠ e2 ⇒ ID(e1) ≠ ID(e2)
+“At least one administrator is logged in at all times.”
+→ ∃ u ∈ Users • IsAdmin(u) ∧ LoggedIn(u)
+“No file can be both encrypted and publicly readable.”
+→ ∀ f ∈ Files • ¬(Encrypted(f) ∧ PubliclyReadable(f))
+Formal Specification 16
+--- Page 28 ---
+31-08-2026
+28
+F I R S T- O R D E R  P R E D I C A T E  L O G I C  ·  P R A C T I C E
+More Practice: Statement → Logic (Continued)
+“A product is out of  stock if  and only if  its quantity is zero.”
+→ ∀ p ∈ Products • OutOfStock(p) ⇔ Quantity(p) = 0
+“Every transaction must be either logged or flagged as suspicious.”
+→ ∀ t ∈ Transactions • Logged(t) ∨ Flagged(t)
+“All passwords must be at least eight characters long.”
+→ ∀ pw ∈ Passwords • Length(pw) ≥ 8
+Formal Specification 17
+Z  N O T A T I O N
+How to Write a Z Schema, Step by Step
+1
+Identify the State →
+2
+Write the State Schema →
+3
+Name the Operation →
+4
+Add Inputs & Outputs →
+5
+Write Pre/Postconditions
+We'll follow exactly these five steps, in order, to build a complete formal specification in the worked example that follows.
+Formal Specification 14
+--- Page 29 ---
+31-08-2026
+29
+W O R K E D  E X A M P L E
+The Problem, Informally
+EXAMPLE
+A bank wants its ATMs to let a customer withdraw cash. The customer inserts a card, enters a PIN, and requests an amount. The
+system must check the amount against the account balance and the daily withdrawal limit, then dispense the cash and update th e 
+balance.
+WHAT HAPPENS
+Before we can write this formally, we need to know what the system must remember (its state)
+Then we need to know what must be true before, and after, a withdrawal is allowed to happen
+The next five slides build that specification up one step at a time
+Formal Specification 16
+S T E P  1  O F  5
+Identify the State
+Before writing any notation, ask in plain language: what does the 
+ATM need to remember between transactions?
+The current account balance
+How much has already been withdrawn today
+The daily withdrawal limit for the account
+Formal Specification 17
+--- Page 30 ---
+31-08-2026
+30
+S T E P  2  O F  5
+Write the State Schema
+ATM
+balance, dailyWithdrawn : ℕ
+dailyLimit : ℕ
+dailyWithdrawn ≤ dailyLimit
+IN PLAIN ENGLISH
+This schema names the state and gives each variable a type 
+— every value here is a natural number
+The line below the second divider is the invariant: a fact 
+that must always stay true, no matter what operations run
+Here, the invariant says the amount already withdrawn 
+today can never exceed the daily limit
+Formal Specification 18
+S T E P  3  O F  5
+Name the Operation & Add Its Input
+Withdraw
++ ΔATM
++ amt? : ℕ
+IN PLAIN ENGLISH
+Amber lines (+) are what's new this step
+"Withdraw" is the name of the operation we're specifying
+ΔATM declares that this operation changes the state 
+described by the ATM schema
+amt? declares the one input this operation needs: the 
+amount requested
+Formal Specification 19
+--- Page 31 ---
+31-08-2026
+31
+S T E P  4  O F  5
+Write the Precondition
+Withdraw
+ΔATM
+amt? : ℕ
++ amt? ≤ balance
++ dailyWithdrawn + amt? ≤ dailyLimit
+IN PLAIN ENGLISH
+Amber lines (+) are what's new this step
+A precondition states what must already be true for the operation to 
+be allowed to run
+Here: the request can't exceed the current balance, and can't push 
+today's total past the daily limit
+If either line is false, this operation is not defined — the ATM must 
+not dispense cash
+Formal Specification 20
+S T E P  5  O F  5
+Write the Postcondition
+Withdraw
+ΔATM
+amt? : ℕ
+amt? ≤ balance
+dailyWithdrawn + amt? ≤ dailyLimit
++ balance′ = balance − amt?
++ dailyWithdrawn′ = dailyWithdrawn + amt?
+IN PLAIN ENGLISH
+Amber lines (+) are what's new this step
+A postcondition states what must be true once the operation has 
+finished
+The primed variables (balance′, dailyWithdrawn′) are the after-values
+The specification is now complete: every precondition and 
+postcondition is written
+Formal Specification 21
+--- Page 32 ---
+31-08-2026
+32
+W O R K E D  E X A M P L E  ·  R E S U L T
+The Complete Specification
+Withdraw
+ΔATM
+amt? : ℕ
+amt? ≤ balance
+dailyWithdrawn + amt? ≤ dailyLimit
+balance′ = balance − amt?
+dailyWithdrawn′ = dailyWithdrawn + amt?
+IN PLAIN ENGLISH
+ΔATM means this operation changes the ATM's state
+amt? is the amount the customer requests to withdraw
+Precondition: the request can't exceed the balance or the daily limit
+Postcondition: the balance and daily total are updated by exactly 
+that amount
+Formal Specification 22
+F O R M A L  S P E C I F I C A T I O N
+Formal Specification — Merits & Demerits
+MERITS
+✓ Well-defined semantics leave no scope for ambiguity
+✓ Automated tools can check properties of the specification
+✓ A specification can sometimes be executed directly, as a 
+working prototype
+DEMERITS
+✗ Difficult to learn and use without a strong mathematical 
+background
+✗ Not well suited to handling very large, complex systems
+Formal Specification 23
+--- Page 33 ---
+31-08-2026
+33
+Requirements Analysis & Specification
+A recap: from a customer's rough idea to a precise, contractual document.
+Requirements Analysis
+ The SRS Document
+ Good vs Bad SRS
+ Decision Logic
+ Formal Specification
+S. Roy  ·  Tezpur University
+
+==================================================
+
+=== FILE: LECT4_Software_Design_Redesigned.pdf ===
+--- Page 1 ---
+30-09-2026
+1
+S O F T W A R E  E N G I N E E R I N G
+Software Design
+Turning a validated SRS into a module structure a programming language can implement
+Swarup Roy  ·  Tezpur University  ·
+O V E R V I E W
+What We'll Cover
+Intro
+ Good Design
+ Cohesion
+ Coupling
+ Module 
+Hierarchy
+ FOD vs OOD
+ Case Study
+Software Design 2
+--- Page 2 ---
+30-09-2026
+2
+01
+P A R T  0 1  O F  0 7
+Introduction to Design
+Where design fits between requirements and code, and what it actually produces.
+I N T R O D U C T I O N
+The Design Phase
+The design phase transforms the SRS document into a form that 
+is easily implementable in a programming language
+It takes the SRS document as input, and produces design 
+documents as output
+Design decides: the module structure, how modules call and 
+control each other, the interfaces and data exchanged between 
+them, each module's own data structures, and the algorithms it 
+runs
+Software Design 4
+--- Page 3 ---
+30-09-2026
+3
+I N T R O D U C T I O N
+Anatomy of a Module: Data + Functions
+Data
+D1 — e.g. a customer record
+D2 — e.g. an account balance
+D3 — e.g. a transaction log
+Functions
+F1 — e.g. validateInput()
+F2 — e.g. computeInterest()
+F3 — e.g. postTransaction()
+F4 — e.g. generateReceipt()
+F5 — e.g. auditEntry()
+Software Design 5
+I N T R O D U C T I O N
+High-Level Design vs. Detailed Design
+Validated SRS →
+High-Level Design
+Identify the modules
+Identify control relationships among 
+modules
+Identify the interfaces among modules
+Usual notation: the structure chart
+Outcome: the program structure 
+(software architecture)
+→
+Detailed Design
+For each module, design its data 
+structures
+For each module, design its algorithms
+Outcome: module specs, detailed 
+enough to code from
+→ Code-ready 
+module specs
+Software Design 6
+--- Page 4 ---
+30-09-2026
+4
+02
+P A R T  0 2  O F  0 7
+What Makes a Design Good?
+There's no single correct design — so we need a way to tell a good one from a bad one.
+G O O D  D E S I G N
+A Fundamental Question
+How do we distinguish between a good design and a bad one?
+There is no single, unique way to design a system — even using 
+the same methodology, different engineers reach very different 
+solutions
+Unless we know what a good software design actually looks 
+like, we can't possibly design one
+Software Design 8
+--- Page 5 ---
+30-09-2026
+5
+G O O D  D E S I G N
+What is Good Software Design?
+Correct
+Implements every functionality 
+specified in the SRS
+Understandable
+A clear, readable structure that 
+other engineers can follow
+Efficient
+Uses processing time and 
+resources sensibly
+Maintainable
+Easy to change safely as 
+requirements evolve
+Software Design 9
+G O O D  D E S I G N
+Why Understandability Matters Most
+KEY INSIGHT
+Understandability is the property that determines the goodness of  nearly everything else. A design that is 
+easy to understand is also easy to maintain and change — and maintenance is not a small slice of  a 
+system's life.
+WHAT HAPPENS
+About 60% of total lifecycle effort is typically spent on maintenance, not initial development
+If a design is hard to understand, that maintenance effort multiplies many times over
+Every other quality — efficiency, correctness, extensibility — is harder to verify in a design nobody can follow
+Software Design 10
+--- Page 6 ---
+30-09-2026
+6
+G O O D  D E S I G N
+Modularity: Divide and Conquer
+Modularity is a fundamental attribute of any good design
+A design solution should consist of a cleanly decomposed set 
+of modules — the classic divide-and-conquer principle
+If modules are nearly independent of one another, each can be 
+understood on its own, which greatly reduces overall complexity
+Modules should also be neatly arranged in a hierarchy — a 
+clean, tree-like diagram, not a tangle
+Software Design 11
+G O O D  D E S I G N
+Modularity: Divide and Conquer
+Modularity is a fundamental attribute of any good design: decompose the system into a cleanly organized set of modules —
+the classic divide-and-conquer principle.
+Payroll System
+Employee Records Time & Attendance Deductions & Tax Payslip Generation
+Nearly-independent modules are each understandable on their own — and the hierarchy stays a clean tree, not a tangle.
+Software Design 11
+--- Page 7 ---
+30-09-2026
+7
+G O O D  D E S I G N
+Cohesion and Coupling: The Two Yardsticks
+Cohesion
+A measure of the functional strength of a single 
+module
+A cohesive module performs one clearly 
+describable task
+High cohesion → easier to understand in isolation, 
+fewer errors propagate, more reusable
+Coupling
+A measure of how interdependent two modules 
+are
+Depends on the complexity of the interface 
+between them
+Low coupling → a change in one module is 
+unlikely to break another
+Software Design 12
+03
+P A R T  0 3  O F  0 7
+Cohesion
+Classifying how tightly the responsibilities inside one module actually belong together.
+--- Page 8 ---
+30-09-2026
+8
+C O H E S I O N
+Classifying Cohesion — Worst to Best
+The classification is somewhat subjective, but it gives a practical scale for judging how cohesive a module is.
+Coincidental Logical Temporal Procedural Communication
+al Sequential Functional
+LOW COHESION — WORST HIGH COHESION — BEST
+Functional cohesion is the goal: every element in the module serves one clearly describable purpose.
+Software Design 14
+C O H E S I O N  ·  R E F E R E N C E
+Types of Cohesion
+Type Description Example
+Coincidental Elements are grouped with no meaningful relationship at 
+all
+A module that prints an error, reads a file, and 
+opens a socket — with nothing in common
+Logical Similar-category operations, selected by a passed-in flag One generic I/O routine for files, keyboard, and 
+network, chosen by a parameter
+Temporal Elements are related only because they run in the same 
+time window
+A start-up routine doing initialization, logging 
+setup, and opening connections
+Procedural Elements follow a fixed sequence of steps in one 
+procedure
+The successive stages of a message-decoding 
+algorithm
+Communicational Elements all operate on the same data structure A set of functions that all read and update one 
+shared array or stack
+Sequential Output of one element feeds directly into the next sort() → search() → display(), chained in a pipeline
+Functional Every element contributes to one single, well-defined task computeOvertime(), computeWorkHours(), 
+computeDeductions() in a payroll module
+Software Design 15
+--- Page 9 ---
+30-09-2026
+9
+C O H E S I O N  ·  C O D E  E X A M P L E S
+Each Type of Cohesion, in Code
+Coincidental
+function utilityBag() {
+logError();
+readConfigFile();
+openSocket();
+}
+Logical
+function ioHandler(k) {
+if (k === "file")
+readFile();
+else readKeyboard();
+}
+Temporal
+function startup() {
+initVars();
+setupLogging();
+openConnections();
+}
+Procedural
+function decode(msg) {
+parseHeader(msg);
+verifyChecksum(msg);
+extractPayload(msg);
+}
+Communicational
+function useStack(s) {
+push(s, 1);
+pop(s);
+peek(s);
+}
+Sequential
+function search(data) {
+const s = sort(data);
+return find(s);
+}
+Functional
+function payroll(emp) {
+computeWorkHours(emp);
+computeOvertime(emp);
+computeDeductions(emp);
+}
+Worst to best, left to right, top to bottom — same order as the classification scale.
+Software Design 16
+C O H E S I O N
+Determining Cohesiveness: A Quick Test
+Write one sentence describing what the module does
+If the sentence is compound (joined by “and”), it likely has 
+sequential or communicational cohesion
+If it uses words like “first”, “next”, “after”, “then”, it likely has 
+sequential or temporal cohesion
+If it uses a word like “initialize”, it probably has temporal 
+cohesion
+A single, simple sentence with none of these — that's the sign 
+of functional cohesion
+Software Design 16
+--- Page 10 ---
+30-09-2026
+10
+C O H E S I O N
+Determining Cohesiveness: A Quick Test
+Write one sentence describing what the module does, then check the sentence itself  against these cues:
+“startup() initializes variables, sets up logging, and opens connections.”
+→ Uses “initializes” → temporal cohesion
+“useStack() pushes an item, pops an item, and peeks at the same stack.”
+→ Compound with “and”, same data structure → communicational cohesion
+“search() sorts the data and then finds the match.”
+→ Compound, uses “then” → sequential cohesion
+“payroll() computes the overtime pay for an employee.”
+→ One simple sentence, no compounding → functional cohesion
+Software Design 17
+04
+P A R T  0 4  O F  0 7
+Coupling
+Classifying how tightly two separate modules are tangled up with each other.
+--- Page 11 ---
+30-09-2026
+11
+C O U P L I N G
+Classifying Coupling — Best to Worst
+There is no way to measure coupling precisely — but classifying its type approximates the degree of interdependence.
+Data Stamp Control Common Content
+LOOSE COUPLING — BEST TIGHT COUPLING — WORST
+Design for data coupling wherever possible — it keeps modules as independent of one another as the problem allows.
+Software Design 18
+C O U P L I N G  ·  R E F E R E N C E
+Types of Coupling
+Type Description Example
+Data Modules exchange only an elementary data item 
+through a parameter
+An integer amount passed as a single 
+parameter
+Stamp Modules exchange a composite (structured) data 
+item
+A whole Order record passed, even though 
+only order.total is used
+Control One module passes a flag that directs the other's 
+logic
+An isRushOrder flag that selects which 
+branch runs
+Common Modules share access to the same global data Two modules both reading and writing one 
+global inventoryCount
+Content One module directly reaches into or branches into 
+another's internals
+Jumping into the middle of another 
+module's code
+Coupling gets worse from left to right — data coupling is the loosest and most desirable; content coupling is the 
+tightest and almost always a defect.
+Software Design 19
+--- Page 12 ---
+30-09-2026
+12
+C O U P L I N G  ·  C O D E  E X A M P L E S
+Each Type of Coupling, in Code
+Data
+function computeTax(amount) {
+return amount * 0.18;
+}
+computeTax(500);
+Stamp
+function shipOrder(order) {
+return order.total;
+// only .total is used
+}
+Control
+function processOrder(isRush) {
+if (isRush) shipToday();
+else queueStandard();
+}
+Common
+let inventoryCount;  // global
+function reserve() {
+inventoryCount--;
+}
+function inventorycheck() {
+print(inventoryCount);
+}
+Content
+function moduleB() {
+goto moduleA.label2;
+// jumps into A's
+// own internals
+}
+Best to worst, left to right — data coupling is loosest and safest; content coupling is tightest and almost always a defect.
+Software Design 21
+C O U P L I N G  ·  W O R K E D  E X A M P L E
+Control Coupling — A Flag Directs Another Module
+validateOrder() processOrder()
+isRushOrder (flag)
+CONTROL
+validateOrder() sets a boolean flag that tells processOrder() which branch of its own logic to execute next. This is more tha n data changing hands 
+— one module is reaching into the control flow of another.
+EXAMPLE   If isRushOrder is true, processOrder() skips the standard queue and ships the order the same day.
+Software Design 20
+--- Page 13 ---
+30-09-2026
+13
+05
+P A R T  0 5  O F  0 7
+Shape of the Module Hierarchy
+Cohesion and coupling describe one module. These measures describe the whole tree.
+M O D U L E  H I E R A R C H Y  ·  R E F E R E N C E
+Depth, Width, Fan-Out, and Fan-In
+Term Meaning
+Depth The number of levels of control in the hierarchy
+Width The overall span of control across the hierarchy's widest level
+Fan-out The number of modules directly controlled (called) by a given module
+Fan-in The number of modules that directly call a given module
+High fan-in is usually good — it signals reuse. High fan-out is a warning sign: a module coordinating too many subordinates 
+usually lacks cohesion.
+Software Design 22
+--- Page 14 ---
+30-09-2026
+14
+M O D U L E  H I E R A R C H Y  ·  E X A M P L E
+Fan-In and Fan-Out in a Structure Chart
+d1 d2
+Main
+fan-out = 3
+Validate Input Compute Report
+Log Utility
+fan-in = 3
+data couple
+Log Utility is called from three places — high fan-in, good reuse. Main directly controls three modules — fan-out = 3.
+Software Design 23
+M O D U L E  H I E R A R C H Y
+Control, Visibility, and Layering
+A module that controls another is superordinate to it; the 
+controlled module is subordinate
+Module A is visible to module B if A calls B, directly or 
+indirectly
+The layering principle: a module may call only the modules in 
+the layer immediately below it
+Lower-level modules handle low-level, mechanical work (I/O); 
+upper-level modules handle managerial, coordinating work
+Abstraction (layered design): a lower-level module must never 
+call upward into a higher-level one
+Software Design 24
+--- Page 15 ---
+30-09-2026
+15
+M O D U L E  H I E R A R C H Y
+The Goal of High-Level Design
+High-level design maps a system's functions {f1, f2, … fn} onto 
+a set of modules {m1, m2, … mj}
+… such that each module has high cohesion
+… coupling among modules is kept as low as possible
+… and the modules are organized into a neat, shallow hierarchy
+Get this mapping right, and the detailed design of every 
+individual module becomes far easier
+Software Design 25
+06
+P A R T  0 6  O F  0 7
+Two Design Philosophies
+Function-oriented and object-oriented design ask a very different first question.
+--- Page 16 ---
+30-09-2026
+16
+D E S I G N  P H I L O S O P H I E S
+Function-Oriented vs. Object-Oriented Design
+Function-Oriented Design
+The system is viewed as a set of functions to 
+perform
+Each function is successively refined into more 
+detailed sub-functions
+Functions are then mapped onto a module 
+structure
+State is centralized — held in data shared across 
+many functions
+Object-Oriented Design
+The system is viewed as a collection of real-world 
+objects (entities)
+Each object bundles its own data with the 
+functions that act on it
+Objects communicate only by passing messages to 
+one another
+State is decentralized — every object manages its 
+own state
+Software Design 27
+F U N C T I O N- O R I E N T E D  ·  W O R K E D  E X A M P L E
+Functional Decomposition: create-library-member
+create-library-member
+assign-membership-
+number create-member-record print-bill
+Each sub-function is refined further into still more detailed sub -functions, and so on, until every module is small enough to im plement directly.
+Software Design 28
+--- Page 17 ---
+30-09-2026
+17
+O B J E C T- O R I E N T E D  ·  W O R K E D  E X A M P L E
+The Same System, as Objects
+Library Automation Software: each library member is a separate 
+object, with its own data and its own functions
+A class defines the structure and behaviour shared by similar 
+objects — every member object belongs to class Member
+Classes may inherit features from a more general super-class
+Functions on one object cannot directly touch another object's 
+data — objects communicate only by sending messages
+Software Design 29
+D E S I G N  P H I L O S O P H I E S  ·  C O N T R A S T
+Where Does the System's State Live?
+FUNCTION-ORIENTED: STATE IS CENTRALIZED OBJECT-ORIENTED: STATE IS DISTRIBUTED
+Member
+Records
+createMember()
+deleteMember()
+updateRecord()issueBook()
+returnBook()
+Member: Asha
+own data + methods
+Member: Rahul
+own data + methods
+Book: OS Concepts
+own data + methods
+Librarian
+own data + methods
+message
+Function-oriented systems share one pool of  state across many functions; object-oriented systems give each object its own state, reached only 
+through a message.
+Software Design 30
+--- Page 18 ---
+30-09-2026
+18
+“Identify verbs if you are after procedural design, and nouns if 
+you are after object-oriented design.”
+Grady Booch
+on the essential difference between the two design philosophies
+07
+P A R T  0 7  O F  0 7
+Case Study: The Fire-Alarm System
+One problem, solved two ways — to see function-oriented and object-oriented design side by side.
+--- Page 19 ---
+30-09-2026
+19
+C A S E  S T U D Y
+The Problem: A Building-Wide Fire-Alarm 
+System
+CASE STUDY
+A large, multi-storied building — 80 floors and 1,000 rooms — needs a computerized fire-alarm system. Every room is fitted with a smoke 
+detector and an alarm.
+W H A T  H A P P E N S
+When any smoke detector reports a fire, the system must determine its location
+… and sound the alarms in the neighboring locations
+It must flash a message on the console the fire-fighting staff watch around the clock
+Once the fire condition has been handled, staff must be able to reset the alarms
+Software Design 33
+C A S E  S T U D Y  ·  F U N C T I O N- O R I E N T E D
+Function-Oriented Approach: One Global State
+Global State (shared by every function)
+detector_status[1000] : BOOL
+detector_locs[1000]  : INT
+alarm_status[1000]   : BOOL
+alarm_locs[1000]     : INT
+neighbor_alarms[1000][10] : INT
+interrogate_detectors()
+get_detector_location()
+determine_neighbor()
+ring_alarm()
+reset_alarm()
+report_fire_location()
+I N  P L A I N  E N G L I S H
+All state lives in five global arrays, indexed by detector or alarm number
+Every function below the divider can read or update any of this data 
+directly
+Nothing “owns” the data — correctness depends on every function using it 
+consistently
+Software Design 34
+--- Page 20 ---
+30-09-2026
+20
+C A S E  S T U D Y  ·  O B J E C T- O R I E N T E D
+Object-Oriented Approach: Two Small Classes
+class Detector
+Attributes: status, location, neighbors
+Operations: create(), senseStatus(), 
+getLocation(), findNeighbors()
+class Alarm
+Attributes: location, status
+Operations: create(), ringAlarm(), 
+getLocation(), resetAlarm()
+In Practice
+One Detector object and one Alarm 
+object exist for every room in the 
+building
+Software Design 35
+C A S E  S T U D Y
+Comparing the Two Approaches
+Function-oriented: the state is centralized in five global arrays, with 
+six functions all reaching into it
+Object-oriented: the state is distributed — every Detector and Alarm 
+object manages only its own status and location
+In practice, most real designs use both: object-oriented design 
+shapes the classes, then top-down function-oriented design designs 
+the methods inside each class
+A system can look entirely object-oriented from the outside, while 
+each class still contains a small, top-down hierarchy of functions on 
+the inside
+Software Design 36
+--- Page 21 ---
+30-09-2026
+21
+S U M M A R Y
+Summary
+The Design Phase
+Turns a validated SRS into a form that is 
+easy to implement
+High-level design → program structure; 
+detailed design → module specification
+Hallmarks of Good Design
+High cohesion, low coupling, in a neat, 
+shallow hierarchy
+Sensible fan-in, low fan-out, and a 
+layered sense of abstraction
+Two Complementary 
+Approaches
+Function-oriented: centralized state, top-
+down function refinement
+Object-oriented: decentralized state, 
+objects that message each other
+Not competing techniques — each fits a 
+different stage of design
+Software Design 37
+Software Design
+A recap: from a validated SRS to a module structure ready to implement.
+Introduction
+ Good Design
+ Cohesion
+ Coupling
+ Module Hierarchy
+ Design 
+Philosophies
+Case Study
+S. Roy  ·  Tezpur University  ·  Slide content courtesy Dr. Rajib Mall
+
+==================================================
+
+=== FILE: dfd_practice_10.pdf ===
+--- Page 1 ---
+SOFTWARE ENGINEERING · IN-CLASS EXERCISE SET
+Ten DFD Practice Problems
+T en independent structured-analysis requirements — read each one, then draw its own context
+diagram, level 1, and level 2 DFD, the same way we did for the Trading-House Automation
+System.
+Swarup Roy · T ezpur University · In the style of problems by Dr. Rajib Mall
+How to Use This Set
+Each of the ten problems below is a self-contained requirement, exactly like the Trading-House Automation
+System exercise. For every problem, work through the same four steps.
+YOUR TASK — FOR EACH PROBLEM
+1. List the external entities the system talks to, the functions it must perform, and the reports or
+documents it must produce.
+2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity
+and every flow crossing its boundary .
+3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores
+they read from or write to.
+4. Pick one level 1 bubble that still hides real complexity , and decompose it one level further, into a
+level 2 DFD.
+A FEW DFD REMINDERS
+• The context diagram represents the whole system as a single bubble — every external entity appears
+there, and nowhere else.
+• Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
+• A DFD carries no control information — no order of execution, no conditions, just data in motion.
+• Every function named in a requirement should show up as a bubble somewhere — and nothing
+beyond the requirement should be invented.
+PROBLEM 1 Community Library Automation System
+A public library wants to automate the issue and return of books. Every member holds a library card
+with a unique membership number, and the library maintains each member’s name, address, and the
+maximum number of books they may borrow at once. When a member presents a book at the counter,
+the clerk checks whether the member’s borrowing limit has already been reached and whether the
+member has any unpaid fines; if either is true, the book is not issued and a message is printed for the
+member. Otherwise, the book is issued, the loan is recorded against the member’s card, and a due date
+fourteen days later is stamped on the book.
+When a book is returned, the clerk checks the due date against today’s date. If the book is overdue,
+a fine is calculated at a fixed rate per day and added to the member’s outstanding balance; a receipt
+showing the fine is printed. The loan record is then closed and the book is marked available again. The
+library also wants the system to let the clerk search the catalogue by title or author to check whether
+a book is currently available, and to let the librarian generate a weekly list of all books still overdue,
+addressed to the members concerned.
+DFD Practice Set · 10 Problems 1
+--- Page 2 ---
+PROBLEM 2 Outpatient Appointment System for a Clinic
+A multi-doctor clinic wants to computerize the booking of outpatient appointments. A patient calls the
+reception desk and requests an appointment with a particular doctor, or with any available doctor in a
+chosen specialty , for a preferred date. The receptionist checks that doctor’s schedule for an open slot on
+or near that date; if a slot exists, it is reserved in the patient’s name and a confirmation slip showing the
+date, time, and doctor is printed for the patient. If no slot is available, the patient is offered the next
+open slot or placed on a waiting list for that doctor.
+On the day of the visit, the patient checks in at the desk; the receptionist marks the appointment as
+arrived and pulls up the patient’s history so the doctor can review it during the consultation. After the
+consultation, the doctor records the diagnosis and any prescribed medicines against the patient’s file,
+and the system prints a visit summary for the patient to take away . The clinic administrator should also
+be able to request a daily list of appointments for each doctor, and a monthly count of consultations per
+specialty for billing purposes.
+PROBLEM 3 Hotel Room Reservation System
+A mid-sized hotel wants a system to manage room bookings. A guest — either by phone or at the front
+desk — specifies the check-in and check-out dates and the type of room required. The front-desk clerk
+checks room availability for that room type across the requested dates; if a suitable room is free, it is
+reserved under the guest’s name and contact details, and a booking confirmation is printed. If no room
+of that type is free for the full period, the clerk offers the nearest alternative dates or a different room
+type.
+When the guest arrives, the clerk checks them in against the reservation, assigns a specific room number,
+and issues a room key along with a printed registration card. Charges for the room, and any additional
+services the guest requests during the stay such as room service or laundry , are added to the guest’s
+running bill. At check-out, the clerk totals the bill, accepts payment, and prints a final invoice; the room
+is then marked as needing housekeeping before it can be booked again. The hotel manager should also
+be able to request an occupancy report for any given date range, showing how many rooms of each type
+were booked.
+PROBLEM 4 Courier Parcel Tracking System
+A courier company wants to track parcels from pickup to delivery . A customer books a pickup by giving
+the sender and receiver addresses, the parcel’s weight, and the desired delivery speed. The booking
+clerk calculates the shipping charge from a rate table based on weight, distance, and speed, and prints a
+shipping label bearing a unique tracking number, which is stuck onto the parcel when the pickup agent
+collects it.
+As the parcel moves through the company’s network, each hub it passes through scans the tracking
+number and logs the parcel’s current location and timestamp against its tracking record. A customer
+can, at any time, submit a tracking number and receive back the parcel’s current status and location
+history . When the parcel reaches its destination hub, a delivery agent attempts delivery; if the receiver
+is unavailable, the attempt is logged and a re-delivery is scheduled for the next day , up to three attempts,
+after which the parcel is returned to the sender. Once delivered, the receiver signs for the parcel, and a
+proof-of-delivery record is stored and made available to the sender on request. The operations manager
+should be able to request a report of all parcels currently overdue against their promised delivery date.
+DFD Practice Set · 10 Problems 2
+--- Page 3 ---
+PROBLEM 5 University Course Registration System
+A university wants to automate course registration at the start of each semester. A student logs in with
+their roll number and selects the courses they wish to take for the semester. For each course, the system
+checks that the student has completed its prerequisite courses and that the course’s seat limit has not
+already been reached; a course failing either check is rejected, with a message telling the student why .
+Courses that pass both checks are added to the student’s provisional timetable, and the system also
+checks that no two selected courses clash in schedule.
+Once the student confirms the selection, the registration is finalized, the seat count for each chosen
+course is decremented, and a printed registration slip listing the confirmed courses is generated. The
+finance office is separately notified of each finalized registration so that the semester fee can be billed to
+the student’s account. A faculty member should be able to request the final class list for any course they
+teach, once registration closes. The academic office also wants a report, generated after registration
+closes, showing enrolment numbers for every course offered that semester, to help plan the following
+semester’s sections.
+PROBLEM 6 Restaurant Table and Order Management System
+A restaurant wants to computerize how it takes and fulfils orders. When a group of customers arrives,
+the host checks the seating chart for a free table of adequate size and assigns it, marking that table
+occupied. The waiter then takes the order at the table, entering each dish and any special instructions
+into the system; the order is checked against the day’s menu to confirm every item is currently available,
+and unavailable items are flagged back to the waiter immediately .
+Once confirmed, the order is sent to the kitchen display , split automatically into separate tickets for
+the starters, mains, and desserts stations. As each station finishes preparing its items, it marks them
+ready , and the waiter is notified to serve that course. When the customers are ready to leave, the waiter
+requests the bill; the system totals the order, applies any applicable discount, and prints an itemized
+bill. Once payment is recorded, the table is marked free again for the host to reassign. The restaurant
+manager should be able to request a report, for any chosen day , of total sales broken down by menu
+category .
+PROBLEM 7 Car Rental Booking System
+A car rental agency wants to automate vehicle bookings across its branches. A customer requests a car
+of a particular category for pickup at one branch and return at the same or a different branch, over a
+given date range. The booking clerk checks the fleet at the pickup branch for a car of that category free
+over the whole period; if one is available, it is reserved against the customer’s driving-license details
+and a booking reference is issued, along with an estimated charge based on the category’s daily rate
+and the number of days.
+At pickup, the clerk records the car’s odometer reading and fuel level, marks the reservation as active,
+and hands over the keys. At return — possibly at a different branch — the receiving clerk records the
+odometer and fuel level again, calculates any extra charges for mileage beyond the included limit or for
+fuel shortfall, and prints a final invoice covering the rental and these extras. If the car is returned to
+a branch other than its home branch, the system flags it for eventual repositioning. The fleet manager
+should be able to request a report showing the current location and status — available, rented, or under
+maintenance — of every car in the fleet.
+DFD Practice Set · 10 Problems 3
+--- Page 4 ---
+PROBLEM 8 Utility Bill Payment System
+A city electricity board wants to automate the billing and payment of household electricity connections.
+Each month, a meter reader visits every connection, and enters the current meter reading against that
+connection’s account number. The system calculates the units consumed since the previous reading,
+applies the board’s slab-wise tariff to compute the amount due, and adds any unpaid balance carried
+over from previous months; a bill showing the units consumed, the amount due, and the payment due
+date is then printed and mailed to the customer.
+A customer may pay a bill in person at a collection counter, or through an online payment gateway;
+either way , the payment is recorded against the account and a receipt is issued. If a bill is not paid by
+its due date, a late-payment surcharge is added to the following month’s bill, and if two consecutive
+bills remain unpaid, the account is flagged for disconnection and a notice is sent to the customer. The
+board’s revenue office should be able to request, for any billing month, a report of total units billed and
+total amount collected across all connections, as well as a separate list of all currently flagged accounts.
+PROBLEM 9 Online Bookstore Order System
+An online bookstore wants to automate the placing and fulfilment of customer orders. A customer
+browses the catalogue and adds books to a cart; at checkout, the system verifies that every book in
+the cart is currently in stock in the requested quantity , and rejects items that are not, showing the
+customer an expected restock date where one is known. For the remaining items, the customer supplies
+a delivery address and a payment method; the system calculates the order total including shipping,
+processes the payment, and — once payment succeeds — confirms the order and prints a packing slip
+for the warehouse.
+The warehouse picks and packs the ordered books against the packing slip, updates the inventory to
+reflect the reduction in stock, and hands the package to a delivery partner, who provides a tracking
+number that is recorded against the order and emailed to the customer. If a book later turns out to be
+damaged or missing during picking, the warehouse flags the order as partially fulfilled, and the system
+automatically issues a partial refund for the missing item. The store manager should be able to request
+a report of best-selling titles over any chosen date range, and a separate report of all orders currently
+awaiting fulfilment.
+PROBLEM 10 Fitness Club Membership System
+A fitness club wants to computerize how it manages memberships and class bookings. A prospective
+member signs up at the front desk, choosing a membership plan; the staff member records the appli-
+cant’s personal details, collects the joining payment, and activates a membership valid from that date for
+the plan’s duration, printing a membership card. Existing members may renew before expiry , extending
+their validity by the plan’s duration, or upgrade to a different plan, with the fee difference calculated
+automatically .
+The club also runs scheduled group classes, each with a maximum number of participants. A member
+can book a spot in an upcoming class through the front desk or a kiosk; the system checks the class
+isn’t already full and that the member’s plan includes group classes, then reserves the spot and prints a
+confirmation. If a member cancels a booking, the freed spot is offered to the first person on that class’s
+waiting list, if any . Each time a member enters the club, their card is scanned at the gate, which checks
+that the membership is currently active before allowing entry and logs the visit. The club manager
+should be able to request a report of attendance trends by month, and a separate list of all memberships
+due to expire within the next two weeks.
+DFD Practice Set · 10 Problems 4
+
+==================================================
+
+=== FILE: DFD_problem_statement.pdf ===
+--- Page 1 ---
+SOFTWARE ENGINEERING · IN-CLASS EXERCISE
+Trading-House Automation System
+A structured-analysis practice problem — read the requirement below,
+then draw the DFDs yourself, before we work through the solution together .
+Swarup Roy · T ezpur University · Problem courtesy Dr. Rajib Mall
+The Requirement
+A large trading house wants software to automate the book-keeping activities of its business. It has many
+regular customers, who place orders for various kinds of commodities. The trading house maintains the name
+and address of every regular customer, and each is assigned a unique customer identification number (CIN).
+As per current practice, when a customer places an order, the accounts department first checks the customer’s
+credit-worthiness, determined by analyzing the history of the customer’s payments against past bills. If a cus-
+tomer is not credit-worthy , the order is not processed any further, and an appropriate order-rejection message
+is generated for the customer.
+If the customer is credit-worthy , the ordered items are checked against the list of items the trading house deals
+with. Items the trading house does not deal with are dropped, and a message is generated for the customer
+about those items. The remaining items are checked for availability in the inventory . If an item is available in
+the desired quantity , a bill (with the customer’s forwarding address) and a material issue slip are printed. The
+customer presents the material issue slip at the store house to take delivery , and the inventory is adjusted to
+reflect the sale.
+If an ordered item is not available in sufficient quantity , it is recorded in a “pending-order” file, along with
+the quantity ordered and the customer’s identification number. The purchase department periodically issues
+a command to generate indents. On this command, the system examines the pending-order file, determines
+which orders are pending and the total quantity required for each item, finds the vendors who supply those
+items from a file of vendor details, and prints indents addressed to the purchase department for those vendors.
+The system should also answer managerial queries. Given a time period, it should report the statistics of
+different items sold over that period — for each item, the quantity sold and the price realized.
+A FEW DFD REMINDERS
+• The context diagram represents the whole system as a single bubble — every external entity appears
+there, and nowhere else.
+• Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
+• A DFD carries no control information — no order of execution, no conditions, just data in motion.
+• Every function named in the requirement should show up as a bubble somewhere — and nothing
+beyond the requirement should be invented.
+YOUR TASK
+Using only the requirement above, work through structured analysis for the Trading-House Automation
+System.
+1. List the external entities the system talks to, the functions it must perform, and the reports or
+documents it must produce.
+2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity
+and every flow crossing its boundary .
+3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores
+they read from or write to.
+4. Pick one level 1 bubble that still hides real complexity , and decompose it one level further, into a
+level 2 DFD.
+Once you’ve sketched your own version, we’ll work through a complete step-by-step solution — from identifying entities and
+functions, to a full level 0 → 1 → 2 DFD.
+T AS · DFD Practice Problem 1
+
+==================================================
+
+=== FILE: DFD_solution_tutorial.pdf ===
+--- Page 1 ---
+SOFTWARE ENGINEERING · WORKED SOLUTION
+From Problem Statement to DFD
+A complete, step-by-step structured analysis of the Trading-House Automation System —
+entities, functions and reports first, then the DFD itself, level 0 through level 2.
+Swarup Roy · T ezpur University · Problem courtesy Dr. Rajib Mall
+Step 1 · Entities, Functions & Reports
+Before drawing a single bubble, mine the requirement for its nouns and verbs. Every “who” outside the
+system’s control is a candidate external entity; every verb describing something the system does is a candidate
+function; every document or message handed back out is a candidate report; and every noun the system must
+remember between requests is a candidate data store.
+Who sits outside the system?
+Three parties exchange data with TAS — nothing else in the requirement acts on the system from outside it.
+External entity Sends the system Receives from the system
+Customer order bill / material-issue-slip / reject-
+message
+Purchase Department Generate-indent (command) indents
+Manager query statistics
+Vendors are never contacted directly by TAS — indents are printed and handed to the purchase department, so the vendor list stays
+an internal file, not an entity .
+What must the system do?
+Four verbs cover the whole requirement — these four become the level 1 bubbles.
+# Function Triggered by What it does
+0.1 Accept-order Customer places an
+order
+Look up the customer, check
+credit-worthiness, accept or reject the
+order
+0.2 Process-order An order is accepted Validate the items, check stock, bill and
+issue what’s available, log the rest as
+pending
+0.3 Handle-query Manager asks a
+question
+Look up sales statistics for the requested
+period
+0.4 Handle-indent-
+request
+Purchase dept.
+requests indents
+Tally pending orders, find vendors, print
+indents
+What comes out — and what gets remembered
+Report / output Produced by Goes to
+reject-message Accept-order Customer
+bill + material-issue-slip Process-order Customer
+indents Handle-indent-request Purchase Dept.
+statistics Handle-query Manager
+Data stores identified: Customer-file, Customer-history, Item-file, Inventory, Accepted-orders, Pending-order, Vendor-list,
+Sales-statistics.
+T AS · Step-by-Step DFD T utorial 1
+--- Page 2 ---
+Step 2 · The Context Diagram (Level 0)
+The whole system, as a single bubble, with every entity attached.
+Customer
+Purchase
+Department
+Manager
+Trading-House-
+Automation-
+System
+0
+order
+response
+Generate-indentindents
+query
+statistics
+“response” stands for whichever of bill + material-issue-slip or reject-message applies to that order — the context diagram
+doesn’t distinguish them yet.
+Step 3 · The Level 1 DFD, Bubble by Bubble
+Decompose the context bubble into its four functions — one at a time.
+Bubble 1: Accept-order 0.1
+Every order starts here: look the customer up, decide if they’re credit-worthy , and either pass the order on or
+reject it.
+Customer
+Accept-
+order
+0.1
+Customer-
+file
+Customer-
+history
+order
+reject-message
+customer record
+payment history
+TO PROCESS-ORDER 0.2 →
+Not credit-worthy, or the CIN doesn’t check out? The order stops here — a reject-message goes straight back to the customer.
+Bubble 2: Process-order 0.2
+For every accepted order: check the items are real, check the stock, then bill what’s available and backorder
+the rest.
+Process-
+order
+0.2
+Item-file Inventory
+Accepted-
+orders
+Pending-
+order
+CustomerFROM 0.1
+accepted-order
+item validity stock qty
+log entry backorder
+bill + issue slip
+Items the trading house doesn’t stock, or can’t supply in full, never reach the customer as a bill — they’re logged to pending-order
+instead.
+T AS · Step-by-Step DFD T utorial 2
+--- Page 3 ---
+Bubble 3: Handle-query 0.3
+The simplest of the four — a manager asks, the system looks up the answer.
+Manager
+Handle-
+query
+0.3
+Sales-
+statistics
+query
+statistics
+item, qty & price
+Sales-statistics is written to every time Process-order completes a sale — Handle-query only ever reads it.
+Bubble 4: Handle-indent-request 0.4
+On command from the purchase department, turn everything that’s still pending into indents.
+Purchase
+Department
+Handle-
+indent-
+request 0.4
+Pending-
+order
+Vendor-
+list
+Generate-indent
+indents
+pending items
+vendor address
+Pending-order is shared with Process-order 0.2 — one bubble writes backorders into it, this one reads them back out.
+Putting it together
+The same four bubbles and eight stores, assembled into one diagram — this is the level 1 DFD in full. Flow
+names are dropped here for clarity; see the bubble-by-bubble figures above for those.
+Customer
+Customer
+Accept-
+order
+0.1
+Customer-
+file
+Customer-
+history
+Process-
+order
+0.2
+Item-file
+Inventory Pending-
+order
+Handle-
+indent-req
+0.4
+Vendor-
+list
+Purchase
+Dept.
+Handle-
+query
+0.3
+Sales-
+statistics
+Manager
+Accepted-orders (a simple write-only log from Process-order) is left off this recap for clarity — it was shown on the Process-order
+figure above.
+Step 4 · Going One Level Deeper
+Pick the bubble that still hides the most decisions, and decompose it.
+Why decompose Process-order 0.2?
+• Of the four level 1 bubbles, Process-order 0.2 still hides the most: it validates items, checks stock, and
+branches into two very different outcomes.
+• That’s exactly the kind of bubble the guidelines warn about — its label alone doesn’t tell you everything it
+does.
+• Accept-order, Handle-query and Handle-indent-request are each already close to a single, well-defined step
+— decomposing them further would add little.
+• So Process-order 0.2 is the one we refine into a level 2 DFD.
+T AS · Step-by-Step DFD T utorial 3
+--- Page 4 ---
+Decomposing Process-order 0.2
+Validate-
+items
+0.2.1
+Item-file
+Customer
+Check-
+availability
+0.2.2
+Inventory Generate-
+documents
+0.2.3
+Customer
+Update-
+records
+0.2.4
+Accepted-
+orders
+Pending-
+order
+FROM 0.1
+accepted-order
+item master
+reject-message
+valid-items
+stock qty available-items
+short-items
+bill + issue slip
+sold-items
+decrement
+log entry
+backorder
+This is exactly the fan-out / fan-in shape decomposition usually takes: one input splits two ways, and both paths report back
+to a single bubble that updates the stores.
+Step 5 · Checking the Work
+A finished DFD should pass the same guidelines it was built from.
+What makes this a good DFD
+• The context diagram is a single bubble, with all three external entities — Customer, Purchase Department,
+Manager — attached to it, and nowhere else.
+• Level 1 has exactly 4 bubbles — comfortably inside the 3-to-7 rule — and only one of them was decomposed
+further.
+• No arrow anywhere shows order-of-execution or a condition — every flow is a named piece of data in
+motion.
+• Every function named in the requirement shows up as a bubble, and nothing beyond the requirement was
+invented.
+Entities, functions and reports first — then a context diagram, a level 1 DFD built bubble by bubble, and one level 2
+decomposition where it actually mattered.
+T AS · Step-by-Step DFD T utorial 4
+
+==================================================
+

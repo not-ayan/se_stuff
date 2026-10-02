@@ -1,1 +1,142 @@
 @import "tailwindcss";
+
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Design tokens — "paper & ink"
+ *
+ * The workspace is a light interface: a gray backdrop holds one large rounded
+ * near-white panel, panels hold white cards, and colour is spent sparingly
+ * (green for "done", amber for exam tips, rose for "needs work"). The single
+ * dark surface is the ink panel used for summary/status blocks.
+ *
+ * Utilities are named by role, not by hue:
+ *   canvas  page backdrop + recessed fills      line        hairline borders
+ *   panel   the large app panel                 line-strong stronger borders
+ *   surface white cards                         faint/muted/subtle/body/strong/ink  text ramp
+ *   ink     near-black surface + primary text   paper       text on ink
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #ececee;
+  --color-panel: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-line: #e8e8ea;
+  --color-line-strong: #dcdcdf;
+
+  --color-faint: #9fa0a7;
+  --color-muted: #74747c;
+  --color-subtle: #5c5c64;
+  --color-body: #34343b;
+  --color-strong: #24242a;
+  --color-ink: #121216;
+  --color-paper: #ffffff;
+
+  --color-positive: #15803d;
+  --color-positive-soft: #e7f7ed;
+
+  --shadow-card: 0 1px 2px rgb(18 18 22 / 0.04), 0 10px 26px -16px rgb(18 18 22 / 0.18);
+  --shadow-panel: 0 24px 60px -32px rgb(18 18 22 / 0.28);
+  --shadow-ink: 0 18px 40px -22px rgb(18 18 22 / 0.5);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  text-rendering: optimizeLegibility;
+}
+
+/* Display type: same family, tighter tracking and heavier weight. */
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: rgb(18 18 22 / 0.14);
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 2px solid #121216;
+  outline-offset: 2px;
+}
+
+/* Hide scrollbars on horizontal strips that should look flat. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slim scrollbars that suit a light shell. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-line-strong);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-faint);
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* KaTeX sizing inside the notes. */
+.katex {
+  font-size: 1.02em;
+}
+
+.katex-display {
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}

@@ -1,6 +1,6 @@
 {
-  "name": "Software Engineering Exam Prep Hub (Striver-Style A2Z Sheet)",
-  "description": "Comprehensive 3-day exam preparation hub and study tracker for Software Engineering based on IIT Kharagpur and university curriculum with interactive diagrams, formulas, and DFD practice.",
+  "name": "Software Engineering · Exam Prep Workspace",
+  "description": "A complete Software Engineering learning workspace: the full lecture notes in a Notion-style reader with a table of contents and progress tracking, a 100+ question exam bank with explanations, flashcard decks for active recall, a DFD practice studio with 11 worked structured-analysis problems, an interactive numerical lab, and a command-palette search across everything.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

@@ -1,173 +1,138 @@
-# Modules 4 & 5: Software Design & Function-Oriented Design (SA/SD & DFDs)
-*Author: Swarup Roy / Dr. Rajib Mall (IIT Kharagpur CSE Curriculum)*
+# Module 4 & 5: Software Design, Modularity, Cohesion, Coupling & DFD Theory
+*Authors & References: Dr. Rajib Mall (IIT Kharagpur CSE Curriculum) & Prof. Swarup Roy*
 
 ---
 
-## 1. Introduction to Software Design
+## 1. Visual Overview: Cohesion Ladder vs. Coupling Scale
 
-### 1.1 What is Software Design?
-Software design is the phase that transforms the Software Requirements Specification (SRS) document into a blueprint suitable for direct implementation in a programming language.
-
-### 1.2 Two Stages of Design
-1. **Preliminary / High-Level Design (Architectural Design)**:
-   - Identifies modules, control relationships (invocation hierarchy), and interfaces (data exchanged).
-   - Primary representation: **Structure Chart**.
-2. **Detailed Design (Low-Level Design)**:
-   - For each module, designs detailed internal data structures and algorithms.
-   - Deliverable: **Module Specification (MSPEC)** document.
-
-### 1.3 What Makes a Software Design "Good"?
-1. **Correctness**: Implements every single requirement in the SRS.
-2. **Understandability**: Clear, simple, readable structure (Crucial! ~60% of software lifecycle costs are maintenance; an unreadable design causes maintenance costs to explode).
-3. **Modularity**: Cleanly decomposed into near-independent modules arranged in a shallow hierarchy.
-4. **Efficiency**: Judicious use of memory and CPU cycles.
-5. **Maintainability**: Low impact when adapting to future changes.
+![Cohesion and Coupling Infographic](/images/cohesion_coupling_diagram.jpg)
 
 ---
 
-## 2. Cohesion: Functional Strength of a Module
+## 2. Cohesion (Internal Module Strength)
 
-Cohesion measures how tightly the internal elements (statements/functions) of a single module belong together.
+> **Definition:** Cohesion is a measure of the internal functional strength of a module—the degree to which all elements inside a single module belong together and perform a single dedicated task.
 
-```
-LOW COHESION (Worst)                                       HIGH COHESION (Best)
-[Coincidental] -> [Logical] -> [Temporal] -> [Procedural] -> [Communicational] -> [Sequential] -> [Functional]
-```
+### The 7 Levels of Cohesion (Ranked from WORST to BEST)
 
-### 2.1 The Seven Cohesion Levels
-
-1. **Coincidental (Worst)**:
-   - Elements are bundled with no meaningful relationship whatsoever.
-   - *Example*: `utilityBag()` containing `logError()`, `readConfigFile()`, `openSocket()`.
-2. **Logical**:
-   - Performs a set of similar-category operations selected by a passed flag.
-   - *Example*: `ioHandler(kind)` branching on whether `kind == "file"` or `"keyboard"` or `"network"`.
-3. **Temporal**:
-   - Elements are executed within the same time window (e.g., startup/shutdown).
-   - *Example*: `startup()` initializing variables, setting up logging, and opening connections.
-4. **Procedural**:
-   - Elements follow a fixed sequence of execution steps in an algorithm.
-   - *Example*: `decodeMessage()` calling `parseHeader()`, `verifyChecksum()`, `extractPayload()`.
-5. **Communicational**:
-   - All functions operate on and update the same data structure.
-   - *Example*: `useStack()` calling `push()`, `pop()`, `peek()` on a shared stack.
-6. **Sequential**:
-   - Output of one activity feeds directly as the input to the next in a pipeline.
-   - *Example*: `searchData()` doing `sort(data) -> find(sortedData) -> display()`.
-7. **Functional (Best & Target Goal)**:
-   - Every element directly cooperates to achieve a **single, well-defined mathematical/business task**.
-   - *Example*: `computeOvertimePay(employee)` in a payroll module.
-
-### 2.2 The Quick Sentence Test for Cohesion
-Write one sentence describing what the module does:
-- Contains *"and"* with unrelated actions $\implies$ Sequential or Communicational.
-- Contains sequence words (*"first"*, *"then"*, *"next"*, *"after"*) $\implies$ Sequential or Temporal.
-- Contains *"initialize"* or *"setup"* $\implies$ Temporal cohesion.
-- **A single simple sentence with a single action verb** $\implies$ **Functional Cohesion!**
+1. **Coincidental Cohesion (Worst)**:
+   - Elements are bundled together with zero meaningful relationship (e.g. a `MiscUtils` class containing `sortArray()`, `printInvoice()`, `calculateTax()`, `connectDB()`).
+   - *Drawback*: Impossible to reuse or maintain without breaking unrelated code.
+2. **Logical Cohesion**:
+   - Elements perform logically similar operations selected by a control flag (e.g. a single function `handleIO(flag)` that contains a giant `switch` statement for printing, disk reading, network sending, and mouse input).
+3. **Temporal Cohesion**:
+   - Elements are grouped simply because they are executed during the same phase of execution (e.g. a monolithic `initializeSystem()` module that opens DB connections, zeroes error counters, loads UI fonts, and reads config files).
+4. **Procedural Cohesion**:
+   - Elements are executed in a specific algorithm order to accomplish a broader task, but do not share data (e.g. `readStudentRecord()`, `calculateExamRank()`, `formatReport()`).
+5. **Communicational Cohesion**:
+   - All operations inside the module operate on the **exact same input data structure** or produce the same output buffer (e.g. a module `StudentDataProcessor` with functions `findAverage(studentRec)`, `checkEligibility(studentRec)`, `printTranscript(studentRec)`).
+6. **Sequential Cohesion**:
+   - The output data generated by one operation serves as the direct input data to the next operation in a pipeline (e.g. `readRawData() -> parseTokens() -> generateBytecode()`).
+7. **Functional Cohesion (Best & Highest)**:
+   - All elements in the module cooperate to perform **exactly one well-defined task** (e.g. `computeCosine(angle)`, `sortDescending(list)`, `authenticateUser(credentials)`).
+   - *Advantage*: High reusability, easy testing, zero side-effects.
 
 ---
 
-## 3. Coupling: Interdependence Between Modules
+## 3. Coupling (Inter-Module Interdependence)
 
-Coupling measures the degree of interdependence or interaction between two separate modules.
+> **Definition:** Coupling is a measure of the degree of interdependence between two software modules. High coupling makes code fragile; changing one module breaks others.
 
-```
-LOOSE COUPLING (Best)                                        TIGHT COUPLING (Worst)
-[Data Coupling]  -->  [Stamp Coupling]  -->  [Control Coupling]  -->  [Common Coupling]  -->  [Content Coupling]
-```
+### The 6 Levels of Coupling (Ranked from BEST to WORST)
 
-### 3.1 The Five Coupling Levels
-
-1. **Data Coupling (Loosest & Best)**:
-   - Modules communicate strictly by passing elementary data items as parameters (e.g., an `int` or `float` amount).
-   - *Example*: `computeTax(amount)` returning `amount * 0.18`.
-2. **Stamp Coupling**:
-   - Modules exchange an entire composite data structure (record, struct) even though only a tiny field is used.
-   - *Example*: Passing entire `Order` record to `calculateShipping()` which only reads `order.weight`.
+1. **Data Coupling (Best & Lowest)**:
+   - Modules communicate exclusively by passing simple scalar/primitive arguments (e.g., passing `float principal, float rate, int time` to `computeInterest()`).
+2. **Stamp (Data-Structure) Coupling**:
+   - Modules pass an entire composite data structure (struct/record/object) when the receiving module only requires one or two fields (e.g. passing a 50-field `EmployeeRecord` struct to a function that only needs `employee.salary`).
 3. **Control Coupling**:
-   - One module passes a flag that directs the internal control flow or execution path of another module.
-   - *Example*: Passing `isRushOrder` flag to `processOrder()` to decide whether to skip standard queue.
+   - One module passes a control flag or token to another module to explicitly control its internal execution flow (e.g. passing `mode = 1` for sort ascending, `mode = 2` for sort descending).
 4. **Common Coupling**:
-   - Multiple modules share access to the same global data space. If one module mutates the global variable, bugs ripple into others unpredictably.
-   - *Example*: Modules reading and writing global `inventoryCount`.
-5. **Content Coupling (Tightest & Worst - Defect)**:
-   - One module directly branches into or modifies the internal code or memory of another module (e.g., `goto` into another module).
+   - Multiple modules read and write to the same shared **global variable space** or shared memory pool.
+   - *Severe Danger*: If a variable is corrupted, tracing which of 20 modules caused the bug is an engineering nightmare.
+5. **Content Coupling (Worst & Highest)**:
+   - One module directly accesses, branches into, or modifies the private internal data, memory pointers, or code lines of another module (e.g. using `goto` into another function's label or modifying internal struct offsets).
 
 ---
 
-## 4. Module Hierarchy Metrics
+## 4. Visual Overview: DFD Grammar & Decomposition Rules
+
+![DFD Symbols and Rules Infographic](/images/dfd_symbols_and_rules.jpg)
+
+---
+
+## 5. Data Flow Diagrams (DFD) — Formal Grammar & Rules
+
+### 5.1 The 4 Standard Symbols
+1. **Process / Bubble (Circle)**: Transforms incoming data into outgoing data. Labeled with an active verb-noun phrase.
+2. **External Entity / Source & Sink (Rectangle)**: Actors, external devices, or external organizations residing strictly **outside** the system boundary.
+3. **Data Store (Two parallel lines / open rectangle)**: Data at rest (files, database tables, buffers).
+4. **Data Flow (Directed Arrow)**: Data in motion. Labeled with a meaningful noun.
+
+---
+
+### 5.2 The DFD Hierarchy: Levels 0, 1, and 2
 
 ```
-                    [ Root / Main ]          <-- Level 1
-                     /     |     \
-                    v      v      v
-                 [ ModA ] [ ModB ] [ ModC ]  <-- Level 2 (Fan-out = 3)
-                    \      |      /
-                     v     v     v
-                   [ Shared Utility ]        <-- Level 3 (Fan-in = 3)
+                       [ Level 0: Context Diagram ]
+               (Entire system as EXACTLY 1 bubble, NO stores)
+                                    │
+                                    ▼
+                         [ Level 1 DFD: Subsystems ]
+                (Decomposed into 3 to 7 primary functional bubbles)
+                                    │
+                                    ▼
+                         [ Level 2 DFD: Detailed ]
+                 (Decomposed sub-bubbles: e.g. 1.1, 1.2, 1.3)
 ```
 
-- **Depth**: Number of levels of control in the hierarchy tree.
-- **Width**: The overall span of control across the widest level.
-- **Fan-Out**: Number of modules directly called/controlled by a module.
-  - *Design Rule*: Keep fan-out $\le 7 \pm 2$. High fan-out indicates poor cohesion (a module trying to coordinate too many things).
-- **Fan-In**: Number of modules that directly invoke a given module.
-  - *Design Rule*: High fan-in is **desirable** because it signals code reuse.
-- **Layering Principle**: Upper layers perform high-level coordination; lower layers perform mechanical I/O. Modules must only call down to the immediate lower layer—**lower modules must NEVER call upwards** (preserves abstraction).
+#### Level 0: Context Diagram
+* The entire system is represented as **exactly one single bubble (Bubble 0)**.
+* Shows system boundaries, surrounded by all **External Entities** and major inputs/outputs.
+* **STRICT GRAMMAR RULE: NO data stores are permitted in a Level 0 Context Diagram**.
+
+#### Level 1 DFD
+* Decomposes Bubble 0 into **3 to 7 high-level functional candidate bubbles**.
+* Data stores appear here for the first time to hold persistent data between processes.
+
+#### Level 2 DFD
+* Decomposes complex Level 1 bubbles into detailed child sub-bubbles (e.g., Bubble `2` decomposes into `2.1`, `2.2`, `2.3`).
 
 ---
 
-## 5. Function-Oriented Design (FOD) vs. Object-Oriented Design (OOD)
-
-| Aspect | Function-Oriented Design (FOD) | Object-Oriented Design (OOD) |
-| :--- | :--- | :--- |
-| **Basic Abstraction** | Functions / processes (Verbs) | Real-world entities / classes (Nouns) |
-| **System View** | System is a collection of functions | System is a society of collaborating objects |
-| **State Storage** | **Centralized**: Shared global data/files | **Distributed**: Decentralized inside each object |
-| **Communication** | Direct function calls passing data | Message passing between encapsulated objects |
-| **Grady Booch Quote** | *"Identify verbs if you are after procedural design, and nouns if you are after object-oriented design."* |
-
-### Case Study: Multi-Storey Fire Alarm (80 Floors, 1,000 Rooms)
-- **FOD Approach**: 5 global arrays (`detector_status[1000]`, `alarm_status[1000]`, `neighbor_alarms[1000][10]`) manipulated by functions (`interrogate_detectors()`, `ring_alarm()`). No entity owns data; high vulnerability to accidental corruption.
-- **OOD Approach**: Two concise classes: `class Detector` (status, location, neighbors) and `class Alarm` (location, status). 1,000 instances of each object manage their own state.
+### 5.3 The DFD Balancing Rule
+> **The Fundamental Law of DFD Balancing:** All data flows entering and leaving a bubble at Level $N$ MUST strictly match the net external data flows entering and leaving its decomposed sub-diagram at Level $N+1$.
 
 ---
 
-## 6. Data Flow Diagrams (DFD)
-
-A DFD (bubble chart) is a hierarchical graphical model showing the data transformations in a system.
-
-### 6.1 DFD Symbols
-1. **External Entity**: Rectangle. People or systems outside system control (sources and sinks of data).
-2. **Process**: Circle (Bubble). Transformation of data inputs into outputs. Annotated with a **verb**.
-3. **Data Flow**: Arrow with data name. **Carries NO control information, no loops, no conditions!**
-4. **Data Store**: Two parallel horizontal lines. Persistent data repository.
-
-### 6.2 Data Dictionary Operators
-- `+`: Composition ($A + B$)
-- `[ , ]`: Selection ($[ \text{credit card} , \text{cash} ]$)
-- `( )`: Optional $(( \text{discount} ))$
-- `{ }`: Iteration ($\{ \text{item} \}^*$ for 0 or more, $\{ \text{pin} \}_4$ for 4)
-- `=`: Equivalence definition
-- `/* */`: Comment
-
-### 6.3 Golden Rules of DFDs
-1. **Context Diagram (Level 0)**: Exactly **ONE** bubble representing the entire system. All external entities connect here and nowhere else. Annotated with a **noun**.
-2. **3 to 7 Rule**: Each bubble at any level decomposes into roughly 3 to 7 child bubbles. Fewer is redundant; more is unreadable.
-3. **Balancing Rule**: All data flows entering/leaving a bubble at Level $N$ must exactly match the data flows entering/leaving the decomposed Level $N+1$ diagram.
-4. **Data Stores**: Must connect only to processes (bubbles), never directly to external entities or other data stores!
+### 5.4 Illegal DFD Connections (Common Construction Errors)
+* ❌ **Entity to Entity**: Data moving directly between two external actors (outside system scope).
+* ❌ **Store to Store**: Direct data flow between two databases without a processing function.
+* ❌ **Entity to Store**: Direct data flow between an actor and a database without a validating process.
+* ❌ **Black Hole**: A process bubble with input data flows but zero output data flows.
+* ❌ **Miracle**: A process bubble with output data flows but zero input data flows.
+* ❌ **Grey Hole**: A process bubble whose input data flows are insufficient to generate its declared outputs.
 
 ---
 
-## 7. Structured Design: Transform & Transaction Analysis
+### 5.5 Data Dictionary Grammar
+* `+` : Composition / Sequence (AND).
+* `[ | ]` : Selection / Choice (OR).
+* `{ }` : Iteration / Repetition (0 or more).
+* `( )` : Optional field.
+* `* *` : Comment annotation.
 
-### 7.1 Transform Analysis
-Used when input data passes through a sequential transform pipeline:
-1. **Afferent Branch**: Converts raw physical input into clean logical form.
-2. **Central Transform**: Performs the core computation / business logic.
-3. **Efferent Branch**: Converts logical results into physical output (screens, reports).
-4. **Factoring**: The central transform and branches are placed under a root module on the structure chart.
+```
+Customer-Order = Customer-ID + Customer-Name + Delivery-Address + { Item-Details } + (Special-Instructions)
+Item-Details   = Item-ID + Quantity + Unit-Price
+Delivery-Address = Street + City + State + PIN-Code
+Payment-Type   = [ Cash-On-Delivery | Credit-Card | Net-Banking | UPI ]
+```
 
-### 7.2 Transaction Analysis
-Used in transaction-driven systems where an input transaction tag branches into one of several alternative action paths.
-- The structure chart contains a **Transaction Center** module that dispatches execution to dedicated transaction submodules.
+---
+
+## 6. Practice Questions & Exam Tips
+
+### Practice Questions (5-8 Marks)
+1. **Explain the 7 levels of Cohesion with clear real-world examples for each level.**
+2. **Explain the 6 levels of Coupling. Why is Content Coupling considered hazardous?**
+3. **What is the DFD Balancing Rule? Give an example of a balanced vs unbalanced DFD.**

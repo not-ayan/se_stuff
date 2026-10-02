@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "skills": {
+    "academic-cv-builder": {
+      "source": "paramchoudhary/resumeskills",
+      "sourceType": "github",
+      "skillPath": "skills/academic-cv-builder/SKILL.md",
+      "computedHash": "fb99caca47eab8bcf5f99b75c95d7ea1df1bfab327e6ae6ae4a9c61cd1f8e96f"
+    },
+    "add-educational-comments": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/add-educational-comments/SKILL.md",
+      "computedHash": "65f6defd9f7da4af496d3c706839d2f48da6761b5eb1bb21ffc7f7aa35288670"
+    },
+    "book-study": {
+      "source": "sanyuan0704/sanyuan-skills",
+      "sourceType": "github",
+      "skillPath": "skills/book-study/SKILL.md",
+      "computedHash": "dcf674f1aeefbcfba261424da361dee84b7663661e1cde7716a572e7944f4bb5"
+    },
+    "comment-code-generate-a-tutorial": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/comment-code-generate-a-tutorial/SKILL.md",
+      "computedHash": "8fad68f9f99c8eb4a4799e34a5e66692a20d66e6975c93d358cbef01be23ba15"
+    },
+    "documentation-and-adrs": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-and-adrs/SKILL.md",
+      "computedHash": "2ed98ee303c23d228c76c7bfe6a5f0e5c0571df81670e5eb099f14929eac47e9"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
+    "gws-classroom": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "skillPath": "skills/gws-classroom/SKILL.md",
+      "computedHash": "6873938c27b2387ec5ae590c025506df9137afc37dafc1ca7e602a74a8b47692"
+    },
+    "nature-writing": {
+      "source": "yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nature-writing/SKILL.md",
+      "computedHash": "a705603e773d04b808dabc1e0759a7f9b4654d6196ec45bdc406e2bb34dc0c14"
+    },
+    "recipe-create-classroom-course": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "skillPath": "skills/recipe-create-classroom-course/SKILL.md",
+      "computedHash": "7244be0835fa959b3add69139e5c72268fed9f9360acf9a5850bc72c7013e1aa"
+    },
+    "scaffold-exercises": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/misc/scaffold-exercises/SKILL.md",
+      "computedHash": "0f8154a7be9fc5ebe6ae0550d520259fadfdd512c166cb7f137f8e697aae4017"
+    },
+    "scientific-thinking-literature-review": {
+      "source": "affaan-m/ecc",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-thinking-literature-review/SKILL.md",
+      "computedHash": "65d4f9a432c202726453c04d5b08d932625a29bcaeeb97cf07928cd8507f6bd9"
+    },
+    "teach": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/teach/SKILL.md",
+      "computedHash": "d5f74fa9a34961cf4df339019f7cd1ebf84163cf8b789829be26342e5ceba5a1"
+    },
+    "test-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/test-driven-development/SKILL.md",
+      "computedHash": "3cfe4ebb6fa7288f668d87880d279c8e48f7a92b63415e296857060f5ce22e05"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "web-project-brainstorming": {
+      "source": "sickn33/agentic-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-project-brainstorming/SKILL.md",
+      "computedHash": "85074c987f9391ff11d20557ff35cd4e8a4f66b1a1c5e15c047a163c6d607366"
+    }
+  }
+}
