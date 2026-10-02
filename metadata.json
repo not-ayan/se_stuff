@@ -1,0 +1,6 @@
+{
+  "name": "Software Engineering Exam Prep Hub (Striver-Style A2Z Sheet)",
+  "description": "Comprehensive 3-day exam preparation hub and study tracker for Software Engineering based on IIT Kharagpur and university curriculum with interactive diagrams, formulas, and DFD practice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
