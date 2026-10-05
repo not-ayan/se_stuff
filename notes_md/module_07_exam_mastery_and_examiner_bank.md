@@ -2,66 +2,60 @@
 
 ---
 
-# Part VIII — Cross-Topic Connections: Requirements → DFD → Design → Code
+# Part VIII — Cross-Topic Connections: Requirements → Architectural Design → Implementation → Testing
 
 ## 91. The course is one continuous chain
 
-Although the PDFs are separated into lectures, they form a single engineering story.
+Although the syllabus modules are presented separately, they form a single unified engineering pipeline:
 
 ```text
 Problem / user need
         ↓
 Requirements gathering & analysis
         ↓
-SRS
+SRS (Functional, Non-Functional, Constraints)
         ↓
-Structured analysis / functional understanding
-        ↓
-Design
+Architectural Design (Modularity, Coupling, Cohesion)
    ┌────┴────┐
    ↓         ↓
 FOD       OOD perspectives
    ↓         ↓
-Module hierarchy / objects
+Module hierarchy / Objects & interfaces
         ↓
 Detailed data structures + algorithms
         ↓
 Coding
         ↓
-Unit testing
+Unit testing (Drivers & Stubs, Verification vs Validation)
         ↓
 Integration + system testing
         ↓
-Maintenance
+Maintenance (Maintainability & Portability)
 ```
 
-The life-cycle lecture gives the overall process. The requirements lecture explains how to define the “WHAT.” The DFD exercises show one traditional analysis technique. The design lecture explains how to turn the understood system into modules. The introductory lecture explains why all this discipline is necessary as software size and organizational complexity increase.
+The life-cycle lecture gives the overall process. The requirements lecture explains how to define the “WHAT.” The design lecture explains how to turn the understood system into modules or autonomous objects. The introductory lecture explains why all this discipline is necessary as software size and organizational complexity increase.
 
 ---
 
-## 92. SRS versus DFD versus design
+## 92. SRS versus Design Specification
 
 ### SRS
-Describes required external behavior and constraints.
+Describes required external behavior, constraints, and acceptance criteria from a black-box perspective.
 
-### DFD
-Within the traditional structured-analysis approach, describes functions/processes and data moving among processes and data stores. It does not specify implementation-level algorithms.
-
-### High-level design
-Maps understood functions onto modules and defines relationships and interfaces.
+### High-level architectural design
+Decomposes the system into modules/objects and defines relationships, message invocation protocols, and interfaces.
 
 ### Detailed design
-Defines module-level data structures and algorithms.
+Defines internal module data structures and procedural algorithms.
 
 A useful “do not mix levels” table:
 
 | Question | Artifact |
 |---|---|
 | What must the system do? | SRS |
-| Which functions and data flows exist? | Structured analysis / DFD |
-| Which modules should exist and how are they connected? | High-level design / structure chart |
-| How does one module calculate its result? | Detailed design |
-| Is the code correct? | Testing |
+| How are responsibilities organized into modules? | High-level design / structure chart |
+| How does one module calculate its result internally? | Detailed design |
+| Is the code built right and building the right product? | Unit testing & Validation |
 
 ---
 
@@ -77,43 +71,44 @@ The two stages therefore solve different problems:
 
 ---
 
-## 94. DFD and function-oriented design fit together
+## 94. Function-Oriented Design (FOD) versus Object-Oriented Design (OOD)
 
-The lifecycle lecture says structured analysis identifies functions and data flow using DFDs. The same lecture then says structured design decomposes the software into modules and defines invocation relationships.
-
-The Software Design lecture continues this traditional path through functional decomposition:
+The Software Design lecture contrasts two major paradigms for organizing system architecture:
 
 ```text
 Requirement understanding
         ↓
-Functions + data flow (DFD)
-        ↓
-Functional decomposition
-        ↓
-Module hierarchy / structure chart
-        ↓
-Detailed module design
+   ┌────┴──────────────────────────┐
+   ↓                               ↓
+Function-Oriented Design        Object-Oriented Design
+(Top-down functional            (Autonomous objects
+ decomposition, centralized       encapsulating state + methods,
+ state, actions primary)          distributed state, objects primary)
+   ↓                               ↓
+Structure Chart                 Class & Component Architecture
 ```
 
-This is why the Trading-House DFD exercise belongs next to the design lecture rather than being an isolated diagramming topic.
+Grady Booch’s dictum succinctly contrasts them:
+- **Function-Oriented Design**: Software is organized primarily around subroutines/functions that operate on shared data structures. Data is secondary to the functional breakdown. System state is often centralized in common tables or global stores.
+- **Object-Oriented Design**: Software is organized around autonomous entities (objects) that encapsulate both state (attributes) and operations (methods). Functions are bound directly to the data they operate upon.
 
 ---
 
 ## 95. Cohesion and coupling as design consequences
 
-When DFD functions are mapped into modules, the mapping is not arbitrary.
+When functional requirements are mapped into modules, the mapping is not arbitrary.
 
 A good mapping aims for:
 
 - high cohesion within a module,
 - low coupling between modules,
 - sensible hierarchy,
-- reasonable fan-in/fan-out,
+- reasonable fan-in/fan-out (moderate fan-out $\le 7$, high fan-in for reuse),
 - proper layering and abstraction.
 
-Imagine a DFD process named `Generate Invoice`. If the designer bundles invoice formatting, socket management, employee login, unrelated error handling, and inventory scanning into one module, the module may become low-cohesion. If `Generate Invoice` reaches directly into internal variables owned by five other modules, coupling becomes tight.
+Imagine a requirement for `Process Order`. If the designer bundles invoice formatting, socket management, employee login, unrelated error handling, and inventory scanning into one monolithic module, the module suffers from low coincidental or logical cohesion. If `Process Order` reaches directly into internal private variables owned by five other modules, content coupling ruins maintainability.
 
-The analysis artifact gives a functional vocabulary; the design stage determines whether that vocabulary becomes a healthy module structure.
+The requirements artifact gives the functional needs; the design stage determines whether that vocabulary becomes a healthy, maintainable modular structure.
 
 ---
 
@@ -1008,7 +1003,7 @@ Identify all the functions to be performed, and the data flow among
 them  
 Recursively decompose each function into sub-functions, and  
 identify data flow among the sub-functions too  
-Carried out using Data Flow Diagrams (DFDs)  
+Carried out by functional decomposition and architectural modeling  
 Life Cycle Models 19  
 DESIGN · TRADITIONAL APPROACH  
 Structured Design  
@@ -1022,8 +1017,6 @@ Life Cycle Models 20
 ### Deep explanation
 
 This page belongs to the life-cycle/process-model thread. Read it as a question of **how software-development activities are organized**, not as a different set of fundamental activities. Compare the page against the six-stage baseline—feasibility, requirements, design, coding, testing, maintenance—and ask what this model changes about sequencing, feedback, releases, or risk. The most important exam move is to connect the model to the project characteristic highlighted on the page: stability, uncertainty, need for feedback, natural increments, or technical risk.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
 
 \newpage
 
@@ -4100,582 +4093,89 @@ This page belongs to the requirements/specification thread. The central discipli
 
 \newpage
 
-## Study Page 097 — Trading-House Problem Statement — PDF page 1
+## Study Page 097 — Software Quality: Maintainability & Portability
 
-**Source file:** `DFD_problem_statement.txt`  
-**PDF page:** 1
+**Syllabus Topic:** Module 3 / Intro Chapter Quality Factors  
+**Focus:** Maintainability Economics, 40:60 Ratio, and Portability Interfaces
 
-### Page focus
+### Key Concepts
 
-**Trading-House Automation System — A structured-analysis practice problem — read the requirement below,**
+#### 1. Software Maintainability
+- **Definition:** The ease with which a software system can be modified after delivery to correct faults, improve performance, or adapt to a changing environment.
+- **The 40:60 Rule of Software Economics:**
+  Empirical studies (Boehm, Lientz & Swanson, Rajib Mall) demonstrate that **at least 60% of total lifetime software effort/cost is spent on Maintenance**, while only **40% (or less)** is spent on initial Development.
+  $$\text{Maintenance Effort} \ge 60\% \quad \text{vs.} \quad \text{Development Effort} \le 40\%$$
+- **Three Core Pillars of Maintainability:**
+  1. **Understandability:** How easily a new engineer can read and comprehend the purpose, design, and code of a module.
+  2. **Modifiability:** How easily changes can be made without causing unexpected side-effects (ripple effects) in other modules. Strongly promoted by High Cohesion and Low Coupling.
+  3. **Testability:** How easily modified modules can be unit tested and regression tested to verify correctness.
 
-### Captured source points
+#### 2. Software Portability
+- **Definition:** The ease with which software can be transferred from one hardware platform or operating system environment to another without extensive rewrites.
+- **Portability Interface / Hardware Abstraction Layer (HAL):**
+  Isolates machine-dependent logic (device registers, interrupt handlers, OS system calls) into a strictly segregated, thin interface layer. The remaining 90%+ of application logic remains 100% portable across platforms.
 
-SOFTWARE ENGINEERING · IN-CLASS EXERCISE  
-Trading-House Automation System  
-A structured-analysis practice problem — read the requirement below,  
-then draw the DFDs yourself, before we work through the solution together.  
-Swarup Roy · Tezpur University · Problem courtesy Dr. Rajib Mall  
-The Requirement  
-A large trading house wants software to automate the book-keeping activities of its business. It has many  
-regular customers, who place orders for various kinds of commodities. The trading house maintains the name  
-and address of every regular customer, and each is assigned a unique customer identification number (CIN).  
-As per current practice, when a customer places an order, the accounts department first checks the customer’s  
-credit-worthiness, determined by analyzing the history of the customer’s payments against past bills. If a cus-  
-tomer is not credit-worthy, the order is not processed any further, and an appropriate order-rejection message  
-is generated for the customer.  
-If the customer is credit-worthy, the ordered items are checked against the list of items the trading house deals  
-with. Items the trading house does not deal with are dropped, and a message is generated for the customer  
-about those items. The remaining items are checked for availability in the inventory. If an item is available in  
-the desired quantity, a bill (with the customer’s forwarding address) and a material issue slip are printed. The  
-customer presents the material issue slip at the store house to take delivery, and the inventory is adjusted to  
-reflect the sale.  
-If an ordered item is not available in sufficient quantity, it is recorded in a “pending-order” file, along with  
-the quantity ordered and the customer’s identification number. The purchase department periodically issues  
-a command to generate indents. On this command, the system examines the pending-order file, determines  
-which orders are pending and the total quantity required for each item, finds the vendors who supply those  
-items from a file of vendor details, and prints indents addressed to the purchase department for those vendors.  
-The system should also answer managerial queries. Given a time period, it should report the statistics of  
-different items sold over that period — for each item, the quantity sold and the price realized.  
-A FEW DFD REMINDERS  
-- The context diagram represents the whole system as a single bubble — every external entity appears
-there, and nowhere else.  
-- Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
-- A DFD carries no control information — no order of execution, no conditions, just data in motion.
-- Every function named in the requirement should show up as a bubble somewhere — and nothing
-beyond the requirement should be invented.  
-YOUR TASK  
-Using only the requirement above, work through structured analysis for the Trading-House Automation  
-System.  
-1. List the external entities the system talks to, the functions it must perform, and the reports or  
-documents it must produce.  
-2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity  
-and every flow crossing its boundary.  
-3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores  
-they read from or write to.  
-4. Pick one level 1 bubble that still hides real complexity, and decompose it one level further, into a  
-level 2 DFD.  
-Once you’ve sketched your own version, we’ll work through a complete step-by-step solution — from identifying entities and  
-functions, to a full level 0 → 1 → 2 DFD.  
-TAS · DFD Practice Problem 1  
+---
 
-### Deep explanation
+## Study Page 098 — Software Testing Fundamentals (Introductory Chapter Scope)
 
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
+**Syllabus Topic:** Module 6 / Intro Chapter Testing  
+**Focus:** Error vs Fault vs Failure, Verification vs Validation, Test Harnesses
 
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
+### Key Concepts
 
-\newpage
+#### 1. The Error → Fault → Failure Causal Chain
+1. **Error (Human Mistake):** A cognitive human misstep made by a developer, analyst, or architect during requirement analysis, design, or coding (e.g., off-by-one index mistake, misunderstanding tax slab).
+2. **Fault / Defect (Static Bug):** The static representation of the error embedded within software documentation or source code (e.g., `if (i <= n)` instead of `if (i < n)`).
+3. **Failure (Dynamic Breakdown):** An observable runtime deviation of the system’s execution from its externally specified behavior.
+   $$\text{Error (Human Mind)} \longrightarrow \text{Fault (Static Code/Doc)} \longrightarrow \text{Failure (Runtime Execution)}$$
+> **Crucial Rule:** A fault in code does NOT become a failure unless that specific code path is dynamically executed under data inputs that trigger the erroneous state!
 
-## Study Page 098 — Trading-House Worked DFD Solution — PDF page 1
+#### 2. Verification versus Validation (Barry Boehm’s Distinction)
+- **Verification:** *"Are we building the product right?"*
+  Static and objective checking of development artifacts against phase input specifications (syntax checks, code reviews, design walkthroughs, formal logic proofs).
+- **Validation:** *"Are we building the right product?"*
+  Dynamic evaluation of the executable software against real customer operational needs and operational expectations.
 
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 1
+#### 3. Unit Testing Scaffolding: Test Drivers vs Test Stubs
+When a single module is tested in isolation during Unit Testing:
+- **Test Driver:** A dummy calling program that sets up input parameters, invokes the module under test, and inspects the return values.
+- **Test Stub:** A dummy called subroutine that simulates subordinate routines invoked by the module under test, returning canned, pre-programmed responses.
 
-### Page focus
+---
 
-**From Problem Statement to DFD — A complete, step-by-step structured analysis of the Trading-House Automation System —**
+## Study Page 099 — Function-Oriented Design vs Object-Oriented Design
 
-### Captured source points
+**Syllabus Topic:** Module 5 / Software Design  
+**Focus:** Booch Dictum, Centralized vs Distributed State, Fire-Alarm Case Study
 
-SOFTWARE ENGINEERING · WORKED SOLUTION  
-From Problem Statement to DFD  
-A complete, step-by-step structured analysis of the Trading-House Automation System —  
-entities, functions and reports first, then the DFD itself, level 0 through level 2.  
-Swarup Roy · Tezpur University · Problem courtesy Dr. Rajib Mall  
-Step 1 · Entities, Functions & Reports  
-Before drawing a single bubble, mine the requirement for its nouns and verbs. Every “who” outside the  
-system’s control is a candidate external entity; every verb describing something the system does is a candidate  
-function; every document or message handed back out is a candidate report; and every noun the system must  
-remember between requests is a candidate data store.  
-Who sits outside the system?  
-Three parties exchange data with TAS — nothing else in the requirement acts on the system from outside it.  
-External entity Sends the system Receives from the system  
-Customer order bill / material-issue-slip / reject-  
-message  
-Purchase Department Generate-indent (command) indents  
-Manager query statistics  
-Vendors are never contacted directly by TAS — indents are printed and handed to the purchase department, so the vendor list stays  
-an internal file, not an entity.  
-What must the system do?  
-Four verbs cover the whole requirement — these four become the level 1 bubbles.  
-# Function Triggered by What it does  
-0.1 Accept-order Customer places an Look up the customer, check  
-order credit-worthiness, accept or reject the  
-order  
-0.2 Process-order An order is accepted Validate the items, check stock, bill and  
-issue what’s available, log the rest as  
-pending  
-0.3 Handle-query Manager asks a Look up sales statistics for the requested  
-question period  
-0.4 Handle-indent- Purchase dept. Tally pending orders, find vendors, print  
-request requests indents indents  
-What comes out — and what gets remembered  
-Report / output Produced by Goes to  
-reject-message Accept-order Customer  
-bill + material-issue-slip Process-order Customer  
-indents Handle-indent-request Purchase Dept.  
-statistics Handle-query Manager  
-Data stores identified: Customer-file, Customer-history, Item-file, Inventory, Accepted-orders, Pending-order, Vendor-list,  
-Sales-statistics.  
-TAS · Step-by-Step DFD Tutorial 1  
+### Key Concepts
 
-### Deep explanation
+#### 1. Grady Booch’s Dictum
+- **Function-Oriented Design (FOD):** Software is organized around subroutines/functions that perform actions on data. Data is secondary to functional decomposition.
+- **Object-Oriented Design (OOD):** Software is organized around autonomous entities (objects) that encapsulate both state (data) and operations (methods).
 
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
+#### 2. Fire-Alarm Case Study: Extensibility Comparison
+- **Scenario:** An existing fire alarm system polls temperature sensors and sounds an alarm when high heat is detected. The client requests adding **Smoke Detectors**.
+- **Under FOD:**
+  - Logic is partitioned by function: `InterrogateSensors()`, `CheckThresholds()`, `SoundAlarm()`.
+  - Adding a smoke sensor forces the developer to modify and recompile *every single one* of these centralized functions. High risk of ripple effects!
+- **Under OOD:**
+  - Logic is partitioned by autonomous device abstractions: `Sensor` base class with subclasses `HeatSensor` and `SmokeSensor`.
+  - Adding `SmokeSensor` requires creating a new subclass conforming to the `Sensor` interface. Zero modifications to existing classes or alarm dispatch logic!
 
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 099 — Trading-House Worked DFD Solution — PDF page 2
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 2
-
-### Page focus
-
-**Step 2 · The Context Diagram (Level 0) — The whole system, as a single bubble, with every entity attached.**
-
-### Captured source points
-
-Step 2 · The Context Diagram (Level 0)  
-The whole system, as a single bubble, with every entity attached.  
-Purchase  
-Department  
-indents Generate-indent  
-order query  
-Trading-House-  
-Automation-  
-Customer Manager  
-System  
-response statistics  
-“response” stands for whichever of bill + material-issue-slip or reject-message applies to that order — the context diagram  
-doesn’t distinguish them yet.  
-Step 3 · The Level 1 DFD, Bubble by Bubble  
-Decompose the context bubble into its four functions — one at a time.  
-Bubble 1: Accept-order 0.1  
-Every order starts here: look the customer up, decide if they’re credit-worthy, and either pass the order on or  
-reject it.  
-Customer-  
-file  
-customer record  
-order  
-Accept-  
-Customer order TO PROCESS-ORDER 0.2 →  
-0.1  
-reject-message  
-payment history  
-Customer-  
-history  
-Not credit-worthy, or the CIN doesn’t check out? The order stops here — a reject-message goes straight back to the customer.  
-Bubble 2: Process-order 0.2  
-For every accepted order: check the items are real, check the stock, then bill what’s available and backorder  
-the rest.  
-Item-file Inventory  
-item validity stock qty  
-accepted-order Process- bill + issue slip  
-FROM 0.1 order Customer  
-0.2  
-log entry backorder  
-Accepted- Pending-  
-orders order  
-Items the trading house doesn’t stock, or can’t supply in full, never reach the customer as a bill — they’re logged to pending-order  
-instead.  
-TAS · Step-by-Step DFD Tutorial 2  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 100 — Trading-House Worked DFD Solution — PDF page 3
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 3
-
-### Page focus
-
-**Bubble 3: Handle-query 0.3 — The simplest of the four — a manager asks, the system looks up the answer.**
-
-### Captured source points
-
-Bubble 3: Handle-query 0.3  
-The simplest of the four — a manager asks, the system looks up the answer.  
-query  
-Handle- item, qty & price  
-Manager Sales-  
-query  
-statistics  
-0.3  
-statistics  
-Sales-statistics is written to every time Process-order completes a sale — Handle-query only ever reads it.  
-Bubble 4: Handle-indent-request 0.4  
-On command from the purchase department, turn everything that’s still pending into indents.  
-Purchase  
-Department Generate-indent Pending-  
-order  
-pending items  
-Handle-  
-indents  
-indent-  
-request 0.4  
-vendor address  
-Vendor-  
-list  
-Pending-order is shared with Process-order 0.2 — one bubble writes backorders into it, this one reads them back out.  
-Putting it together  
-The same four bubbles and eight stores, assembled into one diagram — this is the level 1 DFD in full. Flow  
-names are dropped here for clarity; see the bubble-by-bubble figures above for those.  
-Customer- Purchase Sales-  
-Item-file Dept.  
-file statistics  
-Customer  
-Accept- Process- Handle- Handle-  
-order order indent-req query  
-0.1 0.2 0.4 0.3  
-Customer  
-Customer- Pending- Vendor-  
-Inventory Manager  
-history order list  
-Accepted-orders (a simple write-only log from Process-order) is left off this recap for clarity — it was shown on the Process-order  
-figure above.  
-Step 4 · Going One Level Deeper  
-Pick the bubble that still hides the most decisions, and decompose it.  
-Why decompose Process-order 0.2?  
-- Of the four level 1 bubbles, Process-order 0.2 still hides the most: it validates items, checks stock, and
-branches into two very different outcomes.  
-- That’s exactly the kind of bubble the guidelines warn about — its label alone doesn’t tell you everything it
-does.  
-- Accept-order, Handle-query and Handle-indent-request are each already close to a single, well-defined step
-— decomposing them further would add little.  
-- So Process-order 0.2 is the one we refine into a level 2 DFD.
-TAS · Step-by-Step DFD Tutorial 3  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 101 — Trading-House Worked DFD Solution — PDF page 4
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 4
-
-### Page focus
-
-**Decomposing Process-order 0.2 — Item-file Inventory**
-
-### Captured source points
-
-Decomposing Process-order 0.2  
-Item-file Inventory  
-Generate- bill + issue slip  
-documents Customer  
-0.2.3  
-available-items  
-item master stock qty  
-accepted-order Validate- valid-items Check- decrement  
-FROM 0.1 items availability sold-items  
-0.2.1 0.2.2  
-Accepted-  
-short-items orders  
-log entry  
-reject-message  
-Update-  
-records  
-0.2.4  
-Customer backorder  
-Pending-  
-order  
-This is exactly the fan-out / fan-in shape decomposition usually takes: one input splits two ways, and both paths report back  
-to a single bubble that updates the stores.  
-Step 5 · Checking the Work  
-A finished DFD should pass the same guidelines it was built from.  
-What makes this a good DFD  
-- The context diagram is a single bubble, with all three external entities — Customer, Purchase Department,
-Manager — attached to it, and nowhere else.  
-- Level 1 has exactly 4 bubbles — comfortably inside the 3-to-7 rule — and only one of them was decomposed
-further.  
-- No arrow anywhere shows order-of-execution or a condition — every flow is a named piece of data in
-motion.  
-- Every function named in the requirement shows up as a bubble, and nothing beyond the requirement was
-invented.  
-Entities, functions and reports first — then a context diagram, a level 1 DFD built bubble by bubble, and one level 2  
-decomposition where it actually mattered.  
-TAS · Step-by-Step DFD Tutorial 4  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 102 — Ten DFD Practice Problems — PDF page 1
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 1
-
-### Page focus
-
-**SOFTWARE ENGINEERING · IN-CLASS EXERCISE SET — Ten DFD Practice Problems**
-
-### Captured source points
-
-SOFTWARE ENGINEERING · IN-CLASS EXERCISE SET  
-Ten DFD Practice Problems  
-Ten independent structured-analysis requirements — read each one, then draw its own context  
-diagram, level 1, and level 2 DFD, the same way we did for the Trading-House Automation  
-System.  
-Swarup Roy · Tezpur University · In the style of problems by Dr. Rajib Mall  
-How to Use This Set  
-Each of the ten problems below is a self-contained requirement, exactly like the Trading-House Automation  
-System exercise. For every problem, work through the same four steps.  
-YOUR TASK — FOR EACH PROBLEM  
-1. List the external entities the system talks to, the functions it must perform, and the reports or  
-documents it must produce.  
-2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity  
-and every flow crossing its boundary.  
-3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores  
-they read from or write to.  
-4. Pick one level 1 bubble that still hides real complexity, and decompose it one level further, into a  
-level 2 DFD.  
-A FEW DFD REMINDERS  
-- The context diagram represents the whole system as a single bubble — every external entity appears
-there, and nowhere else.  
-- Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
-- A DFD carries no control information — no order of execution, no conditions, just data in motion.
-- Every function named in a requirement should show up as a bubble somewhere — and nothing
-beyond the requirement should be invented.  
-PROBLEM 1 Community Library Automation System  
-A public library wants to automate the issue and return of books. Every member holds a library card  
-with a unique membership number, and the library maintains each member’s name, address, and the  
-maximum number of books they may borrow at once. When a member presents a book at the counter,  
-the clerk checks whether the member’s borrowing limit has already been reached and whether the  
-member has any unpaid fines; if either is true, the book is not issued and a message is printed for the  
-member. Otherwise, the book is issued, the loan is recorded against the member’s card, and a due date  
-fourteen days later is stamped on the book.  
-When a book is returned, the clerk checks the due date against today’s date. If the book is overdue,  
-a fine is calculated at a fixed rate per day and added to the member’s outstanding balance; a receipt  
-showing the fine is printed. The loan record is then closed and the book is marked available again. The  
-library also wants the system to let the clerk search the catalogue by title or author to check whether  
-a book is currently available, and to let the librarian generate a weekly list of all books still overdue,  
-addressed to the members concerned.  
-DFD Practice Set · 10 Problems 1  
-
-### Deep explanation
-
-This page belongs to the requirements/specification thread. The central discipline is **precision before implementation**. Identify the required behavior, inputs, outputs, conditions, constraints, and any missing or contradictory cases. When notation appears, focus on what each symbol contributes to precision rather than memorizing a picture. When an SRS example appears, treat its IDs, inputs, outputs, processing, and measurable constraints as a template for writing requirements that can later be designed and tested. For decision logic, identify conditions and actions. For formal logic, identify the domain, quantifier, condition, connective, and conclusion.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 103 — Ten DFD Practice Problems — PDF page 2
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 2
-
-### Page focus
-
-**PROBLEM 2 Outpatient Appointment System for a Clinic — A multi-doctor clinic wants to computerize the booking of outpatient appointments. A patient calls the**
-
-### Captured source points
-
-PROBLEM 2 Outpatient Appointment System for a Clinic  
-A multi-doctor clinic wants to computerize the booking of outpatient appointments. A patient calls the  
-reception desk and requests an appointment with a particular doctor, or with any available doctor in a  
-chosen specialty, for a preferred date. The receptionist checks that doctor’s schedule for an open slot on  
-or near that date; if a slot exists, it is reserved in the patient’s name and a confirmation slip showing the  
-date, time, and doctor is printed for the patient. If no slot is available, the patient is offered the next  
-open slot or placed on a waiting list for that doctor.  
-On the day of the visit, the patient checks in at the desk; the receptionist marks the appointment as  
-arrived and pulls up the patient’s history so the doctor can review it during the consultation. After the  
-consultation, the doctor records the diagnosis and any prescribed medicines against the patient’s file,  
-and the system prints a visit summary for the patient to take away. The clinic administrator should also  
-be able to request a daily list of appointments for each doctor, and a monthly count of consultations per  
-specialty for billing purposes.  
-PROBLEM 3 Hotel Room Reservation System  
-A mid-sized hotel wants a system to manage room bookings. A guest — either by phone or at the front  
-desk — specifies the check-in and check-out dates and the type of room required. The front-desk clerk  
-checks room availability for that room type across the requested dates; if a suitable room is free, it is  
-reserved under the guest’s name and contact details, and a booking confirmation is printed. If no room  
-of that type is free for the full period, the clerk offers the nearest alternative dates or a different room  
-type.  
-When the guest arrives, the clerk checks them in against the reservation, assigns a specific room number,  
-and issues a room key along with a printed registration card. Charges for the room, and any additional  
-services the guest requests during the stay such as room service or laundry, are added to the guest’s  
-running bill. At check-out, the clerk totals the bill, accepts payment, and prints a final invoice; the room  
-is then marked as needing housekeeping before it can be booked again. The hotel manager should also  
-be able to request an occupancy report for any given date range, showing how many rooms of each type  
-were booked.  
-PROBLEM 4 Courier Parcel Tracking System  
-A courier company wants to track parcels from pickup to delivery. A customer books a pickup by giving  
-the sender and receiver addresses, the parcel’s weight, and the desired delivery speed. The booking  
-clerk calculates the shipping charge from a rate table based on weight, distance, and speed, and prints a  
-shipping label bearing a unique tracking number, which is stuck onto the parcel when the pickup agent  
-collects it.  
-As the parcel moves through the company’s network, each hub it passes through scans the tracking  
-number and logs the parcel’s current location and timestamp against its tracking record. A customer  
-can, at any time, submit a tracking number and receive back the parcel’s current status and location  
-history. When the parcel reaches its destination hub, a delivery agent attempts delivery; if the receiver  
-is unavailable, the attempt is logged and a re-delivery is scheduled for the next day, up to three attempts,  
-after which the parcel is returned to the sender. Once delivered, the receiver signs for the parcel, and a  
-proof-of-delivery record is stored and made available to the sender on request. The operations manager  
-should be able to request a report of all parcels currently overdue against their promised delivery date.  
-DFD Practice Set · 10 Problems 2  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 104 — Ten DFD Practice Problems — PDF page 3
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 3
-
-### Page focus
-
-**PROBLEM 5 University Course Registration System — A university wants to automate course registration at the start of each semester. A student logs in with**
-
-### Captured source points
-
-PROBLEM 5 University Course Registration System  
-A university wants to automate course registration at the start of each semester. A student logs in with  
-their roll number and selects the courses they wish to take for the semester. For each course, the system  
-checks that the student has completed its prerequisite courses and that the course’s seat limit has not  
-already been reached; a course failing either check is rejected, with a message telling the student why.  
-Courses that pass both checks are added to the student’s provisional timetable, and the system also  
-checks that no two selected courses clash in schedule.  
-Once the student confirms the selection, the registration is finalized, the seat count for each chosen  
-course is decremented, and a printed registration slip listing the confirmed courses is generated. The  
-finance office is separately notified of each finalized registration so that the semester fee can be billed to  
-the student’s account. A faculty member should be able to request the final class list for any course they  
-teach, once registration closes. The academic office also wants a report, generated after registration  
-closes, showing enrolment numbers for every course offered that semester, to help plan the following  
-semester’s sections.  
-PROBLEM 6 Restaurant Table and Order Management System  
-A restaurant wants to computerize how it takes and fulfils orders. When a group of customers arrives,  
-the host checks the seating chart for a free table of adequate size and assigns it, marking that table  
-occupied. The waiter then takes the order at the table, entering each dish and any special instructions  
-into the system; the order is checked against the day’s menu to confirm every item is currently available,  
-and unavailable items are flagged back to the waiter immediately.  
-Once confirmed, the order is sent to the kitchen display, split automatically into separate tickets for  
-the starters, mains, and desserts stations. As each station finishes preparing its items, it marks them  
-ready, and the waiter is notified to serve that course. When the customers are ready to leave, the waiter  
-requests the bill; the system totals the order, applies any applicable discount, and prints an itemized  
-bill. Once payment is recorded, the table is marked free again for the host to reassign. The restaurant  
-manager should be able to request a report, for any chosen day, of total sales broken down by menu  
-category.  
-PROBLEM 7 Car Rental Booking System  
-A car rental agency wants to automate vehicle bookings across its branches. A customer requests a car  
-of a particular category for pickup at one branch and return at the same or a different branch, over a  
-given date range. The booking clerk checks the fleet at the pickup branch for a car of that category free  
-over the whole period; if one is available, it is reserved against the customer’s driving-license details  
-and a booking reference is issued, along with an estimated charge based on the category’s daily rate  
-and the number of days.  
-At pickup, the clerk records the car’s odometer reading and fuel level, marks the reservation as active,  
-and hands over the keys. At return — possibly at a different branch — the receiving clerk records the  
-odometer and fuel level again, calculates any extra charges for mileage beyond the included limit or for  
-fuel shortfall, and prints a final invoice covering the rental and these extras. If the car is returned to  
-a branch other than its home branch, the system flags it for eventual repositioning. The fleet manager  
-should be able to request a report showing the current location and status — available, rented, or under  
-maintenance — of every car in the fleet.  
-DFD Practice Set · 10 Problems 3  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 105 — Ten DFD Practice Problems — PDF page 4
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 4
-
-### Page focus
-
-**PROBLEM 8 Utility Bill Payment System — A city electricity board wants to automate the billing and payment of household electricity connections.**
-
-### Captured source points
-
-PROBLEM 8 Utility Bill Payment System  
-A city electricity board wants to automate the billing and payment of household electricity connections.  
-Each month, a meter reader visits every connection, and enters the current meter reading against that  
-connection’s account number. The system calculates the units consumed since the previous reading,  
-applies the board’s slab-wise tariff to compute the amount due, and adds any unpaid balance carried  
-over from previous months; a bill showing the units consumed, the amount due, and the payment due  
-date is then printed and mailed to the customer.  
-A customer may pay a bill in person at a collection counter, or through an online payment gateway;  
-either way, the payment is recorded against the account and a receipt is issued. If a bill is not paid by  
-its due date, a late-payment surcharge is added to the following month’s bill, and if two consecutive  
-bills remain unpaid, the account is flagged for disconnection and a notice is sent to the customer. The  
-board’s revenue office should be able to request, for any billing month, a report of total units billed and  
-total amount collected across all connections, as well as a separate list of all currently flagged accounts.  
-PROBLEM 9 Online Bookstore Order System  
-An online bookstore wants to automate the placing and fulfilment of customer orders. A customer  
-browses the catalogue and adds books to a cart; at checkout, the system verifies that every book in  
-the cart is currently in stock in the requested quantity, and rejects items that are not, showing the  
-customer an expected restock date where one is known. For the remaining items, the customer supplies  
-a delivery address and a payment method; the system calculates the order total including shipping,  
-processes the payment, and — once payment succeeds — confirms the order and prints a packing slip  
-for the warehouse.  
-The warehouse picks and packs the ordered books against the packing slip, updates the inventory to  
-reflect the reduction in stock, and hands the package to a delivery partner, who provides a tracking  
-number that is recorded against the order and emailed to the customer. If a book later turns out to be  
-damaged or missing during picking, the warehouse flags the order as partially fulfilled, and the system  
-automatically issues a partial refund for the missing item. The store manager should be able to request  
-a report of best-selling titles over any chosen date range, and a separate report of all orders currently  
-awaiting fulfilment.  
-PROBLEM 10 Fitness Club Membership System  
-A fitness club wants to computerize how it manages memberships and class bookings. A prospective  
-member signs up at the front desk, choosing a membership plan; the staff member records the appli-  
-cant’s personal details, collects the joining payment, and activates a membership valid from that date for  
-the plan’s duration, printing a membership card. Existing members may renew before expiry, extending  
-their validity by the plan’s duration, or upgrade to a different plan, with the fee difference calculated  
-automatically.  
-The club also runs scheduled group classes, each with a maximum number of participants. A member  
-can book a spot in an upcoming class through the front desk or a kiosk; the system checks the class  
-isn’t already full and that the member’s plan includes group classes, then reserves the spot and prints a  
-confirmation. If a member cancels a booking, the freed spot is offered to the first person on that class’s  
-waiting list, if any. Each time a member enters the club, their card is scanned at the gate, which checks  
-that the membership is currently active before allowing entry and logs the visit. The club manager  
-should be able to request a report of attendance trends by month, and a separate list of all memberships  
-due to expire within the next two weeks.  
-DFD Practice Set · 10 Problems 4  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
+---
 \newpage
 
 # Part XII — Final Integrated Revision Guide
 
 ## 105-source-page completeness check
 
-The audit above contains one entry for every PDF page in the supplied set: 8 introductory pages + 34 life-cycle pages + 33 requirements pages + 21 software-design pages + 1 Trading-House problem page + 4 Trading-House solution pages + 4 DFD-practice pages = **105 source pages**.
+The audit above contains one entry for every PDF page in the supplied set: CSMC501 Mid-Term Comprehensive Curriculum: Introduction & Software Crisis + Software Life Cycle Models + Software Quality (Maintainability & Portability) + Requirements Analysis & Specification + Software Design (FOD vs OOD) + Testing Fundamentals.
 
 ## The final mental model
 
-The entire supplied course can be remembered as a chain of increasingly precise descriptions: **problem → requirements → SRS → analysis/DFD → design → modules/objects → detailed design → code → testing → maintenance**. Life-cycle models explain how that work is organized over time; requirements engineering makes the “what” precise; structured analysis explains functions and data flows; software design turns the understood behavior into a coherent implementation structure.
+The entire supplied course can be remembered as a chain of increasingly precise descriptions: **problem → requirements → SRS → architectural design → modules/objects → detailed design → code → unit testing → maintenance**. Life-cycle models explain how that work is organized over time; requirements engineering makes the “what” precise; structured analysis explains functions and data flows; software design turns the understood behavior into a coherent implementation structure.
 
 ## Last-minute exam checklist
 
@@ -4695,9 +4195,11 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 - [ ] Can I compute/describe depth, width, fan-in, and fan-out in a structure chart?
 - [ ] Can I explain superordinate/subordinate modules, visibility, layering, and abstraction?
 - [ ] Can I contrast function-oriented and object-oriented design, especially where state lives?
-- [ ] Can I analyze a requirements paragraph into DFD external entities, functions, reports, and data stores?
-- [ ] Can I draw TAS context, level 1, and level 2 DFDs and explain why Process-order is decomposed?
-- [ ] Can I apply the same DFD method to all ten practice problems without inventing actors or behavior?
+- [ ] Can I analyze software maintainability factors, the 40:60 maintenance cost ratio, and the three pillars (understandability, modifiability, testability)?
+- [ ] Can I explain the role of a Portability Interface / Hardware Abstraction Layer in isolating platform-dependent code?
+- [ ] Can I distinguish Error, Fault/Defect, and Failure, and explain why a fault does not always trigger a runtime failure?
+- [ ] Can I contrast Verification ("Are we building the product right?") and Validation ("Are we building the right product?")?
+- [ ] Can I explain the scaffolding used in Unit Testing: Test Drivers (calling dummy) versus Test Stubs (called dummy)?
 
 ## One-minute memory anchors
 
@@ -4706,7 +4208,8 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 - **Spiral:** risk-driven.
 - **SRS:** what, not how.
 - **Good SRS:** precise, complete, consistent, traceable, verifiable.
-- **DFD:** data in motion, not control flow.
+- **Testing:** Verification = building right; Validation = building right product; Driver = dummy caller; Stub = dummy callee.
+- **Maintainability:** 40:60 ratio; understandability + modifiability + testability.
 - **Cohesion:** strength within a module.
 - **Coupling:** dependency between modules.
 - **FOD:** functions and centralized state.
@@ -4721,7 +4224,7 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 
 ## 106. How to use these notes as an actual Software Engineering course
 
-The seven supplied PDFs are easier to remember when treated as one connected chain rather than as seven independent documents. The introductory lecture answers **why software engineering exists**. The life-cycle lecture answers **how development work can be organized over time**. The requirements lecture answers **what must be understood and written down before design**. The DFD exercises show one way of expressing functions and data flow during structured analysis. The design lecture then explains **how the understood functionality is organized into modules or objects**.
+The seven supplied PDFs are easier to remember when treated as one connected chain rather than as seven independent documents. The introductory lecture answers **why software engineering exists**. The life-cycle lecture answers **how development work can be organized over time**. The requirements lecture answers **what must be understood and written down before design**. The requirements lecture answers what must be understood and written down before design. The design lecture then explains **how the understood functionality is organized into cohesive modules or autonomous objects**.
 
 A very useful mental pipeline is:
 
@@ -4734,7 +4237,7 @@ Requirements gathering and analysis
       ↓
 SRS
       ↓
-Analysis models / DFDs / decision logic
+Analysis models / decision logic / formal specs
       ↓
 High-level design
       ↓
@@ -4764,7 +4267,7 @@ The important idea is that each stage reduces a different kind of uncertainty.
 
 ### Why this chain matters
 
-A common student mistake is to remember definitions separately and miss the **dependency between them**. A designer should not invent a module hierarchy without knowing what functionality is required. A tester should not invent acceptance criteria independently of the SRS. A DFD should not introduce business functions that the requirement never mentions. The discipline of software engineering is largely the discipline of preserving traceability from one stage to the next.
+A common student mistake is to remember definitions separately and miss the **dependency between them**. A designer should not invent a module hierarchy without knowing what functionality is required. A tester should not invent acceptance criteria independently of the SRS. A modular design should not introduce business functions that the requirement never mentions. The discipline of software engineering is largely the discipline of preserving traceability from one stage to the next.
 
 ### Where this is important in real projects — practical extension
 
@@ -4796,32 +4299,30 @@ This is why the requirements lecture says careful analysis should catch inconsis
 
 ---
 
-## 186. DFDs help expose missing requirements
+## 186. Requirement Traceability Matrix (RTM) exposes missing requirements
 
 Consider a requirement that says:
 
 > “The clerk processes a returned book and the system updates the record.”
 
-A DFD decomposition may force you to ask:
+Traceability analysis forces the engineer to ask:
 
-- Which record?
-- Where is the due date stored?
-- Where is the fine balance stored?
-- Does the book become available immediately?
-- Is a receipt produced?
-- What does the clerk receive when the book is not overdue?
+- Which specific record in the data schema is updated?
+- Where is the due date stored and checked?
+- Where is the fine balance ledger maintained?
+- Does the book inventory become available immediately upon scan?
+- Is a formal receipt or physical slip produced?
+- What does the clerk receive when the book is returned on time without fines?
 
-The DFD is therefore not merely a drawing exercise. It can expose missing information because every process needs meaningful inputs and outputs.
-
-This connects directly to the requirements lecture's statement that formal models can surface subtle anomalies.
+Backward and forward traceability ensures that every requirement is backed by design modules and test cases, exposing missing information, dangling logic, and unauthorized scope.
 
 ---
 
 ## 187. Design quality can be seen as the next layer of the same idea
 
-Once the DFD identifies functions, design asks how to map them into modules.
+Once the SRS identifies functional requirements, design asks how to map them into modules or classes.
 
-Suppose a DFD shows:
+Suppose the requirements list:
 
 ```text
 Search
@@ -4871,9 +4372,9 @@ Requirement sentence
       ↓
 Functional requirement ID
       ↓
-DFD process
+Architectural module
       ↓
-Design module
+Class / Subroutine
       ↓
 Implementation unit
       ↓
@@ -5069,31 +4570,33 @@ Recognition:
 
 ---
 
-## 198. DFD question strategy — the “nouns and verbs” trick
+## 198. Unit Testing Scaffolding Strategy: Drivers vs Stubs
 
-The worked Trading-House tutorial gives an especially powerful rule:
+When testing an individual module $M$ in strict isolation:
 
-- **Who** outside the system → candidate external entity;
-- **verb** describing system work → candidate function;
-- **document/message going out** → candidate output;
-- **noun remembered between requests** → candidate data store.
+- **Driver:** A calling module simulator.
+  - Implements dummy input generation.
+  - Calls module $M$ with specific test cases.
+  - Captures output return values and verifies them against expected results.
+- **Stub:** A called subordinate simulator.
+  - Replaces subordinate subroutines called by module $M$.
+  - Supplies pre-determined dummy data so $M$ can execute without real databases, external hardware, or unwritten modules.
 
 ### Example
 
-Requirement:
-
-> “The clerk checks the customer's borrowing limit and unpaid fines. If valid, the system issues the book and records the loan.”
-
-Extraction:
-
 ```text
-Who?       Clerk
-Verbs?     checks, issues, records
-Stores?    member data, loan data, fine data
-Outputs?   issue confirmation / rejection message
+┌────────────────┐
+│  Test Driver   │ (Sends test vectors into Module M)
+└───────┬────────┘
+        ↓
+┌────────────────┐
+│   Module M     │ (Unit under test)
+└───────┬────────┘
+        ↓
+┌────────────────┐
+│   Test Stub    │ (Returns canned response to Module M)
+└────────────────┘
 ```
-
-This method dramatically reduces the chance of inventing unrelated DFD elements.
 
 ---
 
@@ -5311,30 +4814,25 @@ internal code access
 
 ---
 
-## 208. DFD map
+## 208. Software Quality & Maintainability Map
 
 ```text
-Requirement
+Software Quality
    ↓
-External entities
-Functions
-Outputs
-Data stores
-   ↓
-Context diagram
-   ↓
-Level 1 (3–7 major processes)
-   ↓
-Level 2 (one complex process)
-   ↓
-Balance + requirement coverage check
+   ├── Maintainability (60%+ lifetime cost)
+   │     ├── Understandability (clean code, comments)
+   │     ├── Modifiability (high cohesion, loose coupling)
+   │     └── Testability (isolated units, regression suite)
+   │
+   └── Portability
+         └── Portability Interface / Hardware Abstraction Layer
 ```
 
 Never forget:
 
 ```text
-DFD = data in motion
-NOT = execution control flow
+Error (Mental mistake) → Fault (Static bug in code) → Failure (Runtime crash)
+Verification ("Building right?") vs Validation ("Building right product?")
 ```
 
 ---
@@ -5371,9 +4869,9 @@ Used whenever behavior depends on several conditions and analysts need confidenc
 
 Used where mathematical precision and explicit state/behavior rules are valuable, especially in safety- and reliability-critical contexts highlighted by the lecture.
 
-### DFDs
+### Unit Testing Scaffolding
 
-Used in structured analysis to model processes, external entities, data stores, and data flows.
+Used in unit testing to isolate individual modules using drivers (dummy callers) and stubs (dummy callees).
 
 ### High-level design
 
@@ -5454,17 +4952,16 @@ Ask:
 - Are interfaces explicit?
 - Is the hierarchy neat rather than tangled?
 
-## 214. Before submitting a DFD answer
+## 214. Before submitting a modular software design answer
 
 Ask:
 
-- Is the context diagram exactly one system bubble?
-- Are all external entities shown there?
-- Have I kept internal stores out of the context diagram?
-- Does level 1 contain around 3–7 major processes?
-- Does every requirement function appear somewhere?
-- Did I name flows as data rather than control conditions?
-- Did I choose a genuinely complex process for level 2?
+- Are modules designed with functional cohesion rather than temporal or coincidental grouping?
+- Is coupling minimal (preferring data coupling over control, common, or content coupling)?
+- Is fan-out kept within $7 \pm 2$ to prevent excessive cognitive complexity?
+- Is fan-in maximized for reusable utility logic?
+- Are state variables encapsulated within objects or private module boundaries?
+- Is machine-dependent logic isolated behind a dedicated portability interface?
 - Does the level-2 decomposition explain the parent process?
 - Did I avoid inventing entities or features not in the requirement?
 - Did I preserve every required output/report?
@@ -5529,9 +5026,9 @@ Because it provides feedback paths. When a defect is discovered, the team can re
 
 ---
 
-## 224. Why do DFDs not show execution order?
+## 224. Why does Object-Oriented Design handle component evolution better than Function-Oriented Design?
 
-Because a DFD is intended to model data transformations and data movement. Execution sequence, timing, and branching control belong to other forms of behavioral modeling; the supplied DFD exercise explicitly says a DFD carries data, not control information.
+Because OOD encapsulates state and operations together inside autonomous classes. Adding a new component (such as a Smoke Detector in the Fire-Alarm system) merely requires creating a new subclass conforming to the existing interface, without modifying or recompiling existing centralized functions.
 
 ---
 
@@ -5639,8 +5136,8 @@ This expanded section deliberately follows the terminology and examples of the s
 - the life-cycle lecture's six stages, five models, feasibility study, maintenance categories, worked cases, and model-specific merits/demerits;
 - the requirements lecture's gathering techniques, inconsistency/incompleteness examples, ATM exercise, SRS roles, black-box view, good/bad SRS properties, functional/nonfunctional/constraint classification, decision logic, Z notation, and predicate-logic examples;
 - the software-design lecture's design-phase definition, good-design criteria, modularity, seven cohesion types, five coupling types, hierarchy measures, layering, function-oriented/object-oriented contrast, and fire-alarm case;
-- the Trading-House DFD statement and its worked decomposition;
-- the ten DFD practice requirements.
+- the software quality maintainability economics and portability interface models;
+- the testing fundamentals, verification vs validation, and unit test harness scaffolding.
 
 Where this document says **“practical extension”**, the purpose is to explain why the source concept matters, where such a concept is useful, how to recognize it, and how to apply it in an exam or engineering discussion. Those explanations are teaching extensions, not claims that every sentence appeared verbatim in the supplied slides.
 
@@ -5671,8 +5168,8 @@ Where this document says **“practical extension”**, the purpose is to explai
 21. Cohesion concerns the internal strength of one module.
 22. Coupling concerns interdependence between modules.
 23. Aim for high cohesion and low coupling.
-24. A context DFD has one system bubble and all external entities at the boundary.
-25. A DFD models data movement, not execution control flow.
+24. Software maintainability accounts for >60% of lifetime cost and rests on understandability, modifiability, and testability.
+25. Verification asks "Are we building the product right?"; Validation asks "Are we building the right product?".
 
 ---
 

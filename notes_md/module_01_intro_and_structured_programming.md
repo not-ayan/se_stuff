@@ -288,6 +288,87 @@ This is especially relevant to:
 - communication equipment,
 - robotics.
 
-The practical lesson is that “software engineering” can sit inside a larger systems-engineering problem. A software decision can depend on hardware timing, sensor characteristics, processor capability, or an external simulator.
+---
+
+## 6. The Software Crisis: Symptoms, Root Causes & Solutions
+
+### 6.1 What is the Software Crisis?
+In the early days of computing (1950s–1960s), computer hardware was extremely expensive while software was comparatively minor, informal, and written in assembly language for a few hundred lines. Over the decades, advances in semiconductor fabrication (e.g. Moore’s Law) drove **hardware costs down exponentially** while computing power skyrocketed.
+
+Simultaneously, the demand for sophisticated, large-scale software surged. However, software development techniques remained informal, artisanal, and ad-hoc. As software size expanded from hundreds of lines to hundreds of thousands or millions of lines ($10\text{K} \to 1000\text{K}$ LOC), development teams encountered catastrophic project failures, massive cost overruns, missed deadlines, and unmaintainable codebases. This systemic failure across the software industry is known as the **Software Crisis**.
+
+```text
+Relative Cost (%)
+ 100% | \                                    / Software Cost (~85-90%)
+      |  \                                  /
+      |   \                                /
+  50% |    \                              /
+      |     \                            /
+      |      \                          /
+   0% |_______\________________________/_______ Hardware Cost (~10-15%)
+    1960     1970      1980     1990     2000+
+```
+
+### 6.2 The Key Symptoms of the Software Crisis
+Examiners regularly ask students to state the primary symptoms of the software crisis:
+1. **Diverging Hardware vs. Software Costs:** Organizations spend larger and larger portions of their IT budgets on software development and maintenance rather than hardware.
+2. **Time and Schedule Over-runs:** Projects are almost never delivered on time; schedules slip by months or years.
+3. **Cost Over-runs:** Projects routinely cost several times their original estimated budgets without delivering additional features.
+4. **Failure to Satisfy User Requirements:** Delivered systems fail to do what the customer actually needed due to poor requirements elicitation.
+5. **Low Quality and High Defect Density:** Software systems frequently crash, exhibit unexpected side-effects, and show unacceptable unreliability.
+6. **Difficulty in Altering, Debugging, and Enhancing (Poor Maintainability):** Modifying existing code to fix bugs or add minor features introduces regression defects and takes disproportionate effort.
+7. **Suboptimal Resource Utilization:** Programs consume excessive memory and CPU cycles due to poor architectural design.
+
+### 6.3 Contributing Factors (Root Causes)
+Why did this crisis occur?
+- **Massive Increase in Problem Size:** Systems grew from individual mathematical scripts to enterprise-wide platforms. Human working memory cannot hold $100{,}000+$ lines of interacting state.
+- **Lack of Adequate Software Engineering Training:** Programmers were trained in syntax and algorithms, not in formal specification, architectural design, verification, or project management.
+- **Severe Shortage of Skilled Engineers:** The exponential growth in computing demand outstripped the availability of qualified personnel.
+- **Low Productivity Improvements:** While hardware processing speed improved by orders of magnitude, human programming productivity increased only modestly.
+
+### 6.4 The Solution to the Software Crisis
+The only viable solution to the software crisis is the **systematic adoption and advancement of Software Engineering practices**:
+- Transitioning from an ad-hoc craft to an engineering discipline based on abstraction, decomposition, and modularity.
+- Adhering to structured Software Life Cycle Models (SDLC) with defined entry and exit criteria.
+- Rigorous requirements engineering and formal specification to eliminate upstream errors.
+- Distinct architectural and detailed design phases before coding.
+- Systematic testing techniques (Unit, Integration, System, Acceptance).
+- Use of CASE (Computer-Aided Software Engineering) tools and quantitative metrics.
 
 ---
+
+## 7. Requirement Traceability & The Traceability Matrix (RTM)
+
+### 7.1 What is Requirement Traceability?
+**Requirement Traceability** is the ability to describe and follow the life of a requirement in both a forwards and backwards direction through all phases of the software development life cycle—from its initial user specification, through analysis, design, implementation, and testing.
+
+```text
+User Need / SRS Req <====== Traceability Links ======> Design Element <======> Code Module <======> Test Case
+```
+
+### 7.2 Forward vs. Backward Traceability
+
+Examiners frequently ask students to define and distinguish between forward and backward traceability:
+
+| Dimension | Forward Traceability | Backward Traceability |
+| :--- | :--- | :--- |
+| **Direction** | SRS Requirement $\longrightarrow$ Design $\longrightarrow$ Code $\longrightarrow$ Test Cases | Test Case / Code / Design $\longrightarrow$ SRS Requirement |
+| **Core Question** | *"Has every requirement been properly designed, implemented, and verified?"* | *"Why does this code or test case exist? Which requirement does it fulfill?"* |
+| **Primary Goal** | **Completeness:** Ensures no client requirement is forgotten, dropped, or overlooked during subsequent development phases. | **Scope Control & Impact Analysis:** Prevents **gold plating** (implementing unrequested features) and facilitates impact analysis when requirements change or bugs are discovered. |
+| **When Applied** | During design review, code construction, and test plan creation. | When evaluating change requests, during regression testing, and during code audits. |
+
+### 7.3 Requirement Traceability Matrix (RTM)
+A **Requirement Traceability Matrix (RTM)** is a structured cross-reference table that maps each requirement to its corresponding architectural modules, source code files, and test case identifiers.
+
+#### Sample RTM Structure:
+| Req ID | Requirement Description | Design Module | Source Code File / Function | Test Case ID | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **REQ-01** | User authentication via password | `AuthService` | `auth.ts::validateCredentials()` | `TC-AUTH-101`, `TC-AUTH-102` | Verified |
+| **REQ-02** | Automatic session logout after 15m idle | `SessionManager` | `session.ts::checkTimeout()` | `TC-SESS-201` | In Test |
+| **REQ-03** | Generate encrypted PDF monthly report | `ReportGenerator` | `reports.ts::exportMonthlyPdf()` | `TC-REP-305` | Designed |
+
+#### Key Benefits of Maintaining an RTM:
+1. **Ensures 100% Test Coverage:** Any requirement without a mapped test case is immediately flagged.
+2. **Detects Unnecessary Code (Gold Plating):** Code modules with no link back to an approved requirement indicate unapproved features that increase maintenance cost and attack surface.
+3. **Streamlines Change Impact Analysis:** If Requirement `REQ-02` changes, the RTM shows precisely which design documents, source files, and test cases must be modified.
+4. **Aids Verification and Audits:** Independent auditors can verify the integrity of safety-critical or compliance-driven systems.

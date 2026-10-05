@@ -48,7 +48,7 @@ const PRESET_EXAM_PROMPTS = [
   'Boehm Cost Escalation Curve (1x to 200x) & Phase Containment',
   'The 7 levels of Cohesion from Coincidental to Functional with code examples',
   'All 6 levels of Coupling and why Content Coupling is the worst',
-  'DFD Balancing Rule and 3 fatal illegal flows (Black Hole, Miracle, Store-to-Store)',
+  'Verification vs Validation and Unit Testing Scaffolding (Driver vs Stub)',
   'Hoare Triples {P} S {Q} axiomatic logic and algebraic ADT equations',
 ];
 

@@ -44,7 +44,7 @@ interface ChatMessage {
 const PRESET_PROMPTS = [
   'Explain the 7 levels of Cohesion with memory tricks & code examples',
   'Why does Iterative Waterfall feedback to SRS cost 100x-200x more?',
-  'How do I balance a Level 2 DFD and prevent Black Holes / Miracles?',
+  'How do FOD and OOD structure state differently in the 1000-room Fire-Alarm System?',
   'Explain Hoare Triples {P} S {Q} and algebraic ADT specs simply',
   'Give me an ultra-condensed 5-minute revision sheet for Module 1',
 ];
@@ -53,7 +53,7 @@ const PRESET_EXAM_QUESTIONS = [
   'Explain the Böhm-Jacopini Theorem and why SESE control flow graphs eliminate the need for GOTO statements.',
   'Discuss the 4 quadrants of Boehm’s Spiral Model and explain why it is classified as a meta-model.',
   'Differentiate between Cohesion and Coupling. Why is Content Coupling considered the most hazardous?',
-  'Explain the DFD Balancing Rule and identify three common structural defects in DFD construction.',
+  'Compare Function-Oriented Design vs Object-Oriented Design using the Fire-Alarm System case study.',
 ];
 
 export const CompanionView: React.FC<CompanionViewProps> = ({ onStartCustomQuiz }) => {
@@ -69,7 +69,7 @@ export const CompanionView: React.FC<CompanionViewProps> = ({ onStartCustomQuiz 
       role: 'assistant',
       content: `👋 **Hello! I am your AI Software Engineering Exam Mentor.**
 
-I have complete, grounded context across all course lecture slides, notes, and the 439 KB master reference (Modules 1 to 5 + DFDs).
+I have complete, grounded context across all course lecture slides, notes, and the master reference (CSMC501 Mid-Term Modules 1 to 6).
 * Ask me any doubt, derivation, or formula.
 * Ask for mnemonics or exam tips.
 * Switch tabs to **Generate Custom Quizzes** or **Grade Your Written Answers**!`,
@@ -80,7 +80,7 @@ I have complete, grounded context across all course lecture slides, notes, and t
   const [chatError, setChatError] = useState<string | null>(null);
 
   // Quiz Gen State
-  const [quizTopic, setQuizTopic] = useState('DFD Rules, Balancing and Illegal Flows');
+  const [quizTopic, setQuizTopic] = useState('Software Design: Modularity, FOD vs OOD');
   const [quizCount, setQuizCount] = useState(5);
   const [quizDifficulty, setQuizDifficulty] = useState<'easy' | 'exam' | 'hard'>('exam');
   const [generatedQuestions, setGeneratedQuestions] = useState<Question[]>([]);
@@ -127,7 +127,7 @@ I have complete, grounded context across all course lecture slides, notes, and t
     setIsChatLoading(true);
 
     try {
-      const response = await askSeMentor({
+      const result = await askSeMentor({
         apiKey,
         model: selectedModel,
         userMessage: text,
@@ -136,7 +136,7 @@ I have complete, grounded context across all course lecture slides, notes, and t
       const assistantMsg: ChatMessage = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',
-        content: response,
+        content: result.response,
       };
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err: unknown) {
@@ -160,14 +160,14 @@ I have complete, grounded context across all course lecture slides, notes, and t
     setGeneratedQuestions([]);
 
     try {
-      const qs = await generateAiQuiz({
+      const result = await generateAiQuiz({
         apiKey,
         model: selectedModel,
         topic: quizTopic,
         count: quizCount,
         difficulty: quizDifficulty,
       });
-      setGeneratedQuestions(qs);
+      setGeneratedQuestions(result.questions);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       setQuizError(msg);
@@ -468,7 +468,7 @@ I have complete, grounded context across all course lecture slides, notes, and t
                   type="text"
                   value={quizTopic}
                   onChange={(e) => setQuizTopic(e.target.value)}
-                  placeholder="e.g. Cohesion vs Coupling, DFD Balancing, Boehm Curve"
+                  placeholder="e.g. Cohesion vs Coupling, FOD vs OOD, Verification vs Validation"
                   className="mt-1.5 w-full rounded-xl border border-line-strong bg-canvas px-3 py-2 text-[13px] text-ink focus:border-sky-600 focus:outline-none"
                 />
               </div>

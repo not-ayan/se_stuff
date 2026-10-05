@@ -10,20 +10,20 @@ export interface StudyDay {
 export const STUDY_PLAN: StudyDay[] = [
   {
     day: 1,
-    label: 'Day 1',
-    focus: 'Foundations, Life Cycle Models (Waterfall, Prototyping, Evolutionary, Spiral)',
+    label: 'Part 1',
+    focus: 'Foundations & Life Cycle Models: Software Crisis, Traceability, Waterfall, Prototyping, Phase Containment',
     chapterIds: ['ch-01', 'ch-02'],
   },
   {
     day: 2,
-    label: 'Day 2',
-    focus: 'Requirements (SRS IEEE 830, Decision Tables) & Software Design (Cohesion & Coupling)',
+    label: 'Part 2',
+    focus: 'Quality & Requirements: Maintainability (40:60), Portability Interface, SRS IEEE 830, Decision Tables (2^k rules)',
     chapterIds: ['ch-03', 'ch-04'],
   },
   {
     day: 3,
-    label: 'Day 3',
-    focus: 'DFD Theory, Rules, Balancing & 10 Solved University Exam Problems',
+    label: 'Part 3',
+    focus: 'Design & Testing Fundamentals: Cohesion (7 levels), Coupling (5 levels), FOD vs OOD (Fire-Alarm), Drivers & Stubs',
     chapterIds: ['ch-05', 'ch-06'],
   },
 ];

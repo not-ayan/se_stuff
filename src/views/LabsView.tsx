@@ -1,41 +1,58 @@
 import React, { useState } from 'react';
-import { Calculator, Layers3, Network } from 'lucide-react';
-import { DFDStudio } from '../components/DFDStudio';
+import { Calculator, Dices, Layers3 } from 'lucide-react';
 import { FormulaCalculator } from '../components/FormulaCalculator';
 import { DiagramViewer } from '../components/DiagramViewer';
+import { ProblemGeneratorStudio } from '../components/ProblemGeneratorStudio';
 import { SectionHeading } from '../components/ui';
 
-type LabTab = 'dfd' | 'numerical' | 'diagrams';
+export type LabTab = 'generator' | 'diagrams' | 'numerical';
 
 interface LabsViewProps {
   initialTab?: LabTab;
 }
 
 const DIAGRAMS = [
-  { type: 'waterfall_effort', title: 'Classical waterfall: 6 phases & effort distribution' },
-  { type: 'iterative_waterfall', title: 'Iterative waterfall: feedback paths & phase containment' },
-  { type: 'spiral_quadrants', title: 'Boehm spiral model: four quadrants & risk loops' },
-  { type: 'cohesion_coupling_ladders', title: 'Cohesion (7 levels) & coupling (5 levels)' },
-  { type: 'cfg_cyclomatic', title: 'Control flow graph & McCabe cyclomatic complexity' },
-  { type: 'bathtub_software_curve', title: 'Hardware bathtub curve vs software failure curve' },
-  { type: 'cmm_pyramid', title: 'SEI capability maturity model: 5 levels & KPAs' },
+  { type: 'rtm_traceability', title: 'Module 1 · Requirements Traceability Matrix (Forward & Backward Traceability)' },
+  { type: 'waterfall_effort', title: 'Module 2 · Classical Waterfall: 6 Phases & 40:60 Life Cycle Effort Split' },
+  { type: 'iterative_waterfall', title: 'Module 2 · Iterative Waterfall: Feedback Paths & Phase Containment' },
+  { type: 'maintainability_portability', title: 'Module 3 · Software Quality: Maintainability (40:60 Rule) & Portability (HAL)' },
+  { type: 'decision_tree_table', title: 'Module 4 · Formal Specification: Decision Tables (2^k Rules) & Trees' },
+  { type: 'fod_vs_ood', title: 'Module 5 · Software Design: Function-Oriented (FOD) vs Object-Oriented (OOD)' },
+  { type: 'cohesion_coupling_ladders', title: 'Module 5 · Cohesion (7 Levels) & Coupling (5 Levels) Spectrums' },
+  { type: 'testing_pyramid_drivers_stubs', title: 'Module 6 · Testing Fundamentals: Error-Fault-Failure & Drivers/Stubs' },
+  { type: 'bathtub_software_curve', title: 'Hardware Bathtub Curve vs Software Failure Curve' },
 ];
 
-export const LabsView: React.FC<LabsViewProps> = ({ initialTab = 'dfd' }) => {
+export const LabsView: React.FC<LabsViewProps> = ({ initialTab = 'generator' }) => {
   const [tab, setTab] = useState<LabTab>(initialTab);
 
   const tabs: { key: LabTab; label: string; description: string; icon: React.ReactNode }[] = [
-    { key: 'dfd', label: 'DFD Studio', description: 'Structured analysis, step by step', icon: <Network className="h-4 w-4" /> },
-    { key: 'numerical', label: 'Numerical Lab', description: 'COCOMO, Putnam, Halstead, McCabe', icon: <Calculator className="h-4 w-4" /> },
-    { key: 'diagrams', label: 'Diagrams', description: 'Interactive concept visualisers', icon: <Layers3 className="h-4 w-4" /> },
+    {
+      key: 'generator',
+      label: 'Mid-Term Problem Studio',
+      description: 'Procedural problems with real-time solution checkers',
+      icon: <Dices className="h-4 w-4 text-amber-500" />,
+    },
+    {
+      key: 'diagrams',
+      label: 'Concept Visualizers',
+      description: 'Waterfall, Spiral, Bathtub, Cohesion/Coupling',
+      icon: <Layers3 className="h-4 w-4 text-emerald-500" />,
+    },
+    {
+      key: 'numerical',
+      label: 'Metrics & Calculators',
+      description: 'Availability, MTBF, Defect Cost, Estimation',
+      icon: <Calculator className="h-4 w-4 text-sky-500" />,
+    },
   ];
 
   return (
     <div className="mx-auto max-w-[1100px] space-y-6 px-4 py-8 sm:px-6">
       <SectionHeading
-        eyebrow="Practice labs"
-        title="Apply what you read"
-        description="Work through structured-analysis problems, run the exam numericals, and inspect the core diagrams."
+        eyebrow="Interactive Labs"
+        title="CSMC501 Practice Studios"
+        description="Solve procedural mid-term problems with real-time verification, explore conceptual architectures, and calculate software metrics."
       />
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -59,7 +76,7 @@ export const LabsView: React.FC<LabsViewProps> = ({ initialTab = 'dfd' }) => {
         })}
       </div>
 
-      {tab === 'dfd' && <DFDStudio />}
+      {tab === 'generator' && <ProblemGeneratorStudio />}
       {tab === 'numerical' && <FormulaCalculator />}
       {tab === 'diagrams' && (
         <div className="space-y-5">

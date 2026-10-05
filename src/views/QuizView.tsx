@@ -50,7 +50,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
 
   // Inline AI Generator State
-  const [aiTopic, setAiTopic] = useState('DFD Rules, Balancing and Illegal Flows');
+  const [aiTopic, setAiTopic] = useState('Software Design: Modularity & FOD vs OOD');
   const [aiCount, setAiCount] = useState(5);
   const [isAiGenerating, setIsAiGenerating] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
@@ -155,7 +155,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
               />
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {[
-                  'DFD Balancing & Illegal Flows',
+                  'FOD vs OOD (Fire-Alarm)',
                   '7 Cohesion Levels',
                   '6 Coupling Levels',
                   'Spiral Model 4 Quadrants',

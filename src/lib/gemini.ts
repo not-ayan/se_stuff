@@ -7,6 +7,8 @@ export interface ModelTier {
   name: string;
   quotaLabel: string;
   rpm: number;
+  category?: string;
+  description?: string;
 }
 
 export const AUTO_MODEL_POOL: ModelTier[] = [
@@ -15,32 +17,46 @@ export const AUTO_MODEL_POOL: ModelTier[] = [
     name: 'Gemini 3.1 Flash Lite',
     quotaLabel: '2/15 RPM · 10/250K TPM',
     rpm: 15,
+    category: 'Flash Lite',
+    description: 'Fastest response with high RPM quota',
   },
   {
     id: 'gemma-4-26b-a4b-it',
     name: 'Gemma 4 26B',
     quotaLabel: '1/30 RPM · 2/16K TPM',
     rpm: 30,
+    category: 'Gemma Open Model',
+    description: 'High throughput open-weights model',
   },
   {
     id: 'gemma-4-31b-it',
     name: 'Gemma 4 31B',
     quotaLabel: '1/30 RPM · 2/16K TPM',
     rpm: 30,
+    category: 'Gemma Large',
+    description: 'High capacity open-weights model',
   },
   {
     id: 'gemini-2.5-flash-lite',
     name: 'Gemini 2.5 Flash Lite',
     quotaLabel: 'High throughput backup',
     rpm: 30,
+    category: 'Flash Lite',
+    description: 'Ultra fast fallback tier',
   },
   {
     id: 'gemini-2.5-flash',
     name: 'Gemini 2.5 Flash',
     quotaLabel: '1M context fallback',
     rpm: 15,
+    category: 'Flash',
+    description: 'General purpose 1M context fallback',
   },
 ];
+
+export const AI_MODELS = AUTO_MODEL_POOL;
+export const getStoredModel = (): string => AUTO_MODEL_POOL[0].id;
+export const setStoredModel = (_model: string): void => {};
 
 const STORAGE_KEY_API_KEY = 'se_prep_gemini_api_key';
 
@@ -396,15 +412,17 @@ export async function askSeMentor({
   apiKey,
   userMessage,
   moduleId,
+  model,
 }: {
   apiKey: string;
   userMessage: string;
   moduleId?: string;
+  model?: string;
 }): Promise<{ response: string; meta: ExecutionMeta }> {
   const notesContext = getContextForTopic(moduleId, userMessage);
 
   const systemInstruction = `You are "SE Mentor", an elite Software Engineering Professor and Exam Coach for university students (Prof. Rajib Mall curriculum).
-Curriculum Scope: Modules 1 to 5 + Data Flow Diagrams (DFDs) + 10 Practice Problems.
+Curriculum Scope: CSMC501 Mid-Term Modules 1 to 6 (Introduction & Software Crisis, Life Cycle Models & Phase Containment, Quality & Maintainability/Portability, Requirements & Decision Tables, Software Design up to FOD vs OOD, and Testing Fundamentals).
 Rules:
 1. Base your answer strictly on the provided course notes.
 2. Provide intuitive explanations first, then formal definitions, mathematical proofs, diagrams, and exam traps.
@@ -430,11 +448,13 @@ export async function generateAiQuiz({
   topic,
   count = 5,
   difficulty = 'exam',
+  model,
 }: {
   apiKey: string;
   topic: string;
   count?: number;
   difficulty?: 'easy' | 'exam' | 'hard';
+  model?: string;
 }): Promise<{ questions: Question[]; meta: ExecutionMeta }> {
   const notesContext = getContextForTopic(undefined, topic);
 
@@ -511,10 +531,12 @@ export async function evaluateSubjectiveAnswer({
   apiKey,
   question,
   userAnswer,
+  model,
 }: {
   apiKey: string;
   question: string;
   userAnswer: string;
+  model?: string;
 }): Promise<{
   score: number;
   totalMarks: number;

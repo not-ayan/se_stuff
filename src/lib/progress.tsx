@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { CHAPTERS } from '../content/chapters';
 import { OUTLINES, TOTAL_SECTION_COUNT } from '../content/outline';
 
@@ -28,6 +28,9 @@ export interface ProgressState {
   quiz: Record<string, QuizAttempt>;
   cards: Record<string, CardAttempt>;
   studyDays: string[];
+  chapterTimeSeconds: Record<string, number>;
+  dailyTimeSeconds: Record<string, number>;
+  totalTimeSeconds: number;
   lastVisit?: LastVisit;
 }
 
@@ -38,16 +41,35 @@ const EMPTY_STATE: ProgressState = {
   quiz: {},
   cards: {},
   studyDays: [],
+  chapterTimeSeconds: {},
+  dailyTimeSeconds: {},
+  totalTimeSeconds: 0,
 };
 
-const todayKey = (): string => new Date().toISOString().slice(0, 10);
+export const todayKey = (): string => new Date().toISOString().slice(0, 10);
+
+export const formatDuration = (seconds: number): string => {
+  if (!seconds || seconds <= 0) return '0m';
+  if (seconds < 60) return `${Math.round(seconds)}s`;
+  const mins = Math.floor(seconds / 60);
+  if (mins < 60) return `${mins}m`;
+  const hours = Math.floor(mins / 60);
+  const remMins = mins % 60;
+  return remMins > 0 ? `${hours}h ${remMins}m` : `${hours}h`;
+};
 
 const loadState = (): ProgressState => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return EMPTY_STATE;
     const parsed = JSON.parse(raw) as Partial<ProgressState>;
-    return { ...EMPTY_STATE, ...parsed };
+    return {
+      ...EMPTY_STATE,
+      ...parsed,
+      chapterTimeSeconds: parsed.chapterTimeSeconds ?? {},
+      dailyTimeSeconds: parsed.dailyTimeSeconds ?? {},
+      totalTimeSeconds: parsed.totalTimeSeconds ?? 0,
+    };
   } catch {
     return EMPTY_STATE;
   }
@@ -84,11 +106,16 @@ export interface ProgressContextValue {
   chapterStats: (chapterId: string) => ChapterStats;
   isChapterComplete: (chapterId: string) => boolean;
   toggleChapterComplete: (chapterId: string) => void;
+  setChapterComplete: (chapterId: string, complete: boolean) => void;
   toggleBookmark: (chapterId: string) => void;
   recordQuizAnswer: (questionId: string, correct: boolean) => void;
   recordCard: (cardId: string, known: boolean) => void;
   visitChapter: (chapterId: string, sectionId?: string) => void;
   resetProgress: () => void;
+  addStudyTime: (seconds: number, chapterId?: string) => void;
+  totalTimeSeconds: number;
+  todayTimeSeconds: number;
+  chapterTimeSeconds: (chapterId: string) => number;
   overall: { percent: number; sectionsRead: number; sectionsTotal: number; chaptersComplete: number };
   quizSummary: { answered: number; correct: number; accuracy: number };
   streak: number;
@@ -99,6 +126,12 @@ const ProgressContext = createContext<ProgressContextValue | null>(null);
 
 export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<ProgressState>(loadState);
+  const activeChapterRef = useRef<string | undefined>(state.lastVisit?.chapterId);
+  const lastActiveRef = useRef<number>(Date.now());
+  const pendingRef = useRef<{ total: number; byChapter: Record<string, number> }>({
+    total: 0,
+    byChapter: {},
+  });
 
   useEffect(() => {
     try {
@@ -119,6 +152,7 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     (chapterId: string, sectionId: string, read: boolean) => {
       setState((prev) => {
         const chapter = { ...(prev.readSections[chapterId] ?? {}) };
+        if (Boolean(chapter[sectionId]) === read) return prev;
         if (read) chapter[sectionId] = true;
         else delete chapter[sectionId];
         return markStudied({ ...prev, readSections: { ...prev.readSections, [chapterId]: chapter } });
@@ -159,6 +193,19 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const isChapterComplete = useCallback(
     (chapterId: string) => Boolean(state.completeChapters[chapterId]) || chapterStats(chapterId).complete,
     [chapterStats, state.completeChapters],
+  );
+
+  const setChapterComplete = useCallback(
+    (chapterId: string, complete: boolean) => {
+      setState((prev) => {
+        if (Boolean(prev.completeChapters[chapterId]) === complete) return prev;
+        const next = { ...prev.completeChapters };
+        if (complete) next[chapterId] = true;
+        else delete next[chapterId];
+        return markStudied({ ...prev, completeChapters: next });
+      });
+    },
+    [markStudied],
   );
 
   const toggleChapterComplete = useCallback(
@@ -218,8 +265,82 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 
   const visitChapter = useCallback((chapterId: string, sectionId?: string) => {
+    activeChapterRef.current = chapterId;
     setState((prev) => ({ ...prev, lastVisit: { chapterId, sectionId, at: Date.now() } }));
   }, []);
+
+  const addStudyTime = useCallback(
+    (seconds: number, chapterId?: string) => {
+      if (seconds <= 0) return;
+      setState((prev) => {
+        const today = todayKey();
+        const nextDaily = { ...prev.dailyTimeSeconds, [today]: (prev.dailyTimeSeconds[today] ?? 0) + seconds };
+        const nextChapterTimes = { ...prev.chapterTimeSeconds };
+        if (chapterId) {
+          nextChapterTimes[chapterId] = (nextChapterTimes[chapterId] ?? 0) + seconds;
+        }
+        return markStudied({
+          ...prev,
+          totalTimeSeconds: (prev.totalTimeSeconds ?? 0) + seconds,
+          dailyTimeSeconds: nextDaily,
+          chapterTimeSeconds: nextChapterTimes,
+        });
+      });
+    },
+    [markStudied],
+  );
+
+  // Active time tracker with idle detection (pause after 60s idle or hidden tab)
+  useEffect(() => {
+    const onActivity = () => {
+      lastActiveRef.current = Date.now();
+    };
+    window.addEventListener('mousemove', onActivity, { passive: true });
+    window.addEventListener('keydown', onActivity, { passive: true });
+    window.addEventListener('scroll', onActivity, { passive: true });
+    window.addEventListener('touchstart', onActivity, { passive: true });
+
+    const interval = setInterval(() => {
+      if (document.hidden) return;
+      if (Date.now() - lastActiveRef.current > 60000) return;
+
+      const ch = activeChapterRef.current;
+      pendingRef.current.total += 1;
+      if (ch) {
+        pendingRef.current.byChapter[ch] = (pendingRef.current.byChapter[ch] ?? 0) + 1;
+      }
+
+      // Flush to state every 5 seconds
+      if (pendingRef.current.total >= 5) {
+        const delta = pendingRef.current.total;
+        const chDeltas = { ...pendingRef.current.byChapter };
+        pendingRef.current = { total: 0, byChapter: {} };
+
+        setState((prev) => {
+          const today = todayKey();
+          const nextDaily = { ...prev.dailyTimeSeconds, [today]: (prev.dailyTimeSeconds[today] ?? 0) + delta };
+          const nextChapterTimes = { ...prev.chapterTimeSeconds };
+          for (const [cId, secs] of Object.entries(chDeltas) as [string, number][]) {
+            nextChapterTimes[cId] = (nextChapterTimes[cId] ?? 0) + secs;
+          }
+          return markStudied({
+            ...prev,
+            totalTimeSeconds: (prev.totalTimeSeconds ?? 0) + delta,
+            dailyTimeSeconds: nextDaily,
+            chapterTimeSeconds: nextChapterTimes,
+          });
+        });
+      }
+    }, 1000);
+
+    return () => {
+      window.removeEventListener('mousemove', onActivity);
+      window.removeEventListener('keydown', onActivity);
+      window.removeEventListener('scroll', onActivity);
+      window.removeEventListener('touchstart', onActivity);
+      clearInterval(interval);
+    };
+  }, [markStudied]);
 
   const resetProgress = useCallback(() => setState(EMPTY_STATE), []);
 
@@ -246,6 +367,18 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const streak = useMemo(() => computeStreak(state.studyDays), [state.studyDays]);
 
+  const todayTimeSeconds = useMemo(() => {
+    const today = todayKey();
+    return state.dailyTimeSeconds[today] ?? 0;
+  }, [state.dailyTimeSeconds]);
+
+  const totalTimeSeconds = state.totalTimeSeconds ?? 0;
+
+  const chapterTimeSeconds = useCallback(
+    (chapterId: string) => state.chapterTimeSeconds[chapterId] ?? 0,
+    [state.chapterTimeSeconds],
+  );
+
   const bookmarkedChapters = useMemo(
     () => Object.keys(state.bookmarks).filter((id) => state.bookmarks[id]),
     [state.bookmarks],
@@ -260,11 +393,16 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       chapterStats,
       isChapterComplete,
       toggleChapterComplete,
+      setChapterComplete,
       toggleBookmark,
       recordQuizAnswer,
       recordCard,
       visitChapter,
       resetProgress,
+      addStudyTime,
+      totalTimeSeconds,
+      todayTimeSeconds,
+      chapterTimeSeconds,
       overall,
       quizSummary,
       streak,
@@ -278,11 +416,16 @@ export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       chapterStats,
       isChapterComplete,
       toggleChapterComplete,
+      setChapterComplete,
       toggleBookmark,
       recordQuizAnswer,
       recordCard,
       visitChapter,
       resetProgress,
+      addStudyTime,
+      totalTimeSeconds,
+      todayTimeSeconds,
+      chapterTimeSeconds,
       overall,
       quizSummary,
       streak,

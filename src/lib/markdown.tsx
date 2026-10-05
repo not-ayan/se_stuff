@@ -22,11 +22,16 @@ interface InlineContext {
  */
 const renderMath = (tex: string, display: boolean, key: string): React.ReactNode => {
   try {
-    const html = katex.renderToString(tex, { displayMode: display, throwOnError: false, strict: false, output: 'html' });
+    const html = katex.renderToString(tex, {
+      displayMode: display,
+      throwOnError: false,
+      strict: false,
+      output: 'html',
+    });
     return (
       <span
         key={key}
-        className={display ? 'my-4 block overflow-x-auto text-center' : 'inline-block px-0.5 align-middle'}
+        className={display ? 'my-3 block overflow-x-auto text-center' : 'inline-block px-1 align-baseline'}
         dangerouslySetInnerHTML={{ __html: html }}
       />
     );
@@ -40,11 +45,11 @@ const renderMath = (tex: string, display: boolean, key: string): React.ReactNode
 };
 
 const INLINE_PATTERN =
-  /(\*\*[^*]+\*\*|__[^_]+__|~~[^~]+~~|`[^`]+`|\$\$[^$]+\$\$|\$[^$\n]+\$|\[[^\]]+\]\([^)]+\)|\*[^*\n]+\*|(?<![\w_])_[^_\n]+_(?![\w_]))/g;
+  /(\*\*[^*]+\*\*|__[^_]+__|~~[^~]+~~|`[^`]+`|\\\[[\s\S]+?\\\]|\\\([^\n]+?\\\)|\$\$[^$]+\$\$|\$[^$\n]+\$|\[[^\]]+\]\([^)]+\)|\*[^*\n]+\*|(?<![\w_])_[^_\n]+_(?![\w_]))/g;
 
 /**
  * Parses inline markdown (bold, italic, code, links, math, strikethrough)
- * into React nodes. Kept intentionally small: enough for the course notes.
+ * into React nodes. Supports both $...$/$$...$$ and \(...\)/\[...\] LaTeX math delimiters.
  */
 export const renderInline = (text: string, ctx: InlineContext): React.ReactNode[] => {
   const parts = text.split(INLINE_PATTERN).filter((part) => part !== undefined && part !== '');
@@ -63,8 +68,10 @@ export const renderInline = (text: string, ctx: InlineContext): React.ReactNode[
         </code>
       );
     }
-    if (/^\$\$[^$]+\$\$$/.test(part)) return renderMath(part.slice(2, -2), true, key);
-    if (/^\$[^$\n]+\$$/.test(part)) return renderMath(part.slice(1, -1), false, key);
+    if (/^\\\([^\n]+?\\\)$/.test(part)) return renderMath(part.slice(2, -2).trim(), false, key);
+    if (/^\\\[[\s\S]+?\\\]$/.test(part)) return renderMath(part.slice(2, -2).trim(), true, key);
+    if (/^\$\$[^$]+\$\$$/.test(part)) return renderMath(part.slice(2, -2).trim(), true, key);
+    if (/^\$[^$\n]+\$$/.test(part)) return renderMath(part.slice(1, -1).trim(), false, key);
     const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
     if (link) {
       return (
@@ -90,6 +97,8 @@ const slugify = (text: string): string =>
   text
     .toLowerCase()
     .replace(/[`*_$~]/g, '')
+    .replace(/\\\(.*?\\\)/g, '')
+    .replace(/\\\[.*?\\\]/g, '')
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
@@ -190,6 +199,53 @@ export const renderMarkdown = (source: string): RenderedMarkdown => {
           </pre>
         </figure>,
       );
+      continue;
+    }
+
+    // Standalone Block Display Math: \[ ... \] or $$ ... $$
+    if (trimmed.startsWith('\\[') || trimmed.startsWith('$$')) {
+      const isBracket = trimmed.startsWith('\\[');
+      const closeDelim = isBracket ? '\\]' : '$$';
+
+      // Single-line block math
+      if (trimmed.length > 2 && trimmed.endsWith(closeDelim)) {
+        const tex = trimmed.slice(2, -2).trim();
+        nodes.push(
+          <div key={nextKey()} className="my-5 overflow-x-auto rounded-xl border border-line bg-canvas/60 p-4 text-center shadow-sm">
+            {renderMath(tex, true, nextKey())}
+          </div>,
+        );
+        index += 1;
+        continue;
+      }
+
+      // Multi-line block math
+      const mathLines: string[] = [];
+      const firstLineContent = trimmed.slice(2).trim();
+      if (firstLineContent) mathLines.push(firstLineContent);
+      index += 1;
+
+      while (index < lines.length && !lines[index].trim().includes(closeDelim)) {
+        mathLines.push(lines[index]);
+        index += 1;
+      }
+
+      if (index < lines.length) {
+        const closingLine = lines[index].trim();
+        const closeIdx = closingLine.indexOf(closeDelim);
+        const beforeClose = closingLine.slice(0, closeIdx).trim();
+        if (beforeClose) mathLines.push(beforeClose);
+        index += 1;
+      }
+
+      const tex = mathLines.join('\n').trim();
+      if (tex) {
+        nodes.push(
+          <div key={nextKey()} className="my-5 overflow-x-auto rounded-xl border border-line bg-canvas/60 p-4 text-center shadow-sm">
+            {renderMath(tex, true, nextKey())}
+          </div>,
+        );
+      }
       continue;
     }
 
@@ -358,6 +414,9 @@ export const markdownToPlainText = (source: string): string =>
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/^#{1,6}\s+/gm, '')
     .replace(/[*_`>~]/g, '')
+    .replace(/\\\[[\s\S]*?\\\]/g, ' ')
+    .replace(/\\\([^\n]*?\\\)/g, ' ')
+    .replace(/\$\$[\s\S]*?\$\$/g, ' ')
     .replace(/\$[^$]*\$/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\|/g, ' ')

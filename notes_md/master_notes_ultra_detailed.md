@@ -1,24 +1,25 @@
-# Software Engineering — Ultra-Detailed Master Notes
+# CSMC501: Complete Mid-Term Master Reference Vault
+> **Comprehensive Master Document for CSMC501 Software Engineering Mid-Term Examination**  
+> Covers Modules 1 through 6 + Exam Mastery:
+> 1. Introduction to Software Engineering & The Software Crisis
+> 2. Software Life Cycle Models (Waterfall, Prototyping, Evolutionary, Spiral)
+> 3. Software Quality (Maintainability 40:60 Economics, Portability Interface)
+> 4. Requirements Analysis and Specification (SRS, Predicate Logic, Decision Tables)
+> 5. Software Design (Modularity, Cohesion, Coupling, FOD vs OOD, Fire-Alarm Case Study)
+> 6. Software Testing Fundamentals (Error vs Fault vs Failure, Verification vs Validation, Unit Testing Scaffolding)
+> 7. Examiner Model Answers, Memory Anchors, and Formula Cheat Sheets
 
-## Complete study guide built from the seven supplied PDFs
+---
 
-**Purpose:** This document converts the supplied lecture PDFs and DFD exercises into a single, exam-oriented learning text. It is deliberately expansive: concepts are unpacked, diagrams are expressed textually, examples are walked through, and every source PDF page is audited one-by-one later in the document.
 
-**Source set:** 7 PDFs, **105 source pages total**.
 
-### Source map
+# ==============================================================================
+# Module 1: Introduction to Software Engineering
+# ==============================================================================
 
-| Source | PDF pages | Main topics |
-|---|---:|---|
-| *SoftEngg - Intro.pdf* | 8 | Software engineering foundations, software products, evolution, hardware/software partitioning, process models |
-| *LECT2_LifeCycleModels_Redesigned.pdf* | 34 | Life cycle, Waterfall, Iterative Waterfall, Prototyping, Evolutionary, Spiral |
-| *LECT3_Requirements_Analysis_Specification_Redesigned.pdf* | 33 | Requirements analysis, SRS, functional/nonfunctional requirements, decision logic, formal specification, Z, predicate logic |
-| *LECT4_Software_Design_Redesigned.pdf* | 21 | Design phase, good design, cohesion, coupling, module hierarchy, function-oriented vs object-oriented design |
-| *DFD_problem_statement.pdf* | 1 | Trading-House Automation System exercise |
-| *DFD_solution_tutorial.pdf* | 4 | Complete Trading-House DFD solution, level 0 → level 1 → level 2 |
-| *dfd_practice_10.pdf* | 4 | Ten independent DFD practice requirements |
+# Module 1: Introduction to Software Engineering & Structured Programming
 
-> **How to use this guide:** Read the deep-dive chapters first. Then use the one-to-one page audit as a completeness check. Finally, use the DFD analysis and exam revision sections without looking back at the PDFs.
+![Module 1: Foundations of Software Engineering & Structured Programming](/images/mod1_se_foundations_infographic.jpg)
 
 ---
 
@@ -176,6 +177,232 @@ The later stages also introduce a stronger process discipline:
 - CASE tools.
 
 This list forms the historical bridge into the rest of the course. The course is effectively showing why a project needs a sequence of engineering artifacts and decisions rather than one long coding activity.
+
+---
+
+---
+
+# Deep Dive: Software Engineering Foundations & Proofs
+
+# Deep Dive A — Software Engineering Foundations
+
+## 107. “Engineering” in software engineering: what the word really implies
+
+The introductory PDF compares software engineering with an engineering approach to construction and highlights the systematic collection of past experience: techniques, methodologies, and guidelines. The crucial word is **systematic**.
+
+An engineer is not expected to reinvent the same basic method every time a similar problem appears. Previous experience is organized so it can inform new work. The lecture also stresses that practical engineering is not purely mathematical. It combines theoretical or quantitative techniques with practical rules and trade-offs.
+
+### Engineering thinking has several recurring habits
+
+1. **Decompose the problem.** Large systems are divided into manageable parts.
+2. **Make assumptions explicit.** Hidden assumptions are a common source of defects.
+3. **Use established techniques where they fit.** There is value in proven patterns and methods.
+4. **Compare alternatives.** Engineering frequently means choosing between several imperfect options.
+5. **Consider constraints early.** Cost, time, resources, technology, and interfaces can affect what is feasible.
+6. **Record decisions.** Decisions need to remain understandable to people who were not present when they were made.
+7. **Verify the result.** Engineering work is not finished merely because something has been built.
+
+### Where is this important?
+
+It is most important when the software is:
+
+- large,
+- long-lived,
+- maintained by many people,
+- safety- or reliability-sensitive,
+- integrated with hardware or external systems,
+- expensive to change after release,
+- used by many users with competing needs.
+
+A tiny personal script might survive with informal practices. A university ERP, banking platform, medical system, airline reservation system, or embedded controller cannot safely rely on one developer remembering everything.
+
+### Why the “ad hoc approach” breaks down
+
+Suppose a programmer builds a small utility with four functions. It may be entirely manageable because the programmer can keep the whole program in working memory. Now imagine multiplying the codebase by a hundred, adding several developers, external interfaces, persistent data, user roles, security constraints, reporting requirements, and a decade of maintenance.
+
+The problem is not simply the number of lines. Larger systems create **more interactions**. A change in one component may affect several others. A requirement may have multiple interpretations. A data format may be shared across components. A small undocumented assumption can become a system-wide dependency.
+
+This explains why the introductory lecture links software engineering with **abstraction and decomposition**. Abstraction lets a person reason about a component without holding every implementation detail in mind. Decomposition limits the amount of complexity any one part must manage.
+
+---
+
+## 108. Programs versus software products — a deeper distinction
+
+The introduction contrasts small, often single-user programs with software products developed by teams for many users. It is tempting to interpret the distinction as merely a matter of size, but the more useful distinction is **engineering responsibility**.
+
+### A personal program often permits shortcuts
+
+A personal program may rely on:
+
+- the author's memory,
+- implicit assumptions,
+- a minimal interface,
+- little documentation,
+- informal testing,
+- direct editing of implementation details.
+
+This can be entirely rational when the cost of failure is low and the programmer is the only consumer.
+
+### A software product has additional obligations
+
+A product normally needs to be understandable to people other than the original author. It may require:
+
+- a defined user interface,
+- configuration or deployment instructions,
+- documentation,
+- systematic testing,
+- release/version management,
+- support for changing requirements,
+- mechanisms for diagnosing faults,
+- predictable behavior under expected conditions.
+
+### Where this matters
+
+This distinction is especially important in exams because questions may ask **why software engineering is necessary** even though “programming” already existed. The strongest explanation is that the engineering problem is broader than writing instructions for a computer. It includes requirements, design, coordination, testing, quality, cost, schedule, and maintenance.
+
+### Practical extension: the “bus factor” idea
+
+A useful additional way to understand the distinction is this thought experiment: **What happens if the original programmer disappears tomorrow?** If the system can still be understood, tested, modified, and deployed by a team, it behaves like an engineered product. If nobody can safely change it without the original author, the process has accumulated excessive dependence on individual memory.
+
+This concept is not named in the supplied slides, but it is a practical reason why the lecture values documentation, systematic development, and understandable design.
+
+---
+
+## 109. Hardware/software partitioning — where the concept is used
+
+The introductory lecture places software engineering inside computer systems engineering and gives examples such as a coffee vending machine and a mobile communication product. The high-level problem is deciding which work belongs in hardware and which belongs in software.
+
+### Why is the partition a design problem?
+
+The same behavior can sometimes be implemented in several ways. A sensor signal can potentially be processed by dedicated circuitry, by a programmable processor, or by a combination. The engineering decision depends on constraints such as response time, cost, flexibility, power, production volume, and the available hardware.
+
+### Why the life cycle changes
+
+When hardware is involved, the project cannot treat software as an isolated artifact. The source shows a process involving:
+
+```text
+Feasibility
+   ↓
+Requirements analysis and specification
+   ↓
+Hardware/software partitioning
+   ├──────────────┐
+   ↓              ↓
+Hardware        Software
+Development     Development
+   └──────────────┬───┘
+                  ↓
+         Integration & Testing
+```
+
+### Where used — practical extension
+
+This is especially relevant to:
+
+- embedded controllers,
+- automotive systems,
+- medical devices,
+- industrial automation,
+- appliances,
+- communication equipment,
+- robotics.
+
+---
+
+## 6. The Software Crisis: Symptoms, Root Causes & Solutions
+
+### 6.1 What is the Software Crisis?
+In the early days of computing (1950s–1960s), computer hardware was extremely expensive while software was comparatively minor, informal, and written in assembly language for a few hundred lines. Over the decades, advances in semiconductor fabrication (e.g. Moore’s Law) drove **hardware costs down exponentially** while computing power skyrocketed.
+
+Simultaneously, the demand for sophisticated, large-scale software surged. However, software development techniques remained informal, artisanal, and ad-hoc. As software size expanded from hundreds of lines to hundreds of thousands or millions of lines ($10\text{K} \to 1000\text{K}$ LOC), development teams encountered catastrophic project failures, massive cost overruns, missed deadlines, and unmaintainable codebases. This systemic failure across the software industry is known as the **Software Crisis**.
+
+```text
+Relative Cost (%)
+ 100% | \                                    / Software Cost (~85-90%)
+      |  \                                  /
+      |   \                                /
+  50% |    \                              /
+      |     \                            /
+      |      \                          /
+   0% |_______\________________________/_______ Hardware Cost (~10-15%)
+    1960     1970      1980     1990     2000+
+```
+
+### 6.2 The Key Symptoms of the Software Crisis
+Examiners regularly ask students to state the primary symptoms of the software crisis:
+1. **Diverging Hardware vs. Software Costs:** Organizations spend larger and larger portions of their IT budgets on software development and maintenance rather than hardware.
+2. **Time and Schedule Over-runs:** Projects are almost never delivered on time; schedules slip by months or years.
+3. **Cost Over-runs:** Projects routinely cost several times their original estimated budgets without delivering additional features.
+4. **Failure to Satisfy User Requirements:** Delivered systems fail to do what the customer actually needed due to poor requirements elicitation.
+5. **Low Quality and High Defect Density:** Software systems frequently crash, exhibit unexpected side-effects, and show unacceptable unreliability.
+6. **Difficulty in Altering, Debugging, and Enhancing (Poor Maintainability):** Modifying existing code to fix bugs or add minor features introduces regression defects and takes disproportionate effort.
+7. **Suboptimal Resource Utilization:** Programs consume excessive memory and CPU cycles due to poor architectural design.
+
+### 6.3 Contributing Factors (Root Causes)
+Why did this crisis occur?
+- **Massive Increase in Problem Size:** Systems grew from individual mathematical scripts to enterprise-wide platforms. Human working memory cannot hold $100{,}000+$ lines of interacting state.
+- **Lack of Adequate Software Engineering Training:** Programmers were trained in syntax and algorithms, not in formal specification, architectural design, verification, or project management.
+- **Severe Shortage of Skilled Engineers:** The exponential growth in computing demand outstripped the availability of qualified personnel.
+- **Low Productivity Improvements:** While hardware processing speed improved by orders of magnitude, human programming productivity increased only modestly.
+
+### 6.4 The Solution to the Software Crisis
+The only viable solution to the software crisis is the **systematic adoption and advancement of Software Engineering practices**:
+- Transitioning from an ad-hoc craft to an engineering discipline based on abstraction, decomposition, and modularity.
+- Adhering to structured Software Life Cycle Models (SDLC) with defined entry and exit criteria.
+- Rigorous requirements engineering and formal specification to eliminate upstream errors.
+- Distinct architectural and detailed design phases before coding.
+- Systematic testing techniques (Unit, Integration, System, Acceptance).
+- Use of CASE (Computer-Aided Software Engineering) tools and quantitative metrics.
+
+---
+
+## 7. Requirement Traceability & The Traceability Matrix (RTM)
+
+### 7.1 What is Requirement Traceability?
+**Requirement Traceability** is the ability to describe and follow the life of a requirement in both a forwards and backwards direction through all phases of the software development life cycle—from its initial user specification, through analysis, design, implementation, and testing.
+
+```text
+User Need / SRS Req <====== Traceability Links ======> Design Element <======> Code Module <======> Test Case
+```
+
+### 7.2 Forward vs. Backward Traceability
+
+Examiners frequently ask students to define and distinguish between forward and backward traceability:
+
+| Dimension | Forward Traceability | Backward Traceability |
+| :--- | :--- | :--- |
+| **Direction** | SRS Requirement $\longrightarrow$ Design $\longrightarrow$ Code $\longrightarrow$ Test Cases | Test Case / Code / Design $\longrightarrow$ SRS Requirement |
+| **Core Question** | *"Has every requirement been properly designed, implemented, and verified?"* | *"Why does this code or test case exist? Which requirement does it fulfill?"* |
+| **Primary Goal** | **Completeness:** Ensures no client requirement is forgotten, dropped, or overlooked during subsequent development phases. | **Scope Control & Impact Analysis:** Prevents **gold plating** (implementing unrequested features) and facilitates impact analysis when requirements change or bugs are discovered. |
+| **When Applied** | During design review, code construction, and test plan creation. | When evaluating change requests, during regression testing, and during code audits. |
+
+### 7.3 Requirement Traceability Matrix (RTM)
+A **Requirement Traceability Matrix (RTM)** is a structured cross-reference table that maps each requirement to its corresponding architectural modules, source code files, and test case identifiers.
+
+#### Sample RTM Structure:
+| Req ID | Requirement Description | Design Module | Source Code File / Function | Test Case ID | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **REQ-01** | User authentication via password | `AuthService` | `auth.ts::validateCredentials()` | `TC-AUTH-101`, `TC-AUTH-102` | Verified |
+| **REQ-02** | Automatic session logout after 15m idle | `SessionManager` | `session.ts::checkTimeout()` | `TC-SESS-201` | In Test |
+| **REQ-03** | Generate encrypted PDF monthly report | `ReportGenerator` | `reports.ts::exportMonthlyPdf()` | `TC-REP-305` | Designed |
+
+#### Key Benefits of Maintaining an RTM:
+1. **Ensures 100% Test Coverage:** Any requirement without a mapped test case is immediately flagged.
+2. **Detects Unnecessary Code (Gold Plating):** Code modules with no link back to an approved requirement indicate unapproved features that increase maintenance cost and attack surface.
+3. **Streamlines Change Impact Analysis:** If Requirement `REQ-02` changes, the RTM shows precisely which design documents, source files, and test cases must be modified.
+4. **Aids Verification and Audits:** Independent auditors can verify the integrity of safety-critical or compliance-driven systems.
+
+
+---
+
+
+# ==============================================================================
+# Module 2: Software Life Cycle Models
+# ==============================================================================
+
+# Module 2: Software Life Cycle Models (SDLC)
+
+![Module 2: SDLC Models, Phase Containment & Spiral Architecture](/images/sdlc_models_infographic.jpg)
 
 ---
 
@@ -354,7 +581,7 @@ The source notes that interviews and discussions are common ways of collecting i
 
 ### Design
 
-The traditional approach described in the lifecycle lecture has two activities: **structured analysis** and **structured design**. Structured analysis identifies functions and data flows using DFDs. Structured design then produces modules, invocation relationships, data structures, and algorithms.
+The traditional approach described in the lifecycle lecture has two activities: **structured analysis** and **structured design**. Structured analysis identifies functions and requirements. Structured design then produces modules, invocation relationships, data structures, and algorithms.
 
 ### Coding and unit testing
 
@@ -609,6 +836,572 @@ The source gives an excellent memorization line:
 | Spiral | risk-driven loops | explicit risk management |
 
 The source’s final selection table should be remembered as a **fit-by-project-characteristics** table, not as a universal formula. Stable, well-understood projects fit the more sequential approaches; unclear requirements call for prototyping; very large systems with natural increments fit evolutionary development; large, technically risky projects fit Spiral.
+
+---
+
+---
+
+# Deep Dive: Life Cycle Models & Risk-Driven Engineering
+
+# Deep Dive B — Life Cycle Models
+
+## 110. What a life-cycle model is actually controlling
+
+The life-cycle lecture calls a life-cycle model a descriptive and diagrammatic model that identifies development activities, establishes their precedence, and divides the life cycle into phases.
+
+Students often memorize the diagrams without asking what is being controlled. A process model controls at least four things conceptually:
+
+- **sequence** — which activities are expected to happen before others,
+- **feedback** — whether later discoveries can send work back to earlier activities,
+- **release strategy** — whether users get a working system before everything is complete,
+- **risk treatment** — whether high-risk issues are explicitly attacked early.
+
+These four dimensions make the five models much easier to compare.
+
+| Model | Main organizing idea |
+|---|---|
+| Classical Waterfall | Phase sequence |
+| Iterative Waterfall | Phase sequence + feedback |
+| Prototyping | Early learning through a rough system |
+| Evolutionary | Useful releases over time |
+| Spiral | Risk reduction loop by loop |
+
+This is the deeper reason the models look different even though they contain many of the same underlying engineering activities.
+
+---
+
+## 111. Classical Waterfall — when the assumptions are favorable
+
+The source defines the classical model as six sequential phases:
+
+```text
+Feasibility
+   ↓
+Requirements Analysis & Specification
+   ↓
+Design
+   ↓
+Coding & Unit Testing
+   ↓
+Integration & System Testing
+   ↓
+Maintenance
+```
+
+The defining feature is that each phase starts only after the previous phase is complete. The classical form has **no formal way back**.
+
+### Why the model can be useful
+
+Its greatest practical advantage is not that it is technologically sophisticated. Its advantage is that it is **easy to organize and manage**. Each phase has an identifiable deliverable, and project managers can ask whether the phase has been completed.
+
+It is particularly useful as a mental model for projects where:
+
+- requirements are already known,
+- the domain is well understood,
+- technology is familiar,
+- the team has experience with similar systems,
+- major change is not expected during construction.
+
+The payroll case in the source deliberately creates those conditions: established salary rules, a familiar technology stack, an experienced team, and stable requirements.
+
+### Where this matters in practice
+
+A classical or near-classical staged approach can be easier to apply when building software for an organization with a mature process and a frozen set of contractual requirements. Examples include certain regulated or contract-driven systems where extensive documentation and approval gates are required.
+
+That does not mean every regulated project literally uses textbook waterfall. Real organizations frequently combine staged approvals with iteration. The lecture's classical model is the conceptual baseline.
+
+### Why its assumptions are dangerous
+
+The source calls the model idealistic because defects can be introduced in one phase and discovered much later. A requirements error can become a design error, which becomes a coding error, which finally appears as a system-test failure.
+
+The later a defect is found, the more previously completed work may have to be revisited.
+
+### A simple propagation example
+
+Suppose the requirement says:
+
+> “The system shall calculate late fees according to the approved policy.”
+
+During requirements analysis, nobody defines the exact rule. During design, developers create one fee field. During coding, they implement a fixed percentage. During system testing, the customer discovers that the policy actually uses a graduated slab.
+
+The problem did not originate in coding. Coding merely exposed a requirement ambiguity. The project may now need changes in the requirements, design, implementation, and tests.
+
+This example explains why later models add feedback or early validation.
+
+---
+
+## 112. Waterfall effort distribution — how to interpret the chart
+
+The waterfall lecture includes illustrative relative effort figures and explicitly warns that they are **illustrative proportions, not exact published percentages**. The conceptual pattern is more important than memorizing the numbers:
+
+- maintenance consumes the largest effort over the full life of the software;
+- among development phases, testing is shown as a major effort consumer.
+
+The later maintenance slide gives a development-to-maintenance ratio of approximately **40:60** as a typical relationship in the source discussion.
+
+### Where important
+
+This is highly important whenever a question asks why maintainability matters. A design decision that saves a few hours during initial coding can become expensive if the code must be modified repeatedly for years.
+
+This is also why the Software Design lecture says understandability is especially important: maintenance is not a small fraction of the system's existence.
+
+### Practical extension: total cost of ownership
+
+A useful way to think about it is:
+
+```text
+Total lifecycle cost
+= initial development
++ testing and deployment
++ corrective maintenance
++ adaptive maintenance
++ enhancement/perfective maintenance
++ operational support
+```
+
+The supplied slides focus on lifecycle effort rather than presenting a full accounting formula. The formula above is a teaching aid that helps explain the same principle.
+
+---
+
+## 113. Iterative Waterfall — the central idea is “return to the phase of origin”
+
+The iterative waterfall model keeps the six phases but adds feedback paths. The most important source statement is the **phase containment of errors** principle:
+
+> Errors should ideally be detected in the same phase in which they are introduced.
+
+A defect discovered in requirements should lead back to requirements, followed by rework of later dependent phases. A design error discovered during testing should lead back toward design, not merely be patched blindly in code.
+
+### Why this is better than “just fix the bug”
+
+Consider a design based on a false assumption. If the developer patches only the implementation, the design document and test basis may still be wrong. The next developer may reintroduce the defect because the root cause was never corrected.
+
+The feedback loop therefore has two purposes:
+
+1. correct the software;
+2. correct the **artifact where the misunderstanding originated**.
+
+### Source example: fund-transfer limit
+
+The source's banking example shows a daily fund-transfer limit discovered to be ambiguous during system testing. The team traces the ambiguity to requirements, clarifies that the limit resets at midnight, and then updates the design, code, and tests.
+
+### When useful
+
+It is useful when requirements are comparatively stable but the project team recognizes that defects can appear at any stage.
+
+### Practical extension: change impact analysis
+
+In real development, a feedback loop should not mean “start the whole project from zero.” The point is targeted rework based on dependency. A change to one requirement may affect specific designs, modules, test cases, and documentation but not unrelated areas.
+
+This is why traceability in the SRS becomes valuable later: it helps identify what needs to be reconsidered when a requirement changes.
+
+---
+
+## 114. Prototyping — the prototype is a learning instrument
+
+The prototyping lecture deliberately defines a prototype as a **toy implementation** with limited functionality, low reliability, and inefficient performance. That definition is extremely important because it prevents a common misunderstanding: a prototype is not automatically the final product in miniature.
+
+### What uncertainty does a prototype attack?
+
+The source gives two especially important targets:
+
+1. **user-interface/interaction uncertainty** — what input formats, messages, reports, dialogs, or displays should look like;
+2. **technical uncertainty** — whether an important implementation idea, such as response time or algorithm efficiency, is technically workable.
+
+### A prototype can be deliberately ugly
+
+A prototype may use:
+
+- dummy data,
+- hard-coded responses,
+- lookup tables instead of real computation,
+- incomplete validation,
+- inefficient algorithms,
+- temporary interfaces.
+
+That is not necessarily bad. The point is to reduce uncertainty quickly.
+
+### Why throw the first prototype away?
+
+The source explicitly recommends being prepared to throw the first version away. This is a powerful engineering idea: **learning and production quality are different objectives**.
+
+If the prototype was built quickly to answer “What should this screen look like?”, then optimizing it into production quality may be less useful than discarding it after the question has been answered.
+
+### When prototyping is important
+
+It is particularly valuable when:
+
+- users are unsure what they want,
+- the interface is difficult to describe verbally,
+- a new interaction style is involved,
+- a technical question could invalidate the project,
+- the customer needs something tangible to react to.
+
+The hospital OPD token-display example makes this obvious. Staff discover that font size, sound level, skipped-token cues, and emergency cases matter when they see an actual screen.
+
+### Prototype danger
+
+The source lists several dangers:
+
+- customers may mistake the prototype for near-final software;
+- hurried prototype structures can leak into the final design;
+- customer feedback requires sustained availability;
+- prototyping adds cost and is unnecessary when requirements are already clear.
+
+A good exam answer should mention both the benefits **and** these specific risks.
+
+---
+
+## 115. Evolutionary model — “working software” changes the release strategy
+
+The evolutionary model delivers the system in successive working releases. The source also calls it the successive-versions or incremental model.
+
+The defining property is:
+
+> **Each release is a functioning system capable of doing useful work.**
+
+That distinguishes it from a throwaway prototype.
+
+### Prototype versus evolutionary release
+
+| Prototype | Evolutionary release |
+|---|---|
+| Mainly for learning and clarification | Intended for actual use |
+| May be inefficient or incomplete | Must provide useful capability |
+| Often thrown away | Becomes part of the final product |
+| User feedback shapes requirements | User feedback shapes later releases |
+| Focuses on uncertainty | Focuses on delivering value incrementally |
+
+### Why the model works for large systems
+
+A large integrated system often contains naturally separable capabilities. The source's campus ERP example has releases for admissions/enrolment, fee payment/library, and hostel/placement.
+
+Instead of waiting for the entire system, users obtain a useful subset, gain experience with it, and influence subsequent releases.
+
+### Where useful
+
+This approach is especially useful when:
+
+- a subset of functionality can operate independently,
+- users need value before the whole system is complete,
+- requirements evolve from real-world use,
+- the system is large enough to contain natural incremental units.
+
+### Major limitation
+
+The source points out that it can be difficult to subdivide some problems into independent functional units. This is the most important condition to test before choosing an evolutionary approach.
+
+If every feature depends heavily on every other feature, incremental release boundaries become difficult.
+
+---
+
+## 116. Spiral model — understand the loop, not the drawing
+
+The source's strongest conceptual statement is:
+
+> **The driving force in the spiral is risk.**
+
+A spiral loop contains four recurring activities:
+
+1. determine objectives,
+2. identify/analyze risks,
+3. develop and validate something to reduce those risks,
+4. review and plan the next loop.
+
+### What counts as “development” in spiral?
+
+A critical source clarification is that “develop & validate” does **not** necessarily mean building the complete application. In an early loop it may produce:
+
+- a feasibility study,
+- an experiment,
+- a proof of concept,
+- a technical report,
+- a prototype.
+
+Later, when the important risks have been reduced, the output can become actual software.
+
+### Why spiral is not simply evolutionary
+
+Both models can produce a growing product, but they answer different primary questions:
+
+```text
+Waterfall       → What phase comes next?
+Iterative WF    → Where should a defect be revisited?
+Prototype       → What do we need to learn quickly?
+Evolutionary    → What useful release should we deliver next?
+Spiral          → What is the biggest unresolved risk?
+```
+
+### Source example: online examination system
+
+The spiral case moves through feasibility, requirements, design, and implementation while changing the dominant concern each time:
+
+- can 5,000 students take the exam together?
+- do users agree on behavior for disconnection, autosave, and exam rules?
+- will the architecture survive peak load?
+- will the final implementation be secure and reliable?
+
+This is the ideal kind of exam example because each loop is driven by a different uncertainty.
+
+### Where important
+
+The spiral model becomes particularly relevant to:
+
+- large projects,
+- technically challenging systems,
+- projects with significant uncertainty,
+- systems where failure would be expensive,
+- projects where requirements and technical solutions evolve together.
+
+The source's drone example adds a safety-oriented illustration: identify the largest technical risk, run a focused experiment, reduce it, and then move to the next risk.
+
+---
+
+## 117. Life-cycle model decision table
+
+Use this as a **recognition tool**, not as a rule that mechanically chooses a process for every project.
+
+| Situation described in a question | Model highlighted by the lectures |
+|---|---|
+| Requirements are clear and stable; familiar technology; experienced team | Classical Waterfall |
+| Requirements are stable but late defects must be fed back to their phase of origin | Iterative Waterfall |
+| Users are unclear about screens, dialogs, reports, or interaction | Prototyping |
+| Large system can be divided into useful working releases | Evolutionary |
+| Major technical/project risks dominate and must be attacked explicitly | Spiral |
+
+### How to answer a “choose the model” question properly
+
+Do not write only “Use Spiral.” Explain **which property of the problem matches which property of the model**.
+
+For example:
+
+> “The project has unresolved technical risks and must validate architecture before committing to full construction. A risk-driven iterative model is therefore appropriate; the spiral process explicitly identifies and reduces major risks in each loop.”
+
+This style demonstrates understanding rather than memorization.
+
+---
+
+
+---
+
+
+# ==============================================================================
+# Module 3: Software Quality (Maintainability & Portability)
+# ==============================================================================
+
+# Module 3: Software Quality — Maintainability & Portability
+
+![Module 3: Software Quality, Maintainability & Portability](/images/software_quality_hal.jpg)
+
+---
+
+# Part I — What is Software Quality?
+
+## 1. Traditional vs. Modern View of Software Quality
+
+### 1.1 The Inadequacy of "Fitness of Purpose" for Software
+Traditionally in manufacturing (for products like automobiles, machine tools, or ceiling fans), quality is defined simply as **"fitness of purpose"**—a quality product does exactly what the user wants it to do.
+
+However, in software engineering, "fitness of purpose" is **not a wholly satisfactory definition of quality**:
+1. **Case A (Terrible User Interface):** Consider a software program that satisfies every mathematical and algorithmic functional requirement specified in the SRS document, but possesses an unintuitive, cryptic, and cumbersome user interface. Even though it is functionally correct, it cannot be considered a quality software product.
+2. **Case B (Spaghetti / Unmaintainable Code):** Consider a product that produces correct output under test conditions, but its codebase consists of unstructured, unreadable "spaghetti code" with global variables and zero documentation. As soon as a bug arises or a minor requirement changes, modifying the code is impossible without breaking other parts. 
+
+> **Key Takeaway:** A software product cannot be judged solely by whether it runs correctly today. It must also be judged by how cleanly it is engineered for long-term survival, human comprehension, and portability across environments.
+
+```text
+Traditional View:
+  Quality = Fitness of Purpose (Does it perform the requested function?)
+
+Modern Software Engineering View:
+  Quality = Correctness + Maintainability + Portability + Usability + Reusability + Reliability
+```
+
+---
+
+## 2. Core Software Quality Factors
+
+The modern perspective associates a software product with several distinct **quality attributes**:
+
+```text
+                  ┌──────────────────────────────────────────────┐
+                  │          MODERN SOFTWARE QUALITY             │
+                  └──────────────────────┬───────────────────────┘
+                                         │
+     ┌───────────────────┬───────────────┴───────────────┬───────────────────┐
+     ▼                   ▼                               ▼                   ▼
+Correctness         Usability                       Portability        Maintainability
+(Satisfies SRS)     (Easy to invoke for             (Runs across OS,   (Easy to understand,
+                     novices & experts)              hardware & tools)  modify & test)
+```
+
+1. **Correctness:** The degree to which the software meets its specified functional and non-functional requirements laid down in the SRS.
+2. **Usability:** The ease with which diverse categories of users (both expert power users and novices) can learn, navigate, and invoke system functions.
+3. **Reusability:** The ease with which individual components or modules can be extracted and reused in other applications without major rewrites.
+4. **Reliability:** The probability that the system will execute without failure over a specified period of time in a specified environment.
+5. **Portability:** The ease with which software can be transferred from one hardware/software platform to another.
+6. **Maintainability:** The ease with which a software system can be modified to correct defects, improve performance, or adapt to a changed environment.
+
+---
+
+# Part II — Deep Dive: Software Maintainability
+
+## 3. Why Maintainability Matters Most
+
+### 3.1 The 40:60 Lifecycle Cost Reality
+In software engineering, maintenance is not an afterthought; it is by far the **largest single cost center in the software lifecycle**.
+
+Extensive empirical studies (highlighted by Rajib Mall and Boehm) demonstrate that the relative effort of initial development to ongoing maintenance is roughly in a **40:60 ratio**, and frequently exceeds **20:80** in long-lived enterprise systems.
+
+```text
+Total Lifetime Software Effort:
+┌─────────────────────────────────┬─────────────────────────────────────────────────┐
+│     Initial Development (40%)   │                Maintenance (60%)                │
+│ (Feasibility, SRS, Design, Code)│      (Bug fixes, enhancements, environment)      │
+└─────────────────────────────────┴─────────────────────────────────────────────────┘
+```
+
+If a system is designed poorly, this maintenance effort multiplies exponentially, consuming massive engineering budgets and paralyzing organizational agility.
+
+### 3.2 The Three Pillars of Maintainability
+A software product is maintainable if it exhibits three sub-attributes:
+
+```text
+                       MAINTAINABILITY
+                              │
+         ┌────────────────────┼────────────────────┐
+         ▼                    ▼                    ▼
+  Understandability      Modifiability        Testability
+(Can others read it?)  (Can we change it    (Can we verify changes
+                        without bugs?)       easily in isolation?)
+```
+
+1. **Understandability:**
+   - How easily a new engineer can read the documentation, examine the design structure charts, and inspect the source code to determine what the system does and how it works.
+   - High modularity, high cohesion, low coupling, meaningful variable naming, and consistent coding standards maximize understandability.
+2. **Modifiability:**
+   - How easily changes can be applied to the system without unexpected ripple effects.
+   - Modules with low coupling ensure that changes inside one module do not silently break other modules.
+3. **Testability:**
+   - How easily the modified software can be verified and validated.
+   - Systems built with clear unit interfaces, deterministic outputs, and test harnesses (drivers/stubs) have high testability.
+
+---
+
+## 4. The Three Types of Software Maintenance
+
+Examiners frequently ask students to classify and explain the three distinct forms of software maintenance:
+
+| Maintenance Type | Purpose | Trigger / Root Cause | Typical Effort Share | Real-World Example |
+| :--- | :--- | :--- | :--- | :--- |
+| **Corrective Maintenance** | Correcting latent errors, bugs, and defects | Bugs discovered by end-users in production that slipped past V&V phases. | ~15% – 20% | Fixing an integer overflow bug in tax computation or a crash on null input. |
+| **Perfective Maintenance** | Enhancing functionality, improving performance, and refining user experience | New business requirements, feature requests, or performance optimization. | ~50% – 60% | Adding dark mode, speeding up database search indexing, or supporting multi-currency payments. |
+| **Adaptive Maintenance** | Porting the software to accommodate changes in its external operating environment | OS updates, hardware upgrades, database migration, or new regulatory standards. | ~20% – 25% | Migrating an application from Windows 10 to Linux, or upgrading from Python 3.9 to 3.12. |
+
+> **Examiner Trick:** Many students assume maintenance is solely "fixing bugs" (Corrective). In reality, **Perfective Maintenance accounts for the largest fraction (over 50%) of all maintenance effort**, because successful software must continuously evolve to satisfy growing user demands!
+
+---
+
+# Part III — Deep Dive: Software Portability
+
+## 5. What is Portability?
+
+### 5.1 Definition
+> **Portability:** A software product is said to be portable if it can be easily made to work in different operating system environments, on different machine architectures, and with different hardware or external libraries with minimal modification.
+
+A product with zero portability requires a complete rewrite to run on another platform, multiplying development and maintenance costs.
+
+---
+
+## 6. Portability Challenges & The Portability Interface Solution
+
+### 6.1 Why Programs Face Portability Problems
+Programs frequently make direct hardware-dependent or OS-dependent calls:
+- Architecture-specific endianness (Little Endian vs. Big Endian).
+- Word size assumptions (32-bit vs. 64-bit pointer arithmetic).
+- Operating system system-calls (Windows Win32 API vs. POSIX `fork()` / `pthreads`).
+- Proprietary graphics or sound hardware drivers.
+
+If these system calls are scattered indiscriminately throughout thousands of source files, porting the application to a new OS requires searching and modifying every single file—a recipe for catastrophic bugs.
+
+### 6.2 The Portability Interface (Abstraction Layer) Pattern
+The canonical software engineering solution (Rajib Mall, Figure 16.1) is to introduce a **Portability Interface / Hardware Abstraction Layer**:
+
+```text
+┌────────────────────────────────────────────────────────┐
+│               Application Software Logic               │
+│          (100% Platform-Independent Code)              │
+└───────────────────────────┬────────────────────────────┘
+                            │ System requests
+┌───────────────────────────▼────────────────────────────┐
+│              PORTABILITY INTERFACE (PAL)               │
+│    (Uniform abstract API: openFile, createThread, etc)  │
+└───────────────────────────┬────────────────────────────┘
+                            │
+         ┌──────────────────┴──────────────────┐
+         ▼                                     ▼
+┌─────────────────────────┐           ┌─────────────────────────┐
+│  Linux / POSIX Adapter  │           │   Windows Win32 Adapter │
+│ (Translates to sys_open)│           │ (Translates to CreateFile)│
+└─────────────────────────┘           └─────────────────────────┘
+```
+
+#### How it works:
+1. All application business logic calls *only* the standardized Portability Interface functions (e.g., `sys_file_read()`, `sys_spawn_thread()`).
+2. The Portability Interface defines a uniform contract.
+3. For each target platform, a dedicated, isolated adapter module is written.
+4. **Result:** When porting the application to a brand-new OS or processor, **zero application business logic is touched**. Only the small, isolated portability adapter is re-implemented!
+
+---
+
+# Part IV — Software Quality Management Systems (QMS)
+
+## 7. Evolution of Quality Management Systems
+
+Quality management has evolved across four distinct historical paradigms over the past half-century:
+
+```text
+Stage 1: Finished Product Inspection (Pre-WWII)
+   │
+   ▼
+Stage 2: Quality Control (QC) (Detect defects + find causes)
+   │
+   ▼
+Stage 3: Quality Assurance (QA) (Process orientation: Good process yields good product)
+   │
+   ▼
+Stage 4: Total Quality Management (TQM) (Continuous quantitative process improvement)
+```
+
+1. **Product Inspection:** Testing products only at the very end of the line; rejecting or scrapping defective units. Inefficient and wasteful for software.
+2. **Quality Control (QC):** Not only detecting defects, but analyzing the specific causes behind those defects to correct the immediate production fault.
+3. **Quality Assurance (QA):** The fundamental premise of modern QA is:
+   > *"If an organization's development processes are sound, standardized, and followed rigorously, the resulting products are bound to be of high quality."*
+   QA focuses on process definition, documentation standards, peer review checklists, and phase gate audits.
+4. **Total Quality Management (TQM):** Continuous process measurement and optimization through statistical metrics (e.g. Six Sigma, SEI-CMM) involving everyone in the organization.
+
+---
+
+# Part V — High-Yield Mid-Term Summary & Formula Sheet
+
+| Concept | Key Equation / Takeaway | Exam Relevance |
+| :--- | :--- | :--- |
+| **Traditional vs Modern Quality** | Software Quality $\neq$ Fitness of Purpose alone. Must include Maintainability, Portability, Usability, Correctness. | 5-mark short answer favorite. |
+| **Development vs Maintenance Ratio** | Initial Development : Maintenance $\approx 40 : 60$ (up to $20 : 80$). | Numerical / conceptual question. |
+| **Maintenance Breakdown** | Perfective ($\sim 50\%-60\%$) > Adaptive ($\sim 20\%-25\%$) > Corrective ($\sim 15\%-20\%$). | Multiple-choice & ranking question. |
+| **Maintainability Pillars** | Maintainability = Understandability + Modifiability + Testability. | Core theory. |
+| **Portability Solution** | Route all platform-dependent syscalls through an isolated Portability Interface layer. | Diagram & architectural question. |
+| **Quality Assurance Premise** | Good, disciplined processes consistently yield high-quality software products. | Definition question. |
+
+
+---
+
+
+# ==============================================================================
+# Module 4: Requirements Analysis & Specification (SRS)
+# ==============================================================================
+
+# Module 4: Requirements Analysis, Specification (SRS) & Formal Methods
+
+![Module 3: Requirements Analysis, IEEE 830 SRS, Logic Modeling & Formal Specifications](/images/mod3_requirements_and_formal_specs.jpg)
 
 ---
 
@@ -1234,1295 +2027,1506 @@ The important exam theme is the trade-off: mathematical precision is gained at t
 
 ---
 
-# Part IV — Software Design
+---
 
-## 48. Where design sits between requirements and code
+# Deep Dive: Requirements Analysis, Decision Logic & Formal Specifications
 
-The Software Design lecture defines design as the transformation of a validated SRS into a form that can be implemented in a programming language.
+# Deep Dive C — Requirements Analysis
 
-The inputs and outputs are explicit:
+## 118. Requirements analysis is fundamentally an uncertainty-removal activity
+
+The requirements lecture begins with a strong motivation: projects can waste months of implementation because the team eventually discovers that it built the wrong thing. Requirements analysis exists to catch this mismatch while it is still inexpensive to correct.
+
+The source divides requirements work into two activities:
 
 ```text
-Validated SRS
-     ↓
-Software Design
-     ↓
-Design documents / module specifications
-     ↓
-Code
+Requirements gathering & analysis
+              ↓
+Requirements specification
+              ↓
+Reviewed and approved SRS
 ```
 
-The design phase decides:
+### What the analyst is actually trying to discover
 
-- module structure,
-- control relationships among modules,
-- interfaces and data exchanged,
-- data structures inside modules,
-- algorithms.
+The source explicitly lists:
 
-This is the “HOW” stage that follows the SRS “WHAT.”
+- what the customer says,
+- what end users actually do,
+- what existing procedures require,
+- what documentation reveals,
+- what needs to be done beyond the literal words of a request.
 
----
+The final point is subtle. An analyst is not simply a transcription machine.
 
-## 49. Anatomy of a module: data + functions
+Suppose a customer says:
 
-The source depicts a module as a combination of information and behavior. Its example data include a customer record, account balance, and transaction log. Example functions include validation, interest computation, transaction posting, receipt generation, and audit entry.
+> “We want a button to print the report.”
 
-This is a deliberately general abstraction. A module is not merely a function; it can contain the data it works with and multiple closely related operations.
-
-The quality question becomes: **do those data and functions belong together, and how much does the module depend on other modules?** That leads directly to cohesion and coupling.
+The analyst should understand what “report” means, who can request it, which information it contains, what inputs control its scope, and what should happen when there is no matching data. The analyst asks clarifying questions because incomplete interpretation creates later defects.
 
 ---
 
-## 50. High-level versus detailed design
+## 119. Existing system versus new system — why the difficulty differs
 
-### High-level design
+When automating an existing system, analysts can observe:
 
-The source says high-level design:
+- input formats,
+- output formats,
+- actual procedures,
+- existing records,
+- human workarounds,
+- organizational roles.
 
-- identifies modules,
-- identifies control relationships,
-- identifies interfaces,
-- commonly uses a structure chart,
-- produces the program structure/architecture.
+This reduces some uncertainty because there is a concrete system to study.
 
-### Detailed design
+When building something entirely new, there may be no operational system to observe. Requirements gathering then depends more heavily on:
 
-Detailed design:
+- discussion,
+- imagination,
+- domain knowledge,
+- examples,
+- prototypes,
+- careful elicitation.
 
-- designs module data structures,
-- designs module algorithms,
-- produces module specifications detailed enough to code from.
+### Where important
 
-Thus:
+This distinction matters when estimating how difficult requirements work will be. A seemingly simple new system can be difficult to specify because users are being asked to describe behavior they have never previously performed through a system.
+
+It also explains why prototyping can be particularly valuable for new systems: users may discover what they actually need only after interacting with a concrete example.
+
+---
+
+## 120. The two classic defects: inconsistency and incompleteness
+
+The lecture's examples deserve deep understanding because both defects are common examination questions.
+
+### Inconsistency
+
+Two requirements are inconsistent when they prescribe incompatible behavior for the same situation.
+
+The source example has one stakeholder saying that when temperature exceeds a threshold the system should turn off the heater and open a shower, while another says the system should turn off the heater and turn on a cooler at the same threshold.
+
+The important lesson is not the specific devices. It is the analysis method:
+
+1. identify the same condition;
+2. compare the prescribed actions;
+3. detect the conflict;
+4. return to the stakeholders;
+5. decide which rule is correct;
+6. record the resolved rule in the SRS.
+
+### Incompleteness
+
+A requirement set is incomplete when it leaves an important situation unspecified.
+
+The source gives a threshold example where behavior above the threshold is described, but behavior below another threshold is omitted even though the system obviously needs to define what happens there.
+
+### Why these defects are expensive
+
+A developer cannot safely implement an undefined behavior. They must either guess or ask for clarification. A guess effectively turns an undocumented assumption into an implementation decision.
+
+### Practical extension: boundary analysis during requirements review
+
+A very effective technique is to actively ask:
+
+- What happens exactly at the threshold?
+- What happens above it?
+- What happens below it?
+- What happens when the input is missing?
+- What happens when two rules could both apply?
+- What happens after repeated failure?
+- What happens when a resource is unavailable?
+
+This style of questioning is visible in the ATM and decision table examples throughout the supplied material.
+
+---
+
+## 121. The four questions every analyst should be able to answer
+
+The source gives four direct questions:
+
+### 1. What is the problem?
+
+State the problem before discussing a solution.
+
+### 2. Why solve it?
+
+Understand why solving the problem is worth resources.
+
+### 3. What are the possible solutions?
+
+Explore alternatives instead of assuming the first proposed design is inevitable.
+
+### 4. What complexities might arise?
+
+Anticipate problems before they become expensive surprises.
+
+### How to use this in practice
+
+For an ATM example:
 
 ```text
-Validated SRS
+Problem:
+Allow a customer to withdraw cash subject to authentication,
+balance, daily limit and machine constraints.
+
+Why:
+Provide automated access to account funds.
+
+Possible solution approaches:
+ATM terminal + bank transaction service;
+other deployment choices may exist depending on the project.
+
+Complexities:
+invalid PINs, insufficient funds, daily limits,
+ATM denomination limits, network response time, etc.
+```
+
+The lecture does not require a particular architecture here; the important point is that analysis should surface these issues before design begins.
+
+---
+
+## 122. Functional requirements — think “input → processing → output”
+
+The source defines a functional requirement as a function that transforms a set of input data into corresponding output data.
+
+A useful representation is:
+
+```text
+Input data
    ↓
-High-Level Design
-   → modules + relationships + interfaces
+Function / processing
    ↓
-Detailed Design
-   → data structures + algorithms
+Output data
+```
+
+For the Library `Search Book` example:
+
+- **Input:** author's name;
+- **Processing:** match the name against the catalogue;
+- **Output:** details of matching books and their locations.
+
+### Why this representation is powerful
+
+It forces the analyst to answer three questions:
+
+1. What information does the function need?
+2. What transformation does the function perform?
+3. What observable result does it produce?
+
+Vague requirements often disappear once you try to fill those three boxes.
+
+### Where this is important
+
+This is useful for:
+
+- writing numbered SRS clauses,
+- identifying architectural functions,
+- designing test cases,
+- designing module interfaces,
+- tracing implementation back to requirements.
+
+### Practical extension: one large function can hide several smaller functions
+
+The lecture explicitly notes that a high-level requirement may itself consist of several identifiable functions. For example, “Process an order” may contain validation, stock checking, billing, logging, and backordering.
+
+---
+
+## 123. Functional requirements versus nonfunctional requirements versus constraints
+
+The source separates these into three categories.
+
+### Functional requirements
+
+What the system must do.
+
+Examples from the course include:
+
+- validate an ATM card and PIN;
+- reject an amount above the account balance;
+- search a book catalogue;
+- generate a bill;
+- record a consultation.
+
+### Nonfunctional requirements
+
+Qualities or characteristics that are not naturally expressed as one input-output function. The source lists:
+
+- reliability,
+- performance,
+- human-computer interface,
+- interfaces with other systems,
+- security,
+- maintainability,
+- portability,
+- usability.
+
+### Constraints
+
+Things the system should or should not do, including:
+
+- standards compliance,
+- required hardware/OS/DBMS,
+- I/O device capabilities,
+- speed requirements,
+- required data representation for an interface.
+
+### Why the distinction matters
+
+Consider the statement:
+
+> “The system shall return a search result within 2 seconds.”
+
+The business function is still “search.” The two-second condition is a performance quality.
+
+The ATM example gives a concrete constraint: the system should respond within five seconds under normal network conditions. It also says cash can only be dispensed in denominations the loaded cassettes can supply and that the card is retained after three consecutive incorrect PIN attempts.
+
+### Practical extension: why this matters to testing
+
+Functional requirements often map naturally to **behavioral test cases**: given input X, verify output Y.
+
+Nonfunctional requirements create **quality-oriented tests**: verify response time, accessibility, reliability targets, security constraints, or compatibility.
+
+Constraints can become acceptance checks about the environment or architecture.
+
+---
+
+# Deep Dive D — The SRS
+
+## 124. Why an SRS is more than “documentation”
+
+The source identifies four roles of an SRS:
+
+1. statement of user needs,
+2. contract document,
+3. reference document,
+4. definition for implementation.
+
+This means the SRS is simultaneously a communication artifact and a control artifact.
+
+### Role 1: Statement of user needs
+
+The SRS captures what stakeholders require from the system.
+
+### Role 2: Contract document
+
+Once approved, the source says it becomes a contract between customer and development team. Later controversies are settled by consulting the recorded requirements rather than relying on memory.
+
+### Role 3: Reference document
+
+Designers, developers, testers, project managers, and maintainers can use it as a shared reference.
+
+### Role 4: Definition for implementation
+
+The SRS does not tell programmers exactly how to implement the software, but it gives the externally required behavior from which implementation must be derived.
+
+### Where this is important
+
+This is especially important when:
+
+- customers and developers are different organizations,
+- many teams work on one product,
+- contractual acceptance matters,
+- the system will be maintained for a long time,
+- multiple developers need a stable reference.
+
+---
+
+## 125. SRS as a black-box specification — what “black box” really means
+
+The source models the SRS as:
+
+```text
+Input Data → [ System S ] → Output Data
+```
+
+with the internal implementation hidden.
+
+### Why deliberately hide the internals?
+
+Because the requirement should remain independent of a particular solution whenever possible.
+
+Suppose a requirement says:
+
+> “The system shall return all matching books within two seconds.”
+
+That leaves the designer free to choose among multiple implementation approaches. The requirement does not need to say “store the titles in a B-tree” or “use a specific database index.” Those are design choices unless a genuine external constraint requires them.
+
+### What the SRS should say
+
+The lecture says it should:
+
+- clearly state **WHAT** needs to be done,
+- use end-user terminology,
+- be a careful and unambiguous contract,
+- be suitable for later formal specification if needed.
+
+### What it should avoid
+
+It should avoid:
+
+- implementation HOW details,
+- premature technical restrictions,
+- vague literary language.
+
+### The “what, not how” exam rule
+
+When deciding whether a statement belongs in an SRS, ask:
+
+> “Could two different designs satisfy this requirement?”
+
+If yes, the statement may be describing **what**. If the statement unnecessarily forces one implementation technique while other valid solutions exist, it may be premature design.
+
+This is a practical decision tool rather than a replacement for analyzing actual project constraints.
+
+---
+
+## 126. Good SRS properties — understand each one separately
+
+The supplied lecture lists:
+
+- concise and unambiguous,
+- specifies what, not how,
+- easy to change,
+- consistent,
+- complete,
+- traceable,
+- verifiable.
+
+### Concise and unambiguous
+
+Two readers should understand the same requirement in the same way.
+
+Bad:
+
+> “The interface should be user-friendly.”
+
+Better:
+
+> “The system shall return the catalogue search results within 2 seconds for a catalogue containing up to 200,000 titles.”
+
+The second statement is more measurable.
+
+### Easy to change
+
+A well-organized SRS isolates requirements rather than embedding one rule in a long paragraph. If a single business rule changes, its impact should be easy to locate.
+
+### Consistent
+
+Different clauses must not prescribe contradictory behavior.
+
+### Complete
+
+The system's important behavior cannot be left to developer imagination.
+
+### Traceable
+
+Every requirement should be traceable forward into design/code/test artifacts and backward to its source where appropriate.
+
+### Verifiable
+
+A requirement should permit someone to determine whether it has been satisfied.
+
+### Where these properties become important later
+
+These are not purely writing-quality concerns. They affect:
+
+```text
+SRS quality
    ↓
-Code-ready module specifications
-```
-
----
-
-## 51. What makes a design good?
-
-The lecture highlights four major properties:
-
-1. **Correct** — implements every SRS functionality.
-2. **Understandable** — has a clear structure other engineers can follow.
-3. **Efficient** — uses processing time and resources sensibly.
-4. **Maintainable** — can be changed safely as requirements evolve.
-
-The lecture gives special emphasis to understandability. A design that is hard to understand is difficult to maintain and change, and the lecture states that roughly 60% of total lifecycle effort is typically spent on maintenance. Again, that percentage is used as a lecture-level heuristic; the conceptual takeaway is that maintenance is a major part of software life.
-
----
-
-## 52. Modularity: divide and conquer
-
-A good design is decomposed into a clean set of modules. The source repeatedly emphasizes **divide and conquer**.
-
-If modules are close to independent, each one can be understood in isolation. This lowers the amount of information a developer needs to hold in their head simultaneously.
-
-The hierarchy should also be tree-like rather than tangled. The payroll example separates employee records, time and attendance, deductions and tax, and payslip generation.
-
-The deeper idea is not “make as many modules as possible.” Over-decomposition also adds coordination overhead. The goal is to find modules whose boundaries make the overall system easier to understand.
-
----
-
-## 53. Cohesion
-
-**Cohesion** measures the functional strength of a single module: how strongly the responsibilities inside one module belong together.
-
-The source gives a scale from low to high:
-
-```text
-Coincidental
+Design certainty
    ↓
-Logical
+Implementation certainty
    ↓
-Temporal
+Testability
    ↓
-Procedural
-   ↓
-Communicational
-   ↓
-Sequential
-   ↓
-Functional
+Acceptance confidence
 ```
 
-The target is **functional cohesion**: all elements contribute to one clearly describable purpose.
-
-### Why high cohesion helps
-
-A highly cohesive module has an obvious reason to exist. It is easier to understand, explain, test, and potentially reuse.
+A requirement that cannot be interpreted or tested clearly creates problems downstream.
 
 ---
 
-## 54. Seven types of cohesion
+## 127. Standard SRS structure — how to use the four sections
 
-### 54.1 Coincidental cohesion
+The source's standard structure follows the shape of IEEE 830:
 
-Elements are grouped together without meaningful relationship. The lecture’s example mixes error logging, file reading, and socket opening.
+### Section 1 — Introduction
 
-This is the weakest form because the module is effectively a random utility bag.
+Typical contents:
 
-### 54.2 Logical cohesion
+- purpose,
+- scope,
+- definitions and abbreviations,
+- references,
+- document overview.
 
-Several operations belong to the same broad category but one operation is selected by a parameter. An I/O handler that switches among file, keyboard, or network behavior illustrates this.
+**Why useful:** establishes the context needed to read the rest of the document.
 
-The operations are similar conceptually, but the module still contains multiple distinct responsibilities.
+### Section 2 — Overall Description
 
-### 54.3 Temporal cohesion
+Typical contents:
 
-Functions are grouped because they execute in the same time period. The lecture’s startup example initializes variables, sets up logging, and opens connections.
+- product perspective,
+- major functions,
+- user characteristics,
+- general constraints,
+- assumptions.
 
-The common link is “these things happen during startup,” not one single functional purpose.
+**Why useful:** provides the big picture before the detailed requirements.
 
-### 54.4 Procedural cohesion
+### Section 3 — Specific Requirements
 
-Elements follow a sequence of steps in one procedure, such as successive stages in message decoding.
+Typical contents:
 
-The relationship comes from order of execution.
+- functional requirements,
+- external interface requirements,
+- performance requirements,
+- design constraints.
 
-### 54.5 Communicational cohesion
+**Why useful:** this is where developers and testers find detailed behavioral expectations.
 
-Elements operate on the same data structure. The stack example pushes, pops, and peeks at the same stack.
+### Section 4 — Appendices / Index
 
-The shared data provides the relationship.
+Supporting data, glossary, cross-references, and similar material.
 
-### 54.6 Sequential cohesion
+### Practical extension: document navigation
 
-The output of one part becomes the input of the next, such as `sort → search → display`.
-
-The functions form a pipeline.
-
-### 54.7 Functional cohesion
-
-Every element contributes to one single, well-defined task. The payroll example groups work such as calculating work hours, overtime, and deductions as one coherent payroll-processing purpose in the lecture.
+As SRS documents become large, section numbering becomes a maintenance tool. A requirement such as `R.2.3` can be referenced from a design module and test case without copying its entire wording everywhere.
 
 ---
 
-## 55. Quick cohesion test
+## 128. Writing functional requirements with input → output precision
 
-The lecture gives a clever textual test: write one sentence that explains what the module does.
+The sample `Search Book` and `Renew Book` requirements in the lecture are useful because they turn ordinary prose into explicit clauses.
 
-Watch the language:
-
-- a compound “and” sentence may indicate sequential or communicational cohesion;
-- words such as “first,” “next,” “after,” or “then” suggest sequential or temporal relationships;
-- “initialize” strongly suggests temporal cohesion;
-- a single simple sentence describing one purpose is a strong sign of functional cohesion.
-
-The examples are:
+### Example pattern
 
 ```text
-startup() initializes variables, sets up logging, and opens connections.
-→ temporal
-
-useStack() pushes, pops, and peeks at the same stack.
-→ communicational
-
-search() sorts the data and then finds the match.
-→ sequential
-
-payroll() computes the overtime pay for an employee.
-→ functional
+Requirement ID: R.X.Y
+Input:
+Processing:
+Output:
 ```
 
-This heuristic is not a mathematical measurement. It is a fast design-review aid.
+This format makes hidden assumptions visible.
 
----
-
-## 56. Coupling
-
-**Coupling** measures how interdependent two modules are. The source connects coupling to the complexity of the interface between modules.
-
-The scale is:
+For `Renew Book`:
 
 ```text
-Data → Stamp → Control → Common → Content
-loosest                         tightest
+R.2.1
+Input: renew option selected
+Output: prompt for membership number and password
+
+R.2.2
+Input: membership number + password
+Output: borrowed-book list OR invalid-password message
+Processing: validate password and find the borrower's books
+
+R.2.3
+Input: selected books for renewal
+Output: renewal confirmation
+Processing: update the borrower record
 ```
 
-The design goal is **low/loose coupling**. When one module can change without forcing changes in another, the design is easier to maintain.
+### Why split one requirement into multiple clauses?
+
+Because “renew a book” contains several externally visible interactions. Breaking it into smaller clauses improves:
+
+- testability,
+- traceability,
+- changeability,
+- completeness checking.
+
+### Where useful
+
+This style is especially effective for exam questions asking you to convert a paragraph into SRS clauses. Look for distinct input-output interactions rather than trying to turn the entire paragraph into one enormous sentence.
 
 ---
 
-## 57. Five types of coupling
+## 129. Bad SRS patterns — how to diagnose them quickly
 
-### Data coupling
+The lecture lists several bad patterns.
 
-Modules exchange only an elementary data item through a parameter. Example: passing an integer amount.
+### Unstructured specification
 
-This is the loosest and most desirable form in the lecture’s scale.
+A narrative essay can hide important requirements inside prose and make later changes difficult.
 
-### Stamp coupling
+**Diagnostic clue:** many rules are buried in paragraphs without identifiers or structure.
 
-A composite structure is passed even though only part of it is used. Example: passing a whole `Order` object when only `order.total` is needed.
+### Noise
 
-The interface exposes more structure than necessary.
+Irrelevant material makes it harder to find actual requirements.
 
-### Control coupling
+**Diagnostic clue:** information that does not affect system behavior or constraints.
 
-One module passes a flag that directs the logic of another module. Example: `isRushOrder` causes the callee to choose one branch or another.
+### Silence
 
-This means information crossing the boundary is influencing the callee’s control flow rather than merely supplying data.
+Important behavior is not specified.
 
-### Common coupling
+**Diagnostic clue:** a realistic operating situation has no defined outcome.
 
-Modules share global data. Two modules can both access and modify a global inventory count.
+### Overspecification
 
-This creates hidden dependencies because a change from one location can affect the other.
+The SRS dictates a particular implementation when it need not.
 
-### Content coupling
+**Example:** requiring names to be stored in sorted order when the requirement only needs names to be searchable.
 
-One module directly reaches into another’s internals, such as jumping into the middle of another module’s code. This is the tightest form and is presented as almost always a defect.
+### Contradictions
 
----
+Two places say incompatible things.
 
-## 58. Control coupling worked example
+### Ambiguity
 
-The lecture shows `validateOrder()` setting an `isRushOrder` flag which is then passed to `processOrder()`.
+Different readers could reasonably interpret a phrase differently.
 
-The flag does not merely describe a business datum. It tells the second module **which path of its own internal logic to execute**.
+### Forward references
 
-That is why this is worse than simple data coupling: the caller must know something about the callee’s control decisions.
+A requirement assumes a definition will appear later or elsewhere without making the meaning easy to resolve.
 
-A useful test is:
+### Wishful thinking
 
-> If a parameter is essentially telling the receiving module **how to behave**, rather than merely supplying data it needs, suspect control coupling.
+The document demands an outcome without specifying meaningful behavior or constraints that make it testable.
 
----
+### Exam technique
 
-## 59. Module hierarchy: depth, width, fan-out, fan-in
-
-These measures concern the shape of the whole module tree.
-
-### Depth
-Number of levels of control in the hierarchy.
-
-### Width
-Overall span across the widest level.
-
-### Fan-out
-How many modules a module directly controls/calls.
-
-### Fan-in
-How many modules directly call a particular module.
-
-The source emphasizes a design intuition:
-
-- **High fan-in** often indicates useful reuse.
-- **High fan-out** can be a warning that a module is coordinating too many subordinates and may lack cohesion.
-
-The structure-chart example shows a `Log Utility` called from three places, giving it fan-in of 3, while `Main` directly controls three modules, giving it fan-out of 3.
-
----
-
-## 60. Visibility and layering
-
-The source defines a module that controls another as **superordinate**, while the controlled module is **subordinate**.
-
-A module is visible to another if the caller can reach it directly or indirectly.
-
-The **layering principle** says a module should call only modules in the immediately lower layer. Lower layers perform lower-level mechanical work such as I/O; upper layers coordinate and manage.
-
-The abstraction principle is crucial:
-
-> A lower-level module must not call upward into a higher-level module.
-
-This preserves direction of dependency and makes the structure easier to reason about.
-
----
-
-## 61. Goal of high-level design
-
-The source describes high-level design as mapping system functions \(\{f_1, f_2, …, f_n\}\) onto modules \(\{m_1, m_2, …, m_j\}\) such that:
-
-- each module has high cohesion,
-- coupling among modules is low,
-- the modules form a neat, shallow hierarchy.
-
-This mapping is one of the core design decisions of the course.
-
----
-
-## 62. Function-oriented design versus object-oriented design
-
-The two philosophies ask different first questions.
-
-### Function-oriented design (FOD)
-
-- views the system as functions to perform;
-- successively refines functions into sub-functions;
-- maps functions to modules;
-- centralizes state in shared data structures.
-
-### Object-oriented design (OOD)
-
-- views the system as a collection of real-world entities/objects;
-- bundles data with the operations acting on that data;
-- lets objects communicate through messages;
-- distributes state across objects.
-
-The lecture’s mnemonic is a quote attributed to Grady Booch:
-
-> “Identify verbs if you are after procedural design, and nouns if you are after object-oriented design.”
-
-The point is a modeling heuristic: procedural analysis naturally focuses on actions, while object-oriented analysis naturally focuses on entities and their responsibilities.
-
----
-
-## 63. Function-oriented worked example: create-library-member
-
-The source starts with:
+When shown a “bad SRS” paragraph, classify the defect by asking:
 
 ```text
-create-library-member
-        /       |       \
-       /        |        \
-assign membership  create-member-record  print-bill
-number
+Is something irrelevant?             → Noise
+Is something missing?               → Silence / incompleteness
+Does it force implementation?       → Overspecification
+Do two rules conflict?              → Contradiction / inconsistency
+Could readers interpret it oddly?   → Ambiguity
+Is it a wall of prose?              → Unstructured specification
 ```
 
-Each sub-function can be refined again until the resulting modules are small enough to implement directly.
-
-This is **functional decomposition**: repeatedly break a larger function into smaller functions while preserving the overall purpose.
-
-The key concept is recursive refinement rather than merely splitting the screen into UI components.
-
 ---
 
-## 64. Object-oriented library example
+# Deep Dive E — Decision Logic
 
-In the OOD version, each library member is represented as an object with its own state and operations. A class defines the shared structure and behavior of similar objects, such as a `Member` class.
+## 130. Why decision trees and decision tables are taught with requirements
 
-The lecture also mentions inheritance: classes may inherit features from a more general superclass.
+A requirement is often not just a simple transformation. It may contain several conditions and outcomes.
 
-A central rule is that one object’s functions do not directly reach into another object’s data. Objects communicate by sending messages.
+For the ATM example, the system needs to evaluate multiple conditions before dispensing cash.
 
-This creates encapsulation of state.
+The source asks students to represent this logic in two ways:
 
----
+- a decision tree,
+- a decision table.
 
-## 65. Where the state lives: the central contrast
+These are complementary representations.
 
-The source visualizes the distinction clearly.
+### Decision tree
 
-### Function-oriented
-Many functions interact with one central pool of member records.
+Best for visualizing how conditions lead to outcomes.
+
+Example:
 
 ```text
-createMember()  ─┐
-returnBook()    ─┼→ Member Records ← issueBook()
-deleteMember() ─┤
-updateRecord() ─┘
+Card/PIN valid?
+ ├── No  → Reject
+ └── Yes
+      ↓
+Amount ≤ balance?
+ ├── No  → Reject
+ └── Yes
+      ↓
+Amount within daily limit?
+ ├── No  → Reject
+ └── Yes → Dispense + update balance
 ```
 
-### Object-oriented
-Each object owns its state and exposes behavior through its interface.
+### Decision table
+
+Best for systematically checking combinations of conditions.
+
+| Rule | Card/PIN valid | Amount ≤ balance | Within daily limit | Action |
+|---|---|---|---|---|
+| R1 | No | – | – | Reject |
+| R2 | Yes | No | – | Reject |
+| R3 | Yes | Yes | No | Reject |
+| R4 | Yes | Yes | Yes | Dispense and update |
+
+The “–” means the later condition is irrelevant to that outcome under the chosen decision structure.
+
+### Where important
+
+Decision tables are particularly valuable when there are many conditions and possible combinations. Decision trees are especially useful when explaining the logic to a human.
+
+### Practical extension: completeness checking
+
+One major advantage of a table is that it can expose missing cases. If a condition can be true or false and no rule covers one combination, the requirements may be incomplete.
+
+This links directly back to the requirements lecture's warning about incompleteness.
+
+---
+
+# Deep Dive F — Formal Specification, Z, and Predicate Logic
+
+## 131. Why formal methods appear after ordinary SRS writing
+
+The requirements lecture moves from ordinary natural-language requirements into formal specification. The motivation is precision.
+
+Natural language is expressive, but it can be ambiguous. Formal notation gives a mathematically defined way to describe state and rules.
+
+The source's workflow is:
 
 ```text
-Member: Asha  ↔ messages ↔ Member: Rahul
-    own data + methods        own data + methods
-
-Book: OS Concepts             Librarian
-own data + methods            own data + methods
+Choose a notation
+      ↓
+Model the state
+      ↓
+Define each operation
+      ↓
+State preconditions
+      ↓
+State postconditions
 ```
 
-The important conceptual contrast is **centralized versus distributed state**.
+### Where formal specification is important
+
+The source particularly emphasizes safety- and reliability-critical systems and notes that formal notation can support automated property checking. It also describes formal specification as useful when ambiguity needs to be removed.
+
+It is not necessary for every ordinary business application. The source explicitly lists difficulty of learning and poor fit for very large, complex systems among its disadvantages.
 
 ---
 
-## 66. Fire-alarm case study: why the difference matters
+## 132. Z notation — understand each symbol as a piece of a state model
 
-The case describes an 80-floor, 1,000-room building. Every room has a smoke detector and alarm.
+The source describes Z as a specification notation built on set theory and first-order predicate logic. It organizes specifications into **schemas**.
 
-When a detector reports a fire, the system must:
-
-1. determine the location,
-2. sound alarms in neighboring locations,
-3. display a message for fire-fighting staff,
-4. allow staff to reset alarms after the condition is handled.
-
-### Function-oriented version
-
-The lecture uses five global arrays:
-
-- `detector_status[1000]`
-- `detector_locs[1000]`
-- `alarm_status[1000]`
-- `alarm_locs[1000]`
-- `neighbor_alarms[1000][10]`
-
-and six functions:
-
-- `interrogate_detectors()`
-- `get_detector_location()`
-- `determine_neighbor()`
-- `ring_alarm()`
-- `reset_alarm()`
-- `report_fire_location()`
-
-All functions can access the shared state. Nothing explicitly owns it. Therefore, correctness depends on all functions consistently understanding the same global structures.
-
-### Object-oriented version
-
-The source defines two small classes:
-
-`Detector`
-- attributes: status, location, neighbors;
-- operations: create, senseStatus, getLocation, findNeighbors.
-
-`Alarm`
-- attributes: location, status;
-- operations: create, ringAlarm, getLocation, resetAlarm.
-
-In practice there is a Detector object and Alarm object associated with each room.
-
-### The deeper lesson
-
-The source concludes that real systems commonly use both styles. An overall design may use objects to encapsulate data, while individual class methods can still be refined in a top-down function-oriented way.
-
-Thus FOD and OOD are not presented as mutually exclusive religions; they are complementary perspectives.
-
----
-
-# Part V — Structured Analysis and Data Flow Diagrams
-
-## 67. What the DFD exercises are teaching
-
-The DFD materials use **structured analysis**. The core task is to read a requirements paragraph and convert its nouns and verbs into a data-oriented model.
-
-The supplied practice materials establish four rules that should be treated as exam rules:
-
-1. The **context diagram** contains the whole system as one bubble.
-2. Every external entity appears at that boundary and nowhere else in the context diagram.
-3. A bubble should usually decompose into around **3 to 7 child bubbles**.
-4. A DFD shows **data in motion**, not control flow. Do not draw arrows whose meaning is “then,” “if,” “loop,” or “do this next.”
-
-The practice sheets additionally emphasize that every function named in the requirement should appear somewhere and that the analyst should not invent extra behavior.
-
----
-
-## 68. The four things to mine from a requirement
-
-The worked Trading-House solution gives a very effective extraction method:
-
-- every external “who” is a candidate **external entity**;
-- every verb describing system work is a candidate **function**;
-- every document or message produced is a candidate **report/output**;
-- every noun that must be remembered between requests is a candidate **data store**.
-
-This is a disciplined way to start a DFD before drawing any bubbles.
-
-### Example vocabulary
-
-Suppose the requirement says:
-
-> A customer sends an order; the system checks the customer record; if valid, it updates inventory and produces a bill.
-
-Candidate extraction:
-
-- External entity: Customer.
-- Function: accept/check order.
-- Function: update inventory.
-- Output: bill.
-- Data stores: customer file, inventory.
-
-The diagram comes after the vocabulary mining.
-
----
-
-# Part VI — Trading-House Automation System: Complete DFD Reasoning
-
-## 69. Read the Trading-House requirement as a model
-
-The requirement describes a trading house that maintains customers, checks creditworthiness, validates ordered items, checks inventory, issues bills and material issue slips, records pending orders, generates vendor indents, and answers manager queries about item sales.
-
-The problem statement explicitly instructs the student to produce:
-
-1. a list of entities, functions, and reports,
-2. context diagram (level 0),
-3. level 1 DFD,
-4. one level 2 decomposition.
-
-The worked solution follows exactly that order.
-
----
-
-## 70. External entities in TAS
-
-The worked solution identifies **three** external entities:
-
-| Entity | Sends to system | Receives from system |
-|---|---|---|
-| Customer | order | bill + material-issue-slip or reject-message |
-| Purchase Department | generate-indent command | indents |
-| Manager | query | statistics |
-
-A subtle but important point from the solution: **Vendors are not external entities in the DFD** because TAS does not communicate with them directly. The system reads the internal vendor list and prints indents for the Purchase Department, which then handles them.
-
-This is an excellent example of the difference between “mentioned in the story” and “directly interacting with the software.”
-
----
-
-## 71. Four level-1 functions in TAS
-
-The four bubbles are:
-
-| ID | Function | Main responsibility |
-|---|---|---|
-| 0.1 | Accept-order | look up customer, evaluate creditworthiness, accept/reject |
-| 0.2 | Process-order | validate items, check stock, bill available items, log pending items |
-| 0.3 | Handle-query | return sales statistics for a requested period |
-| 0.4 | Handle-indent-request | consolidate pending orders, identify vendors, print indents |
-
-Notice the clean decomposition: four functions are comfortably inside the 3–7 guideline.
-
----
-
-## 72. TAS data stores
-
-The worked solution identifies eight internal data stores:
-
-1. Customer-file
-2. Customer-history
-3. Item-file
-4. Inventory
-5. Accepted-orders
-6. Pending-order
-7. Vendor-list
-8. Sales-statistics
-
-The solution explains that a data store is something the system remembers across requests. Vendors, by contrast, are not a store merely because the system stores vendor details; the **vendor-list** is the store.
-
----
-
-## 73. TAS Level 0 — context diagram
-
-The whole system is one bubble.
-
-```mermaid
-flowchart LR
-    C[Customer] -->|order| S((Trading-House Automation System))
-    S -->|response: bill + issue slip OR reject message| C
-    P[Purchase Department] -->|generate-indent| S
-    S -->|indents| P
-    M[Manager] -->|query| S
-    S -->|statistics| M
-```
-
-The context diagram intentionally collapses all internal distinctions. The response is shown generically because the level-0 picture does not yet distinguish between a successful order and a rejected one.
-
-The important rule is **boundary purity**: internal files such as Customer-file or Inventory do not appear in the context diagram.
-
----
-
-## 74. TAS Level 1 — Accept-order
-
-`Accept-order (0.1)` receives a customer order, uses the Customer-file and Customer-history, and either sends an accepted order onward to Process-order or produces a reject message.
+A schema has two main conceptual parts:
 
 ```text
-Customer
-   |
-   | order
-   v
-+----------------+
-| Accept-order   |
-|      0.1       |
-+----------------+
-  |            |
-  | accepted   | reject-message
-  v            v
-Process-order Customer
++------------------------------+
+| declarations                 |
++------------------------------+
+| predicates / constraints     |
++------------------------------+
 ```
 
-The data stores read by this function are:
+### Core conventions from the source
 
-- Customer-file → customer record,
-- Customer-history → payment history.
+| Symbol | Meaning |
+|---|---|
+| `ℕ` | Natural numbers |
+| `ℤ` | Integers |
+| `ΔATM` | The operation changes ATM state |
+| `ΞATM` | The operation reads state but does not change it |
+| `x?` | Input |
+| `x!` | Output |
+| `x` and `x′` | Before-state and after-state values |
+| `∧` | AND |
+| `∨` | OR |
+| `¬` | NOT |
+| `⇒` | Implies |
+| `⇔` | If and only if |
+| `∀` | For all |
+| `∃` | There exists |
+| `∈` | Member of |
+| `⊆` | Subset of |
+| `∪` | Union |
+| `∩` | Intersection |
+| `→` | Total function |
+| `dom` | Domain |
+| `ran` | Range |
 
-The key semantic point is that an order rejected for creditworthiness **stops there** in the process model; it does not continue to Process-order.
+### Practical learning trick
+
+Do not memorize all symbols as isolated mathematics. Associate each symbol with the question it answers:
+
+- `Δ` → “Does this operation change state?”
+- `Ξ` → “Is this only a query?”
+- `?` → “What comes in?”
+- `!` → “What goes out?”
+- prime `'` → “What is the new value after the operation?”
+- `∀` → “For every object?”
+- `∃` → “Does at least one exist?”
+
+This makes formal notation much easier to decode under exam pressure.
 
 ---
 
-## 75. TAS Level 1 — Process-order
+## 133. Building the ATM Z specification step by step
 
-`Process-order (0.2)` is more complex. It receives an accepted order and needs to:
+The source deliberately constructs the ATM example in five steps.
 
-1. validate ordered items against Item-file;
-2. check availability in Inventory;
-3. generate bill and material issue slip for available items;
-4. record shortage/pending items;
-5. update stores and sales information.
+### Step 1 — Identify the state
 
-The source identifies Item-file, Inventory, Accepted-orders, and Pending-order here; Sales-statistics is updated when a sale completes.
+Ask:
 
-This bubble still hides multiple distinct decisions, which is exactly why the worked solution chooses it for level 2 decomposition.
+> “What must the ATM/account model remember between transactions?”
 
----
+The source identifies:
 
-## 76. TAS Level 1 — Handle-query
+- current balance,
+- amount withdrawn today,
+- daily withdrawal limit.
 
-`Handle-query (0.3)` is intentionally simple:
+### Step 2 — State schema
+
+Conceptually:
 
 ```text
-Manager → query → Handle-query → Sales-statistics → statistics → Manager
+ATM
+---------------------------
+balance, dailyWithdrawn : ℕ
+dailyLimit              : ℕ
+---------------------------
+dailyWithdrawn ≤ dailyLimit
 ```
 
-The solution emphasizes that Sales-statistics is written when Process-order records a sale, while Handle-query simply reads it to answer managerial requests.
+The predicate below the divider is an invariant: it must remain true.
 
-This separation prevents the query function from taking responsibility for generating sales data.
-
----
-
-## 77. TAS Level 1 — Handle-indent-request
-
-`Handle-indent-request (0.4)` receives a generate-indent command from the Purchase Department.
-
-It reads:
-
-- Pending-order,
-- Vendor-list.
-
-It determines the items still required and the total quantities, finds supplying vendors, and prints indents to the Purchase Department.
-
-The shared store **Pending-order** is important: Process-order writes shortage information into it, while Handle-indent-request later reads it.
-
----
-
-## 78. TAS Level 2 — decompose Process-order
-
-The solution chooses Process-order because it hides the most complexity.
-
-The four child bubbles are:
-
-1. **Validate-items (0.2.1)**
-2. **Check-availability (0.2.2)**
-3. **Generate-documents (0.2.3)**
-4. **Update-records (0.2.4)**
-
-The high-level idea is:
+### Step 3 — Operation and input
 
 ```text
-Accepted order
-      |
-      v
-Validate items
-      |
-      v
-Check availability
-     / \
-available short
-    |      |
-    +---+--+
-        v
-Generate documents / update records
+Withdraw
+ΔATM
+amt? : ℕ
 ```
 
-The source describes this as a fan-out/fan-in pattern: one accepted-order stream splits into different result types and the information is ultimately consolidated into the record-update stage.
+`ΔATM` says the operation can change the state. `amt?` is the requested amount.
 
----
-
-## 79. TAS DFD quality checklist
-
-The worked tutorial’s final checks are exam-friendly:
-
-- context diagram has one system bubble and all three external entities,
-- level 1 contains exactly four bubbles,
-- only the complex Process-order bubble is decomposed further,
-- no arrow encodes execution order or conditions,
-- every function mentioned in the requirement appears,
-- nothing beyond the requirement is invented.
-
-The last two are especially important. A DFD should be **requirement-driven, not imagination-driven**.
-
----
-# Part VII — DFD Practice Set: How to Analyze All Ten Problems
-
-## 80. A repeatable DFD algorithm for examinations
-
-For each requirements paragraph, do not start drawing immediately. Use this sequence:
-
-### Step A — Mark the outsiders
-Underline people, offices, departments, or other systems that directly exchange data with the software. These are candidate external entities.
-
-### Step B — Extract the verbs
-Write down every system responsibility: book, check, calculate, reserve, record, generate, report, notify, etc. Group related verbs into 3–7 major functions.
-
-### Step C — Extract persistent nouns
-Anything that must be remembered between separate interactions becomes a candidate data store: customer record, inventory, appointment list, loan history, course list, etc.
-
-### Step D — Extract outputs
-Bills, slips, confirmations, receipts, reports, notices, lists, messages, and tracking histories are output data flows.
-
-### Step E — Draw the context diagram first
-Place the complete system in one bubble and connect only the external entities. Do not place internal data stores here.
-
-### Step F — Make level 1
-Break the system into 3–7 major functions. Connect each function to the appropriate stores and external entities.
-
-### Step G — Choose one genuinely complex function for level 2
-Choose a bubble that contains several transformations or meaningful internal subdivisions. Do not decompose a trivial one just to create another diagram.
-
-### Step H — Check balancing
-Everything entering or leaving a parent process must be explainable in its child decomposition. Even when the source practice sheet does not explicitly use the word “balancing,” this is a useful structured-analysis check derived from the hierarchy demonstrated by the Trading-House worked solution.
-
----
-
-## 81. Problem 1 — Community Library Automation System
-
-### Requirement focus
-The library automates book issue and return, fines, catalogue search, and a weekly overdue list.
-
-### External entities directly implied
-
-- **Member** — provides membership identity when borrowing/returning and receives rejection/fine information and overdue correspondence.
-- **Clerk** — performs the issue/return/search interactions with the system.
-- **Librarian** — requests the weekly overdue list.
-
-The source problem does not say that an external bank, payment gateway, or publisher interacts with the system, so those should not be invented.
-
-### Candidate level-1 functions
-
-1. **Issue Book** — verify member, borrowing limit, outstanding fines, create loan, assign due date, produce rejection message when blocked.
-2. **Return Book** — compare due date with today, calculate fine if overdue, close loan, mark book available, print receipt.
-3. **Search Catalogue** — search by title or author and report availability.
-4. **Generate Overdue List** — find all overdue loans and create a member-addressed weekly list.
-
-Four bubbles are a natural decomposition and match the 3–7 guideline.
-
-### Candidate data stores
-
-- Member-file
-- Book/Catalogue-file
-- Loan-records
-- Fine/account records
-
-These names are analytical labels; the requirement itself specifies what the library remembers, not a mandatory database schema.
-
-### Important flows
+### Step 4 — Preconditions
 
 ```text
-Member/Clerk → Issue Book → membership + book information
-Issue Book ↔ Member/Loan/Fine data
-Issue Book → confirmation OR rejection message
-
-Clerk → Return Book → return information
-Return Book → fine receipt (when applicable)
-Return Book → loan closed + book available
-
-Clerk → Search Catalogue → title/author → availability result
-
-Librarian → Generate Overdue List → weekly overdue list
+amt? ≤ balance
+ dailyWithdrawn + amt? ≤ dailyLimit
 ```
 
-### Best level-2 candidate
-`Issue Book` is a good choice because it contains several real decisions: member eligibility, borrowing limit, unpaid-fine check, issuing, and loan recording.
+These conditions must hold before the withdrawal is valid.
 
-### Exam traps
-Do not treat the **library catalogue** as an external entity; it is an internal data store. Do not draw the overdue case as a control-flow branch with “IF overdue” on a DFD. Put the required information transformation into the relevant process and use named data flows.
-
----
-
-## 82. Problem 2 — Outpatient Appointment System for a Clinic
-
-### Requirement focus
-The system books appointments, handles arrival, provides patient history to the doctor, records consultation results, and produces operational/billing reports.
-
-### External entities
-
-- Patient
-- Receptionist
-- Doctor
-- Clinic Administrator
-
-### Candidate level-1 functions
-
-1. **Book Appointment**
-2. **Check In Patient / Retrieve History**
-3. **Record Consultation**
-4. **Generate Clinic Reports**
-
-### Candidate stores
-
-- Patient-file / history
-- Doctor schedules / appointment records
-- Consultation records
-- Waiting list
-
-### Important data flows
-
-Booking sends doctor/specialty/date preferences and patient identity into the system and yields a confirmed slot, offered alternative, or waiting-list outcome.
-
-Check-in sends an arrival event and retrieves the patient history for the doctor.
-
-Consultation sends diagnosis and prescribed medicines and results in a recorded patient-file update plus a visit summary.
-
-Reports include:
-
-- daily appointments for each doctor,
-- monthly consultation count by specialty.
-
-### Level-2 candidate
-`Book Appointment` contains multiple sub-activities: identify desired doctor/specialty, inspect schedule, reserve a slot, or generate an alternative/waiting-list outcome.
-
-### Modeling caution
-The requirement distinguishes “doctor” from “receptionist.” Even if both could theoretically be the same human in a tiny clinic, the DFD should respect the roles described in the requirement.
-
----
-
-## 83. Problem 3 — Hotel Room Reservation System
-
-### External entities
-
-- Guest
-- Front-desk clerk
-- Hotel manager
-
-### Major functions
-
-1. **Reserve Room**
-2. **Check In Guest**
-3. **Manage Stay Charges**
-4. **Check Out / Produce Invoice**
-5. **Generate Occupancy Report**
-
-Five level-1 bubbles fit the practice guideline.
-
-### Candidate stores
-
-- Room inventory/status
-- Reservations
-- Guest records
-- Running bills / stay charges
-- Housekeeping status
-
-### Key transformations
-
-Reservation uses requested dates and room type to determine availability over the **full requested period**. If no complete-period match exists, the system returns alternative dates or room type information.
-
-Check-in changes reservation state, assigns a room number, and produces the registration card and room-key instruction.
-
-During the stay, additional services such as room service and laundry are added to the running bill.
-
-Checkout totals charges, accepts payment, prints final invoice, and marks the room as needing housekeeping before it can be booked again.
-
-### Level-2 candidate
-`Check Out / Produce Invoice` or `Reserve Room` both contain real complexity. Reservation is especially useful if the examiner wants a decomposition around availability over multiple requested dates.
-
-### DFD-specific caution
-“Nearest alternative dates” is a result of processing. Do not put “if no room then…” as a control arrow. The flow should be an **alternative availability result** produced by the reservation process.
-
----
-
-## 84. Problem 4 — Courier Parcel Tracking System
-
-### External entities
-
-- Customer
-- Booking clerk
-- Pickup agent
-- Hub / hub operator
-- Delivery agent
-- Operations manager
-
-### Major functions
-
-1. **Book Pickup / Create Tracking Record**
-2. **Scan and Update Parcel Status**
-3. **Answer Tracking Request**
-4. **Manage Delivery Attempts**
-5. **Store / Provide Proof of Delivery**
-6. **Generate Overdue Parcel Report**
-
-Six bubbles are within the recommended range.
-
-### Candidate stores
-
-- Parcel/tracking records
-- Rate table
-- Location/status history
-- Delivery attempt history
-- Proof-of-delivery records
-
-### Critical flows
-
-Booking receives addresses, weight, and speed and calculates shipping charge. A unique tracking number is associated with the parcel.
-
-Each hub supplies scan information containing the tracking number, location, and timestamp.
-
-A tracking request is answered with current status and location history.
-
-At destination, failed delivery attempts are recorded; re-delivery is scheduled for the next day, up to three attempts. The requirement explicitly says the parcel is returned to the sender after three failed attempts.
-
-After successful delivery, the receiver’s signature becomes part of the proof-of-delivery record, which is made available to the sender.
-
-### Level-2 candidate
-`Manage Delivery Attempts` is ideal because it contains repeated delivery outcomes and the eventual return-to-sender rule.
-
-### Modeling caution
-A DFD does not draw a loop saying “next day.” The re-delivery information itself is data. Timing and repetition remain part of the requirement semantics, but DFD arrows should remain data-oriented.
-
----
-
-## 85. Problem 5 — University Course Registration System
-
-### External entities
-
-- Student
-- Finance Office
-- Faculty member
-- Academic Office
-
-The student and university staff interact with the registration system; the finance office receives finalized registration information.
-
-### Major functions
-
-1. **Authenticate / Start Registration**
-2. **Validate Course Selection**
-3. **Check Schedule Conflicts / Build Provisional Timetable**
-4. **Finalize Registration**
-5. **Produce Class / Enrollment Reports**
-
-### Candidate stores
-
-- Student academic record
-- Course catalogue
-- Prerequisite information
-- Seat counts
-- Timetable/schedule
-- Registration records
-
-### Core validation
-
-For each chosen course, the system checks:
-
-- prerequisite completion,
-- seat availability.
-
-Then it checks clashes among selected courses.
-
-The important conceptual distinction is between **provisional** and **finalized** registration. Until confirmation, selections belong in an intermediate state. Once confirmed, seats are decremented, the registration slip is produced, and finance is notified.
-
-### Outputs
-
-- rejection messages explaining failed prerequisite/seat checks,
-- registration slip,
-- notification to finance,
-- faculty class lists after registration closes,
-- academic-office enrolment report.
-
-### Level-2 candidate
-`Validate Course Selection` can be decomposed into prerequisite check, seat availability check, and timetable-conflict processing.
-
----
-
-## 86. Problem 6 — Restaurant Table and Order Management System
-
-### External entities explicitly represented by operational roles
-
-- Host
-- Waiter
-- Kitchen stations
-- Restaurant manager
-
-The requirement describes customers as participants in the business scenario, but customers are not explicitly stated to enter data directly into the software. For a strict DFD derived from the requirement, the direct external interfaces are better represented by the staff roles and kitchen stations that interact with the system.
-
-### Major functions
-
-1. **Assign Table**
-2. **Enter / Validate Order**
-3. **Send / Split Kitchen Tickets**
-4. **Track Course Preparation**
-5. **Generate Bill / Record Payment**
-6. **Generate Sales Report**
-
-### Candidate stores
-
-- Table/seating chart
-- Menu availability
-- Current orders
-- Bill/payment records
-- Sales statistics
-
-### Key transformation
-The order is checked against the day’s menu. Unavailable items have to be communicated back to the waiter. Once confirmed, the order is split into starters, mains, and desserts tickets.
-
-The kitchen stations send ready-status information, which causes the system to notify the waiter about the course. Again, the DFD should represent status information, not a control-flow arrow saying “when ready, notify waiter.”
-
-### Checkout
-The bill process totals the order, applies a discount when applicable, prints the itemized bill, records payment, and marks the table free.
-
-### Level-2 candidate
-`Send / Split Kitchen Tickets` is a good candidate because it contains order decomposition by course/station and later readiness information.
-
----
-
-## 87. Problem 7 — Car Rental Booking System
-
-### External entities
-
-- Customer
-- Booking clerk
-- Pickup clerk
-- Receiving clerk
-- Fleet manager
-
-### Major functions
-
-1. **Create Booking**
-2. **Activate Rental at Pickup**
-3. **Process Return**
-4. **Calculate Final Charges**
-5. **Generate Fleet Status Report**
-
-### Candidate stores
-
-- Fleet records
-- Reservations
-- Customer/license records
-- Rental contract/current rental status
-- Branch/location information
-- Maintenance status
-
-### Important requirements to preserve
-The car must be free for the **whole requested date range**. A booking reference and estimated charge are produced.
-
-At pickup, odometer and fuel readings are recorded and the reservation becomes active.
-
-At return, the receiving clerk records both readings again. Extra charges can arise from mileage beyond the included limit or fuel shortfall. A final invoice covers the base rental and extras.
-
-A return to another branch causes the system to flag the car for eventual repositioning.
-
-### Level-2 candidate
-`Process Return` can be decomposed into reading capture, rental closure, mileage comparison, fuel comparison, extra-charge determination, final invoice preparation, and repositioning flag creation.
-
----
-
-## 88. Problem 8 — Utility Bill Payment System
-
-### External entities
-
-- Meter reader
-- Customer
-- Collection counter
-- Online payment gateway
-- Revenue Office
-
-The payment gateway is explicitly mentioned by the requirement, so unlike some other problems there is a clear external system boundary here.
-
-### Major functions
-
-1. **Record Meter Reading / Generate Bill**
-2. **Record Payment**
-3. **Manage Late / Unpaid Accounts**
-4. **Generate Revenue Report**
-5. **Generate Flagged-Accounts List**
-
-### Candidate stores
-
-- Connection/account records
-- Previous/current meter readings
-- Tariff table
-- Bills and balances
-- Payment records
-- Account-status/disconnection flags
-
-### Billing logic
-The system calculates:
+### Step 5 — Postconditions
 
 ```text
-current reading − previous reading
-          ↓
-units consumed
-          ↓
-slab-wise tariff calculation
-          ↓
-current amount
-          +
-unpaid carried-forward balance
-          ↓
-amount due
+balance′ = balance − amt?
+dailyWithdrawn′ = dailyWithdrawn + amt?
 ```
 
-The bill contains units, amount due, and payment due date.
+The primed variables represent after-values.
 
-### Unpaid consequences
-Late payment leads to a surcharge on the following month’s bill. Two consecutive unpaid bills cause the account to be flagged for disconnection and a notice to be sent.
+### Why this style is powerful
 
-### Level-2 candidate
-`Manage Late / Unpaid Accounts` is the strongest candidate because it incorporates previous payment status, surcharge information, consecutive nonpayment, flagging, and notice generation.
+Compare the formal form with a vague English statement such as “withdraw the amount if allowed.” The formal version precisely specifies:
 
----
+- what must be true before,
+- what changes,
+- exactly how the state changes.
 
-## 89. Problem 9 — Online Bookstore Order System
+### Where used
 
-### External entities
-
-- Customer
-- Warehouse
-- Delivery partner
-- Store manager
-
-The requirement says the system “processes the payment,” but does not explicitly name a payment gateway as an interacting external entity. Under the source rule “nothing beyond the requirement should be invented,” do not automatically add a payment gateway.
-
-### Major functions
-
-1. **Browse Catalogue / Cart Management**
-2. **Validate Stock at Checkout**
-3. **Calculate Total and Process Payment**
-4. **Pack and Update Fulfilment**
-5. **Record Tracking / Notify Customer**
-6. **Handle Partial Fulfilment / Refund**
-7. **Generate Manager Reports**
-
-Seven bubbles is right at the source guideline and captures the many explicitly named responsibilities.
-
-### Candidate stores
-
-- Catalogue
-- Inventory
-- Carts/orders
-- Payment/order status
-- Fulfilment records
-- Tracking information
-- Refund records
-
-### Important branch information
-Items not in stock are rejected from the remaining order selection, with an expected restock date shown where known.
-
-Only after payment succeeds is the order confirmed and a packing slip printed.
-
-If warehouse picking discovers a damaged or missing book, the order is partially fulfilled and a partial refund is issued.
-
-### Level-2 candidate
-`Handle Partial Fulfilment / Refund` or `Validate Stock at Checkout` both contain significant internal logic.
+This style is useful when correctness of state transitions matters greatly: banking rules, reservation invariants, safety conditions, resource-accounting systems, and other domains where “what must always remain true?” is a central question.
 
 ---
 
-## 90. Problem 10 — Fitness Club Membership System
+## 134. First-order predicate logic — a translation skill rather than a memorization topic
 
-### External entities
+The source teaches a repeatable pattern for translating English statements.
 
-- Prospective/existing member
-- Front-desk staff
-- Kiosk
-- Gate/card scanner
-- Club manager
+### Key phrase mapping
 
-### Major functions
+```text
+Every / all / each       → ∀
+a member of a set       → ∈
+some / at least one     → ∃
+and                      → ∧
+or                       → ∨
+not / no / never         → ¬
+if ... then              → ⇒
+if and only if           → ⇔
+```
 
-1. **Create / Activate Membership**
-2. **Renew / Upgrade Membership**
-3. **Book / Cancel Class**
-4. **Manage Waiting List**
-5. **Validate Entry / Log Visit**
-6. **Generate Membership and Attendance Reports**
+### Example from the source
 
-### Candidate stores
+English:
 
-- Member records
-- Membership plans and validity
-- Payments
-- Classes and capacities
-- Class bookings
-- Waiting lists
-- Visit/attendance records
+> Every student who has passed all exams graduates.
 
-### Membership logic
-A joining payment activates a membership from the current date for the plan duration, and a membership card is printed.
+Formal pattern:
 
-Renewal extends validity by the plan duration. Upgrading calculates the fee difference automatically.
+```text
+∀ s ∈ Students • PassedAll(s) ⇒ Graduates(s)
+```
 
-### Class logic
-The system checks:
+The core pattern is:
 
-- whether the class is full,
-- whether the member’s plan includes group classes.
+```text
+∀ object ∈ domain • condition ⇒ conclusion
+```
 
-On cancellation, the first waiting-list person is offered the released place when a waiting list exists.
+### Software example from the source
 
-### Entry logic
-Each visit begins with a card scan. The system checks active membership before allowing entry and logs the visit.
+English:
 
-### Reports
-- monthly attendance trends,
-- memberships expiring within the next two weeks.
+> Every request that fails authentication is rejected.
 
-### Level-2 candidate
-`Book / Cancel Class` is an excellent choice because capacity, eligibility, booking, cancellation, and waiting-list promotion all relate to the same underlying responsibility.
+Formal form:
+
+```text
+∀ r ∈ Requests • ¬Authenticated(r) ⇒ Rejected(r)
+```
+
+### Practical translation algorithm
+
+When solving an exam question:
+
+1. circle the domain noun (`students`, `requests`, `products`);
+2. find quantifier words (`every`, `some`, `at least one`);
+3. underline conditions;
+4. identify the conclusion;
+5. determine whether conditions are joined by AND or OR;
+6. assemble the formula.
+
+This is much safer than trying to translate the entire sentence at once.
 
 ---
 
-# Part VIII — Cross-Topic Connections: Requirements → DFD → Design → Code
+## 135. The subtle difference between implication and “if and only if”
+
+The source includes both `⇒` and `⇔`, and this distinction is often tested.
+
+### Implication
+
+```text
+A ⇒ B
+```
+
+means: whenever A is true, B must be true.
+
+It does **not** by itself say that B guarantees A.
+
+### Biconditional
+
+```text
+A ⇔ B
+```
+
+means both directions:
+
+```text
+A ⇒ B
+B ⇒ A
+```
+
+The source example:
+
+```text
+OutOfStock(p) ⇔ Quantity(p) = 0
+```
+
+is stronger than merely saying “if quantity is zero, the product is out of stock.” It states an equivalence.
+
+### Exam trap
+
+If the English says “if and only if,” do not translate it as a one-way implication.
+
+---
+
+
+---
+
+
+# ==============================================================================
+# Module 5: Software Design (Modularity & FOD vs OOD)
+# ==============================================================================
+
+# Module 5: Software Design — Modularity, Cohesion, Coupling & FOD vs. OOD
+
+![Module 5: Software Design — Modularity, Cohesion/Coupling & FOD vs OOD](/images/fod_vs_ood_design.jpg)
+
+---
+
+# Part I — Introduction to Software Design
+
+## 1. What is the Software Design Phase?
+The design phase is the critical engineering bridge that transforms a validated **Software Requirements Specification (SRS)** into a technical representation that is readily implementable in a chosen programming language.
+
+```text
+┌─────────────────┐       ┌──────────────────────┐       ┌──────────────────────┐
+│  Validated SRS  │ ====> │ Software Design      │ ====> │ Implementable Code   │
+│  (What to do)   │       │ (How to structure)   │       │ (Working Modules)    │
+└─────────────────┘       └──────────────────────┘       └──────────────────────┘
+```
+
+The design process decides:
+- The overall **module structure** and decomposition.
+- The **control relationships** (which module calls and governs which).
+- The **interfaces and data exchanged** between modules.
+- The **internal data structures** of each module.
+- The **algorithms** executed within each function.
+
+---
+
+## 2. High-Level Design vs. Detailed Design
+
+Examiners frequently require students to distinguish between the two distinct sub-phases of software design:
+
+```text
+Validated SRS Document
+         │
+         ▼
+┌────────────────────────────────────────────────────────┐
+│                   HIGH-LEVEL DESIGN                    │
+│ • Identify the system modules                         │
+│ • Identify control relationships among modules         │
+│ • Identify module interfaces and data exchanged        │
+│ • Output: Program Structure / Software Architecture    │
+│   (Represented via Structure Charts)                   │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│                    DETAILED DESIGN                     │
+│ • Design internal data structures for each module      │
+│ • Design algorithms for each module                    │
+│ • Output: Code-ready module specifications             │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           ▼
+                   Coding & Unit Testing
+```
+
+---
+
+## 3. What Makes a Design "Good"?
+
+Because there is no single, unique design solution for any non-trivial specification, we need rigorous objective yardsticks to distinguish a superior design from an inferior one.
+
+A good software design must be:
+1. **Correct:** Accurately implements every requirement specified in the SRS.
+2. **Understandable:** Exhibits a clear, readable structure that any qualified engineer can easily comprehend without consulting the original author.
+3. **Efficient:** Utilizes processing time, memory, network bandwidth, and storage sensibly.
+4. **Maintainable:** Amenable to safe, localized modifications as requirements evolve.
+
+### 3.1 Why Understandability Matters Most
+> **Key Insight (Rajib Mall):** Understandability is the single master property that governs nearly all other quality attributes. Since **60% or more of lifecycle effort is spent on maintenance**, a design that is difficult to understand multiplies maintenance costs exponentially. Every other quality—correctness, efficiency, and security—is vastly harder to verify in a design nobody can read.
+
+---
+
+# Part II — Modularity, Cohesion & Coupling
+
+## 4. Modularity: Divide and Conquer
+Modularity is the fundamental attribute of any engineered design. A large system is decomposed into a cleanly organized set of discrete modules—the classic **divide-and-conquer** principle.
+- If modules are nearly independent of each other, each module can be reasoned about, implemented, and tested in isolation.
+- Modules must be organized in a neat, tree-like hierarchy rather than an entangled web of cross-calls.
+
+To measure the quality of modular decomposition, software engineering relies on two central yardsticks: **Cohesion** and **Coupling**.
+
+```text
+       COHESION                               COUPLING
+(Intra-module strength)                (Inter-module dependency)
+How tightly related are elements       How dependent are two separate
+WITHIN a single module?                 modules on EACH OTHER?
+     AIM: HIGH                              AIM: LOW
+```
+
+---
+
+## 5. Cohesion: The 7 Levels (Worst to Best)
+
+**Cohesion** measures the functional strength of a single module. A highly cohesive module performs a single, well-defined, focused task.
+
+```text
+Coincidental < Logical < Temporal < Procedural < Communicational < Sequential < Functional
+[ WORST: Low Cohesion ]                                             [ BEST: High Cohesion ]
+```
+
+### Complete Classification of the 7 Cohesion Levels:
+
+| Cohesion Level | Rank | Exact Definition | Code Example |
+| :--- | :--- | :--- | :--- |
+| **Coincidental** | 1 (Worst) | Elements are grouped into the same module with no meaningful relationship whatsoever. Pure random "utility bags". | `function misc() { logError(); readFile(); openSocket(); }` |
+| **Logical** | 2 | Module performs a set of similar-category operations selected by a passed-in control flag. | `function ioHandler(flag) { if(flag == "file") readFile(); else readKeyboard(); }` |
+| **Temporal** | 3 | Elements are grouped together solely because they execute within the same window of time (e.g. system startup or shutdown). | `function startup() { initVars(); setupLogging(); openConnections(); }` |
+| **Procedural** | 4 | Elements are grouped because they execute in a specific sequential order across different algorithmic steps to accomplish a composite procedure. | `function decode(msg) { parseHeader(msg); verifyChecksum(msg); extractPayload(msg); }` |
+| **Communicational** | 5 | All elements inside the module operate on the same input data structure or produce the same output data structure. | `function useStack(s) { push(s, val); pop(s); peek(s); }` (all operate on stack `s`) |
+| **Sequential** | 6 | The output data produced by one processing element serves as the direct input to the next processing element (pipeline). | `function search(data) { const sorted = sort(data); return find(sorted); }` |
+| **Functional** | 7 (Best) | **Every single element in the module contributes directly to executing one and only one well-defined mathematical or operational task.** | `function computeOvertimePay(employee) { ... }` or `Math.sin(angle)` |
+
+### The Sentence Test for Cohesion
+A famous practical heuristic for determining the cohesion of a module:
+1. Write a single sentence describing what the module accomplishes.
+2. If the sentence is compound (contains conjunctions like **"and"** or **"or"**), the module likely has **communicational**, **logical**, or **sequential** cohesion.
+3. If the sentence uses temporal sequence words like **"first"**, **"next"**, **"after"**, or **"initialize"**, it likely has **temporal** or **procedural** cohesion.
+4. If it is a clean, single sentence without conjunctions describing one specific action, it has **functional cohesion**.
+
+---
+
+## 6. Coupling: The 5 Levels (Best to Worst)
+
+**Coupling** measures the degree of interdependence between two separate modules. High coupling means a change in one module breaks another; low coupling promotes isolation.
+
+```text
+Data Coupling < Stamp Coupling < Control Coupling < Common Coupling < Content Coupling
+[ BEST: Loose Coupling ]                                          [ WORST: Tight Coupling ]
+```
+
+### Complete Classification of the 5 Coupling Levels:
+
+| Coupling Level | Rank | Description | Code Demonstration |
+| :--- | :--- | :--- | :--- |
+| **Data Coupling** | 1 (Best) | Modules communicate exclusively by passing elementary data items (e.g., integers, booleans, floats) as formal parameters. | `function computeTax(amount: number) { return amount * 0.18; }` |
+| **Stamp Coupling** | 2 | Modules pass a composite data structure (record, struct, object), but the called module uses only a small subset of the fields. | `function ship(order: Order) { print(order.address); }` (Passing whole `Order` when only address is needed) |
+| **Control Coupling** | 3 | One module passes a control flag or signal that explicitly dictates the internal execution logic or branch choices of the other module. | `function process(isRush: boolean) { if (isRush) shipExpress(); else shipEconomy(); }` |
+| **Common Coupling** | 4 | Multiple modules share direct read/write access to the same global data area or shared variables. | `let globalInventory = 100; function buy() { globalInventory--; }` |
+| **Content Coupling** | 5 (Worst) | One module directly accesses, branches into, or modifies the internal code or private memory space of another module (e.g. `goto` into another module). | A module jumping directly into label 2 of module B: `goto ModuleB.label2;` |
+
+---
+
+## 7. Shape of the Module Hierarchy
+
+In a structure chart representing software architecture, modular structure is evaluated using four topological dimensions:
+
+```text
+                 [ Root / Main Module ]          <── Level 0
+                    /       |       \
+                   /        |        \
+                [Mod A]  [Mod B]   [Mod C]       <── Level 1
+                /     \             /
+             [Sub1]  [Sub2]      [Sub3]          <── Level 2
+```
+
+1. **Depth:** The number of levels of control in the hierarchy (e.g., Depth = 3).
+2. **Width:** The overall span of control across the widest single horizontal level of the hierarchy.
+3. **Fan-Out:** The number of modules directly controlled (called) by a given superordinate module.
+   - *Rule:* A very high fan-out ($\ge 7$) indicates that a module is doing too much coordinating work and typically lacks functional cohesion.
+4. **Fan-In:** The number of superordinate modules that directly invoke a given subordinate module.
+   - *Rule:* **High fan-in is highly desirable!** It signifies widespread code reuse (e.g., a shared logging or math routine).
+
+### Layering Rules of Modular Abstraction:
+- **Superordinate & Subordinate:** The calling module is superordinate; the called module is subordinate.
+- **Layering Principle:** A module may call only modules in the layer immediately below it.
+- **Strict Abstraction:** A lower-level utility or I/O routine must **never call upward** into a higher-level business or coordinating module.
+
+---
+
+# Part III — Two Design Philosophies: FOD vs. OOD
+
+## 8. Function-Oriented Design (FOD) vs. Object-Oriented Design (OOD)
+
+Software engineering has witnessed two primary paradigms for decomposing complex systems:
+
+```text
+                    TWO CONTRASTING DESIGN PHILOSOPHIES
+                                     │
+         ┌───────────────────────────┴───────────────────────────┐
+         ▼                                                       ▼
+FUNCTION-ORIENTED DESIGN (FOD)                          OBJECT-ORIENTED DESIGN (OOD)
+• Primary focus: FUNCTIONS / VERBS                     • Primary focus: OBJECTS / NOUNS
+• Top-down functional decomposition                     • System is a collection of real entities
+• State is CENTRALIZED in shared data structures        • State is DISTRIBUTED & ENCAPSULATED
+• Example: Structured Analysis / Structured Design      • Example: Classes, Polymorphism, Inheritance
+```
+
+### 8.1 Booch's Master Heuristic
+> **Grady Booch's Dictum:**  
+> *"Identify **verbs** if you are after procedural / function-oriented design, and **nouns** if you are after object-oriented design."*
+
+### 8.2 Comprehensive Comparison Table (Exam Favorite):
+
+| Dimension | Function-Oriented Design (FOD) | Object-Oriented Design (OOD) |
+| :--- | :--- | :--- |
+| **Fundamental Unit** | Functions / Subroutines (Verbs: `compute()`, `validate()`) | Objects / Classes (Nouns: `Customer`, `Account`) |
+| **System State Location** | **Centralized State:** Held in global or shared data structures accessible by multiple functions. | **Distributed State:** Decentralized and private inside each object instance. |
+| **Decomposition Style** | Top-down step-wise functional refinement. | Entity abstraction and domain modeling. |
+| **Data Security / Coupling** | Higher risk of Common Coupling due to shared data stores. | Encapsulation hides private fields; communication only via public messages/methods. |
+| **Change Impact** | Modifying a data structure forces changes across all functions referencing it. | Modifying an internal attribute affects only methods of that specific class. |
+| **Reuse Mechanism** | Library subroutines (procedural reuse). | Inheritance, composition, and polymorphic interfaces. |
+
+---
+
+# Part IV — Case Study: The Fire-Alarm System
+
+## 9. The Fire-Alarm System (80 Floors, 1,000 Rooms)
+
+To crystallize the architectural divergence between FOD and OOD, consider the canonical university examination case study from Dr. Rajib Mall's lectures:
+
+> **System Specification:**  
+> A large, multi-storied building (80 floors, 1,000 rooms) requires a computerized fire-alarm system. Every room is fitted with a smoke detector and a fire alarm.
+> 1. When any smoke detector detects a fire condition, the system must determine its exact location.
+> 2. The system must immediately trigger the alarms in the affected room and all neighboring rooms.
+> 3. It must flash an emergency message and location map on the 24/7 operator console.
+> 4. Once the fire is extinguished, the operator must be able to reset the system.
+
+---
+
+### 9.1 Solution A: The Function-Oriented Design (FOD) Approach
+In FOD, the system is designed around a set of centralized global arrays and procedural functions:
+
+```text
+┌────────────────────────────────────────────────────────┐
+│               CENTRALIZED GLOBAL STATE                 │
+│ • detector_status[1000] : boolean                      │
+│ • detector_locs[1000]   : integer                      │
+│ • alarm_status[1000]    : boolean                      │
+│ • alarm_locs[1000]      : integer                      │
+│ • neighbor_alarms[1000][10] : integer                  │
+└───────────────────────────┬────────────────────────────┘
+                            │ Read & Write
+       ┌────────────────────┼────────────────────┐
+       ▼                    ▼                    ▼
+interrogate_detectors()  determine_neighbor()  ring_alarm()
+get_detector_location()  report_fire_loc()     reset_alarm()
+```
+
+#### Structural Flaws of the FOD Approach:
+- **No Data Ownership:** None of the functions owns the state. All functions have direct read/write access to the raw arrays.
+- **Tight Common Coupling:** If we change `detector_locs` from a single integer room number to a structured 3D coordinate `{floor, wing, room}`, **all six functions break simultaneously**.
+- **Difficult Maintenance:** Any function can accidentally corrupt `neighbor_alarms` with zero compiler protection.
+
+---
+
+### 9.2 Solution B: The Object-Oriented Design (OOD) Approach
+In OOD, the system is modeled around the real-world nouns: `Detector` and `Alarm`. State is distributed into 1,000 independent object instances.
+
+```text
+┌─────────────────────────────────┐       ┌─────────────────────────────────┐
+│         class Detector          │       │           class Alarm           │
+├─────────────────────────────────┤       ├─────────────────────────────────┤
+│ - status : boolean              │       │ - status : boolean              │
+│ - location : LocationRecord     │       │ - location : LocationRecord     │
+│ - neighborDetectors : List      │       │                                 │
+├─────────────────────────────────┤       ├─────────────────────────────────┤
+│ + senseStatus() : boolean       │       │ + ringAlarm() : void            │
+│ + getLocation() : LocationRecord│       │ + resetAlarm() : void           │
+│ + findNeighbors() : List        │       │ + getStatus() : boolean         │
+└─────────────────────────────────┘       └─────────────────────────────────┘
+```
+
+#### Advantages of the OOD Approach:
+- **Encapsulated State:** Only `Detector` methods can read or mutate detector attributes.
+- **Localized Change Impact:** Changing `location` representation inside `Detector` does not affect `Alarm` or the operator console.
+- **Natural Mental Mapping:** Real-world entities map 1-to-1 with software objects.
+
+---
+
+## 10. The Complementary Nature of FOD and OOD
+Do FOD and OOD compete, or can they coexist?
+
+> **Key Architectural Insight:** Modern software engineering recognizes that **FOD and OOD are complementary, not mutually exclusive**:
+> 1. At the **macro architectural level**, OOD is used to identify domain entities, establish clean class boundaries, encapsulate distributed state, and minimize inter-component coupling.
+> 2. At the **micro algorithmic level** (inside each method of a class), FOD is applied to decompose complex algorithms into smaller, top-down procedural functions with high functional cohesion!
+
+---
+
+# Part V — High-Yield Mid-Term Exam Summary
+
+| Topic | Core Rules & Key Formulae | Exam Checkpoint |
+| :--- | :--- | :--- |
+| **High vs Detailed Design** | High-level produces program structure & structure charts; Detailed design produces algorithms and data structures. | 4-mark comparison. |
+| **Cohesion Ranking** | Coincidental (worst) $\to$ Logical $\to$ Temporal $\to$ Procedural $\to$ Communicational $\to$ Sequential $\to$ Functional (best). | Must write from memory! |
+| **Coupling Ranking** | Data (best/loosest) $\to$ Stamp $\to$ Control $\to$ Common $\to$ Content (worst/tightest). | High yield ordering question. |
+| **Hierarchy Metrics** | High Fan-In = Good code reuse; High Fan-Out = Warning (lacks cohesion). | Structure chart calculation. |
+| **State Comparison** | FOD = Centralized global data; OOD = Distributed encapsulated object state. | Fire-Alarm case study core point. |
+
+
+
+---
+
+
+# ==============================================================================
+# Module 6: Software Testing Fundamentals & Unit Testing
+# ==============================================================================
+
+# Module 6: Software Testing Fundamentals & Unit Testing
+
+![Module 6: Software Testing Fundamentals & Unit Testing Harness](/images/testing_unit_harness.jpg)
+
+---
+
+# Part I — Testing Fundamentals
+
+## 1. What is Software Testing?
+
+### 1.1 The Classical Philosophy of Testing
+In software engineering, testing is the process of executing a program with the deliberate intention of finding errors.
+
+> **Glenford Myers' Maxim:**  
+> *"Testing is not the process of showing that a program contains no errors. Rather, testing is the process of executing a program with the explicit intent of finding errors."*
+
+A successful test case is **not** one that runs without failure; a successful test case is one that **uncovers a previously undiscovered defect**!
+
+---
+
+## 2. Core Terminology: Error vs. Fault/Defect vs. Failure
+
+Examiners frequently test students on the precise IEEE definitions of these three interrelated terms:
+
+```text
+  HUMAN MISTAKE               SOURCE CODE FLAW              OBSERVED BEHAVIOR
+┌────────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│     ERROR      │ ========> │  FAULT / DEFECT │ ========> │     FAILURE     │
+│(Mental slip by │           │ (Static bug in  │           │(Dynamic deviation│
+│  a developer)  │           │  the codebase)  │           │ during runtime) │
+└────────────────┘           └─────────────────┘           └─────────────────┘
+```
+
+1. **Error (Human Mistake):**
+   - An incorrect decision or action taken by a software engineer, designer, or programmer during development (e.g., misunderstanding a requirement, typing `<` instead of `<=`).
+2. **Fault / Defect / Bug:**
+   - The static manifestation of an error inside the software artifact (SRS document, design model, or source code). A fault sits dormant in the code until that particular instruction path is executed.
+3. **Failure:**
+   - A dynamic runtime deviation of the program’s observed output or behavior from its expected specification.
+   - *Crucial Rule:* A fault does not necessarily result in a failure unless the faulty line of code is executed with input data that triggers the defective condition and propagates it to observable output!
+
+---
+
+## 3. Verification versus Validation (Boehm's Criterion)
+
+One of the most famous and high-frequency university exam questions is the distinction between **Verification** and **Validation**:
+
+```text
+                  VERIFICATION vs. VALIDATION
+                               │
+         ┌─────────────────────┴─────────────────────┐
+         ▼                                           ▼
+   VERIFICATION                                 VALIDATION
+ "Are we building the                         "Are we building the
+    product RIGHT?"                              RIGHT product?"
+```
+
+| Dimension | Verification | Validation |
+| :--- | :--- | :--- |
+| **Barry Boehm's Question** | *"Are we building the product right?"* | *"Are we building the right product?"* |
+| **Core Objective** | Checks whether the software conforms to the specification developed in the immediate preceding phase. | Checks whether the final software satisfies the customer's true operational needs and expectations. |
+| **Activity Nature** | **Static analysis & reviews:** Inspections, walkthroughs, desk-checking, syntax validation, formal proofs. | **Dynamic execution:** Running executable test cases against the live software with actual input data. |
+| **Execution Required?** | **No executable code needed.** Can verify requirements, architecture diagrams, and source code statically. | **Yes.** Requires executing compiled code to observe runtime behavior. |
+| **Phase Scope** | Carried out continuously at every phase boundary of the SDLC. | Carried out primarily during integration, system, and user acceptance testing. |
+
+---
+
+## 4. Testing versus Debugging
+
+Although often confused by novices, testing and debugging are two fundamentally different engineering activities:
+
+| Attribute | Testing | Debugging |
+| :--- | :--- | :--- |
+| **Primary Goal** | To discover failures and expose the existence of dormant defects. | To locate the exact line/source of the defect and correct it in code. |
+| **Starting State** | Begins with an unverified software module or build. | Begins *only* after a test case has produced a confirmed failure. |
+| **Who Performs It?** | Software Quality Assurance (QA) engineers, testers, or developers. | The software developer who coded the module. |
+| **Methodology** | Systematic, repeatable, guided by test plans, ECP, and BVA. | Heuristic, inductive/deductive reasoning, traceback, breakpoints. |
+| **Outcome** | Test execution reports listing passed and failed test cases. | Source code modifications fixing the bug without introducing regressions. |
+
+---
+
+## 5. Testing in the Small vs. Testing in the Large
+
+Software testing cannot be accomplished in one massive, chaotic step. Instead, it follows a structured bottom-up progression:
+
+```text
+               SYSTEM TESTING (Testing in the Large)
+                     ▲
+                     │
+            INTEGRATION TESTING
+                     ▲
+                     │
+               UNIT TESTING (Testing in the Small)
+```
+
+1. **Testing in the Small (Unit Testing):**
+   - Testing individual components, procedures, or modules in strict isolation.
+   - Performed immediately after coding and peer code review.
+2. **Testing in the Large (Integration & System Testing):**
+   - **Integration Testing:** Assembling individual unit-tested modules incrementally to detect interface errors, parameter mismatches, and data flow collisions.
+   - **System Testing:** Testing the fully integrated, complete software product against the original SRS document (includes Alpha, Beta, Performance, and Acceptance testing).
+
+---
+
+# Part II — Unit Testing Fundamentals
+
+## 6. What is Unit Testing?
+
+> **Unit Testing (Module Testing):** The testing of different units or modules of a system in **complete isolation** from one another.
+
+### 6.1 Why Isolate Modules During Unit Testing?
+If we attempt to test multiple modules simultaneously without unit testing them first, isolating the root cause of any failure becomes a combinatorial nightmare. When an isolated module fails, we know with 100% certainty that the bug lies inside that specific module!
+
+---
+
+## 7. The Unit Test Environment: Drivers and Stubs
+
+A single module under test (MUT) almost never exists in a vacuum. It interacts with the rest of the application:
+1. It calls other subordinate procedures.
+2. It accesses global or nonlocal data structures.
+3. It expects to be called with specific parameters by superordinate routines.
+
+When a module is ready for unit testing, the modules that call it and the modules it calls are usually **not yet coded or tested**. Therefore, special scaffolding programs must be built:
+
+```text
+                    ┌─────────────────────────┐
+                    │      DRIVER MODULE      │  <── Simulates superordinate caller
+                    │ (Generates test inputs) │      (passes parameters, logs output)
+                    └────────────┬────────────┘
+                                 │ Calls
+                                 ▼
+                    ┌─────────────────────────┐
+                    │    MODULE UNDER TEST    │
+                    │         (MUT)           │
+                    └────────────┬────────────┘
+                                 │ Calls
+                                 ▼
+                    ┌─────────────────────────┐
+                    │       STUB MODULE       │  <── Simulates subordinate callee
+                    │ (Dummy return / lookup) │      (returns hardcoded sample data)
+                    └─────────────────────────┘
+```
+
+---
+
+### 7.1 Driver Modules
+- **Definition:** A **Driver** is a dummy main program or harness written specifically to test a module.
+- **Responsibilities:**
+  1. Initializes global data structures or variables required by the MUT.
+  2. Invokes the module under test, passing carefully designed test case parameters.
+  3. Captures the return values or side-effects and prints/validates them against expected outputs.
+
+#### Example Driver (in TypeScript):
+```typescript
+// Driver for computeTaxRate(salary, age)
+function runTaxDriver() {
+  const testCases = [
+    { salary: 250000, age: 30, expected: 0.05 },
+    { salary: 600000, age: 65, expected: 0.10 },
+  ];
+  
+  for (const tc of testCases) {
+    const actual = computeTaxRate(tc.salary, tc.age);
+    console.assert(actual === tc.expected, `FAILED for salary ${tc.salary}: got ${actual}`);
+  }
+}
+```
+
+---
+
+### 7.2 Stub Modules
+- **Definition:** A **Stub** is a dummy procedure that has the identical interface (parameters and return type) as a subordinate procedure called by the MUT, but contains a highly simplified implementation.
+- **Responsibilities:**
+  - Prevents compilation/runtime linking errors when subordinate modules are missing.
+  - Returns hardcoded values, simple table lookups, or dummy acknowledgments so the MUT can continue executing.
+
+#### Example Stub (in TypeScript):
+```typescript
+// Real database module is not ready yet; Stub returns mock credit score
+function stubFetchCreditScore(customerId: string): number {
+  // Simple table lookup stub
+  if (customerId === "CUST-999") return 780;
+  return 650; // Default simulated score
+}
+```
+
+---
+
+### 7.3 Comparison: Driver vs. Stub
+
+| Feature | Driver Module | Stub Module |
+| :--- | :--- | :--- |
+| **Simulates** | Superordinate (Calling) module. | Subordinate (Called) module. |
+| **Control Flow** | **Calls** the module under test. | **Is called by** the module under test. |
+| **Direction** | Sits **above** the MUT. | Sits **below** the MUT. |
+| **Functionality** | Passes test inputs, invokes MUT, verifies outputs. | Receives calls from MUT, returns dummy data/acknowledgment. |
+| **Complexity** | Usually contains test harnesses and assertions. | Minimal, often a simple hardcoded return or lookup table. |
+
+---
+
+## 8. Basic Black-Box Test Case Design
+
+How do we choose input values to unit test a module effectively without testing all infinite combinations?
+
+### 8.1 Equivalence Class Partitioning (ECP)
+The input domain is partitioned into a finite number of **equivalence classes** such that testing any single representative value from a class is assumed to yield the same program behavior as any other value in that class:
+- **Valid Equivalence Classes:** Inputs that represent valid, legitimate values expected by the specification.
+- **Invalid Equivalence Classes:** Inputs that represent illegal, boundary-violating, or error states.
+
+### 8.2 Boundary Value Analysis (BVA)
+Extensive programming experience shows that **most defects congregate at the boundaries of input ranges** (e.g., off-by-one errors like `<` instead of `<=`).
+- For an input variable restricted to the range $[a, b]$, BVA prescribes generating test cases at:
+  $$\{ a, \; a+1, \; \text{nominal}, \; b-1, \; b \}$$
+  along with invalid boundary points $\{ a-1, \; b+1 \}$.
+
+---
+
+# Part III — High-Yield Mid-Term Summary
+
+| Concept | Key Definition / Takeaway | Exam Anchor |
+| :--- | :--- | :--- |
+| **Testing Objective** | Finding defects, not proving correctness (Myers). | 2-mark definition. |
+| **Error vs Fault vs Failure** | Error (human mistake) $\to$ Fault (bug in code) $\to$ Failure (incorrect output at runtime). | 5-mark distinction question. |
+| **Verification vs Validation** | Verification = Building product right (specs/static); Validation = Building right product (needs/dynamic). | Boehm's quote must be cited! |
+| **Testing vs Debugging** | Testing reveals failures; Debugging locates and fixes faults. | Comparative table. |
+| **Driver** | Dummy calling program above MUT (passes inputs, checks outputs). | Diagram & definition. |
+| **Stub** | Dummy called routine below MUT (returns simplified/mock response). | Diagram & definition. |
+| **Black Box Techniques** | Equivalence Class Partitioning (ECP) + Boundary Value Analysis (BVA). | Test case generation question. |
+
+
+---
+
+
+# ==============================================================================
+# Module 7: Mid-Term Exam Mastery & Examiner Solution Bank
+# ==============================================================================
+
+# Module 7: Exam Mastery, Examiner Answer Bank & Revision Sheets
+
+---
+
+# Part VIII — Cross-Topic Connections: Requirements → Architectural Design → Implementation → Testing
 
 ## 91. The course is one continuous chain
 
-Although the PDFs are separated into lectures, they form a single engineering story.
+Although the syllabus modules are presented separately, they form a single unified engineering pipeline:
 
 ```text
 Problem / user need
         ↓
 Requirements gathering & analysis
         ↓
-SRS
+SRS (Functional, Non-Functional, Constraints)
         ↓
-Structured analysis / functional understanding
-        ↓
-Design
+Architectural Design (Modularity, Coupling, Cohesion)
    ┌────┴────┐
    ↓         ↓
 FOD       OOD perspectives
    ↓         ↓
-Module hierarchy / objects
+Module hierarchy / Objects & interfaces
         ↓
 Detailed data structures + algorithms
         ↓
 Coding
         ↓
-Unit testing
+Unit testing (Drivers & Stubs, Verification vs Validation)
         ↓
 Integration + system testing
         ↓
-Maintenance
+Maintenance (Maintainability & Portability)
 ```
 
-The life-cycle lecture gives the overall process. The requirements lecture explains how to define the “WHAT.” The DFD exercises show one traditional analysis technique. The design lecture explains how to turn the understood system into modules. The introductory lecture explains why all this discipline is necessary as software size and organizational complexity increase.
+The life-cycle lecture gives the overall process. The requirements lecture explains how to define the “WHAT.” The design lecture explains how to turn the understood system into modules or autonomous objects. The introductory lecture explains why all this discipline is necessary as software size and organizational complexity increase.
 
 ---
 
-## 92. SRS versus DFD versus design
+## 92. SRS versus Design Specification
 
 ### SRS
-Describes required external behavior and constraints.
+Describes required external behavior, constraints, and acceptance criteria from a black-box perspective.
 
-### DFD
-Within the traditional structured-analysis approach, describes functions/processes and data moving among processes and data stores. It does not specify implementation-level algorithms.
-
-### High-level design
-Maps understood functions onto modules and defines relationships and interfaces.
+### High-level architectural design
+Decomposes the system into modules/objects and defines relationships, message invocation protocols, and interfaces.
 
 ### Detailed design
-Defines module-level data structures and algorithms.
+Defines internal module data structures and procedural algorithms.
 
 A useful “do not mix levels” table:
 
 | Question | Artifact |
 |---|---|
 | What must the system do? | SRS |
-| Which functions and data flows exist? | Structured analysis / DFD |
-| Which modules should exist and how are they connected? | High-level design / structure chart |
-| How does one module calculate its result? | Detailed design |
-| Is the code correct? | Testing |
+| How are responsibilities organized into modules? | High-level design / structure chart |
+| How does one module calculate its result internally? | Detailed design |
+| Is the code built right and building the right product? | Unit testing & Validation |
 
 ---
 
@@ -2538,43 +3542,44 @@ The two stages therefore solve different problems:
 
 ---
 
-## 94. DFD and function-oriented design fit together
+## 94. Function-Oriented Design (FOD) versus Object-Oriented Design (OOD)
 
-The lifecycle lecture says structured analysis identifies functions and data flow using DFDs. The same lecture then says structured design decomposes the software into modules and defines invocation relationships.
-
-The Software Design lecture continues this traditional path through functional decomposition:
+The Software Design lecture contrasts two major paradigms for organizing system architecture:
 
 ```text
 Requirement understanding
         ↓
-Functions + data flow (DFD)
-        ↓
-Functional decomposition
-        ↓
-Module hierarchy / structure chart
-        ↓
-Detailed module design
+   ┌────┴──────────────────────────┐
+   ↓                               ↓
+Function-Oriented Design        Object-Oriented Design
+(Top-down functional            (Autonomous objects
+ decomposition, centralized       encapsulating state + methods,
+ state, actions primary)          distributed state, objects primary)
+   ↓                               ↓
+Structure Chart                 Class & Component Architecture
 ```
 
-This is why the Trading-House DFD exercise belongs next to the design lecture rather than being an isolated diagramming topic.
+Grady Booch’s dictum succinctly contrasts them:
+- **Function-Oriented Design**: Software is organized primarily around subroutines/functions that operate on shared data structures. Data is secondary to the functional breakdown. System state is often centralized in common tables or global stores.
+- **Object-Oriented Design**: Software is organized around autonomous entities (objects) that encapsulate both state (attributes) and operations (methods). Functions are bound directly to the data they operate upon.
 
 ---
 
 ## 95. Cohesion and coupling as design consequences
 
-When DFD functions are mapped into modules, the mapping is not arbitrary.
+When functional requirements are mapped into modules, the mapping is not arbitrary.
 
 A good mapping aims for:
 
 - high cohesion within a module,
 - low coupling between modules,
 - sensible hierarchy,
-- reasonable fan-in/fan-out,
+- reasonable fan-in/fan-out (moderate fan-out $\le 7$, high fan-in for reuse),
 - proper layering and abstraction.
 
-Imagine a DFD process named `Generate Invoice`. If the designer bundles invoice formatting, socket management, employee login, unrelated error handling, and inventory scanning into one module, the module may become low-cohesion. If `Generate Invoice` reaches directly into internal variables owned by five other modules, coupling becomes tight.
+Imagine a requirement for `Process Order`. If the designer bundles invoice formatting, socket management, employee login, unrelated error handling, and inventory scanning into one monolithic module, the module suffers from low coincidental or logical cohesion. If `Process Order` reaches directly into internal private variables owned by five other modules, content coupling ruins maintainability.
 
-The analysis artifact gives a functional vocabulary; the design stage determines whether that vocabulary becomes a healthy module structure.
+The requirements artifact gives the functional needs; the design stage determines whether that vocabulary becomes a healthy, maintainable modular structure.
 
 ---
 
@@ -3469,7 +4474,7 @@ Identify all the functions to be performed, and the data flow among
 them  
 Recursively decompose each function into sub-functions, and  
 identify data flow among the sub-functions too  
-Carried out using Data Flow Diagrams (DFDs)  
+Carried out by functional decomposition and architectural modeling  
 Life Cycle Models 19  
 DESIGN · TRADITIONAL APPROACH  
 Structured Design  
@@ -3483,8 +4488,6 @@ Life Cycle Models 20
 ### Deep explanation
 
 This page belongs to the life-cycle/process-model thread. Read it as a question of **how software-development activities are organized**, not as a different set of fundamental activities. Compare the page against the six-stage baseline—feasibility, requirements, design, coding, testing, maintenance—and ask what this model changes about sequencing, feedback, releases, or risk. The most important exam move is to connect the model to the project characteristic highlighted on the page: stability, uncertainty, need for feedback, natural increments, or technical risk.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
 
 \newpage
 
@@ -6561,582 +7564,89 @@ This page belongs to the requirements/specification thread. The central discipli
 
 \newpage
 
-## Study Page 097 — Trading-House Problem Statement — PDF page 1
+## Study Page 097 — Software Quality: Maintainability & Portability
 
-**Source file:** `DFD_problem_statement.txt`  
-**PDF page:** 1
+**Syllabus Topic:** Module 3 / Intro Chapter Quality Factors  
+**Focus:** Maintainability Economics, 40:60 Ratio, and Portability Interfaces
 
-### Page focus
+### Key Concepts
 
-**Trading-House Automation System — A structured-analysis practice problem — read the requirement below,**
+#### 1. Software Maintainability
+- **Definition:** The ease with which a software system can be modified after delivery to correct faults, improve performance, or adapt to a changing environment.
+- **The 40:60 Rule of Software Economics:**
+  Empirical studies (Boehm, Lientz & Swanson, Rajib Mall) demonstrate that **at least 60% of total lifetime software effort/cost is spent on Maintenance**, while only **40% (or less)** is spent on initial Development.
+  $$\text{Maintenance Effort} \ge 60\% \quad \text{vs.} \quad \text{Development Effort} \le 40\%$$
+- **Three Core Pillars of Maintainability:**
+  1. **Understandability:** How easily a new engineer can read and comprehend the purpose, design, and code of a module.
+  2. **Modifiability:** How easily changes can be made without causing unexpected side-effects (ripple effects) in other modules. Strongly promoted by High Cohesion and Low Coupling.
+  3. **Testability:** How easily modified modules can be unit tested and regression tested to verify correctness.
 
-### Captured source points
+#### 2. Software Portability
+- **Definition:** The ease with which software can be transferred from one hardware platform or operating system environment to another without extensive rewrites.
+- **Portability Interface / Hardware Abstraction Layer (HAL):**
+  Isolates machine-dependent logic (device registers, interrupt handlers, OS system calls) into a strictly segregated, thin interface layer. The remaining 90%+ of application logic remains 100% portable across platforms.
 
-SOFTWARE ENGINEERING · IN-CLASS EXERCISE  
-Trading-House Automation System  
-A structured-analysis practice problem — read the requirement below,  
-then draw the DFDs yourself, before we work through the solution together.  
-Swarup Roy · Tezpur University · Problem courtesy Dr. Rajib Mall  
-The Requirement  
-A large trading house wants software to automate the book-keeping activities of its business. It has many  
-regular customers, who place orders for various kinds of commodities. The trading house maintains the name  
-and address of every regular customer, and each is assigned a unique customer identification number (CIN).  
-As per current practice, when a customer places an order, the accounts department first checks the customer’s  
-credit-worthiness, determined by analyzing the history of the customer’s payments against past bills. If a cus-  
-tomer is not credit-worthy, the order is not processed any further, and an appropriate order-rejection message  
-is generated for the customer.  
-If the customer is credit-worthy, the ordered items are checked against the list of items the trading house deals  
-with. Items the trading house does not deal with are dropped, and a message is generated for the customer  
-about those items. The remaining items are checked for availability in the inventory. If an item is available in  
-the desired quantity, a bill (with the customer’s forwarding address) and a material issue slip are printed. The  
-customer presents the material issue slip at the store house to take delivery, and the inventory is adjusted to  
-reflect the sale.  
-If an ordered item is not available in sufficient quantity, it is recorded in a “pending-order” file, along with  
-the quantity ordered and the customer’s identification number. The purchase department periodically issues  
-a command to generate indents. On this command, the system examines the pending-order file, determines  
-which orders are pending and the total quantity required for each item, finds the vendors who supply those  
-items from a file of vendor details, and prints indents addressed to the purchase department for those vendors.  
-The system should also answer managerial queries. Given a time period, it should report the statistics of  
-different items sold over that period — for each item, the quantity sold and the price realized.  
-A FEW DFD REMINDERS  
-- The context diagram represents the whole system as a single bubble — every external entity appears
-there, and nowhere else.  
-- Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
-- A DFD carries no control information — no order of execution, no conditions, just data in motion.
-- Every function named in the requirement should show up as a bubble somewhere — and nothing
-beyond the requirement should be invented.  
-YOUR TASK  
-Using only the requirement above, work through structured analysis for the Trading-House Automation  
-System.  
-1. List the external entities the system talks to, the functions it must perform, and the reports or  
-documents it must produce.  
-2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity  
-and every flow crossing its boundary.  
-3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores  
-they read from or write to.  
-4. Pick one level 1 bubble that still hides real complexity, and decompose it one level further, into a  
-level 2 DFD.  
-Once you’ve sketched your own version, we’ll work through a complete step-by-step solution — from identifying entities and  
-functions, to a full level 0 → 1 → 2 DFD.  
-TAS · DFD Practice Problem 1  
+---
 
-### Deep explanation
+## Study Page 098 — Software Testing Fundamentals (Introductory Chapter Scope)
 
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
+**Syllabus Topic:** Module 6 / Intro Chapter Testing  
+**Focus:** Error vs Fault vs Failure, Verification vs Validation, Test Harnesses
 
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
+### Key Concepts
 
-\newpage
+#### 1. The Error → Fault → Failure Causal Chain
+1. **Error (Human Mistake):** A cognitive human misstep made by a developer, analyst, or architect during requirement analysis, design, or coding (e.g., off-by-one index mistake, misunderstanding tax slab).
+2. **Fault / Defect (Static Bug):** The static representation of the error embedded within software documentation or source code (e.g., `if (i <= n)` instead of `if (i < n)`).
+3. **Failure (Dynamic Breakdown):** An observable runtime deviation of the system’s execution from its externally specified behavior.
+   $$\text{Error (Human Mind)} \longrightarrow \text{Fault (Static Code/Doc)} \longrightarrow \text{Failure (Runtime Execution)}$$
+> **Crucial Rule:** A fault in code does NOT become a failure unless that specific code path is dynamically executed under data inputs that trigger the erroneous state!
 
-## Study Page 098 — Trading-House Worked DFD Solution — PDF page 1
+#### 2. Verification versus Validation (Barry Boehm’s Distinction)
+- **Verification:** *"Are we building the product right?"*
+  Static and objective checking of development artifacts against phase input specifications (syntax checks, code reviews, design walkthroughs, formal logic proofs).
+- **Validation:** *"Are we building the right product?"*
+  Dynamic evaluation of the executable software against real customer operational needs and operational expectations.
 
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 1
+#### 3. Unit Testing Scaffolding: Test Drivers vs Test Stubs
+When a single module is tested in isolation during Unit Testing:
+- **Test Driver:** A dummy calling program that sets up input parameters, invokes the module under test, and inspects the return values.
+- **Test Stub:** A dummy called subroutine that simulates subordinate routines invoked by the module under test, returning canned, pre-programmed responses.
 
-### Page focus
+---
 
-**From Problem Statement to DFD — A complete, step-by-step structured analysis of the Trading-House Automation System —**
+## Study Page 099 — Function-Oriented Design vs Object-Oriented Design
 
-### Captured source points
+**Syllabus Topic:** Module 5 / Software Design  
+**Focus:** Booch Dictum, Centralized vs Distributed State, Fire-Alarm Case Study
 
-SOFTWARE ENGINEERING · WORKED SOLUTION  
-From Problem Statement to DFD  
-A complete, step-by-step structured analysis of the Trading-House Automation System —  
-entities, functions and reports first, then the DFD itself, level 0 through level 2.  
-Swarup Roy · Tezpur University · Problem courtesy Dr. Rajib Mall  
-Step 1 · Entities, Functions & Reports  
-Before drawing a single bubble, mine the requirement for its nouns and verbs. Every “who” outside the  
-system’s control is a candidate external entity; every verb describing something the system does is a candidate  
-function; every document or message handed back out is a candidate report; and every noun the system must  
-remember between requests is a candidate data store.  
-Who sits outside the system?  
-Three parties exchange data with TAS — nothing else in the requirement acts on the system from outside it.  
-External entity Sends the system Receives from the system  
-Customer order bill / material-issue-slip / reject-  
-message  
-Purchase Department Generate-indent (command) indents  
-Manager query statistics  
-Vendors are never contacted directly by TAS — indents are printed and handed to the purchase department, so the vendor list stays  
-an internal file, not an entity.  
-What must the system do?  
-Four verbs cover the whole requirement — these four become the level 1 bubbles.  
-# Function Triggered by What it does  
-0.1 Accept-order Customer places an Look up the customer, check  
-order credit-worthiness, accept or reject the  
-order  
-0.2 Process-order An order is accepted Validate the items, check stock, bill and  
-issue what’s available, log the rest as  
-pending  
-0.3 Handle-query Manager asks a Look up sales statistics for the requested  
-question period  
-0.4 Handle-indent- Purchase dept. Tally pending orders, find vendors, print  
-request requests indents indents  
-What comes out — and what gets remembered  
-Report / output Produced by Goes to  
-reject-message Accept-order Customer  
-bill + material-issue-slip Process-order Customer  
-indents Handle-indent-request Purchase Dept.  
-statistics Handle-query Manager  
-Data stores identified: Customer-file, Customer-history, Item-file, Inventory, Accepted-orders, Pending-order, Vendor-list,  
-Sales-statistics.  
-TAS · Step-by-Step DFD Tutorial 1  
+### Key Concepts
 
-### Deep explanation
+#### 1. Grady Booch’s Dictum
+- **Function-Oriented Design (FOD):** Software is organized around subroutines/functions that perform actions on data. Data is secondary to functional decomposition.
+- **Object-Oriented Design (OOD):** Software is organized around autonomous entities (objects) that encapsulate both state (data) and operations (methods).
 
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
+#### 2. Fire-Alarm Case Study: Extensibility Comparison
+- **Scenario:** An existing fire alarm system polls temperature sensors and sounds an alarm when high heat is detected. The client requests adding **Smoke Detectors**.
+- **Under FOD:**
+  - Logic is partitioned by function: `InterrogateSensors()`, `CheckThresholds()`, `SoundAlarm()`.
+  - Adding a smoke sensor forces the developer to modify and recompile *every single one* of these centralized functions. High risk of ripple effects!
+- **Under OOD:**
+  - Logic is partitioned by autonomous device abstractions: `Sensor` base class with subclasses `HeatSensor` and `SmokeSensor`.
+  - Adding `SmokeSensor` requires creating a new subclass conforming to the `Sensor` interface. Zero modifications to existing classes or alarm dispatch logic!
 
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 099 — Trading-House Worked DFD Solution — PDF page 2
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 2
-
-### Page focus
-
-**Step 2 · The Context Diagram (Level 0) — The whole system, as a single bubble, with every entity attached.**
-
-### Captured source points
-
-Step 2 · The Context Diagram (Level 0)  
-The whole system, as a single bubble, with every entity attached.  
-Purchase  
-Department  
-indents Generate-indent  
-order query  
-Trading-House-  
-Automation-  
-Customer Manager  
-System  
-response statistics  
-“response” stands for whichever of bill + material-issue-slip or reject-message applies to that order — the context diagram  
-doesn’t distinguish them yet.  
-Step 3 · The Level 1 DFD, Bubble by Bubble  
-Decompose the context bubble into its four functions — one at a time.  
-Bubble 1: Accept-order 0.1  
-Every order starts here: look the customer up, decide if they’re credit-worthy, and either pass the order on or  
-reject it.  
-Customer-  
-file  
-customer record  
-order  
-Accept-  
-Customer order TO PROCESS-ORDER 0.2 →  
-0.1  
-reject-message  
-payment history  
-Customer-  
-history  
-Not credit-worthy, or the CIN doesn’t check out? The order stops here — a reject-message goes straight back to the customer.  
-Bubble 2: Process-order 0.2  
-For every accepted order: check the items are real, check the stock, then bill what’s available and backorder  
-the rest.  
-Item-file Inventory  
-item validity stock qty  
-accepted-order Process- bill + issue slip  
-FROM 0.1 order Customer  
-0.2  
-log entry backorder  
-Accepted- Pending-  
-orders order  
-Items the trading house doesn’t stock, or can’t supply in full, never reach the customer as a bill — they’re logged to pending-order  
-instead.  
-TAS · Step-by-Step DFD Tutorial 2  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 100 — Trading-House Worked DFD Solution — PDF page 3
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 3
-
-### Page focus
-
-**Bubble 3: Handle-query 0.3 — The simplest of the four — a manager asks, the system looks up the answer.**
-
-### Captured source points
-
-Bubble 3: Handle-query 0.3  
-The simplest of the four — a manager asks, the system looks up the answer.  
-query  
-Handle- item, qty & price  
-Manager Sales-  
-query  
-statistics  
-0.3  
-statistics  
-Sales-statistics is written to every time Process-order completes a sale — Handle-query only ever reads it.  
-Bubble 4: Handle-indent-request 0.4  
-On command from the purchase department, turn everything that’s still pending into indents.  
-Purchase  
-Department Generate-indent Pending-  
-order  
-pending items  
-Handle-  
-indents  
-indent-  
-request 0.4  
-vendor address  
-Vendor-  
-list  
-Pending-order is shared with Process-order 0.2 — one bubble writes backorders into it, this one reads them back out.  
-Putting it together  
-The same four bubbles and eight stores, assembled into one diagram — this is the level 1 DFD in full. Flow  
-names are dropped here for clarity; see the bubble-by-bubble figures above for those.  
-Customer- Purchase Sales-  
-Item-file Dept.  
-file statistics  
-Customer  
-Accept- Process- Handle- Handle-  
-order order indent-req query  
-0.1 0.2 0.4 0.3  
-Customer  
-Customer- Pending- Vendor-  
-Inventory Manager  
-history order list  
-Accepted-orders (a simple write-only log from Process-order) is left off this recap for clarity — it was shown on the Process-order  
-figure above.  
-Step 4 · Going One Level Deeper  
-Pick the bubble that still hides the most decisions, and decompose it.  
-Why decompose Process-order 0.2?  
-- Of the four level 1 bubbles, Process-order 0.2 still hides the most: it validates items, checks stock, and
-branches into two very different outcomes.  
-- That’s exactly the kind of bubble the guidelines warn about — its label alone doesn’t tell you everything it
-does.  
-- Accept-order, Handle-query and Handle-indent-request are each already close to a single, well-defined step
-— decomposing them further would add little.  
-- So Process-order 0.2 is the one we refine into a level 2 DFD.
-TAS · Step-by-Step DFD Tutorial 3  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 101 — Trading-House Worked DFD Solution — PDF page 4
-
-**Source file:** `DFD_solution_tutorial.txt`  
-**PDF page:** 4
-
-### Page focus
-
-**Decomposing Process-order 0.2 — Item-file Inventory**
-
-### Captured source points
-
-Decomposing Process-order 0.2  
-Item-file Inventory  
-Generate- bill + issue slip  
-documents Customer  
-0.2.3  
-available-items  
-item master stock qty  
-accepted-order Validate- valid-items Check- decrement  
-FROM 0.1 items availability sold-items  
-0.2.1 0.2.2  
-Accepted-  
-short-items orders  
-log entry  
-reject-message  
-Update-  
-records  
-0.2.4  
-Customer backorder  
-Pending-  
-order  
-This is exactly the fan-out / fan-in shape decomposition usually takes: one input splits two ways, and both paths report back  
-to a single bubble that updates the stores.  
-Step 5 · Checking the Work  
-A finished DFD should pass the same guidelines it was built from.  
-What makes this a good DFD  
-- The context diagram is a single bubble, with all three external entities — Customer, Purchase Department,
-Manager — attached to it, and nowhere else.  
-- Level 1 has exactly 4 bubbles — comfortably inside the 3-to-7 rule — and only one of them was decomposed
-further.  
-- No arrow anywhere shows order-of-execution or a condition — every flow is a named piece of data in
-motion.  
-- Every function named in the requirement shows up as a bubble, and nothing beyond the requirement was
-invented.  
-Entities, functions and reports first — then a context diagram, a level 1 DFD built bubble by bubble, and one level 2  
-decomposition where it actually mattered.  
-TAS · Step-by-Step DFD Tutorial 4  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 102 — Ten DFD Practice Problems — PDF page 1
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 1
-
-### Page focus
-
-**SOFTWARE ENGINEERING · IN-CLASS EXERCISE SET — Ten DFD Practice Problems**
-
-### Captured source points
-
-SOFTWARE ENGINEERING · IN-CLASS EXERCISE SET  
-Ten DFD Practice Problems  
-Ten independent structured-analysis requirements — read each one, then draw its own context  
-diagram, level 1, and level 2 DFD, the same way we did for the Trading-House Automation  
-System.  
-Swarup Roy · Tezpur University · In the style of problems by Dr. Rajib Mall  
-How to Use This Set  
-Each of the ten problems below is a self-contained requirement, exactly like the Trading-House Automation  
-System exercise. For every problem, work through the same four steps.  
-YOUR TASK — FOR EACH PROBLEM  
-1. List the external entities the system talks to, the functions it must perform, and the reports or  
-documents it must produce.  
-2. Draw the context diagram (level 0) — the whole system as one bubble, with every external entity  
-and every flow crossing its boundary.  
-3. Decompose the context bubble into a level 1 DFD — the 3 to 7 major functions, and the data stores  
-they read from or write to.  
-4. Pick one level 1 bubble that still hides real complexity, and decompose it one level further, into a  
-level 2 DFD.  
-A FEW DFD REMINDERS  
-- The context diagram represents the whole system as a single bubble — every external entity appears
-there, and nowhere else.  
-- Each bubble should decompose into roughly 3 to 7 child bubbles — not fewer, not many more.
-- A DFD carries no control information — no order of execution, no conditions, just data in motion.
-- Every function named in a requirement should show up as a bubble somewhere — and nothing
-beyond the requirement should be invented.  
-PROBLEM 1 Community Library Automation System  
-A public library wants to automate the issue and return of books. Every member holds a library card  
-with a unique membership number, and the library maintains each member’s name, address, and the  
-maximum number of books they may borrow at once. When a member presents a book at the counter,  
-the clerk checks whether the member’s borrowing limit has already been reached and whether the  
-member has any unpaid fines; if either is true, the book is not issued and a message is printed for the  
-member. Otherwise, the book is issued, the loan is recorded against the member’s card, and a due date  
-fourteen days later is stamped on the book.  
-When a book is returned, the clerk checks the due date against today’s date. If the book is overdue,  
-a fine is calculated at a fixed rate per day and added to the member’s outstanding balance; a receipt  
-showing the fine is printed. The loan record is then closed and the book is marked available again. The  
-library also wants the system to let the clerk search the catalogue by title or author to check whether  
-a book is currently available, and to let the librarian generate a weekly list of all books still overdue,  
-addressed to the members concerned.  
-DFD Practice Set · 10 Problems 1  
-
-### Deep explanation
-
-This page belongs to the requirements/specification thread. The central discipline is **precision before implementation**. Identify the required behavior, inputs, outputs, conditions, constraints, and any missing or contradictory cases. When notation appears, focus on what each symbol contributes to precision rather than memorizing a picture. When an SRS example appears, treat its IDs, inputs, outputs, processing, and measurable constraints as a template for writing requirements that can later be designed and tested. For decision logic, identify conditions and actions. For formal logic, identify the domain, quantifier, condition, connective, and conclusion.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 103 — Ten DFD Practice Problems — PDF page 2
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 2
-
-### Page focus
-
-**PROBLEM 2 Outpatient Appointment System for a Clinic — A multi-doctor clinic wants to computerize the booking of outpatient appointments. A patient calls the**
-
-### Captured source points
-
-PROBLEM 2 Outpatient Appointment System for a Clinic  
-A multi-doctor clinic wants to computerize the booking of outpatient appointments. A patient calls the  
-reception desk and requests an appointment with a particular doctor, or with any available doctor in a  
-chosen specialty, for a preferred date. The receptionist checks that doctor’s schedule for an open slot on  
-or near that date; if a slot exists, it is reserved in the patient’s name and a confirmation slip showing the  
-date, time, and doctor is printed for the patient. If no slot is available, the patient is offered the next  
-open slot or placed on a waiting list for that doctor.  
-On the day of the visit, the patient checks in at the desk; the receptionist marks the appointment as  
-arrived and pulls up the patient’s history so the doctor can review it during the consultation. After the  
-consultation, the doctor records the diagnosis and any prescribed medicines against the patient’s file,  
-and the system prints a visit summary for the patient to take away. The clinic administrator should also  
-be able to request a daily list of appointments for each doctor, and a monthly count of consultations per  
-specialty for billing purposes.  
-PROBLEM 3 Hotel Room Reservation System  
-A mid-sized hotel wants a system to manage room bookings. A guest — either by phone or at the front  
-desk — specifies the check-in and check-out dates and the type of room required. The front-desk clerk  
-checks room availability for that room type across the requested dates; if a suitable room is free, it is  
-reserved under the guest’s name and contact details, and a booking confirmation is printed. If no room  
-of that type is free for the full period, the clerk offers the nearest alternative dates or a different room  
-type.  
-When the guest arrives, the clerk checks them in against the reservation, assigns a specific room number,  
-and issues a room key along with a printed registration card. Charges for the room, and any additional  
-services the guest requests during the stay such as room service or laundry, are added to the guest’s  
-running bill. At check-out, the clerk totals the bill, accepts payment, and prints a final invoice; the room  
-is then marked as needing housekeeping before it can be booked again. The hotel manager should also  
-be able to request an occupancy report for any given date range, showing how many rooms of each type  
-were booked.  
-PROBLEM 4 Courier Parcel Tracking System  
-A courier company wants to track parcels from pickup to delivery. A customer books a pickup by giving  
-the sender and receiver addresses, the parcel’s weight, and the desired delivery speed. The booking  
-clerk calculates the shipping charge from a rate table based on weight, distance, and speed, and prints a  
-shipping label bearing a unique tracking number, which is stuck onto the parcel when the pickup agent  
-collects it.  
-As the parcel moves through the company’s network, each hub it passes through scans the tracking  
-number and logs the parcel’s current location and timestamp against its tracking record. A customer  
-can, at any time, submit a tracking number and receive back the parcel’s current status and location  
-history. When the parcel reaches its destination hub, a delivery agent attempts delivery; if the receiver  
-is unavailable, the attempt is logged and a re-delivery is scheduled for the next day, up to three attempts,  
-after which the parcel is returned to the sender. Once delivered, the receiver signs for the parcel, and a  
-proof-of-delivery record is stored and made available to the sender on request. The operations manager  
-should be able to request a report of all parcels currently overdue against their promised delivery date.  
-DFD Practice Set · 10 Problems 2  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 104 — Ten DFD Practice Problems — PDF page 3
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 3
-
-### Page focus
-
-**PROBLEM 5 University Course Registration System — A university wants to automate course registration at the start of each semester. A student logs in with**
-
-### Captured source points
-
-PROBLEM 5 University Course Registration System  
-A university wants to automate course registration at the start of each semester. A student logs in with  
-their roll number and selects the courses they wish to take for the semester. For each course, the system  
-checks that the student has completed its prerequisite courses and that the course’s seat limit has not  
-already been reached; a course failing either check is rejected, with a message telling the student why.  
-Courses that pass both checks are added to the student’s provisional timetable, and the system also  
-checks that no two selected courses clash in schedule.  
-Once the student confirms the selection, the registration is finalized, the seat count for each chosen  
-course is decremented, and a printed registration slip listing the confirmed courses is generated. The  
-finance office is separately notified of each finalized registration so that the semester fee can be billed to  
-the student’s account. A faculty member should be able to request the final class list for any course they  
-teach, once registration closes. The academic office also wants a report, generated after registration  
-closes, showing enrolment numbers for every course offered that semester, to help plan the following  
-semester’s sections.  
-PROBLEM 6 Restaurant Table and Order Management System  
-A restaurant wants to computerize how it takes and fulfils orders. When a group of customers arrives,  
-the host checks the seating chart for a free table of adequate size and assigns it, marking that table  
-occupied. The waiter then takes the order at the table, entering each dish and any special instructions  
-into the system; the order is checked against the day’s menu to confirm every item is currently available,  
-and unavailable items are flagged back to the waiter immediately.  
-Once confirmed, the order is sent to the kitchen display, split automatically into separate tickets for  
-the starters, mains, and desserts stations. As each station finishes preparing its items, it marks them  
-ready, and the waiter is notified to serve that course. When the customers are ready to leave, the waiter  
-requests the bill; the system totals the order, applies any applicable discount, and prints an itemized  
-bill. Once payment is recorded, the table is marked free again for the host to reassign. The restaurant  
-manager should be able to request a report, for any chosen day, of total sales broken down by menu  
-category.  
-PROBLEM 7 Car Rental Booking System  
-A car rental agency wants to automate vehicle bookings across its branches. A customer requests a car  
-of a particular category for pickup at one branch and return at the same or a different branch, over a  
-given date range. The booking clerk checks the fleet at the pickup branch for a car of that category free  
-over the whole period; if one is available, it is reserved against the customer’s driving-license details  
-and a booking reference is issued, along with an estimated charge based on the category’s daily rate  
-and the number of days.  
-At pickup, the clerk records the car’s odometer reading and fuel level, marks the reservation as active,  
-and hands over the keys. At return — possibly at a different branch — the receiving clerk records the  
-odometer and fuel level again, calculates any extra charges for mileage beyond the included limit or for  
-fuel shortfall, and prints a final invoice covering the rental and these extras. If the car is returned to  
-a branch other than its home branch, the system flags it for eventual repositioning. The fleet manager  
-should be able to request a report showing the current location and status — available, rented, or under  
-maintenance — of every car in the fleet.  
-DFD Practice Set · 10 Problems 3  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
-\newpage
-
-## Study Page 105 — Ten DFD Practice Problems — PDF page 4
-
-**Source file:** `dfd_practice_10.txt`  
-**PDF page:** 4
-
-### Page focus
-
-**PROBLEM 8 Utility Bill Payment System — A city electricity board wants to automate the billing and payment of household electricity connections.**
-
-### Captured source points
-
-PROBLEM 8 Utility Bill Payment System  
-A city electricity board wants to automate the billing and payment of household electricity connections.  
-Each month, a meter reader visits every connection, and enters the current meter reading against that  
-connection’s account number. The system calculates the units consumed since the previous reading,  
-applies the board’s slab-wise tariff to compute the amount due, and adds any unpaid balance carried  
-over from previous months; a bill showing the units consumed, the amount due, and the payment due  
-date is then printed and mailed to the customer.  
-A customer may pay a bill in person at a collection counter, or through an online payment gateway;  
-either way, the payment is recorded against the account and a receipt is issued. If a bill is not paid by  
-its due date, a late-payment surcharge is added to the following month’s bill, and if two consecutive  
-bills remain unpaid, the account is flagged for disconnection and a notice is sent to the customer. The  
-board’s revenue office should be able to request, for any billing month, a report of total units billed and  
-total amount collected across all connections, as well as a separate list of all currently flagged accounts.  
-PROBLEM 9 Online Bookstore Order System  
-An online bookstore wants to automate the placing and fulfilment of customer orders. A customer  
-browses the catalogue and adds books to a cart; at checkout, the system verifies that every book in  
-the cart is currently in stock in the requested quantity, and rejects items that are not, showing the  
-customer an expected restock date where one is known. For the remaining items, the customer supplies  
-a delivery address and a payment method; the system calculates the order total including shipping,  
-processes the payment, and — once payment succeeds — confirms the order and prints a packing slip  
-for the warehouse.  
-The warehouse picks and packs the ordered books against the packing slip, updates the inventory to  
-reflect the reduction in stock, and hands the package to a delivery partner, who provides a tracking  
-number that is recorded against the order and emailed to the customer. If a book later turns out to be  
-damaged or missing during picking, the warehouse flags the order as partially fulfilled, and the system  
-automatically issues a partial refund for the missing item. The store manager should be able to request  
-a report of best-selling titles over any chosen date range, and a separate report of all orders currently  
-awaiting fulfilment.  
-PROBLEM 10 Fitness Club Membership System  
-A fitness club wants to computerize how it manages memberships and class bookings. A prospective  
-member signs up at the front desk, choosing a membership plan; the staff member records the appli-  
-cant’s personal details, collects the joining payment, and activates a membership valid from that date for  
-the plan’s duration, printing a membership card. Existing members may renew before expiry, extending  
-their validity by the plan’s duration, or upgrade to a different plan, with the fee difference calculated  
-automatically.  
-The club also runs scheduled group classes, each with a maximum number of participants. A member  
-can book a spot in an upcoming class through the front desk or a kiosk; the system checks the class  
-isn’t already full and that the member’s plan includes group classes, then reserves the spot and prints a  
-confirmation. If a member cancels a booking, the freed spot is offered to the first person on that class’s  
-waiting list, if any. Each time a member enters the club, their card is scanned at the gate, which checks  
-that the membership is currently active before allowing entry and logs the visit. The club manager  
-should be able to request a report of attendance trends by month, and a separate list of all memberships  
-due to expire within the next two weeks.  
-DFD Practice Set · 10 Problems 4  
-
-### Deep explanation
-
-This page belongs to the structured-analysis/DFD thread. Extract **external entities, functions, outputs, and persistent data stores** before drawing. A context diagram compresses the system to one process and shows only external boundary flows; lower levels reveal the internal functions and stores. Keep arrows data-oriented: do not turn the process sequence or an IF statement into a control-flow arrow. The requirement itself is the boundary of the model—do not invent actors, files, or functions that the text does not support.
-
-**DFD cue:** keep process names as functions, flow names as data, stores as persistent information, and external entities outside the system boundary.
-
+---
 \newpage
 
 # Part XII — Final Integrated Revision Guide
 
 ## 105-source-page completeness check
 
-The audit above contains one entry for every PDF page in the supplied set: 8 introductory pages + 34 life-cycle pages + 33 requirements pages + 21 software-design pages + 1 Trading-House problem page + 4 Trading-House solution pages + 4 DFD-practice pages = **105 source pages**.
+The audit above contains one entry for every PDF page in the supplied set: CSMC501 Mid-Term Comprehensive Curriculum: Introduction & Software Crisis + Software Life Cycle Models + Software Quality (Maintainability & Portability) + Requirements Analysis & Specification + Software Design (FOD vs OOD) + Testing Fundamentals.
 
 ## The final mental model
 
-The entire supplied course can be remembered as a chain of increasingly precise descriptions: **problem → requirements → SRS → analysis/DFD → design → modules/objects → detailed design → code → testing → maintenance**. Life-cycle models explain how that work is organized over time; requirements engineering makes the “what” precise; structured analysis explains functions and data flows; software design turns the understood behavior into a coherent implementation structure.
+The entire supplied course can be remembered as a chain of increasingly precise descriptions: **problem → requirements → SRS → architectural design → modules/objects → detailed design → code → unit testing → maintenance**. Life-cycle models explain how that work is organized over time; requirements engineering makes the “what” precise; structured analysis explains functions and data flows; software design turns the understood behavior into a coherent implementation structure.
 
 ## Last-minute exam checklist
 
@@ -7156,9 +7666,11 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 - [ ] Can I compute/describe depth, width, fan-in, and fan-out in a structure chart?
 - [ ] Can I explain superordinate/subordinate modules, visibility, layering, and abstraction?
 - [ ] Can I contrast function-oriented and object-oriented design, especially where state lives?
-- [ ] Can I analyze a requirements paragraph into DFD external entities, functions, reports, and data stores?
-- [ ] Can I draw TAS context, level 1, and level 2 DFDs and explain why Process-order is decomposed?
-- [ ] Can I apply the same DFD method to all ten practice problems without inventing actors or behavior?
+- [ ] Can I analyze software maintainability factors, the 40:60 maintenance cost ratio, and the three pillars (understandability, modifiability, testability)?
+- [ ] Can I explain the role of a Portability Interface / Hardware Abstraction Layer in isolating platform-dependent code?
+- [ ] Can I distinguish Error, Fault/Defect, and Failure, and explain why a fault does not always trigger a runtime failure?
+- [ ] Can I contrast Verification ("Are we building the product right?") and Validation ("Are we building the right product?")?
+- [ ] Can I explain the scaffolding used in Unit Testing: Test Drivers (calling dummy) versus Test Stubs (called dummy)?
 
 ## One-minute memory anchors
 
@@ -7167,7 +7679,8 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 - **Spiral:** risk-driven.
 - **SRS:** what, not how.
 - **Good SRS:** precise, complete, consistent, traceable, verifiable.
-- **DFD:** data in motion, not control flow.
+- **Testing:** Verification = building right; Validation = building right product; Driver = dummy caller; Stub = dummy callee.
+- **Maintainability:** 40:60 ratio; understandability + modifiability + testability.
 - **Cohesion:** strength within a module.
 - **Coupling:** dependency between modules.
 - **FOD:** functions and centralized state.
@@ -7182,7 +7695,7 @@ The entire supplied course can be remembered as a chain of increasingly precise 
 
 ## 106. How to use these notes as an actual Software Engineering course
 
-The seven supplied PDFs are easier to remember when treated as one connected chain rather than as seven independent documents. The introductory lecture answers **why software engineering exists**. The life-cycle lecture answers **how development work can be organized over time**. The requirements lecture answers **what must be understood and written down before design**. The DFD exercises show one way of expressing functions and data flow during structured analysis. The design lecture then explains **how the understood functionality is organized into modules or objects**.
+The seven supplied PDFs are easier to remember when treated as one connected chain rather than as seven independent documents. The introductory lecture answers **why software engineering exists**. The life-cycle lecture answers **how development work can be organized over time**. The requirements lecture answers **what must be understood and written down before design**. The requirements lecture answers what must be understood and written down before design. The design lecture then explains **how the understood functionality is organized into cohesive modules or autonomous objects**.
 
 A very useful mental pipeline is:
 
@@ -7195,7 +7708,7 @@ Requirements gathering and analysis
       ↓
 SRS
       ↓
-Analysis models / DFDs / decision logic
+Analysis models / decision logic / formal specs
       ↓
 High-level design
       ↓
@@ -7225,7 +7738,7 @@ The important idea is that each stage reduces a different kind of uncertainty.
 
 ### Why this chain matters
 
-A common student mistake is to remember definitions separately and miss the **dependency between them**. A designer should not invent a module hierarchy without knowing what functionality is required. A tester should not invent acceptance criteria independently of the SRS. A DFD should not introduce business functions that the requirement never mentions. The discipline of software engineering is largely the discipline of preserving traceability from one stage to the next.
+A common student mistake is to remember definitions separately and miss the **dependency between them**. A designer should not invent a module hierarchy without knowing what functionality is required. A tester should not invent acceptance criteria independently of the SRS. A modular design should not introduce business functions that the requirement never mentions. The discipline of software engineering is largely the discipline of preserving traceability from one stage to the next.
 
 ### Where this is important in real projects — practical extension
 
@@ -7235,3081 +7748,9 @@ This is also why documentation is not simply “for teachers.” In a real syste
 
 ---
 
-# Deep Dive A — Software Engineering Foundations
-
-## 107. “Engineering” in software engineering: what the word really implies
-
-The introductory PDF compares software engineering with an engineering approach to construction and highlights the systematic collection of past experience: techniques, methodologies, and guidelines. The crucial word is **systematic**.
-
-An engineer is not expected to reinvent the same basic method every time a similar problem appears. Previous experience is organized so it can inform new work. The lecture also stresses that practical engineering is not purely mathematical. It combines theoretical or quantitative techniques with practical rules and trade-offs.
-
-### Engineering thinking has several recurring habits
-
-1. **Decompose the problem.** Large systems are divided into manageable parts.
-2. **Make assumptions explicit.** Hidden assumptions are a common source of defects.
-3. **Use established techniques where they fit.** There is value in proven patterns and methods.
-4. **Compare alternatives.** Engineering frequently means choosing between several imperfect options.
-5. **Consider constraints early.** Cost, time, resources, technology, and interfaces can affect what is feasible.
-6. **Record decisions.** Decisions need to remain understandable to people who were not present when they were made.
-7. **Verify the result.** Engineering work is not finished merely because something has been built.
-
-### Where is this important?
-
-It is most important when the software is:
-
-- large,
-- long-lived,
-- maintained by many people,
-- safety- or reliability-sensitive,
-- integrated with hardware or external systems,
-- expensive to change after release,
-- used by many users with competing needs.
-
-A tiny personal script might survive with informal practices. A university ERP, banking platform, medical system, airline reservation system, or embedded controller cannot safely rely on one developer remembering everything.
-
-### Why the “ad hoc approach” breaks down
-
-Suppose a programmer builds a small utility with four functions. It may be entirely manageable because the programmer can keep the whole program in working memory. Now imagine multiplying the codebase by a hundred, adding several developers, external interfaces, persistent data, user roles, security constraints, reporting requirements, and a decade of maintenance.
-
-The problem is not simply the number of lines. Larger systems create **more interactions**. A change in one component may affect several others. A requirement may have multiple interpretations. A data format may be shared across components. A small undocumented assumption can become a system-wide dependency.
-
-This explains why the introductory lecture links software engineering with **abstraction and decomposition**. Abstraction lets a person reason about a component without holding every implementation detail in mind. Decomposition limits the amount of complexity any one part must manage.
-
----
-
-## 108. Programs versus software products — a deeper distinction
-
-The introduction contrasts small, often single-user programs with software products developed by teams for many users. It is tempting to interpret the distinction as merely a matter of size, but the more useful distinction is **engineering responsibility**.
-
-### A personal program often permits shortcuts
-
-A personal program may rely on:
-
-- the author's memory,
-- implicit assumptions,
-- a minimal interface,
-- little documentation,
-- informal testing,
-- direct editing of implementation details.
-
-This can be entirely rational when the cost of failure is low and the programmer is the only consumer.
-
-### A software product has additional obligations
-
-A product normally needs to be understandable to people other than the original author. It may require:
-
-- a defined user interface,
-- configuration or deployment instructions,
-- documentation,
-- systematic testing,
-- release/version management,
-- support for changing requirements,
-- mechanisms for diagnosing faults,
-- predictable behavior under expected conditions.
-
-### Where this matters
-
-This distinction is especially important in exams because questions may ask **why software engineering is necessary** even though “programming” already existed. The strongest explanation is that the engineering problem is broader than writing instructions for a computer. It includes requirements, design, coordination, testing, quality, cost, schedule, and maintenance.
-
-### Practical extension: the “bus factor” idea
-
-A useful additional way to understand the distinction is this thought experiment: **What happens if the original programmer disappears tomorrow?** If the system can still be understood, tested, modified, and deployed by a team, it behaves like an engineered product. If nobody can safely change it without the original author, the process has accumulated excessive dependence on individual memory.
-
-This concept is not named in the supplied slides, but it is a practical reason why the lecture values documentation, systematic development, and understandable design.
-
----
-
-## 109. Hardware/software partitioning — where the concept is used
-
-The introductory lecture places software engineering inside computer systems engineering and gives examples such as a coffee vending machine and a mobile communication product. The high-level problem is deciding which work belongs in hardware and which belongs in software.
-
-### Why is the partition a design problem?
-
-The same behavior can sometimes be implemented in several ways. A sensor signal can potentially be processed by dedicated circuitry, by a programmable processor, or by a combination. The engineering decision depends on constraints such as response time, cost, flexibility, power, production volume, and the available hardware.
-
-### Why the life cycle changes
-
-When hardware is involved, the project cannot treat software as an isolated artifact. The source shows a process involving:
-
-```text
-Feasibility
-   ↓
-Requirements analysis and specification
-   ↓
-Hardware/software partitioning
-   ├──────────────┐
-   ↓              ↓
-Hardware        Software
-Development     Development
-   └──────────────┬───┘
-                  ↓
-         Integration & Testing
-```
-
-### Where used — practical extension
-
-This is especially relevant to:
-
-- embedded controllers,
-- automotive systems,
-- medical devices,
-- industrial automation,
-- appliances,
-- communication equipment,
-- robotics.
-
-The practical lesson is that “software engineering” can sit inside a larger systems-engineering problem. A software decision can depend on hardware timing, sensor characteristics, processor capability, or an external simulator.
-
----
-
-# Deep Dive B — Life Cycle Models
-
-## 110. What a life-cycle model is actually controlling
-
-The life-cycle lecture calls a life-cycle model a descriptive and diagrammatic model that identifies development activities, establishes their precedence, and divides the life cycle into phases.
-
-Students often memorize the diagrams without asking what is being controlled. A process model controls at least four things conceptually:
-
-- **sequence** — which activities are expected to happen before others,
-- **feedback** — whether later discoveries can send work back to earlier activities,
-- **release strategy** — whether users get a working system before everything is complete,
-- **risk treatment** — whether high-risk issues are explicitly attacked early.
-
-These four dimensions make the five models much easier to compare.
-
-| Model | Main organizing idea |
-|---|---|
-| Classical Waterfall | Phase sequence |
-| Iterative Waterfall | Phase sequence + feedback |
-| Prototyping | Early learning through a rough system |
-| Evolutionary | Useful releases over time |
-| Spiral | Risk reduction loop by loop |
-
-This is the deeper reason the models look different even though they contain many of the same underlying engineering activities.
-
----
-
-## 111. Classical Waterfall — when the assumptions are favorable
-
-The source defines the classical model as six sequential phases:
-
-```text
-Feasibility
-   ↓
-Requirements Analysis & Specification
-   ↓
-Design
-   ↓
-Coding & Unit Testing
-   ↓
-Integration & System Testing
-   ↓
-Maintenance
-```
-
-The defining feature is that each phase starts only after the previous phase is complete. The classical form has **no formal way back**.
-
-### Why the model can be useful
-
-Its greatest practical advantage is not that it is technologically sophisticated. Its advantage is that it is **easy to organize and manage**. Each phase has an identifiable deliverable, and project managers can ask whether the phase has been completed.
-
-It is particularly useful as a mental model for projects where:
-
-- requirements are already known,
-- the domain is well understood,
-- technology is familiar,
-- the team has experience with similar systems,
-- major change is not expected during construction.
-
-The payroll case in the source deliberately creates those conditions: established salary rules, a familiar technology stack, an experienced team, and stable requirements.
-
-### Where this matters in practice
-
-A classical or near-classical staged approach can be easier to apply when building software for an organization with a mature process and a frozen set of contractual requirements. Examples include certain regulated or contract-driven systems where extensive documentation and approval gates are required.
-
-That does not mean every regulated project literally uses textbook waterfall. Real organizations frequently combine staged approvals with iteration. The lecture's classical model is the conceptual baseline.
-
-### Why its assumptions are dangerous
-
-The source calls the model idealistic because defects can be introduced in one phase and discovered much later. A requirements error can become a design error, which becomes a coding error, which finally appears as a system-test failure.
-
-The later a defect is found, the more previously completed work may have to be revisited.
-
-### A simple propagation example
-
-Suppose the requirement says:
-
-> “The system shall calculate late fees according to the approved policy.”
-
-During requirements analysis, nobody defines the exact rule. During design, developers create one fee field. During coding, they implement a fixed percentage. During system testing, the customer discovers that the policy actually uses a graduated slab.
-
-The problem did not originate in coding. Coding merely exposed a requirement ambiguity. The project may now need changes in the requirements, design, implementation, and tests.
-
-This example explains why later models add feedback or early validation.
-
----
-
-## 112. Waterfall effort distribution — how to interpret the chart
-
-The waterfall lecture includes illustrative relative effort figures and explicitly warns that they are **illustrative proportions, not exact published percentages**. The conceptual pattern is more important than memorizing the numbers:
-
-- maintenance consumes the largest effort over the full life of the software;
-- among development phases, testing is shown as a major effort consumer.
-
-The later maintenance slide gives a development-to-maintenance ratio of approximately **40:60** as a typical relationship in the source discussion.
-
-### Where important
-
-This is highly important whenever a question asks why maintainability matters. A design decision that saves a few hours during initial coding can become expensive if the code must be modified repeatedly for years.
-
-This is also why the Software Design lecture says understandability is especially important: maintenance is not a small fraction of the system's existence.
-
-### Practical extension: total cost of ownership
-
-A useful way to think about it is:
-
-```text
-Total lifecycle cost
-= initial development
-+ testing and deployment
-+ corrective maintenance
-+ adaptive maintenance
-+ enhancement/perfective maintenance
-+ operational support
-```
-
-The supplied slides focus on lifecycle effort rather than presenting a full accounting formula. The formula above is a teaching aid that helps explain the same principle.
-
----
-
-## 113. Iterative Waterfall — the central idea is “return to the phase of origin”
-
-The iterative waterfall model keeps the six phases but adds feedback paths. The most important source statement is the **phase containment of errors** principle:
-
-> Errors should ideally be detected in the same phase in which they are introduced.
-
-A defect discovered in requirements should lead back to requirements, followed by rework of later dependent phases. A design error discovered during testing should lead back toward design, not merely be patched blindly in code.
-
-### Why this is better than “just fix the bug”
-
-Consider a design based on a false assumption. If the developer patches only the implementation, the design document and test basis may still be wrong. The next developer may reintroduce the defect because the root cause was never corrected.
-
-The feedback loop therefore has two purposes:
-
-1. correct the software;
-2. correct the **artifact where the misunderstanding originated**.
-
-### Source example: fund-transfer limit
-
-The source's banking example shows a daily fund-transfer limit discovered to be ambiguous during system testing. The team traces the ambiguity to requirements, clarifies that the limit resets at midnight, and then updates the design, code, and tests.
-
-### When useful
-
-It is useful when requirements are comparatively stable but the project team recognizes that defects can appear at any stage.
-
-### Practical extension: change impact analysis
-
-In real development, a feedback loop should not mean “start the whole project from zero.” The point is targeted rework based on dependency. A change to one requirement may affect specific designs, modules, test cases, and documentation but not unrelated areas.
-
-This is why traceability in the SRS becomes valuable later: it helps identify what needs to be reconsidered when a requirement changes.
-
----
-
-## 114. Prototyping — the prototype is a learning instrument
-
-The prototyping lecture deliberately defines a prototype as a **toy implementation** with limited functionality, low reliability, and inefficient performance. That definition is extremely important because it prevents a common misunderstanding: a prototype is not automatically the final product in miniature.
-
-### What uncertainty does a prototype attack?
-
-The source gives two especially important targets:
-
-1. **user-interface/interaction uncertainty** — what input formats, messages, reports, dialogs, or displays should look like;
-2. **technical uncertainty** — whether an important implementation idea, such as response time or algorithm efficiency, is technically workable.
-
-### A prototype can be deliberately ugly
-
-A prototype may use:
-
-- dummy data,
-- hard-coded responses,
-- lookup tables instead of real computation,
-- incomplete validation,
-- inefficient algorithms,
-- temporary interfaces.
-
-That is not necessarily bad. The point is to reduce uncertainty quickly.
-
-### Why throw the first prototype away?
-
-The source explicitly recommends being prepared to throw the first version away. This is a powerful engineering idea: **learning and production quality are different objectives**.
-
-If the prototype was built quickly to answer “What should this screen look like?”, then optimizing it into production quality may be less useful than discarding it after the question has been answered.
-
-### When prototyping is important
-
-It is particularly valuable when:
-
-- users are unsure what they want,
-- the interface is difficult to describe verbally,
-- a new interaction style is involved,
-- a technical question could invalidate the project,
-- the customer needs something tangible to react to.
-
-The hospital OPD token-display example makes this obvious. Staff discover that font size, sound level, skipped-token cues, and emergency cases matter when they see an actual screen.
-
-### Prototype danger
-
-The source lists several dangers:
-
-- customers may mistake the prototype for near-final software;
-- hurried prototype structures can leak into the final design;
-- customer feedback requires sustained availability;
-- prototyping adds cost and is unnecessary when requirements are already clear.
-
-A good exam answer should mention both the benefits **and** these specific risks.
-
----
-
-## 115. Evolutionary model — “working software” changes the release strategy
-
-The evolutionary model delivers the system in successive working releases. The source also calls it the successive-versions or incremental model.
-
-The defining property is:
-
-> **Each release is a functioning system capable of doing useful work.**
-
-That distinguishes it from a throwaway prototype.
-
-### Prototype versus evolutionary release
-
-| Prototype | Evolutionary release |
-|---|---|
-| Mainly for learning and clarification | Intended for actual use |
-| May be inefficient or incomplete | Must provide useful capability |
-| Often thrown away | Becomes part of the final product |
-| User feedback shapes requirements | User feedback shapes later releases |
-| Focuses on uncertainty | Focuses on delivering value incrementally |
-
-### Why the model works for large systems
-
-A large integrated system often contains naturally separable capabilities. The source's campus ERP example has releases for admissions/enrolment, fee payment/library, and hostel/placement.
-
-Instead of waiting for the entire system, users obtain a useful subset, gain experience with it, and influence subsequent releases.
-
-### Where useful
-
-This approach is especially useful when:
-
-- a subset of functionality can operate independently,
-- users need value before the whole system is complete,
-- requirements evolve from real-world use,
-- the system is large enough to contain natural incremental units.
-
-### Major limitation
-
-The source points out that it can be difficult to subdivide some problems into independent functional units. This is the most important condition to test before choosing an evolutionary approach.
-
-If every feature depends heavily on every other feature, incremental release boundaries become difficult.
-
----
-
-## 116. Spiral model — understand the loop, not the drawing
-
-The source's strongest conceptual statement is:
-
-> **The driving force in the spiral is risk.**
-
-A spiral loop contains four recurring activities:
-
-1. determine objectives,
-2. identify/analyze risks,
-3. develop and validate something to reduce those risks,
-4. review and plan the next loop.
-
-### What counts as “development” in spiral?
-
-A critical source clarification is that “develop & validate” does **not** necessarily mean building the complete application. In an early loop it may produce:
-
-- a feasibility study,
-- an experiment,
-- a proof of concept,
-- a technical report,
-- a prototype.
-
-Later, when the important risks have been reduced, the output can become actual software.
-
-### Why spiral is not simply evolutionary
-
-Both models can produce a growing product, but they answer different primary questions:
-
-```text
-Waterfall       → What phase comes next?
-Iterative WF    → Where should a defect be revisited?
-Prototype       → What do we need to learn quickly?
-Evolutionary    → What useful release should we deliver next?
-Spiral          → What is the biggest unresolved risk?
-```
-
-### Source example: online examination system
-
-The spiral case moves through feasibility, requirements, design, and implementation while changing the dominant concern each time:
-
-- can 5,000 students take the exam together?
-- do users agree on behavior for disconnection, autosave, and exam rules?
-- will the architecture survive peak load?
-- will the final implementation be secure and reliable?
-
-This is the ideal kind of exam example because each loop is driven by a different uncertainty.
-
-### Where important
-
-The spiral model becomes particularly relevant to:
-
-- large projects,
-- technically challenging systems,
-- projects with significant uncertainty,
-- systems where failure would be expensive,
-- projects where requirements and technical solutions evolve together.
-
-The source's drone example adds a safety-oriented illustration: identify the largest technical risk, run a focused experiment, reduce it, and then move to the next risk.
-
----
-
-## 117. Life-cycle model decision table
-
-Use this as a **recognition tool**, not as a rule that mechanically chooses a process for every project.
-
-| Situation described in a question | Model highlighted by the lectures |
-|---|---|
-| Requirements are clear and stable; familiar technology; experienced team | Classical Waterfall |
-| Requirements are stable but late defects must be fed back to their phase of origin | Iterative Waterfall |
-| Users are unclear about screens, dialogs, reports, or interaction | Prototyping |
-| Large system can be divided into useful working releases | Evolutionary |
-| Major technical/project risks dominate and must be attacked explicitly | Spiral |
-
-### How to answer a “choose the model” question properly
-
-Do not write only “Use Spiral.” Explain **which property of the problem matches which property of the model**.
-
-For example:
-
-> “The project has unresolved technical risks and must validate architecture before committing to full construction. A risk-driven iterative model is therefore appropriate; the spiral process explicitly identifies and reduces major risks in each loop.”
-
-This style demonstrates understanding rather than memorization.
-
----
-
-# Deep Dive C — Requirements Analysis
-
-## 118. Requirements analysis is fundamentally an uncertainty-removal activity
-
-The requirements lecture begins with a strong motivation: projects can waste months of implementation because the team eventually discovers that it built the wrong thing. Requirements analysis exists to catch this mismatch while it is still inexpensive to correct.
-
-The source divides requirements work into two activities:
-
-```text
-Requirements gathering & analysis
-              ↓
-Requirements specification
-              ↓
-Reviewed and approved SRS
-```
-
-### What the analyst is actually trying to discover
-
-The source explicitly lists:
-
-- what the customer says,
-- what end users actually do,
-- what existing procedures require,
-- what documentation reveals,
-- what needs to be done beyond the literal words of a request.
-
-The final point is subtle. An analyst is not simply a transcription machine.
-
-Suppose a customer says:
-
-> “We want a button to print the report.”
-
-The analyst should understand what “report” means, who can request it, which information it contains, what inputs control its scope, and what should happen when there is no matching data. The analyst asks clarifying questions because incomplete interpretation creates later defects.
-
----
-
-## 119. Existing system versus new system — why the difficulty differs
-
-When automating an existing system, analysts can observe:
-
-- input formats,
-- output formats,
-- actual procedures,
-- existing records,
-- human workarounds,
-- organizational roles.
-
-This reduces some uncertainty because there is a concrete system to study.
-
-When building something entirely new, there may be no operational system to observe. Requirements gathering then depends more heavily on:
-
-- discussion,
-- imagination,
-- domain knowledge,
-- examples,
-- prototypes,
-- careful elicitation.
-
-### Where important
-
-This distinction matters when estimating how difficult requirements work will be. A seemingly simple new system can be difficult to specify because users are being asked to describe behavior they have never previously performed through a system.
-
-It also explains why prototyping can be particularly valuable for new systems: users may discover what they actually need only after interacting with a concrete example.
-
----
-
-## 120. The two classic defects: inconsistency and incompleteness
-
-The lecture's examples deserve deep understanding because both defects are common examination questions.
-
-### Inconsistency
-
-Two requirements are inconsistent when they prescribe incompatible behavior for the same situation.
-
-The source example has one stakeholder saying that when temperature exceeds a threshold the system should turn off the heater and open a shower, while another says the system should turn off the heater and turn on a cooler at the same threshold.
-
-The important lesson is not the specific devices. It is the analysis method:
-
-1. identify the same condition;
-2. compare the prescribed actions;
-3. detect the conflict;
-4. return to the stakeholders;
-5. decide which rule is correct;
-6. record the resolved rule in the SRS.
-
-### Incompleteness
-
-A requirement set is incomplete when it leaves an important situation unspecified.
-
-The source gives a threshold example where behavior above the threshold is described, but behavior below another threshold is omitted even though the system obviously needs to define what happens there.
-
-### Why these defects are expensive
-
-A developer cannot safely implement an undefined behavior. They must either guess or ask for clarification. A guess effectively turns an undocumented assumption into an implementation decision.
-
-### Practical extension: boundary analysis during requirements review
-
-A very effective technique is to actively ask:
-
-- What happens exactly at the threshold?
-- What happens above it?
-- What happens below it?
-- What happens when the input is missing?
-- What happens when two rules could both apply?
-- What happens after repeated failure?
-- What happens when a resource is unavailable?
-
-This style of questioning is visible in the ATM and DFD examples throughout the supplied material.
-
----
-
-## 121. The four questions every analyst should be able to answer
-
-The source gives four direct questions:
-
-### 1. What is the problem?
-
-State the problem before discussing a solution.
-
-### 2. Why solve it?
-
-Understand why solving the problem is worth resources.
-
-### 3. What are the possible solutions?
-
-Explore alternatives instead of assuming the first proposed design is inevitable.
-
-### 4. What complexities might arise?
-
-Anticipate problems before they become expensive surprises.
-
-### How to use this in practice
-
-For an ATM example:
-
-```text
-Problem:
-Allow a customer to withdraw cash subject to authentication,
-balance, daily limit and machine constraints.
-
-Why:
-Provide automated access to account funds.
-
-Possible solution approaches:
-ATM terminal + bank transaction service;
-other deployment choices may exist depending on the project.
-
-Complexities:
-invalid PINs, insufficient funds, daily limits,
-ATM denomination limits, network response time, etc.
-```
-
-The lecture does not require a particular architecture here; the important point is that analysis should surface these issues before design begins.
-
----
-
-## 122. Functional requirements — think “input → processing → output”
-
-The source defines a functional requirement as a function that transforms a set of input data into corresponding output data.
-
-A useful representation is:
-
-```text
-Input data
-   ↓
-Function / processing
-   ↓
-Output data
-```
-
-For the Library `Search Book` example:
-
-- **Input:** author's name;
-- **Processing:** match the name against the catalogue;
-- **Output:** details of matching books and their locations.
-
-### Why this representation is powerful
-
-It forces the analyst to answer three questions:
-
-1. What information does the function need?
-2. What transformation does the function perform?
-3. What observable result does it produce?
-
-Vague requirements often disappear once you try to fill those three boxes.
-
-### Where this is important
-
-This is useful for:
-
-- writing numbered SRS clauses,
-- identifying DFD processes,
-- designing test cases,
-- designing module interfaces,
-- tracing implementation back to requirements.
-
-### Practical extension: one large function can hide several smaller functions
-
-The lecture explicitly notes that a high-level requirement may itself consist of several identifiable functions. For example, “Process an order” may contain validation, stock checking, billing, logging, and backordering. This is exactly why the Trading-House solution decomposes `Process-order` further in its level-2 DFD.
-
----
-
-## 123. Functional requirements versus nonfunctional requirements versus constraints
-
-The source separates these into three categories.
-
-### Functional requirements
-
-What the system must do.
-
-Examples from the course include:
-
-- validate an ATM card and PIN;
-- reject an amount above the account balance;
-- search a book catalogue;
-- generate a bill;
-- record a consultation.
-
-### Nonfunctional requirements
-
-Qualities or characteristics that are not naturally expressed as one input-output function. The source lists:
-
-- reliability,
-- performance,
-- human-computer interface,
-- interfaces with other systems,
-- security,
-- maintainability,
-- portability,
-- usability.
-
-### Constraints
-
-Things the system should or should not do, including:
-
-- standards compliance,
-- required hardware/OS/DBMS,
-- I/O device capabilities,
-- speed requirements,
-- required data representation for an interface.
-
-### Why the distinction matters
-
-Consider the statement:
-
-> “The system shall return a search result within 2 seconds.”
-
-The business function is still “search.” The two-second condition is a performance quality.
-
-The ATM example gives a concrete constraint: the system should respond within five seconds under normal network conditions. It also says cash can only be dispensed in denominations the loaded cassettes can supply and that the card is retained after three consecutive incorrect PIN attempts.
-
-### Practical extension: why this matters to testing
-
-Functional requirements often map naturally to **behavioral test cases**: given input X, verify output Y.
-
-Nonfunctional requirements create **quality-oriented tests**: verify response time, accessibility, reliability targets, security constraints, or compatibility.
-
-Constraints can become acceptance checks about the environment or architecture.
-
----
-
-# Deep Dive D — The SRS
-
-## 124. Why an SRS is more than “documentation”
-
-The source identifies four roles of an SRS:
-
-1. statement of user needs,
-2. contract document,
-3. reference document,
-4. definition for implementation.
-
-This means the SRS is simultaneously a communication artifact and a control artifact.
-
-### Role 1: Statement of user needs
-
-The SRS captures what stakeholders require from the system.
-
-### Role 2: Contract document
-
-Once approved, the source says it becomes a contract between customer and development team. Later controversies are settled by consulting the recorded requirements rather than relying on memory.
-
-### Role 3: Reference document
-
-Designers, developers, testers, project managers, and maintainers can use it as a shared reference.
-
-### Role 4: Definition for implementation
-
-The SRS does not tell programmers exactly how to implement the software, but it gives the externally required behavior from which implementation must be derived.
-
-### Where this is important
-
-This is especially important when:
-
-- customers and developers are different organizations,
-- many teams work on one product,
-- contractual acceptance matters,
-- the system will be maintained for a long time,
-- multiple developers need a stable reference.
-
----
-
-## 125. SRS as a black-box specification — what “black box” really means
-
-The source models the SRS as:
-
-```text
-Input Data → [ System S ] → Output Data
-```
-
-with the internal implementation hidden.
-
-### Why deliberately hide the internals?
-
-Because the requirement should remain independent of a particular solution whenever possible.
-
-Suppose a requirement says:
-
-> “The system shall return all matching books within two seconds.”
-
-That leaves the designer free to choose among multiple implementation approaches. The requirement does not need to say “store the titles in a B-tree” or “use a specific database index.” Those are design choices unless a genuine external constraint requires them.
-
-### What the SRS should say
-
-The lecture says it should:
-
-- clearly state **WHAT** needs to be done,
-- use end-user terminology,
-- be a careful and unambiguous contract,
-- be suitable for later formal specification if needed.
-
-### What it should avoid
-
-It should avoid:
-
-- implementation HOW details,
-- premature technical restrictions,
-- vague literary language.
-
-### The “what, not how” exam rule
-
-When deciding whether a statement belongs in an SRS, ask:
-
-> “Could two different designs satisfy this requirement?”
-
-If yes, the statement may be describing **what**. If the statement unnecessarily forces one implementation technique while other valid solutions exist, it may be premature design.
-
-This is a practical decision tool rather than a replacement for analyzing actual project constraints.
-
----
-
-## 126. Good SRS properties — understand each one separately
-
-The supplied lecture lists:
-
-- concise and unambiguous,
-- specifies what, not how,
-- easy to change,
-- consistent,
-- complete,
-- traceable,
-- verifiable.
-
-### Concise and unambiguous
-
-Two readers should understand the same requirement in the same way.
-
-Bad:
-
-> “The interface should be user-friendly.”
-
-Better:
-
-> “The system shall return the catalogue search results within 2 seconds for a catalogue containing up to 200,000 titles.”
-
-The second statement is more measurable.
-
-### Easy to change
-
-A well-organized SRS isolates requirements rather than embedding one rule in a long paragraph. If a single business rule changes, its impact should be easy to locate.
-
-### Consistent
-
-Different clauses must not prescribe contradictory behavior.
-
-### Complete
-
-The system's important behavior cannot be left to developer imagination.
-
-### Traceable
-
-Every requirement should be traceable forward into design/code/test artifacts and backward to its source where appropriate.
-
-### Verifiable
-
-A requirement should permit someone to determine whether it has been satisfied.
-
-### Where these properties become important later
-
-These are not purely writing-quality concerns. They affect:
-
-```text
-SRS quality
-   ↓
-Design certainty
-   ↓
-Implementation certainty
-   ↓
-Testability
-   ↓
-Acceptance confidence
-```
-
-A requirement that cannot be interpreted or tested clearly creates problems downstream.
-
----
-
-## 127. Standard SRS structure — how to use the four sections
-
-The source's standard structure follows the shape of IEEE 830:
-
-### Section 1 — Introduction
-
-Typical contents:
-
-- purpose,
-- scope,
-- definitions and abbreviations,
-- references,
-- document overview.
-
-**Why useful:** establishes the context needed to read the rest of the document.
-
-### Section 2 — Overall Description
-
-Typical contents:
-
-- product perspective,
-- major functions,
-- user characteristics,
-- general constraints,
-- assumptions.
-
-**Why useful:** provides the big picture before the detailed requirements.
-
-### Section 3 — Specific Requirements
-
-Typical contents:
-
-- functional requirements,
-- external interface requirements,
-- performance requirements,
-- design constraints.
-
-**Why useful:** this is where developers and testers find detailed behavioral expectations.
-
-### Section 4 — Appendices / Index
-
-Supporting data, glossary, cross-references, and similar material.
-
-### Practical extension: document navigation
-
-As SRS documents become large, section numbering becomes a maintenance tool. A requirement such as `R.2.3` can be referenced from a design module and test case without copying its entire wording everywhere.
-
----
-
-## 128. Writing functional requirements with input → output precision
-
-The sample `Search Book` and `Renew Book` requirements in the lecture are useful because they turn ordinary prose into explicit clauses.
-
-### Example pattern
-
-```text
-Requirement ID: R.X.Y
-Input:
-Processing:
-Output:
-```
-
-This format makes hidden assumptions visible.
-
-For `Renew Book`:
-
-```text
-R.2.1
-Input: renew option selected
-Output: prompt for membership number and password
-
-R.2.2
-Input: membership number + password
-Output: borrowed-book list OR invalid-password message
-Processing: validate password and find the borrower's books
-
-R.2.3
-Input: selected books for renewal
-Output: renewal confirmation
-Processing: update the borrower record
-```
-
-### Why split one requirement into multiple clauses?
-
-Because “renew a book” contains several externally visible interactions. Breaking it into smaller clauses improves:
-
-- testability,
-- traceability,
-- changeability,
-- completeness checking.
-
-### Where useful
-
-This style is especially effective for exam questions asking you to convert a paragraph into SRS clauses. Look for distinct input-output interactions rather than trying to turn the entire paragraph into one enormous sentence.
-
----
-
-## 129. Bad SRS patterns — how to diagnose them quickly
-
-The lecture lists several bad patterns.
-
-### Unstructured specification
-
-A narrative essay can hide important requirements inside prose and make later changes difficult.
-
-**Diagnostic clue:** many rules are buried in paragraphs without identifiers or structure.
-
-### Noise
-
-Irrelevant material makes it harder to find actual requirements.
-
-**Diagnostic clue:** information that does not affect system behavior or constraints.
-
-### Silence
-
-Important behavior is not specified.
-
-**Diagnostic clue:** a realistic operating situation has no defined outcome.
-
-### Overspecification
-
-The SRS dictates a particular implementation when it need not.
-
-**Example:** requiring names to be stored in sorted order when the requirement only needs names to be searchable.
-
-### Contradictions
-
-Two places say incompatible things.
-
-### Ambiguity
-
-Different readers could reasonably interpret a phrase differently.
-
-### Forward references
-
-A requirement assumes a definition will appear later or elsewhere without making the meaning easy to resolve.
-
-### Wishful thinking
-
-The document demands an outcome without specifying meaningful behavior or constraints that make it testable.
-
-### Exam technique
-
-When shown a “bad SRS” paragraph, classify the defect by asking:
-
-```text
-Is something irrelevant?             → Noise
-Is something missing?               → Silence / incompleteness
-Does it force implementation?       → Overspecification
-Do two rules conflict?              → Contradiction / inconsistency
-Could readers interpret it oddly?   → Ambiguity
-Is it a wall of prose?              → Unstructured specification
-```
-
----
-
-# Deep Dive E — Decision Logic
-
-## 130. Why decision trees and decision tables are taught with requirements
-
-A requirement is often not just a simple transformation. It may contain several conditions and outcomes.
-
-For the ATM example, the system needs to evaluate multiple conditions before dispensing cash.
-
-The source asks students to represent this logic in two ways:
-
-- a decision tree,
-- a decision table.
-
-These are complementary representations.
-
-### Decision tree
-
-Best for visualizing how conditions lead to outcomes.
-
-Example:
-
-```text
-Card/PIN valid?
- ├── No  → Reject
- └── Yes
-      ↓
-Amount ≤ balance?
- ├── No  → Reject
- └── Yes
-      ↓
-Amount within daily limit?
- ├── No  → Reject
- └── Yes → Dispense + update balance
-```
-
-### Decision table
-
-Best for systematically checking combinations of conditions.
-
-| Rule | Card/PIN valid | Amount ≤ balance | Within daily limit | Action |
-|---|---|---|---|---|
-| R1 | No | – | – | Reject |
-| R2 | Yes | No | – | Reject |
-| R3 | Yes | Yes | No | Reject |
-| R4 | Yes | Yes | Yes | Dispense and update |
-
-The “–” means the later condition is irrelevant to that outcome under the chosen decision structure.
-
-### Where important
-
-Decision tables are particularly valuable when there are many conditions and possible combinations. Decision trees are especially useful when explaining the logic to a human.
-
-### Practical extension: completeness checking
-
-One major advantage of a table is that it can expose missing cases. If a condition can be true or false and no rule covers one combination, the requirements may be incomplete.
-
-This links directly back to the requirements lecture's warning about incompleteness.
-
----
-
-# Deep Dive F — Formal Specification, Z, and Predicate Logic
-
-## 131. Why formal methods appear after ordinary SRS writing
-
-The requirements lecture moves from ordinary natural-language requirements into formal specification. The motivation is precision.
-
-Natural language is expressive, but it can be ambiguous. Formal notation gives a mathematically defined way to describe state and rules.
-
-The source's workflow is:
-
-```text
-Choose a notation
-      ↓
-Model the state
-      ↓
-Define each operation
-      ↓
-State preconditions
-      ↓
-State postconditions
-```
-
-### Where formal specification is important
-
-The source particularly emphasizes safety- and reliability-critical systems and notes that formal notation can support automated property checking. It also describes formal specification as useful when ambiguity needs to be removed.
-
-It is not necessary for every ordinary business application. The source explicitly lists difficulty of learning and poor fit for very large, complex systems among its disadvantages.
-
----
-
-## 132. Z notation — understand each symbol as a piece of a state model
-
-The source describes Z as a specification notation built on set theory and first-order predicate logic. It organizes specifications into **schemas**.
-
-A schema has two main conceptual parts:
-
-```text
-+------------------------------+
-| declarations                 |
-+------------------------------+
-| predicates / constraints     |
-+------------------------------+
-```
-
-### Core conventions from the source
-
-| Symbol | Meaning |
-|---|---|
-| `ℕ` | Natural numbers |
-| `ℤ` | Integers |
-| `ΔATM` | The operation changes ATM state |
-| `ΞATM` | The operation reads state but does not change it |
-| `x?` | Input |
-| `x!` | Output |
-| `x` and `x′` | Before-state and after-state values |
-| `∧` | AND |
-| `∨` | OR |
-| `¬` | NOT |
-| `⇒` | Implies |
-| `⇔` | If and only if |
-| `∀` | For all |
-| `∃` | There exists |
-| `∈` | Member of |
-| `⊆` | Subset of |
-| `∪` | Union |
-| `∩` | Intersection |
-| `→` | Total function |
-| `dom` | Domain |
-| `ran` | Range |
-
-### Practical learning trick
-
-Do not memorize all symbols as isolated mathematics. Associate each symbol with the question it answers:
-
-- `Δ` → “Does this operation change state?”
-- `Ξ` → “Is this only a query?”
-- `?` → “What comes in?”
-- `!` → “What goes out?”
-- prime `'` → “What is the new value after the operation?”
-- `∀` → “For every object?”
-- `∃` → “Does at least one exist?”
-
-This makes formal notation much easier to decode under exam pressure.
-
----
-
-## 133. Building the ATM Z specification step by step
-
-The source deliberately constructs the ATM example in five steps.
-
-### Step 1 — Identify the state
-
-Ask:
-
-> “What must the ATM/account model remember between transactions?”
-
-The source identifies:
-
-- current balance,
-- amount withdrawn today,
-- daily withdrawal limit.
-
-### Step 2 — State schema
-
-Conceptually:
-
-```text
-ATM
----------------------------
-balance, dailyWithdrawn : ℕ
-dailyLimit              : ℕ
----------------------------
-dailyWithdrawn ≤ dailyLimit
-```
-
-The predicate below the divider is an invariant: it must remain true.
-
-### Step 3 — Operation and input
-
-```text
-Withdraw
-ΔATM
-amt? : ℕ
-```
-
-`ΔATM` says the operation can change the state. `amt?` is the requested amount.
-
-### Step 4 — Preconditions
-
-```text
-amt? ≤ balance
- dailyWithdrawn + amt? ≤ dailyLimit
-```
-
-These conditions must hold before the withdrawal is valid.
-
-### Step 5 — Postconditions
-
-```text
-balance′ = balance − amt?
-dailyWithdrawn′ = dailyWithdrawn + amt?
-```
-
-The primed variables represent after-values.
-
-### Why this style is powerful
-
-Compare the formal form with a vague English statement such as “withdraw the amount if allowed.” The formal version precisely specifies:
-
-- what must be true before,
-- what changes,
-- exactly how the state changes.
-
-### Where used
-
-This style is useful when correctness of state transitions matters greatly: banking rules, reservation invariants, safety conditions, resource-accounting systems, and other domains where “what must always remain true?” is a central question.
-
----
-
-## 134. First-order predicate logic — a translation skill rather than a memorization topic
-
-The source teaches a repeatable pattern for translating English statements.
-
-### Key phrase mapping
-
-```text
-Every / all / each       → ∀
-a member of a set       → ∈
-some / at least one     → ∃
-and                      → ∧
-or                       → ∨
-not / no / never         → ¬
-if ... then              → ⇒
-if and only if           → ⇔
-```
-
-### Example from the source
-
-English:
-
-> Every student who has passed all exams graduates.
-
-Formal pattern:
-
-```text
-∀ s ∈ Students • PassedAll(s) ⇒ Graduates(s)
-```
-
-The core pattern is:
-
-```text
-∀ object ∈ domain • condition ⇒ conclusion
-```
-
-### Software example from the source
-
-English:
-
-> Every request that fails authentication is rejected.
-
-Formal form:
-
-```text
-∀ r ∈ Requests • ¬Authenticated(r) ⇒ Rejected(r)
-```
-
-### Practical translation algorithm
-
-When solving an exam question:
-
-1. circle the domain noun (`students`, `requests`, `products`);
-2. find quantifier words (`every`, `some`, `at least one`);
-3. underline conditions;
-4. identify the conclusion;
-5. determine whether conditions are joined by AND or OR;
-6. assemble the formula.
-
-This is much safer than trying to translate the entire sentence at once.
-
----
-
-## 135. The subtle difference between implication and “if and only if”
-
-The source includes both `⇒` and `⇔`, and this distinction is often tested.
-
-### Implication
-
-```text
-A ⇒ B
-```
-
-means: whenever A is true, B must be true.
-
-It does **not** by itself say that B guarantees A.
-
-### Biconditional
-
-```text
-A ⇔ B
-```
-
-means both directions:
-
-```text
-A ⇒ B
-B ⇒ A
-```
-
-The source example:
-
-```text
-OutOfStock(p) ⇔ Quantity(p) = 0
-```
-
-is stronger than merely saying “if quantity is zero, the product is out of stock.” It states an equivalence.
-
-### Exam trap
-
-If the English says “if and only if,” do not translate it as a one-way implication.
-
----
-
-# Deep Dive G — Software Design
-
-## 136. What changes when the project moves from SRS to design?
-
-The Software Design lecture describes design as the transformation of a validated SRS into a form that is easily implementable in a programming language.
-
-The design phase decides:
-
-- module structure,
-- how modules call/control one another,
-- interfaces and exchanged data,
-- each module's data structures,
-- each module's algorithms.
-
-The important distinction is that the SRS is primarily about required external behavior, while design creates the internal organization needed to implement that behavior.
-
----
-
-## 137. High-level design versus detailed design — do not mix them
-
-### High-level design
-
-Answers:
-
-- Which modules exist?
-- Which modules call which?
-- What interfaces connect them?
-- What is the overall program structure?
-
-The source identifies the **structure chart** as the usual notation.
-
-### Detailed design
-
-Answers:
-
-- What data structures does each module use?
-- What algorithm does each module execute?
-- What is detailed enough for direct coding?
-
-### Example
-
-Suppose the system has a top-level function `ProcessOrder`.
-
-High-level design might produce:
-
-```text
-ProcessOrder
-├── ValidateOrder
-├── CheckInventory
-├── CalculateBill
-└── UpdateRecords
-```
-
-Detailed design then specifies exactly how `CheckInventory` searches inventory, what data structures it uses, and what it returns.
-
-### Where important
-
-This distinction appears in design questions asking “what is high-level design?” or “what is detailed design?” It also helps explain why a structure chart is not a substitute for algorithm design.
-
----
-
-## 138. What makes a good design — the four high-level qualities
-
-The source names four properties:
-
-### Correct
-
-Implements every functionality specified in the SRS.
-
-### Understandable
-
-The structure can be followed by other engineers.
-
-### Efficient
-
-Uses processing time and resources sensibly.
-
-### Maintainable
-
-Can be changed safely as requirements evolve.
-
-The lecture places special emphasis on **understandability**. The reason is straightforward: if nobody can understand the architecture, it becomes harder to verify correctness, diagnose faults, and make changes safely.
-
-### Where important
-
-These qualities are useful whenever a question asks “what is a good software design?” Do not answer only “high cohesion and low coupling.” Those are specific design mechanisms supporting the broader qualities.
-
----
-
-## 139. Modularity — divide and conquer at the design level
-
-The design lecture calls modularity a fundamental attribute of good design. The idea is to decompose a large system into a cleanly organized set of modules.
-
-### Why modularity helps
-
-If modules are nearly independent, each module can be understood in relative isolation. That reduces the amount of information a developer must keep in mind.
-
-A well-modularized system also localizes change. If a requirement affects one cohesive module and the module's interface stays stable, the rest of the system may require little or no modification.
-
-### Where used
-
-Modularity is central to:
-
-- large codebases,
-- team development,
-- testing,
-- maintenance,
-- reuse,
-- fault isolation.
-
-### Practical extension: module boundaries should follow responsibilities
-
-A module boundary is useful when it separates responsibilities that can be understood and changed independently. This is why cohesion and coupling are taught immediately after modularity.
-
----
-
-## 140. Cohesion — measure the internal unity of one module
-
-The source defines cohesion as a measure of the **functional strength of a single module**. A cohesive module performs one clearly describable task.
-
-The seven forms are presented from worst to best:
-
-```text
-Coincidental
-     ↓
-Logical
-     ↓
-Temporal
-     ↓
-Procedural
-     ↓
-Communicational
-     ↓
-Sequential
-     ↓
-Functional
-```
-
-### The key question
-
-> “How strongly do the responsibilities inside this one module belong together?”
-
-If the answer is “barely,” cohesion is low.
-
-If the answer is “every part contributes to one well-defined task,” cohesion is high.
-
----
-
-## 141. Cohesion type 1 — coincidental cohesion
-
-This is the weakest form in the source.
-
-The module contains unrelated elements simply because they happened to be grouped together.
-
-Source-style example:
-
-```text
-utilityBag()
-    logError()
-    readConfigFile()
-    openSocket()
-```
-
-These actions may all be “utilities,” but there is no strong functional relationship among them.
-
-### Why bad?
-
-The module is difficult to describe in one meaningful sentence. Changes to one activity are unlikely to have much conceptual relationship to the others.
-
-### Where you might encounter it
-
-Large “miscellaneous” or “helper” modules that accumulate unrelated code over time.
-
-### Exam clue
-
-Words such as “unrelated,” “randomly grouped,” or “no meaningful relationship.”
-
----
-
-## 142. Cohesion type 2 — logical cohesion
-
-Logical cohesion groups operations that are similar in category but performs one of them based on a flag or selector.
-
-Example:
-
-```text
-ioHandler(kind)
-   if kind == file      → readFile()
-   else if keyboard     → readKeyboard()
-   ...
-```
-
-### Why better than coincidental but still weak
-
-At least the functions belong to one broad conceptual category. However, the module contains different operations that are activated selectively.
-
-### Exam clue
-
-Look for a **generic category handler** controlled by a parameter or flag.
-
----
-
-## 143. Cohesion type 3 — temporal cohesion
-
-Elements are grouped because they happen during the same time period or phase, not because they perform one unified business function.
-
-Source example:
-
-```text
-startup()
-    initVars()
-    setupLogging()
-    openConnections()
-```
-
-These belong to startup, so they have a timing relationship.
-
-### Recognition clue
-
-Words like:
-
-- initialize,
-- startup,
-- shutdown,
-- boot,
-- beginning.
-
-The source's quick test explicitly points to the word “initialize” as a clue.
-
----
-
-## 144. Cohesion type 4 — procedural cohesion
-
-Elements are grouped because they follow a specific sequence of steps within one procedure.
-
-Source-style example:
-
-```text
-decode(message)
-    parseHeader()
-    verifyChecksum()
-    extractPayload()
-```
-
-The steps belong to one procedure, but the emphasis is on the sequence rather than one indivisible single function.
-
-### Recognition clue
-
-Look for words such as:
-
-- first,
-- next,
-- then,
-- after.
-
----
-
-## 145. Cohesion type 5 — communicational cohesion
-
-Several operations work on the same data structure.
-
-Source example:
-
-```text
-useStack(s)
-    push(s, 1)
-    pop(s)
-    peek(s)
-```
-
-The functions are related because they operate on `s`.
-
-### Recognition clue
-
-Ask:
-
-> “Are these operations grouped mainly because they read or update the same data?”
-
-If yes, think communicational cohesion.
-
----
-
-## 146. Cohesion type 6 — sequential cohesion
-
-The output of one element directly feeds the next element.
-
-Source example:
-
-```text
-sort(data)
-   ↓
-search(sortedData)
-   ↓
-display(result)
-```
-
-### Recognition clue
-
-Look for a chain:
-
-```text
-A produces output → B consumes it → C consumes B's output
-```
-
-The source's quick test uses wording such as “then” as a clue.
-
----
-
-## 147. Cohesion type 7 — functional cohesion
-
-This is the strongest form in the source. Every element contributes to one clearly defined task.
-
-A payroll module that computes the overtime pay for one employee is a good example of a single clear purpose.
-
-### Recognition clue
-
-The one-sentence description is simple:
-
-> “This module computes overtime pay.”
-
-There is no need to connect unrelated actions with “and.”
-
-### Why high cohesion matters
-
-The source links high cohesion to:
-
-- easier isolation and understanding,
-- fewer error propagations,
-- greater reuse.
-
-### Practical extension
-
-High cohesion tends to make a module easier to test because the input-output purpose is narrow enough to define meaningful cases.
-
----
-
-## 148. The cohesion “one-sentence test” — how to use it under exam pressure
-
-The design lecture provides an unusually practical diagnostic method.
-
-Write one sentence describing what the module does.
-
-Then inspect the sentence.
-
-```text
-“Does A and B and C ...”
-       ↓
-Possibly procedural/communicational or low cohesion
-
-“First ..., then ..., after ...”
-       ↓
-Sequential/procedural/temporal clue
-
-“Initialize ...”
-       ↓
-Temporal clue
-
-“Computes one clearly defined thing.”
-       ↓
-Functional cohesion clue
-```
-
-This test is not a perfect mathematical classifier; the source itself says the classification is somewhat subjective. But it is a very effective exam heuristic.
-
----
-
-## 149. Coupling — measure the interdependence between modules
-
-The source defines coupling as the measure of how interdependent two modules are. It depends on the complexity of the interface between them.
-
-The goal is:
-
-> **Low coupling.**
-
-Why? Because when modules depend heavily on one another, changes in one place are more likely to break another.
-
-The source classifies coupling from best to worst:
-
-```text
-Data
- ↓
-Stamp
- ↓
-Control
- ↓
-Common
- ↓
-Content
-```
-
----
-
-## 150. Data coupling
-
-Two modules exchange only elementary data items through parameters.
-
-Example:
-
-```text
-computeTax(amount)
-```
-
-Only the amount is passed.
-
-### Why desirable
-
-The interface is small and explicit. A change to unrelated fields elsewhere does not have to affect the receiving module.
-
-### Exam clue
-
-Look for simple scalar/basic values passed as parameters.
-
----
-
-## 151. Stamp coupling
-
-One module passes a composite/structured record to another even though the receiver uses only part of it.
-
-Example from the source:
-
-```text
-shipOrder(order)
-    return order.total
-```
-
-The complete `Order` structure is passed even though only `total` is needed.
-
-### Why worse than data coupling
-
-The receiving module becomes dependent on the structure of a larger data object.
-
-### Recognition clue
-
-A whole record/object/structure crosses the interface when only a small portion is needed.
-
----
-
-## 152. Control coupling
-
-One module passes a flag that directs another module's internal logic.
-
-Source example:
-
-```text
-processOrder(isRush)
-```
-
-The flag determines whether an order follows the rush or standard path.
-
-### Why worse
-
-The caller is no longer simply providing data. It is influencing the **control flow** of the callee.
-
-The source's worked example explains this using `validateOrder()` setting `isRushOrder`, which `processOrder()` then interprets.
-
-### Recognition clue
-
-Look for parameters named like:
-
-- flag,
-- mode,
-- option,
-- type,
-- switch,
-
-when that parameter selects the receiver's algorithmic branch.
-
----
-
-## 153. Common coupling
-
-The modules share access to common global data.
-
-Source example:
-
-```text
-inventoryCount
-```
-
-may be read or modified by several modules.
-
-### Why risky
-
-A change made by one module can affect others unexpectedly. There is less encapsulation around the shared state.
-
-### Recognition clue
-
-Look for global variables, common blocks, or shared mutable state directly visible to multiple modules.
-
----
-
-## 154. Content coupling
-
-The strongest and worst form in the source. One module directly reaches into another module's internals, such as jumping into the middle of another module's logic.
-
-The source gives a `goto`-style example.
-
-### Why almost always a defect
-
-The boundary of the module is effectively broken. Internal implementation details become external dependencies.
-
-If module A can assume where a label or internal variable exists inside module B, B cannot safely change its internal structure.
-
-### Exam clue
-
-Look for direct access to another module's internals or branching into its code.
-
----
-
-## 155. Cohesion and coupling together — the core design slogan
-
-The design lecture's practical goal can be summarized as:
-
-> **High cohesion inside modules + low coupling between modules.**
-
-These are not competing properties. They describe different boundaries:
-
-```text
-One module
-┌───────────────────────────────┐
-│ How strongly do its parts     │
-│ belong together?              │
-│            → COHESION         │
-└───────────────────────────────┘
-
-Between modules
-A ───────── interface ───────── B
-       How much do A and B
-       depend on each other?
-              → COUPLING
-```
-
-### A practical change scenario
-
-Suppose a payment module has high cohesion and communicates with the billing module using only a transaction amount and result code. If the internal payment algorithm changes, billing may continue working unchanged.
-
-Now imagine billing directly manipulates payment module's internal state. That creates tight coupling, increasing the cost of change.
-
----
-
-# Deep Dive H — Module Hierarchy
-
-## 156. Depth, width, fan-out, and fan-in
-
-The source uses four structural measures.
-
-### Depth
-
-Number of levels of control in the hierarchy.
-
-### Width
-
-Overall span of control across the widest level.
-
-### Fan-out
-
-Number of modules directly controlled/called by one module.
-
-### Fan-in
-
-Number of modules that directly call a given module.
-
-### Why these are useful
-
-They help describe the **shape of the whole module tree**, whereas cohesion and coupling describe individual modules or their relationships.
-
----
-
-## 157. Fan-in — why reuse can be good
-
-If many modules call a utility that performs a genuinely common function, fan-in can be high.
-
-The source example has a `Log Utility` called from three places.
-
-```text
-        Main
-      /  |   \
-     A   B    C
-      \  |   /
-       Log Utility
-```
-
-The lecture describes high fan-in as usually good because it signals reuse.
-
-### Important qualification
-
-High fan-in is not automatically good. A shared utility should actually represent a stable common responsibility. Otherwise a central module may become a fragile bottleneck.
-
-The source's statement is about the general design signal: **reuse is usually valuable when the shared functionality is cohesive**.
-
----
-
-## 158. Fan-out — why too much coordination can be a warning
-
-If one module controls many subordinate modules directly, fan-out becomes high.
-
-The source describes high fan-out as a warning sign because a module coordinating too many subordinates may lack cohesion.
-
-### Practical interpretation
-
-A top-level coordinator naturally has some fan-out. The problem appears when the parent knows too many low-level details or must manage too many unrelated tasks.
-
-### Refactoring intuition
-
-Instead of:
-
-```text
-Main
-├─ Validate A
-├─ Validate B
-├─ Load File
-├─ Format Report
-├─ Save Database
-├─ Send Email
-├─ Log Audit
-├─ Check Permission
-└─ ...
-```
-
-a designer might create meaningful intermediary modules so that each layer has a clearer abstraction.
-
-This is a practical extension illustrating the source's warning about excessive fan-out.
-
----
-
-## 159. Layering and visibility
-
-The source states:
-
-- a module that controls another is superordinate;
-- the controlled module is subordinate;
-- a module is visible to another if it calls it directly or indirectly;
-- a layering principle says a module should call the layer immediately below it;
-- lower levels handle low-level mechanical work such as I/O;
-- upper levels handle managerial/coordinating work;
-- lower-level modules should not call upward.
-
-### Why layering matters
-
-Imagine a UI module, business-logic layer, and data-access layer:
-
-```text
-Presentation / UI
-        ↓
-Business Logic
-        ↓
-Data Access / I/O
-```
-
-The UI should not need to manipulate low-level storage details directly if the architecture intends to enforce the business layer. Likewise, a low-level I/O module should not start calling the user-interface logic upward.
-
-### Where important
-
-Layering is useful when systems become large enough that responsibilities need clear boundaries. It improves comprehensibility and reduces tangled dependencies.
-
-### Exam clue
-
-If the question describes modules calling both downward and upward across levels, mention a violation of layering/abstraction.
-
----
-
-## 160. High-level design as a mapping problem
-
-The design lecture describes high-level design mathematically as mapping system functions:
-
-```text
-{f1, f2, ..., fn}
-```
-
-onto modules:
-
-```text
-{m1, m2, ..., mj}
-```
-
-such that:
-
-- cohesion is high,
-- coupling is low,
-- the hierarchy is neat and shallow.
-
-This is a useful conceptual bridge between requirements analysis and design.
-
-### Why this matters
-
-There is no universal rule saying “one requirement = one module.” Several functions may belong together, or one function may need to be decomposed. The goal is to find a partition that creates understandable and manageable responsibilities.
-
----
-
-# Deep Dive I — Function-Oriented and Object-Oriented Design
-
-## 161. Function-oriented design — start from verbs
-
-The source describes function-oriented design as viewing the system as a set of functions, successively refining functions into detailed sub-functions, and mapping them onto a module structure.
-
-The state is described as **centralized**, held in data shared across many functions.
-
-The worked example:
-
-```text
-create-library-member
-├── assign-membership-number
-├── create-member-record
-└── print-bill
-```
-
-Each function can then be refined further until the resulting modules are small enough to implement directly.
-
-### Where useful
-
-Function-oriented thinking is particularly natural when the problem is expressed as a clear sequence or collection of transformations:
-
-- data processing pipelines,
-- batch processing,
-- transaction processing,
-- algorithmically structured systems.
-
-The exact application fit depends on the system; the source presents FOD as one of two complementary design philosophies.
-
----
-
-## 162. Object-oriented design — start from nouns/entities
-
-The source describes object-oriented design as viewing the system as a collection of real-world objects/entities. Each object bundles its own data with the functions that act on it.
-
-Objects communicate by passing messages, and state is decentralized.
-
-The library example describes `Member` objects containing their own data and behavior, with classes defining shared structure and behavior for similar objects.
-
-### Where useful
-
-Object-oriented thinking becomes especially natural when the domain contains entities with:
-
-- identity,
-- state,
-- behavior,
-- relationships with other entities.
-
-Examples include members, books, accounts, orders, employees, cars, reservations, and physical devices.
-
----
-
-## 163. The central contrast: where does state live?
-
-This is the single most important conceptual difference in the source's comparison.
-
-### Function-oriented
-
-```text
-               shared state
-            ┌───────────────┐
-            │ member records│
-            │ orders        │
-            │ etc.          │
-            └───────────────┘
-              ↑    ↑    ↑
-             f1    f2   f3
-```
-
-Multiple functions operate over a common pool of state.
-
-### Object-oriented
-
-```text
-Member A       Member B       Book X
-data+methods   data+methods   data+methods
-      \            |            /
-             messages
-```
-
-Each object manages its own state.
-
-### Why state distribution matters
-
-Centralized state makes it easy for many functions to access the same information, but it can create broad dependencies. Distributed state improves encapsulation because the owner of the data controls how it is used.
-
-The supplied lecture's fire-alarm case is designed to make exactly this point.
-
----
-
-## 164. Fire-alarm case — why the example is powerful
-
-The source uses a building with **80 floors and 1,000 rooms**, each containing a smoke detector and alarm.
-
-Required behavior includes:
-
-- determining the location of a detected fire,
-- sounding neighboring alarms,
-- flashing a console message,
-- allowing staff to reset alarms.
-
-### Function-oriented representation
-
-The source puts information into global arrays such as:
-
-```text
-detector_status[1000]
-detector_locs[1000]
-alarm_status[1000]
-alarm_locs[1000]
-neighbor_alarms[1000][10]
-```
-
-Functions then operate on that shared data.
-
-The source's core criticism is that **nothing owns the data**. Correctness depends on every function using the shared structures consistently.
-
-### Object-oriented representation
-
-The source introduces classes such as:
-
-```text
-Detector
-    status
-    location
-    neighbors
-
-    create()
-    senseStatus()
-    getLocation()
-    findNeighbors()
-
-Alarm
-    location
-    status
-
-    create()
-    ringAlarm()
-    getLocation()
-    resetAlarm()
-```
-
-Now one detector object and one alarm object can exist for each room.
-
-### The deeper lesson
-
-The source does not say that one philosophy makes the other obsolete. It explicitly says that in practice many real designs use both: object-oriented design can shape classes, while top-down function-oriented decomposition can still be used to design methods inside those classes.
-
-This is important because students sometimes treat FOD and OOD as mutually exclusive programming religions. The source frames them as complementary design approaches.
-
----
-
-# Deep Dive J — DFDs and Structured Analysis
-
-## 165. What a DFD is trying to show
-
-The DFD exercises teach structured analysis from requirements. The practice sheet gives a very explicit recipe:
-
-1. list external entities, functions, and outputs;
-2. draw the context diagram;
-3. decompose it into a level-1 DFD;
-4. choose one complex level-1 process and decompose it into level 2.
-
-### What the DFD emphasizes
-
-A DFD emphasizes **data in motion and transformations**.
-
-It does not primarily show:
-
-- execution sequence,
-- timing,
-- program statements,
-- boolean conditions as control flow,
-- implementation classes.
-
-The practice sheet explicitly says:
-
-> A DFD carries no control information — no order of execution, no conditions, just data in motion.
-
-### Why this matters
-
-Students often draw flowcharts instead of DFDs. A flowchart asks “what happens next?” A DFD asks “what data enters, what transformation occurs, what data leaves, and where is persistent data stored?”
-
----
-
-## 166. Context diagram — the one-bubble rule
-
-The context diagram represents the **entire system as one process/bubble**.
-
-Every external entity should appear there, with every data flow crossing the system boundary.
-
-Internal data stores do **not** belong in the context diagram.
-
-### Why?
-
-Because the context diagram establishes the system boundary. It answers:
-
-> “What is inside the system, and who/what outside it exchanges data with the system?”
-
-### Exam method
-
-Before drawing anything, write:
-
-```text
-External entities:
-1.
-2.
-3.
-
-External inputs:
-...
-
-External outputs:
-...
-```
-
-Then put the complete system in the center.
-
----
-
-## 167. Level 1 DFD — decomposing the context bubble
-
-The practice sheet recommends roughly **3 to 7 child bubbles**.
-
-Why this range?
-
-Because one giant process hides too much detail, while twenty tiny bubbles produce an unreadable first-level model.
-
-The correct decomposition is not “split until there are exactly four processes.” It is to identify major responsibilities from the requirement and keep the level understandable.
-
-### Example: Trading-House Automation System
-
-The worked solution identifies four level-1 processes:
-
-```text
-0.1 Accept-order
-0.2 Process-order
-0.3 Handle-query
-0.4 Handle-indent-request
-```
-
-These are not arbitrary names. The solution explicitly mines nouns and verbs from the requirement, then maps major system responsibilities to these bubbles.
-
----
-
-## 168. Level 2 DFD — when to decompose
-
-A level-2 decomposition should be used when a level-1 bubble still hides meaningful internal complexity.
-
-The Trading-House solution chooses `Process-order` because it hides:
-
-- item validation,
-- stock checking,
-- branching between available and unavailable quantities,
-- document generation,
-- record updates.
-
-It then decomposes it into:
-
-```text
-0.2.1 Validate-items
-0.2.2 Check-availability
-0.2.3 Generate-documents
-0.2.4 Update-records
-```
-
-### Important idea: decomposition must preserve the parent process's meaning
-
-The level-2 processes together should explain the same external behavior as the level-1 process. This is the practical notion of **balancing** between levels.
-
----
-
-## 169. DFD “do not invent” rule
-
-The practice sheet says:
-
-> Every function named in a requirement should show up as a bubble somewhere — and nothing beyond the requirement should be invented.
-
-This is extremely important for exam questions.
-
-Suppose the requirement says the system prints a bill for a valid order. Do not invent:
-
-- a customer loyalty system,
-- payment gateway,
-- tax engine,
-- notification server,
-
-unless the requirement explicitly requires them.
-
-A DFD answer is judged against the stated boundary, not against what a real-world application might eventually contain.
-
-### Practical rule
-
-When tempted to add something, ask:
-
-> “Can I point to the exact requirement sentence that creates this entity, function, store, or flow?”
-
-If not, treat it as suspicious.
-
----
-
-# Deep Dive K — Trading-House Automation System
-
-## 170. Step-by-step extraction from the Trading-House requirement
-
-The source requirement contains several layers of information.
-
-### External entities identified by the worked solution
-
-- Customer
-- Purchase Department
-- Manager
-
-The worked solution explicitly says vendors are **not** treated as external entities because the system merely prints indents and hands them to the purchase department; vendor details remain an internal file.
-
-This is an excellent lesson in system boundaries.
-
-### Major functions identified
-
-```text
-0.1 Accept-order
-0.2 Process-order
-0.3 Handle-query
-0.4 Handle-indent-request
-```
-
-### Data stores identified
-
-- Customer-file
-- Customer-history
-- Item-file
-- Inventory
-- Accepted-orders
-- Pending-order
-- Vendor-list
-- Sales-statistics
-
-### Reports/output documents
-
-- reject message,
-- bill,
-- material issue slip,
-- indents,
-- statistics.
-
----
-
-## 171. Trading-House context diagram reasoning
-
-The context diagram is:
-
-```text
-                         Customer
-                            |
-                       order / response
-                            |
-                            v
-              +---------------------------+
-              | Trading-House Automation  |
-              |          System           |
-              +---------------------------+
-                   ^                 ^
-                   |                 |
-            Generate-indent        query
-                   |                 |
-          Purchase Department     Manager
-                   |
-                indents
-```
-
-The worked solution emphasizes that the response flow is intentionally generic at level 0. It represents whichever result applies: bill + material issue slip or rejection message.
-
-### Why not distinguish the branches yet?
-
-Because the context diagram is about the **system boundary**, not internal decision detail. The detail belongs in the lower-level decomposition.
-
----
-
-## 172. Trading-House `Accept-order` — what belongs here?
-
-The requirement states that customer creditworthiness is checked before further processing. Therefore the worked solution uses:
-
-```text
-Customer
-   ↓ order
-Accept-order
-   ↔ Customer-file
-   ↔ Customer-history
-   ↓
-accepted-order → Process-order
-
-or
-
-reject-message → Customer
-```
-
-### Why customer history is separate from customer file
-
-The worked solution distinguishes identity/details from payment history. This reflects the requirement's separate conceptual needs:
-
-- current customer information,
-- historical payment behavior.
-
-### What should not happen here
-
-Item validation and inventory checking belong to `Process-order` according to the worked solution. Keeping responsibilities separate improves the level-1 model's clarity.
-
----
-
-## 173. Trading-House `Process-order` — why it gets a level-2 decomposition
-
-At level 1 it interacts with:
-
-- Item-file,
-- Inventory,
-- Accepted-orders,
-- Pending-order,
-- Customer/order input,
-- Customer output.
-
-Its behavior includes:
-
-1. validate items against the item file;
-2. check availability;
-3. generate documents for available quantities;
-4. record pending quantities;
-5. update records.
-
-Because that is more than one conceptual step, it is the natural level-2 candidate.
-
-### Level-2 interpretation
-
-```text
-             accepted-order
-                    |
-                    v
-          +-------------------+
-          | Validate-items    |
-          +-------------------+
-                    |
-                valid-items
-                    |
-                    v
-          +-------------------+
-          | Check-availability|
-          +-------------------+
-              /           \
-     available-items     short-items
-          |                  |
-          v                  v
-  Generate-documents     Update-records
-          |                  ^
-          |                  |
-          +---------> Update-records
-                         |
-                  stores updated
-```
-
-The exact graphical arrangement can vary; what matters is that all major transformations represented in the source are preserved.
-
----
-
-## 174. Why the DFD solution calls `Pending-order` a shared store
-
-The worked solution explicitly says `Pending-order` is shared between two level-1 processes:
-
-- `Process-order` writes backorders into it;
-- `Handle-indent-request` reads pending orders from it.
-
-This teaches an important DFD concept: data stores can be used by multiple processes when the requirement requires persistent information to flow between responsibilities.
-
-### Why a file is not automatically an external entity
-
-Because it remains inside the system boundary. A store is conceptually persistent system data; an external entity is something outside the system exchanging data with it.
-
----
-
-# Deep Dive L — Extended DFD Reasoning for the Ten Practice Problems
-
-## 175. Problem 1 — Community Library: full analysis thinking
-
-### Requirement responsibilities
-
-The requirement contains four obvious service areas:
-
-```text
-Issue book
-Return book
-Search catalogue
-Generate overdue list
-```
-
-### External roles
-
-- Member
-- Clerk
-- Librarian
-
-The clerk is an operational user of the system. The member is the person whose borrowing state is managed. The librarian requests the weekly overdue list.
-
-### Persistent information
-
-A careful extraction suggests at least:
-
-- member data,
-- catalogue/book data,
-- loan data,
-- outstanding fine information.
-
-### Level 1 suggestion
-
-```text
-1. Issue Book
-2. Return Book
-3. Search Catalogue
-4. Generate Overdue List
-```
-
-### `Issue Book` level 2
-
-A useful decomposition is:
-
-```text
-Identify member
-      ↓
-Check borrowing limit
-      ↓
-Check unpaid fine status
-      ↓
-Issue/Reject
-      ↓
-Record loan + due date
-```
-
-The requirement says the due date is **fourteen days later**, which must be represented in the functional behavior.
-
-### `Return Book` level 2
-
-```text
-Read loan record
-      ↓
-Compare due date with today's date
-      ↓
-Calculate fixed-rate daily fine if overdue
-      ↓
-Update outstanding balance
-      ↓
-Close loan
-      ↓
-Mark book available
-      ↓
-Print fine receipt when required
-```
-
-### Where this problem teaches a reusable pattern
-
-It demonstrates the difference between:
-
-- **current status data** — available/unavailable books;
-- **historical transaction data** — loan record;
-- **accounting data** — fines/balance.
-
-That pattern appears again in many other DFD problems.
-
----
-
-## 176. Problem 2 — Clinic appointments: where the complexity lives
-
-The requirement looks like “booking,” but it actually contains several state transitions.
-
-### Main functions
-
-```text
-1. Book appointment
-2. Check in patient / retrieve history
-3. Record consultation
-4. Generate reports
-```
-
-### Important data
-
-- doctor schedules,
-- appointments,
-- patient history,
-- diagnosis/medication records,
-- waiting list.
-
-### Why `Book appointment` is complex
-
-The receptionist can request:
-
-- a particular doctor,
-- any available doctor in a specialty,
-- a preferred date.
-
-The process may yield:
-
-- reserved slot,
-- next available slot offer,
-- waiting-list entry.
-
-The DFD should capture these as data outcomes rather than drawing procedural control arrows.
-
-### Check-in complexity
-
-Check-in changes the appointment status to arrived and retrieves patient history for the doctor. That means one user interaction updates one store while retrieving information for another role.
-
-### Report requirements
-
-Two distinct report types must be preserved:
-
-- daily appointment lists by doctor;
-- monthly consultation counts by specialty.
-
-A common exam mistake is to include “appointments report” and forget the specialty-based monthly consultation count.
-
 ---
 
-## 177. Problem 3 — Hotel reservation: the critical word is “full period”
-
-The requirement says a room must be free **across the requested dates**.
-
-That means the reservation function conceptually considers an interval, not just a single date.
-
-### Main functions
-
-```text
-1. Reserve room
-2. Check in
-3. Manage stay charges
-4. Check out and invoice
-5. Occupancy report
-```
-
-### Level-2 candidate: Reserve room
-
-```text
-Receive dates + room type
-        ↓
-Check room availability for full period
-        ↓
-Available?
-  ├── yes → reserve under guest
-  │          ↓
-  │      print confirmation
-  └── no  → offer alternative dates
-             or different room type
-```
-
-Again, the “yes/no” is **logic in the underlying requirement**, not an instruction to draw `YES` or `NO` control labels on DFD arrows. The DFD should express the resulting data information.
-
-### Check-in and checkout
-
-Check-in associates the reservation with a specific room and generates registration material.
-
-Checkout has several outcomes:
-
-- final bill total,
-- payment accepted,
-- final invoice,
-- room status set to housekeeping.
-
-The requirement explicitly prevents the room from being immediately treated as bookable again.
-
----
-
-## 178. Problem 4 — Courier tracking: history is a first-class store
-
-This problem is ideal for learning the difference between **current status** and **location history**.
-
-A tracking response contains both:
-
-- current parcel status/location,
-- history of scanned locations/timestamps.
-
-Therefore the persistent model needs historical tracking information, not merely one “current location” field.
-
-### Major responsibilities
-
-```text
-Create shipment
-Scan/update tracking
-Answer tracking request
-Manage delivery attempts
-Store/provide proof of delivery
-Generate overdue report
-```
-
-### Level-2 candidate: delivery attempts
-
-The rule can be represented as a data-processing decomposition:
-
-```text
-Attempt information
-      ↓
-Record attempt
-      ↓
-Delivery outcome data
-   ├── delivered → signature / POD
-   └── unavailable → next-day redelivery data
-                         ↓
-                    attempt count
-                         ↓
-                return-to-sender record
-```
-
-The requirement's “up to three attempts” is a business rule. Keep it visible in the analysis even though a DFD itself should not be turned into a flowchart.
-
----
-
-## 179. Problem 5 — Course registration: validation plus provisional state
-
-This problem is a strong example of **preliminary state versus final state**.
-
-The source requirement describes a provisional timetable followed by final confirmation.
-
-### Main responsibilities
-
-```text
-Authenticate/start
-Validate courses
-Build provisional timetable
-Finalize registration
-Produce reports/notifications
-```
-
-### Validation conditions
-
-Each course must pass:
-
-- prerequisite check,
-- seat-limit check.
-
-Then the selected set must be checked for schedule clashes.
-
-### Why a provisional timetable is important
-
-The system is not required to immediately decrement seat counts upon every attempted selection. The requirement says seat counts are decremented once the student confirms and registration is finalized.
-
-This is a subtle but important requirement detail.
-
-### External output
-
-Finance office receives finalized registration information so fees can be billed.
-
-Faculty receive final class lists after registration closes.
-
-Academic office receives enrollment statistics after registration closes.
-
-### Common mistake
-
-Putting the academic report in the student interaction path. The requirement makes it a separate administrative query/report activity.
-
----
-
-## 180. Problem 6 — Restaurant order management: three station tickets
-
-The requirement contains a useful data-transformation chain.
-
-```text
-Customer order
-      ↓
-Menu availability validation
-      ↓
-Confirmed order
-      ↓
-Split into:
-  ├── starters ticket
-  ├── mains ticket
-  └── desserts ticket
-```
-
-### Major functions
-
-1. seating/table assignment;
-2. order capture and validation;
-3. kitchen ticket generation;
-4. preparation/status updates;
-5. bill and payment;
-6. sales reporting.
-
-### Why this is a good level-2 candidate
-
-`Process Order` can be decomposed into:
-
-```text
-Capture order
-   ↓
-Check menu availability
-   ↓
-Flag unavailable items
-   ↓
-Confirm order
-   ↓
-Split into station tickets
-   ↓
-Record ready status
-   ↓
-Notify waiter
-```
-
-### Persistent stores
-
-At minimum, analysis points toward:
-
-- table/seating status,
-- menu availability,
-- orders,
-- kitchen ticket/status information,
-- payment/sales records.
-
-### Report requirement
-
-The manager requests daily total sales broken down by menu category. Do not replace this with a generic “sales report”; preserve the category breakdown.
-
----
-
-## 181. Problem 7 — Car rental: pickup and return capture two measurement states
-
-The requirement records odometer and fuel at both pickup and return.
-
-That means the rental process needs to retain enough information to compare the two states.
-
-### Main functions
-
-```text
-1. Create booking
-2. Activate rental at pickup
-3. Process return
-4. Calculate extra charges / final invoice
-5. Fleet status report
-```
-
-### Important state transitions
-
-```text
-Available
-   ↓ booking
-Reserved
-   ↓ pickup
-Rented
-   ↓ return
-Available / maintenance-related status
-```
-
-The exact source states mentioned for the fleet report are:
-
-- available,
-- rented,
-- under maintenance.
-
-If the return branch is not the home branch, the system also flags the car for repositioning.
-
-### Level-2 candidate
-
-`Process Return`:
-
-```text
-Receive return readings
-      ↓
-Compare odometer with included mileage
-      ↓
-Calculate mileage extra if applicable
-      ↓
-Compare fuel with expected level
-      ↓
-Calculate fuel extra if applicable
-      ↓
-Finalize rental
-      ↓
-Print invoice
-      ↓
-Flag repositioning when needed
-```
-
----
-
-## 182. Problem 8 — Utility billing: monthly state carries forward
-
-The utility problem illustrates how one month depends on previous stored data.
-
-### Core calculation
-
-```text
-Current meter reading
-       −
-Previous meter reading
-       =
-Units consumed
-       ↓
-Slab-wise tariff
-       ↓
-Current charge
-       +
-Unpaid carried-forward balance
-       =
-Amount due
-```
-
-### Major functions
-
-1. record meter reading/generate bill;
-2. record payment;
-3. manage late/unpaid accounts;
-4. generate revenue report;
-5. generate flagged-account list.
-
-### Important late-payment logic
-
-- unpaid by due date → surcharge added to following month's bill;
-- two consecutive unpaid bills → account flagged for disconnection and notice sent.
-
-### Level-2 candidate: unpaid-account processing
-
-This requires reading payment history, determining whether the due date has passed, calculating surcharge information, checking the consecutive-unpaid rule, and producing the appropriate notice/flag data.
-
-### Report details
-
-The revenue office needs:
-
-- total units billed for a billing month,
-- total amount collected,
-- a separate list of currently flagged accounts.
-
-The word “separate” matters: the second report is not merely another column in the first one.
-
----
-
-## 183. Problem 9 — Online bookstore: partial fulfilment creates a second outcome path
-
-The requirement is richer than a simple “place order” system because warehouse picking can discover damaged or missing books after payment/confirmation.
-
-### Major functions
-
-```text
-1. Browse catalogue / cart
-2. Verify stock
-3. Calculate total and process payment
-4. Confirm order / packing slip
-5. Warehouse fulfilment and inventory update
-6. Tracking / customer notification
-7. Handle partial fulfilment and refund
-```
-
-### Important boundary condition
-
-At checkout, the system verifies requested quantities are currently in stock. Items unavailable are rejected and a known restock date is shown.
-
-### Later warehouse problem
-
-Even though the checkout stock check passed, a later picking process can discover a damaged or missing book. That creates a **partial-fulfilment state** and a partial refund.
-
-This teaches an important requirements-analysis principle: a system may need to handle failures that occur **after an earlier validation succeeded**.
-
-### Level-2 candidate
-
-`Handle partial fulfilment` can include:
-
-```text
-Receive warehouse exception
-        ↓
-Identify missing/damaged item
-        ↓
-Update order fulfilment state
-        ↓
-Calculate refund amount
-        ↓
-Issue partial refund
-        ↓
-Update customer/order record
-```
-
-The exact implementation of payment processing is not expanded beyond the requirement; do not invent an external payment entity unless the requirement names one.
-
----
-
-## 184. Problem 10 — Fitness club: membership state + class capacity + gate access
-
-This problem contains three distinct domains inside one system:
-
-1. membership lifecycle,
-2. class booking,
-3. facility entry.
-
-### Major functions
-
-```text
-Create/activate membership
-Renew/upgrade membership
-Book/cancel class
-Manage waiting list
-Validate entry/log visit
-Generate reports
-```
-
-### Membership rules
-
-Joining payment activates membership from that date for the plan duration.
-
-Renewal extends the validity by the plan duration.
-
-Upgrade calculates the fee difference automatically.
-
-### Class rules
-
-The system checks:
-
-- whether the class is full;
-- whether the member's plan includes group classes.
-
-Cancellation can cause the freed spot to be offered to the first waiting-list person.
-
-### Gate rules
-
-Card scan → active membership check → entry allowed or denied → visit logged.
-
-### Reports
-
-- monthly attendance trends;
-- memberships expiring within the next two weeks.
-
-### Level-2 candidate
-
-`Book/cancel class` is especially useful because it combines capacity, eligibility, booking, cancellation, and waiting-list processing.
-
----
+# Deep Dive: Concept Maps, Examiner Answers & High-Yield Summary
 
 # Deep Dive M — High-Yield Connections Between Concepts
 
@@ -10329,32 +7770,30 @@ This is why the requirements lecture says careful analysis should catch inconsis
 
 ---
 
-## 186. DFDs help expose missing requirements
+## 186. Requirement Traceability Matrix (RTM) exposes missing requirements
 
 Consider a requirement that says:
 
 > “The clerk processes a returned book and the system updates the record.”
 
-A DFD decomposition may force you to ask:
+Traceability analysis forces the engineer to ask:
 
-- Which record?
-- Where is the due date stored?
-- Where is the fine balance stored?
-- Does the book become available immediately?
-- Is a receipt produced?
-- What does the clerk receive when the book is not overdue?
+- Which specific record in the data schema is updated?
+- Where is the due date stored and checked?
+- Where is the fine balance ledger maintained?
+- Does the book inventory become available immediately upon scan?
+- Is a formal receipt or physical slip produced?
+- What does the clerk receive when the book is returned on time without fines?
 
-The DFD is therefore not merely a drawing exercise. It can expose missing information because every process needs meaningful inputs and outputs.
-
-This connects directly to the requirements lecture's statement that formal models can surface subtle anomalies.
+Backward and forward traceability ensures that every requirement is backed by design modules and test cases, exposing missing information, dangling logic, and unauthorized scope.
 
 ---
 
 ## 187. Design quality can be seen as the next layer of the same idea
 
-Once the DFD identifies functions, design asks how to map them into modules.
+Once the SRS identifies functional requirements, design asks how to map them into modules or classes.
 
-Suppose a DFD shows:
+Suppose the requirements list:
 
 ```text
 Search
@@ -10404,9 +7843,9 @@ Requirement sentence
       ↓
 Functional requirement ID
       ↓
-DFD process
+Architectural module
       ↓
-Design module
+Class / Subroutine
       ↓
 Implementation unit
       ↓
@@ -10602,31 +8041,33 @@ Recognition:
 
 ---
 
-## 198. DFD question strategy — the “nouns and verbs” trick
+## 198. Unit Testing Scaffolding Strategy: Drivers vs Stubs
 
-The worked Trading-House tutorial gives an especially powerful rule:
+When testing an individual module $M$ in strict isolation:
 
-- **Who** outside the system → candidate external entity;
-- **verb** describing system work → candidate function;
-- **document/message going out** → candidate output;
-- **noun remembered between requests** → candidate data store.
+- **Driver:** A calling module simulator.
+  - Implements dummy input generation.
+  - Calls module $M$ with specific test cases.
+  - Captures output return values and verifies them against expected results.
+- **Stub:** A called subordinate simulator.
+  - Replaces subordinate subroutines called by module $M$.
+  - Supplies pre-determined dummy data so $M$ can execute without real databases, external hardware, or unwritten modules.
 
 ### Example
 
-Requirement:
-
-> “The clerk checks the customer's borrowing limit and unpaid fines. If valid, the system issues the book and records the loan.”
-
-Extraction:
-
 ```text
-Who?       Clerk
-Verbs?     checks, issues, records
-Stores?    member data, loan data, fine data
-Outputs?   issue confirmation / rejection message
+┌────────────────┐
+│  Test Driver   │ (Sends test vectors into Module M)
+└───────┬────────┘
+        ↓
+┌────────────────┐
+│   Module M     │ (Unit under test)
+└───────┬────────┘
+        ↓
+┌────────────────┐
+│   Test Stub    │ (Returns canned response to Module M)
+└────────────────┘
 ```
-
-This method dramatically reduces the chance of inventing unrelated DFD elements.
 
 ---
 
@@ -10844,30 +8285,25 @@ internal code access
 
 ---
 
-## 208. DFD map
+## 208. Software Quality & Maintainability Map
 
 ```text
-Requirement
+Software Quality
    ↓
-External entities
-Functions
-Outputs
-Data stores
-   ↓
-Context diagram
-   ↓
-Level 1 (3–7 major processes)
-   ↓
-Level 2 (one complex process)
-   ↓
-Balance + requirement coverage check
+   ├── Maintainability (60%+ lifetime cost)
+   │     ├── Understandability (clean code, comments)
+   │     ├── Modifiability (high cohesion, loose coupling)
+   │     └── Testability (isolated units, regression suite)
+   │
+   └── Portability
+         └── Portability Interface / Hardware Abstraction Layer
 ```
 
 Never forget:
 
 ```text
-DFD = data in motion
-NOT = execution control flow
+Error (Mental mistake) → Fault (Static bug in code) → Failure (Runtime crash)
+Verification ("Building right?") vs Validation ("Building right product?")
 ```
 
 ---
@@ -10904,9 +8340,9 @@ Used whenever behavior depends on several conditions and analysts need confidenc
 
 Used where mathematical precision and explicit state/behavior rules are valuable, especially in safety- and reliability-critical contexts highlighted by the lecture.
 
-### DFDs
+### Unit Testing Scaffolding
 
-Used in structured analysis to model processes, external entities, data stores, and data flows.
+Used in unit testing to isolate individual modules using drivers (dummy callers) and stubs (dummy callees).
 
 ### High-level design
 
@@ -10987,17 +8423,16 @@ Ask:
 - Are interfaces explicit?
 - Is the hierarchy neat rather than tangled?
 
-## 214. Before submitting a DFD answer
+## 214. Before submitting a modular software design answer
 
 Ask:
 
-- Is the context diagram exactly one system bubble?
-- Are all external entities shown there?
-- Have I kept internal stores out of the context diagram?
-- Does level 1 contain around 3–7 major processes?
-- Does every requirement function appear somewhere?
-- Did I name flows as data rather than control conditions?
-- Did I choose a genuinely complex process for level 2?
+- Are modules designed with functional cohesion rather than temporal or coincidental grouping?
+- Is coupling minimal (preferring data coupling over control, common, or content coupling)?
+- Is fan-out kept within $7 \pm 2$ to prevent excessive cognitive complexity?
+- Is fan-in maximized for reusable utility logic?
+- Are state variables encapsulated within objects or private module boundaries?
+- Is machine-dependent logic isolated behind a dedicated portability interface?
 - Does the level-2 decomposition explain the parent process?
 - Did I avoid inventing entities or features not in the requirement?
 - Did I preserve every required output/report?
@@ -11062,9 +8497,9 @@ Because it provides feedback paths. When a defect is discovered, the team can re
 
 ---
 
-## 224. Why do DFDs not show execution order?
+## 224. Why does Object-Oriented Design handle component evolution better than Function-Oriented Design?
 
-Because a DFD is intended to model data transformations and data movement. Execution sequence, timing, and branching control belong to other forms of behavioral modeling; the supplied DFD exercise explicitly says a DFD carries data, not control information.
+Because OOD encapsulates state and operations together inside autonomous classes. Adding a new component (such as a Smoke Detector in the Fire-Alarm system) merely requires creating a new subclass conforming to the existing interface, without modifying or recompiling existing centralized functions.
 
 ---
 
@@ -11172,8 +8607,8 @@ This expanded section deliberately follows the terminology and examples of the s
 - the life-cycle lecture's six stages, five models, feasibility study, maintenance categories, worked cases, and model-specific merits/demerits;
 - the requirements lecture's gathering techniques, inconsistency/incompleteness examples, ATM exercise, SRS roles, black-box view, good/bad SRS properties, functional/nonfunctional/constraint classification, decision logic, Z notation, and predicate-logic examples;
 - the software-design lecture's design-phase definition, good-design criteria, modularity, seven cohesion types, five coupling types, hierarchy measures, layering, function-oriented/object-oriented contrast, and fire-alarm case;
-- the Trading-House DFD statement and its worked decomposition;
-- the ten DFD practice requirements.
+- the software quality maintainability economics and portability interface models;
+- the testing fundamentals, verification vs validation, and unit test harness scaffolding.
 
 Where this document says **“practical extension”**, the purpose is to explain why the source concept matters, where such a concept is useful, how to recognize it, and how to apply it in an exam or engineering discussion. Those explanations are teaching extensions, not claims that every sentence appeared verbatim in the supplied slides.
 
@@ -11204,11 +8639,14 @@ Where this document says **“practical extension”**, the purpose is to explai
 21. Cohesion concerns the internal strength of one module.
 22. Coupling concerns interdependence between modules.
 23. Aim for high cohesion and low coupling.
-24. A context DFD has one system bubble and all external entities at the boundary.
-25. A DFD models data movement, not execution control flow.
+24. Software maintainability accounts for >60% of lifetime cost and rests on understandability, modifiability, and testability.
+25. Verification asks "Are we building the product right?"; Validation asks "Are we building the right product?".
 
 ---
 
 ## End of expanded study guide
 
 The original 105-page source audit remains above this section. This expansion is intentionally designed to make the notes usable not only for remembering **what** the lecturer said, but for understanding **why the concept exists, when it matters, how to recognize it, how it connects to the rest of software engineering, and how to write it in an examination answer**.
+
+
+---

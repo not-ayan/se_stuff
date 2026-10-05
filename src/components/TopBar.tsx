@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookOpen, BrainCircuit, Command, HelpCircle, Layers3, LayoutGrid, LayoutDashboard, Search, Sparkles } from 'lucide-react';
+import { BookOpen, BrainCircuit, Clock, Command, HelpCircle, Layers3, LayoutGrid, LayoutDashboard, Search, Sparkles } from 'lucide-react';
+import { formatDuration, useProgress } from '../lib/progress';
 
 export type ViewKey = 'home' | 'learn' | 'quiz' | 'cards' | 'labs';
 
@@ -28,6 +29,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   overallPercent,
   streak,
 }) => {
+  const { todayTimeSeconds } = useProgress();
   const navList = (className: string) => (
     <nav aria-label="Primary" className={className}>
       {NAV.map((item) => {
@@ -101,6 +103,14 @@ export const TopBar: React.FC<TopBarProps> = ({
           >
             <Search className="h-4 w-4" />
           </button>
+
+          <div
+            className="hidden items-center gap-1.5 rounded-xl border border-line bg-surface px-2.5 py-2 sm:flex"
+            title="Active study time recorded today"
+          >
+            <Clock className="h-3.5 w-3.5 text-emerald-600" />
+            <span className="font-mono text-[11.5px] font-medium text-body">{formatDuration(todayTimeSeconds)}</span>
+          </div>
 
           <div
             className="hidden items-center gap-1.5 rounded-xl border border-line bg-surface px-2.5 py-2 sm:flex"

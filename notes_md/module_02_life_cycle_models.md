@@ -179,7 +179,7 @@ The source notes that interviews and discussions are common ways of collecting i
 
 ### Design
 
-The traditional approach described in the lifecycle lecture has two activities: **structured analysis** and **structured design**. Structured analysis identifies functions and data flows using DFDs. Structured design then produces modules, invocation relationships, data structures, and algorithms.
+The traditional approach described in the lifecycle lecture has two activities: **structured analysis** and **structured design**. Structured analysis identifies functions and requirements. Structured design then produces modules, invocation relationships, data structures, and algorithms.
 
 ### Coding and unit testing
 

@@ -12,7 +12,7 @@ import { CHAPTERS, getChapterById } from './content/chapters';
 import type { Question } from './types';
 import { Sparkles } from 'lucide-react';
 
-type LabTab = 'dfd' | 'numerical' | 'diagrams';
+type LabTab = 'generator' | 'numerical' | 'diagrams';
 
 const Workspace: React.FC = () => {
   const { overall, streak } = useProgress();
@@ -21,7 +21,7 @@ const Workspace: React.FC = () => {
   const [quizModuleId, setQuizModuleId] = useState<string | undefined>(undefined);
   const [customQuestions, setCustomQuestions] = useState<Question[] | null>(null);
   const [cardsChapterId, setCardsChapterId] = useState<string | undefined>(undefined);
-  const [labTab, setLabTab] = useState<LabTab>('dfd');
+  const [labTab, setLabTab] = useState<LabTab>('generator');
   const [searchOpen, setSearchOpen] = useState(false);
 
   // AI Drawer state
@@ -115,7 +115,7 @@ const Workspace: React.FC = () => {
             navigate('cards');
           }}
           onOpenPractice={() => {
-            setLabTab('dfd');
+            setLabTab('generator');
             navigate('labs');
           }}
           onOpenAiMentor={(prompt) => {

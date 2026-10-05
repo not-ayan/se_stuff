@@ -1,4 +1,4 @@
-# Module 3: Requirements Analysis, Specification (SRS) & Formal Methods
+# Module 4: Requirements Analysis, Specification (SRS) & Formal Methods
 
 ![Module 3: Requirements Analysis, IEEE 830 SRS, Logic Modeling & Formal Specifications](/images/mod3_requirements_and_formal_specs.jpg)
 
@@ -737,7 +737,7 @@ A very effective technique is to actively ask:
 - What happens after repeated failure?
 - What happens when a resource is unavailable?
 
-This style of questioning is visible in the ATM and DFD examples throughout the supplied material.
+This style of questioning is visible in the ATM and decision table examples throughout the supplied material.
 
 ---
 
@@ -821,14 +821,14 @@ Vague requirements often disappear once you try to fill those three boxes.
 This is useful for:
 
 - writing numbered SRS clauses,
-- identifying DFD processes,
+- identifying architectural functions,
 - designing test cases,
 - designing module interfaces,
 - tracing implementation back to requirements.
 
 ### Practical extension: one large function can hide several smaller functions
 
-The lecture explicitly notes that a high-level requirement may itself consist of several identifiable functions. For example, “Process an order” may contain validation, stock checking, billing, logging, and backordering. This is exactly why the Trading-House solution decomposes `Process-order` further in its level-2 DFD.
+The lecture explicitly notes that a high-level requirement may itself consist of several identifiable functions. For example, “Process an order” may contain validation, stock checking, billing, logging, and backordering.
 
 ---
 

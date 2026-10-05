@@ -10,9 +10,9 @@ import {
   Check,
   Clock,
   Compass,
+  Dices,
   Flame,
   Layers3,
-  Network,
   RotateCcw,
   Sparkles,
   Target,
@@ -20,10 +20,9 @@ import {
   Trophy,
 } from 'lucide-react';
 import { CHAPTERS, getChapterById } from '../content/chapters';
-import { STUDY_PLAN, chaptersForDay, minutesForDay } from '../content/plan';
 import { ALL_QUESTIONS, QUIZ_MODULE_LABELS } from '../data/quiz';
 import { FLASHCARDS } from '../data/flashcards';
-import { useProgress } from '../lib/progress';
+import { formatDuration, useProgress } from '../lib/progress';
 import { ACCENT_CLASSES, ProgressBar, SectionHeading, StatTile } from '../components/ui';
 import type { ViewKey } from '../components/TopBar';
 
@@ -35,7 +34,19 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigate, onOpenQuiz, onOpenCards }) => {
-  const { overall, quizSummary, streak, chapterStats, isChapterComplete, state, bookmarkedChapters, resetProgress } = useProgress();
+  const {
+    overall,
+    quizSummary,
+    streak,
+    chapterStats,
+    isChapterComplete,
+    state,
+    bookmarkedChapters,
+    resetProgress,
+    todayTimeSeconds,
+    totalTimeSeconds,
+    chapterTimeSeconds,
+  } = useProgress();
 
   const continueChapter = useMemo(() => {
     if (state.lastVisit) {
@@ -75,11 +86,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
               </span>
               <div className="min-w-0">
                 <h1 className="text-[22px] font-semibold leading-tight tracking-tight text-ink sm:text-[27px]">
-                  Software Engineering
+                  CSMC501 — Software Engineering Mid-Term
                 </h1>
                 <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed text-subtle">
-                  The full lecture notes from Dr. Rajib Mall and Prof. Swarup Roy, an exam question bank, flashcards and
-                  practice labs. Read a chapter, drill the questions, check yourself.
+                  Curated strictly to the Mid-Term Syllabus (Modules 1–6: Software Crisis, Traceability, SDLC & Phase Containment, Quality, Requirements & Decision Tables, Design up to FOD vs OOD, and Testing Fundamentals). Procedural problem generators and real-time solution checkers embedded directly in every lesson.
                 </p>
               </div>
             </div>
@@ -99,6 +109,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
               >
                 <Sparkles className="h-4 w-4 text-amber-700" />
                 Mixed quiz
+              </button>
+              <button
+                onClick={() => onNavigate('labs')}
+                className="flex items-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-[13px] font-semibold text-amber-900 transition-colors hover:bg-amber-500/20 shadow-sm"
+              >
+                <Dices className="h-4 w-4 text-amber-600" />
+                Problem Generator
               </button>
             </div>
 
@@ -159,66 +176,18 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
       </section>
 
       {/* ── Stats ─────────────────────────────────────────────────────────── */}
-      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <StatTile
+          label="Study Time"
+          value={formatDuration(todayTimeSeconds)}
+          hint={`${formatDuration(totalTimeSeconds)} total logged`}
+          icon={<Clock className="h-4 w-4" />}
+          tone="text-emerald-700"
+        />
         <StatTile label="Streak" value={`${streak}d`} hint="Consecutive study days" icon={<Flame className="h-4 w-4" />} tone="text-amber-700" />
         <StatTile label="Questions" value={`${quizSummary.answered}`} hint={`${quizSummary.correct} correct so far`} icon={<Trophy className="h-4 w-4" />} tone="text-ink" />
         <StatTile label="Flashcards" value={`${cardsKnown}/${FLASHCARDS.length}`} hint={`${cardsSeen} cards reviewed`} icon={<Sparkles className="h-4 w-4" />} tone="text-violet-700" />
-        <StatTile label="Bookmarks" value={`${bookmarkedChapters.length}`} hint="Chapters saved for revision" icon={<BookmarkCheck className="h-4 w-4" />} tone="text-emerald-700" />
-      </section>
-
-      {/* ── Study plan ────────────────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <SectionHeading
-          eyebrow="Study plan"
-          title="Your three-day sprint"
-          description="A balanced path through all twelve chapters. Each day mixes theory-heavy and practice-heavy material."
-        />
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          {STUDY_PLAN.map((day) => {
-            const chapters = chaptersForDay(day);
-            const percent = Math.round(chapters.reduce((sum, c) => sum + chapterStats(c.id).percent, 0) / (chapters.length || 1));
-            return (
-              <div key={day.day} className="rounded-2xl border border-line bg-surface p-5">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11.5px] font-semibold text-body">{day.label}</span>
-                  <span className="flex items-center gap-1 text-[11px] text-muted">
-                    <Clock className="h-3 w-3" /> {minutesForDay(day)} min
-                  </span>
-                </div>
-                <p className="mt-1.5 text-[12px] leading-snug text-subtle">{day.focus}</p>
-                <ProgressBar value={percent} className="mt-3" />
-                <ul className="mt-3 space-y-0.5">
-                  {chapters.map((chapter) => {
-                    const done = isChapterComplete(chapter.id);
-                    return (
-                      <li key={chapter.id}>
-                        <button
-                          onClick={() => onSelectChapter(chapter.id)}
-                          className="flex w-full items-center gap-2 rounded-lg px-1.5 py-1.5 text-left text-[12.5px] transition-colors hover:bg-canvas"
-                        >
-                          <span
-                            className={`grid h-4 w-4 shrink-0 place-items-center rounded ${
-                              done ? 'bg-emerald-500/20 text-emerald-700' : 'bg-line text-muted'
-                            }`}
-                          >
-                            {done ? <Check className="h-3 w-3" /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
-                          </span>
-                          <span className={`truncate ${done ? 'text-muted' : 'text-body'}`}>{chapter.title}</span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className="mt-3 flex items-center justify-between border-t border-line pt-3 text-[11px] text-muted">
-                  <span>{percent}% complete</span>
-                  <span className="font-mono">
-                    {chapters.filter((chapter) => isChapterComplete(chapter.id)).length}/{chapters.length}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <StatTile label="Bookmarks" value={`${bookmarkedChapters.length}`} hint="Chapters saved for revision" icon={<BookmarkCheck className="h-4 w-4" />} tone="text-sky-700" />
       </section>
 
       {/* ── Chapter library ───────────────────────────────────────────────── */}
@@ -229,6 +198,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
             const stats = chapterStats(chapter.id);
             const accent = ACCENT_CLASSES[chapter.accent];
             const bookmarked = Boolean(state.bookmarks[chapter.id]);
+            const spentSecs = chapterTimeSeconds(chapter.id);
             return (
               <button
                 key={chapter.id}
@@ -248,7 +218,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
                   <ProgressBar value={stats.percent} tone={accent.bar} />
                   <div className="mt-2 flex items-center justify-between text-[10.5px] text-muted">
                     <span className="font-mono">{stats.read}/{stats.total} sections</span>
-                    <span>{chapter.estMinutes} min</span>
+                    <span className="flex items-center gap-1 font-mono text-[10.5px]">
+                      {spentSecs > 0 && <span className="text-emerald-700 font-semibold">{formatDuration(spentSecs)} /</span>}
+                      <span>{chapter.estMinutes} min</span>
+                    </span>
                   </div>
                 </div>
               </button>
@@ -306,14 +279,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectChapter, onNavigat
           <SectionHeading eyebrow="Practice" title="Labs" />
           <button
             onClick={() => onNavigate('labs')}
+            className="flex w-full items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50/70 p-4 text-left transition-colors hover:border-amber-400 hover:bg-amber-50"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-amber-100">
+              <Dices className="h-4 w-4 text-amber-700" />
+            </span>
+            <span>
+              <span className="block text-[13px] font-semibold text-ink">Problem Generator &amp; Checker</span>
+              <span className="block text-[11.5px] text-amber-900/75">Infinite random questions &amp; step-by-step solvers</span>
+            </span>
+          </button>
+          <button
+            onClick={() => onNavigate('labs')}
             className="flex w-full items-center gap-3 rounded-2xl border border-line bg-surface p-4 text-left transition-colors hover:border-line-strong"
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-canvas">
-              <Network className="h-4 w-4 text-amber-700" />
+              <Layers3 className="h-4 w-4 text-emerald-700" />
             </span>
             <span>
-              <span className="block text-[13px] font-semibold text-ink">DFD practice studio</span>
-              <span className="block text-[11.5px] text-subtle">11 worked structured-analysis problems</span>
+              <span className="block text-[13px] font-semibold text-ink">Concept Visualizers</span>
+              <span className="block text-[11.5px] text-subtle">Waterfall, Spiral, Bathtub &amp; Cohesion</span>
             </span>
           </button>
           <button

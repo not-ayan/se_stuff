@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, BrainCircuit, HelpCircle, List, Network, Sparkles, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BrainCircuit, Dices, HelpCircle, List, Sparkles, X } from 'lucide-react';
 import { CHAPTERS, getChapterById } from '../content/chapters';
 import { NotesReader } from '../components/NotesReader';
 import { ChapterSidebar } from '../components/ChapterSidebar';
@@ -100,12 +100,19 @@ export const LearnView: React.FC<LearnViewProps> = ({
               >
                 <Sparkles className="h-4 w-4 text-amber-700" /> Flashcards
               </button>
+              <button
+                onClick={onOpenPractice}
+                className="flex items-center gap-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-[13px] font-medium text-amber-900 transition-colors hover:bg-amber-500/20"
+                title="Practice randomly generated problems"
+              >
+                <Dices className="h-4 w-4 text-amber-600" /> Practice Problems
+              </button>
               {chapter.hasPractice && (
                 <button
                   onClick={onOpenPractice}
                   className="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-[13px] font-medium text-amber-800 transition-colors hover:bg-amber-100"
                 >
-                  <Network className="h-4 w-4" /> DFD studio
+                  <Dices className="h-4 w-4" /> Practice Studio
                 </button>
               )}
             </div>

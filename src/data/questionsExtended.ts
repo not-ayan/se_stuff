@@ -2,7 +2,7 @@ import { Question } from '../types';
 
 /**
  * Supplementary exam questions covering material that appears in the lecture
- * PDFs (LECT2/3/4, the DFD practice set, and the Rajib Mall notes) but was not
+ * PDFs (LECT2/3/4, mid-term course notes, and the Rajib Mall notes) but was not
  * present in the original bank. Ids are prefixed `qx-` to stay distinct.
  */
 export const EXTENDED_QUESTIONS: Question[] = [
@@ -91,10 +91,10 @@ export const EXTENDED_QUESTIONS: Question[] = [
     explanation: 'Maintenance consumes roughly 60% of total lifetime effort — the development-to-maintenance ratio is about 40:60, making it the single most expensive phase.',
   },
 
-  // ── Module 3 ──────────────────────────────────────────────────────────────
+  // ── Module 4 (Requirements & Formal Specification) ─────────────────────────
   {
     id: 'qx-3-1',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'mcq',
     question: 'The SRS is called a black-box specification because it:',
     options: [
@@ -108,7 +108,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-3-2',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'mcq',
     question: 'Which of these is a marker of a NON-verifiable SRS requirement?',
     options: ['"Response time must be under 2 seconds"', '"The system should be user-friendly"', '"The system shall reject amounts above the balance"', '"The report must list all overdue books"'],
@@ -117,7 +117,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-3-3',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'true_false',
     question: 'A decision table is especially useful when you need to check that no rule has been omitted from complex conditional logic.',
     correctAnswer: true,
@@ -125,7 +125,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-3-4',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'mcq',
     question: 'In a Z specification, what does the symbol ΔS conventionally denote?',
     options: ['A state schema that is only inspected', 'An operation that modifies the state of schema S', 'An input variable', 'An invariant that must always hold'],
@@ -134,7 +134,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-3-5',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'mcq',
     question: 'In algebraic specification, an operation that a client can use but that is itself expressible using basic constructors is called:',
     options: ['A basic constructor', 'An extra constructor', 'A basic inspector', 'An exception'],
@@ -143,17 +143,17 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-3-6',
-    moduleId: 'mod-3',
+    moduleId: 'mod-4',
     type: 'short_answer',
     question: 'Give the formula for the minimum number of rewrite equations needed for a complete algebraic specification.',
     correctAnswer: 'm1 × (m2 + n1) + n2',
     explanation: 'm1 = basic constructors, m2 = extra constructors, n1 = basic inspectors, n2 = extra inspectors. For a FIFO queue with m1=2, m2=1, n1=2, n2=0 this gives 6 axioms.',
   },
 
-  // ── Modules 4-5 (Design & DFD) ────────────────────────────────────────────
+  // ── Module 3 (Quality) & Module 5 (Design) ─────────────────────────────────
   {
     id: 'qx-4-1',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-5',
     type: 'mcq',
     question: 'Passing a whole Order record to a function that only reads order.total is an example of which coupling?',
     options: ['Data coupling', 'Stamp coupling', 'Control coupling', 'Content coupling'],
@@ -162,7 +162,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-4-2',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-5',
     type: 'mcq',
     question: 'A module whose only description is "initializes variables, sets up logging, and opens connections" most likely has which cohesion?',
     options: ['Functional', 'Sequential', 'Temporal', 'Coincidental'],
@@ -171,7 +171,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-4-3',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-5',
     type: 'mcq',
     question: 'In a structure chart, a module called directly by three different modules has:',
     options: ['Fan-out = 3', 'Fan-in = 3', 'Depth = 3', 'Width = 3'],
@@ -180,46 +180,48 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-4-4',
-    moduleId: 'mod-4-5',
-    type: 'true_false',
-    question: 'In a DFD, a data store may be connected directly to an external entity.',
-    correctAnswer: false,
-    explanation: 'Data stores connect only to processes (bubbles). Direct entity-to-store or store-to-store flows are not permitted — a process must mediate the interaction.',
+    moduleId: 'mod-5',
+    type: 'mcq',
+    question: 'In Object-Oriented Design (OOD), a system is primarily viewed as a collection of interacting:',
+    options: ['Global subroutines and central databases', 'Autonomous objects encapsulating state and operations', 'Sequential data filters in a pipeline', 'Static configuration files'],
+    correctAnswer: 'Autonomous objects encapsulating state and operations',
+    explanation: 'OOD decomposes the system into objects that encapsulate private state and expose methods, reducing global coupling.',
   },
   {
     id: 'qx-4-5',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-3',
     type: 'mcq',
-    question: 'What does the DFD data dictionary operator `{ item }*` denote?',
-    options: ['A selection between alternatives', 'An optional element', 'Zero or more repetitions', 'A composition of two elements'],
-    correctAnswer: 'Zero or more repetitions',
-    explanation: 'In the data dictionary grammar, `{ }` denotes iteration, `[ , ]` selection, `( )` optionality, and `+` composition.',
+    question: 'Which of the following is an essential attribute of high Software Maintainability?',
+    options: ['Understandability, Modifiability, and Testability', 'Execution speed, binary compression, and assembly optimization', 'Single-file code architecture', 'Elimination of all comments'],
+    correctAnswer: 'Understandability, Modifiability, and Testability',
+    explanation: 'Maintainability directly depends on how easily software can be understood, modified safely, and retested without ripple effects.',
   },
   {
     id: 'qx-4-6',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-3',
     type: 'mcq',
-    question: 'The "balancing" rule for DFDs requires that:',
+    question: 'How does an Abstract Machine or Hardware Abstraction Layer (HAL) enhance software portability?',
     options: [
-      'Every bubble decomposes into exactly two children',
-      'Data flows entering and leaving a bubble match those entering and leaving its decomposition',
-      'Each level uses a different notation',
-      'Data stores appear at every level',
+      'It isolates all machine-dependent device drivers and OS calls behind a standardized interface',
+      'It automatically converts code into Python at runtime',
+      'It eliminates the need for a compiler',
+      'It duplicates the source code for every target CPU',
     ],
-    correctAnswer: 'Data flows entering and leaving a bubble match those entering and leaving its decomposition',
-    explanation: 'Balancing guarantees the child diagram neither invents new external flows nor drops ones the parent had.',
+    correctAnswer: 'It isolates all machine-dependent device drivers and OS calls behind a standardized interface',
+    explanation: 'A portability interface/HAL confines platform-specific system calls to a thin layer, allowing the core application logic to be compiled on new targets without change.',
   },
   {
     id: 'qx-4-7',
-    moduleId: 'mod-4-5',
-    type: 'short_answer',
-    question: 'Which DFD level must contain exactly one bubble, and how is that bubble annotated?',
-    correctAnswer: 'The context diagram (Level 0), annotated with a noun',
-    explanation: 'Level 0 represents the entire system as a single bubble labelled with a noun; processes at deeper levels are labelled with verbs.',
+    moduleId: 'mod-5',
+    type: 'mcq',
+    question: 'In the Fire-Alarm System case study, which design approach localizes changes when a new Smoke Sensor is added?',
+    options: ['Object-Oriented Design (OOD)', 'Function-Oriented Design (FOD)', 'Unstructured programming', 'Classical Waterfall'],
+    correctAnswer: 'Object-Oriented Design (OOD)',
+    explanation: 'In OOD, a new Sensor class inherits from a base Sensor abstraction; existing controller and alarm methods do not require modification.',
   },
   {
     id: 'qx-4-8',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-5',
     type: 'mcq',
     question: 'Which structured design technique produces a structure chart with an afferent branch, a central transform, and an efferent branch?',
     options: ['Transaction analysis', 'Transform analysis', 'Data flow testing', 'Reverse engineering'],
@@ -228,7 +230,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-4-9',
-    moduleId: 'mod-4-5',
+    moduleId: 'mod-5',
     type: 'true_false',
     question: 'A good high-level design aims for high cohesion, low coupling, and a shallow module hierarchy.',
     correctAnswer: true,
@@ -343,10 +345,10 @@ export const EXTENDED_QUESTIONS: Question[] = [
     explanation: 'The proxy lets client and server objects communicate across a network as if locally. Facade instead simplifies a complex local subsystem behind one entry point.',
   },
 
-  // ── Module 10 (Testing) ───────────────────────────────────────────────────
+  // ── Module 6 (Software Testing Fundamentals & Unit Testing) ───────────────
   {
     id: 'qx-10-1',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'mcq',
     question: 'For an input range of [0, 5000], which set of values belongs to Boundary Value Analysis?',
     options: ['{500, 1000, 2500}', '{-1, 0, 1, 4999, 5000, 5001}', '{-5, 6000}', '{0, 2500, 5000}'],
@@ -355,7 +357,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-10-2',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'mcq',
     question: 'Top-down integration testing requires which test scaffolding?',
     options: ['Drivers only', 'Stubs only', 'Both drivers and stubs', 'Neither'],
@@ -364,7 +366,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-10-3',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'mcq',
     question: 'In mutation testing, a mutant that produces the same output as the original for every test case is said to be:',
     options: ['Killed', 'Alive, indicating the test suite is deficient', 'Equivalent and therefore good', 'Seeded'],
@@ -373,7 +375,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-10-4',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'mcq',
     question: 'Using error seeding, 25 defects are seeded, 20 are found during testing, and 50 natural defects are found. What is the estimated number of remaining unseeded defects?',
     options: ['12', '12.5', '62.5', '15'],
@@ -382,7 +384,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-10-5',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'true_false',
     question: 'In Cleanroom testing, programmers verify their modules statically instead of unit-testing them by execution.',
     correctAnswer: true,
@@ -390,7 +392,7 @@ export const EXTENDED_QUESTIONS: Question[] = [
   },
   {
     id: 'qx-10-6',
-    moduleId: 'mod-10',
+    moduleId: 'mod-6',
     type: 'mcq',
     question: 'Code walkthroughs should NOT be attended by managers because:',
     options: [
@@ -634,12 +636,12 @@ export const EXTENDED_QUESTIONS: Question[] = [
     question: 'Which of these is the correct order for recovering design from code during reverse engineering?',
     options: [
       'SRS → Structure chart → Module specs → Code',
-      'Code → Module specs → Structure chart / DFD → SRS document',
+      'Code → Module specs → Structure chart / Architectural model → SRS document',
       'Module specs → Code → SRS → Design',
       'Code → SRS → Module specs → Structure chart',
     ],
-    correctAnswer: 'Code → Module specs → Structure chart / DFD → SRS document',
-    explanation: 'Reverse engineering climbs the abstraction ladder — code to module specifications, then to architecture (structure chart/DFD), and finally back to an SRS document.',
+    correctAnswer: 'Code → Module specs → Structure chart / Architectural model → SRS document',
+    explanation: 'Reverse engineering climbs the abstraction ladder — code to module specifications, then to architecture (structure chart/architectural model), and finally back to an SRS document.',
   },
   {
     id: 'qx-14-5',

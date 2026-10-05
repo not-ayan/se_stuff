@@ -7,7 +7,7 @@ export interface TopicItem {
   moduleId: string;
   lessonNumber: number;
   title: string;
-  day: ExamDay;
+  day?: ExamDay;
   difficulty: Difficulty;
   isHighYield: boolean;
   isNumerical: boolean;
@@ -26,7 +26,7 @@ export interface CourseModule {
   moduleNumber: number;
   title: string;
   description: string;
-  day: ExamDay;
+  day?: ExamDay;
   topics: TopicItem[];
 }
 
@@ -41,23 +41,4 @@ export interface Question {
   hint?: string;
 }
 
-export interface DFDProblem {
-  id: string;
-  problemNumber: number;
-  title: string;
-  systemName: string;
-  requirement: string;
-  externalEntities: { name: string; inputs: string[]; outputs: string[] }[];
-  candidateFunctions: { id: string; name: string; triggeredBy: string; description: string }[];
-  dataStores: string[];
-  level0: {
-    systemBubble: string;
-    flows: { from: string; to: string; label: string }[];
-  };
-  level1: {
-    bubbles: { id: string; name: string; readsFrom: string[]; writesTo: string[]; inputs: string[]; outputs: string[] }[];
-  };
-  level2FocusBubble: string;
-  level2SubBubbles: { id: string; name: string; description: string; inputs: string[]; outputs: string[] }[];
-  sampleDataDictionary?: { name: string; definition: string }[];
-}
+

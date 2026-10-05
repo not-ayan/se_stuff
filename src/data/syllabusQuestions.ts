@@ -210,7 +210,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-01",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "What is the primary role of the System Analyst in requirements engineering?",
     "options": [
@@ -224,7 +224,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-02",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "Which of the following is NOT an IEEE 830 quality attribute of a well-formed SRS?",
     "options": [
@@ -238,7 +238,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-03",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "In a formal 4-quadrant Decision Table, what are the four constituent sections?",
     "options": [
@@ -252,7 +252,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-04",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "numerical",
     "question": "If a business policy has 4 binary independent conditions (each True or False), how many total rules are required in the decision table to guarantee exhaustive coverage?",
     "correctAnswer": "16",
@@ -260,7 +260,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-05",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "In Hoare Logic axiomatic specifications, what does the triple {P} S {Q} assert?",
     "options": [
@@ -274,7 +274,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-06",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "In the algebraic specification of an Abstract Data Type (ADT), how are operations categorized?",
     "options": [
@@ -288,7 +288,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m3-07",
-    "moduleId": "mod-3",
+    "moduleId": "mod-4",
     "type": "mcq",
     "question": "For a Stack ADT with operations newStack, push(s, x), pop(s), top(s), and isEmpty(s), what is the evaluation of pop(push(s, x))?",
     "options": [
@@ -302,7 +302,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-01",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "What is the primary difference between Cohesion and Coupling in software architecture?",
     "options": [
@@ -316,7 +316,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-02",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "Which of the following represents the 7 levels of Cohesion in strict order from WORST to BEST?",
     "options": [
@@ -330,7 +330,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-03",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "A module called `startupInitialization()` that turns on hardware drivers, clears display screens, opens database connections, and resets logs exhibits what level of cohesion?",
     "options": [
@@ -344,7 +344,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-04",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "Which of the following represents the 6 levels of Coupling in strict order from WORST (tightest) to BEST (loosest)?",
     "options": [
@@ -358,7 +358,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-05",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "Why is Common Coupling (sharing global variables among multiple modules) dangerous in software systems?",
     "options": [
@@ -372,7 +372,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-06",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "In a Structure Chart, what do an open circle arrow (\u25cb\u2192) and a solid/filled circle arrow (\u25cf\u2192) signify?",
     "options": [
@@ -386,7 +386,7 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m4-07",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
     "question": "What is the recommended design heuristic for Fan-In and Fan-Out in module structure charts?",
     "options": [
@@ -400,88 +400,212 @@ export const SYLLABUS_EXAM_QUESTIONS: Question[] = [
   },
   {
     "id": "q-m5-01",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
-    "question": "Which of the following connections is STRICTLY ILLEGAL in a Data Flow Diagram?",
+    "question": "According to Grady Booch's dictum, how do Function-Oriented Design (FOD) and Object-Oriented Design (OOD) view the primary organizational structure of software?",
     "options": [
-      "Connecting a Data Store directly to another Data Store without an intervening Process bubble.",
-      "Connecting an External Entity to a Process.",
-      "Connecting a Process to a Data Store.",
-      "Connecting one Process bubble directly to another Process bubble."
+      "FOD organizes software around functions (subroutines) with data secondary, whereas OOD organizes software around autonomous entities (objects) encapsulating state and operations.",
+      "FOD is purely for embedded systems while OOD is strictly for cloud web applications.",
+      "FOD encapsulates state inside classes, while OOD relies exclusively on global centralized data structures.",
+      "FOD eliminates functions entirely in favor of database triggers, while OOD eliminates data."
     ],
-    "correctAnswer": "Connecting a Data Store directly to another Data Store without an intervening Process bubble.",
-    "explanation": "Data cannot move autonomously. Data can only be transferred between entities and stores through an active Process bubble."
+    "correctAnswer": "FOD organizes software around functions (subroutines) with data secondary, whereas OOD organizes software around autonomous entities (objects) encapsulating state and operations.",
+    "explanation": "In FOD, the primary building blocks are subroutines/functions that operate on shared or passed data. In OOD, the fundamental units are objects that encapsulate data together with the operations operating on that data."
   },
   {
     "id": "q-m5-02",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-5",
     "type": "mcq",
-    "question": "In DFD terminology, what is a 'Black Hole' defect?",
+    "question": "In the Fire-Alarm System design comparison, why does the Function-Oriented Design (FOD) struggle when a new sensor type (e.g., Smoke Detector alongside Heat Detector) is introduced?",
     "options": [
-      "A process bubble that has incoming data flows but zero outgoing data flows.",
-      "A process bubble that generates outputs with no inputs (Miracle).",
-      "A circular dependency between two external entities.",
-      "A database that runs out of disk storage."
+      "The central controller's interrogator and processor functions must be modified and recompiled because logic is centralized by action rather than device type.",
+      "FOD does not allow hardware communication or polling loops.",
+      "FOD requires that every sensor be implemented as a separate microservice.",
+      "FOD cannot read analog signals from electrical sensors."
     ],
-    "correctAnswer": "A process bubble that has incoming data flows but zero outgoing data flows.",
-    "explanation": "A Black Hole consumes data without producing any output or updating any persistent store, representing a dead-end functional defect."
+    "correctAnswer": "The central controller's interrogator and processor functions must be modified and recompiled because logic is centralized by action rather than device type.",
+    "explanation": "In FOD, adding a new sensor requires modifying every centralized function that handles sensors (e.g. Interrogate(), SoundAlarm()). In OOD, a new Sensor subclass can be added polymorphically without modifying existing classes."
   },
   {
     "id": "q-m5-03",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-6",
     "type": "mcq",
-    "question": "What does the fundamental DFD Balancing Rule require?",
+    "question": "In unit testing, what is the key difference between a Test Driver and a Test Stub?",
     "options": [
-      "All input and output data flows connected to a parent process bubble must appear with exact semantic equivalence in its decomposed child DFD.",
-      "Every bubble must have equal numbers of inputs and outputs.",
-      "The number of entities must equal the number of data stores.",
-      "Every process bubble must take exactly 1 second to execute."
+      "A Driver simulates a calling module (calls the unit under test), while a Stub simulates a called module (called by the unit under test).",
+      "A Driver is used only in system testing, while a Stub is used only in acceptance testing.",
+      "A Driver simulates database failure, while a Stub replaces the entire operating system.",
+      "A Driver is written in machine code, while a Stub is written in Python."
     ],
-    "correctAnswer": "All input and output data flows connected to a parent process bubble must appear with exact semantic equivalence in its decomposed child DFD.",
-    "explanation": "Balancing ensures conservation of data flows across hierarchical levels: data cannot appear or vanish between parent and child diagrams."
+    "correctAnswer": "A Driver simulates a calling module (calls the unit under test), while a Stub simulates a called module (called by the unit under test).",
+    "explanation": "A driver acts as the dummy main program sending test cases into the module under test. A stub provides dummy responses when the module under test calls subordinate subroutines."
   },
   {
     "id": "q-m5-04",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-6",
     "type": "mcq",
-    "question": "In a Data Dictionary, what does the notation `Payment = [ Cash | Card | UPI ]` signify?",
+    "question": "Which sequence correctly captures the causal chain from human mistake to observable dynamic breakdown?",
     "options": [
-      "Selection: Payment is composed of exactly ONE of either Cash, Card, or UPI.",
-      "Sequence: Payment consists of Cash followed by Card followed by UPI.",
-      "Iteration: Payment contains zero or more UPI transfers.",
-      "Optional: Payment may be omitted."
+      "Error (human mistake in code/design) \u2192 Fault/Defect (static bug in artifact) \u2192 Failure (dynamic manifestation during execution).",
+      "Failure \u2192 Fault \u2192 Error.",
+      "Defect \u2192 Failure \u2192 Error.",
+      "Bug \u2192 Crash \u2192 Human mistake."
     ],
-    "correctAnswer": "Selection: Payment is composed of exactly ONE of either Cash, Card, or UPI.",
-    "explanation": "Square brackets `[ | ]` denote selection (OR); braces `{ }` denote iteration; plus `+` denotes sequence; parentheses `( )` denote optional fields."
+    "correctAnswer": "Error (human mistake in code/design) \u2192 Fault/Defect (static bug in artifact) \u2192 Failure (dynamic manifestation during execution).",
+    "explanation": "An Error is a human cognitive mistake. It introduces a Fault (static defect) into the source code or design. When that code is executed under conditions triggering the fault, a Failure (runtime deviation from expected behavior) occurs."
   },
   {
     "id": "q-m5-05",
-    "moduleId": "mod-4-5",
-    "type": "short_answer",
-    "question": "In Data Dictionary grammar, which pair of symbols is used to represent repetition or iteration (0 or more occurrences)?",
-    "correctAnswer": "{ }",
-    "explanation": "Curly braces `{ }` denote iteration of elements from zero to unbounded repetitions."
+    "moduleId": "mod-6",
+    "type": "mcq",
+    "question": "How does Barry Boehm succinctly distinguish between 'Verification' and 'Validation'?",
+    "options": [
+      "Verification: 'Are we building the product right?' | Validation: 'Are we building the right product?'",
+      "Verification: 'Is the product cheap?' | Validation: 'Is the product fast?'",
+      "Verification: 'Did we write unit tests?' | Validation: 'Did we run them on Linux?'",
+      "Verification: 'Are we building the right product?' | Validation: 'Are we building the product right?'"
+    ],
+    "correctAnswer": "Verification: 'Are we building the product right?' | Validation: 'Are we building the right product?'",
+    "explanation": "Verification checks adherence to phase specifications (syntax, design rules, static analysis). Validation checks adherence to the actual user needs and operational goals."
   },
   {
     "id": "q-m5-06",
-    "moduleId": "mod-4-5",
-    "type": "true_false",
-    "question": "A Level 0 Context Diagram should always depict all internal relational database tables and files as data stores.",
-    "correctAnswer": false,
-    "explanation": "Internal data stores are deliberately omitted from the Context Diagram to keep the top-level view clean. Data stores first appear in Level 1 decomposition."
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "In modern software engineering economics, what proportion of total life cycle software effort/cost is spent on Maintenance versus initial Development?",
+    "options": [
+      "Approximately 60% or more on Maintenance, with 40% or less on initial Development.",
+      "Approximately 90% on initial Development and 10% on Maintenance.",
+      "Exactly 50% Development and 50% Maintenance across all domains.",
+      "99% on Hardware purchasing and 1% on Maintenance."
+    ],
+    "correctAnswer": "Approximately 60% or more on Maintenance, with 40% or less on initial Development.",
+    "explanation": "Extensive empirical studies (Boehm, Lientz & Swanson, Rajib Mall) show that maintenance consumes roughly 60% to 80% of total life cycle costs, with development accounting for only 20% to 40%."
   },
   {
     "id": "q-m5-07",
-    "moduleId": "mod-4-5",
+    "moduleId": "mod-1",
     "type": "mcq",
-    "question": "What should the naming convention for a Process bubble in a DFD always be?",
+    "question": "What is the primary role of Backward (or Reverse) Traceability in a Requirement Traceability Matrix (RTM)?",
     "options": [
-      "An active [Verb + Noun Phrase] (e.g., 'Validate Password', 'Compute Total Bill')",
-      "A passive noun (e.g., 'Billing File')",
-      "An acronym with no description (e.g., 'SYS_01')",
-      "A variable name with camelCase (e.g., 'doProcessing()')"
+      "To verify that every design component and line of code traces back to an authorized customer requirement (detecting gold plating or unauthorized features).",
+      "To enable developers to write code before requirements are approved.",
+      "To automatically reverse-compile assembly code into high-level C++.",
+      "To trace git commit hashes backwards to the previous release tag."
     ],
-    "correctAnswer": "An active [Verb + Noun Phrase] (e.g., 'Validate Password', 'Compute Total Bill')",
-    "explanation": "Processes represent active transformations of data, requiring action verbs paired with descriptive object nouns."
+    "correctAnswer": "To verify that every design component and line of code traces back to an authorized customer requirement (detecting gold plating or unauthorized features).",
+    "explanation": "Backward traceability links design components, code, and tests back to the SRS requirement that justified their existence, preventing extraneous features (gold plating) and unverified code."
+  },
+  {
+    "id": "q-m3-qual-01",
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "Why is 'fitness of purpose' an insufficient definition of Software Quality?",
+    "options": [
+      "A program may compute correct results but have an unusable UI or unmaintainable spaghetti code.",
+      "Fitness of purpose applies only to mechanical appliances like ceiling fans, not software.",
+      "Software quality is exclusively measured by execution speed in nanoseconds.",
+      "Fitness of purpose ignores compiler warnings."
+    ],
+    "correctAnswer": "A program may compute correct results but have an unusable UI or unmaintainable spaghetti code.",
+    "explanation": "In software engineering, functional correctness alone does not guarantee quality. A product that cannot be maintained, ported, or easily used fails modern quality criteria."
+  },
+  {
+    "id": "q-m3-qual-02",
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "According to the 40:60 Software Economics rule, what proportion of total lifetime expenditure is consumed by post-delivery Maintenance?",
+    "options": [
+      "At least 60% (with development accounting for <= 40%).",
+      "Exactly 10% (development is 90%).",
+      "50% development and 50% maintenance in all domains.",
+      "Less than 5% if using Agile methodologies."
+    ],
+    "correctAnswer": "At least 60% (with development accounting for <= 40%).",
+    "explanation": "Extensive empirical research (Boehm, Lientz & Swanson) demonstrates that maintenance accounts for >60% of total lifetime software cost."
+  },
+  {
+    "id": "q-m3-qual-03",
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "Which three sub-characteristics form the core pillars of Software Maintainability?",
+    "options": [
+      "Understandability, Modifiability, and Testability",
+      "Speed, Memory Footprint, and Battery Consumption",
+      "Compilation Time, LOC, and Function Count",
+      "Encryption Key Length, HTTPS, and Firewalls"
+    ],
+    "correctAnswer": "Understandability, Modifiability, and Testability",
+    "explanation": "Maintainability depends on how easily maintainers can understand the logic, modify code without ripple effects, and re-test changes."
+  },
+  {
+    "id": "q-m3-qual-04",
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "How does a Portability Interface or Hardware Abstraction Layer (HAL) enable software portability?",
+    "options": [
+      "By isolating machine-dependent device drivers and OS system calls into a thin boundary layer.",
+      "By automatically compiling C++ code into Java bytecode at runtime.",
+      "By running all applications inside web browsers exclusively.",
+      "By eliminating the need for operating systems entirely."
+    ],
+    "correctAnswer": "By isolating machine-dependent device drivers and OS system calls into a thin boundary layer.",
+    "explanation": "A portability interface isolates hardware and OS specifics to <5% of the codebase, allowing the remaining 95%+ of application code to run unchanged across platforms."
+  },
+  {
+    "id": "q-m3-qual-05",
+    "moduleId": "mod-3",
+    "type": "mcq",
+    "question": "In McCall's Quality Factor Model, under which category does Portability fall?",
+    "options": [
+      "Product Transition",
+      "Product Operation",
+      "Product Revision",
+      "Product Feasibility"
+    ],
+    "correctAnswer": "Product Transition",
+    "explanation": "McCall partitions quality into: Product Operation (correctness, reliability, usability), Product Revision (maintainability, flexibility, testability), and Product Transition (portability, reusability, interoperability)."
+  },
+  {
+    "id": "q-m6-test-01",
+    "moduleId": "mod-6",
+    "type": "mcq",
+    "question": "What is Glenford Myers' classic maxim regarding the primary goal of software testing?",
+    "options": [
+      "Testing is the process of executing a program with the deliberate intent of finding errors, not showing it works.",
+      "Testing proves mathematically that zero bugs exist in the software.",
+      "Testing is performed solely to satisfy client contract clauses.",
+      "Testing should only be executed by end-users in production."
+    ],
+    "correctAnswer": "Testing is the process of executing a program with the deliberate intent of finding errors, not showing it works.",
+    "explanation": "Glenford Myers formulated that a successful test case is one that uncovers an undiscovered defect. If testing aimed only to show the program works, testers would subconsciously select inputs that avoid triggering bugs."
+  },
+  {
+    "id": "q-m6-test-02",
+    "moduleId": "mod-6",
+    "type": "mcq",
+    "question": "Why must Unit Testing strictly precede Integration Testing?",
+    "options": [
+      "Testing modules in isolation narrows down the search space for bugs, preventing combinatorial debugging complexity.",
+      "Unit testing is performed by managers while integration is done by developers.",
+      "Compilers refuse to link modules before unit tests pass.",
+      "Unit testing tests the database while integration testing tests the UI."
+    ],
+    "correctAnswer": "Testing modules in isolation narrows down the search space for bugs, preventing combinatorial debugging complexity.",
+    "explanation": "When units are thoroughly verified in isolation, any bug discovered during integration can be attributed directly to interface mismatches between modules."
+  },
+  {
+    "id": "q-m6-test-03",
+    "moduleId": "mod-6",
+    "type": "mcq",
+    "question": "In black-box testing, why is Boundary Value Analysis (BVA) considered superior to random test data generation?",
+    "options": [
+      "Empirical evidence demonstrates that programming defects cluster predominantly at the boundaries of input domains.",
+      "Boundary values are faster for CPUs to compute than middle values.",
+      "BVA eliminates the need for unit testing.",
+      "BVA tests only negative numbers."
+    ],
+    "correctAnswer": "Empirical evidence demonstrates that programming defects cluster predominantly at the boundaries of input domains.",
+    "explanation": "Programmers frequently make off-by-one errors (< vs <=, > vs >=). BVA targets these exact boundary conditions (min-1, min, min+1, max-1, max, max+1)."
   }
-];
+];

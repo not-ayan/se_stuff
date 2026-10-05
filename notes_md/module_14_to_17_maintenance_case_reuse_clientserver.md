@@ -15,7 +15,7 @@ Three primary types of maintenance:
 ### 1.2 Legacy Systems & Reverse Engineering
 - **Legacy Software**: Systems that are hard to maintain due to poor documentation, spaghetti unstructured code, and loss of original developer knowledge.
 - **Software Reverse Engineering**: The process of recovering the high-level design and SRS from an analysis of source code:
-  $$\text{Code} \longrightarrow \text{Module Specs} \longrightarrow \text{Structure Chart / DFD} \longrightarrow \text{SRS Document}$$
+  $$\text{Code} \longrightarrow \text{Module Specs} \longrightarrow \text{Structure Chart / Architectural Model} \longrightarrow \text{SRS Document}$$
 - **Cosmetic Clean-Up (First Step)**: Reformatting using pretty-printers, assigning meaningful variable names, removing `goto` statements, and simplifying nested conditionals.
 
 ### 1.3 Maintenance Process Models
@@ -36,7 +36,7 @@ Three primary types of maintenance:
 ### 2.2 Modern CASE Environment Architecture
 - **User Interface**: Consistent look-and-feel across all lifecycle tools.
 - **Tool Set**: Analysis/design diagrammers, code generators, test harness generators, documentation exporters (DTP/PostScript).
-- **Object Management System (OMS)**: Maps complex software entities (classes, DFDs, test cases) into storage.
+- **Object Management System (OMS)**: Maps complex software entities (classes, architectural models, test cases) into storage.
 - **Central Repository (Data Dictionary)**: Centralized store ensuring consistency and traceability across all phases.
 - **Second-Generation CASE**: Intelligent diagram layout engines, formal methodology rule checking, and automated code-generation synchronization.
 
