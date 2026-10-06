@@ -62,31 +62,30 @@ export const LearnView: React.FC<LearnViewProps> = ({
 
   return (
     <div className="mx-auto max-w-[1500px] px-4 py-7 sm:px-6 sm:py-9">
-      <div className={`grid grid-cols-1 gap-6 ${desktopSidebarCollapsed ? 'lg:grid-cols-[74px_minmax(0,1fr)]' : 'lg:grid-cols-[268px_minmax(0,1fr)]'}`}>
+      <div className={`grid grid-cols-1 gap-6 ${desktopSidebarCollapsed ? 'lg:grid-cols-[minmax(0,1fr)]' : 'lg:grid-cols-[268px_minmax(0,1fr)]'}`}>
         {/* Desktop sidebar */}
-        <aside className="hidden lg:block">
-          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2">
-            <div className="mb-2 flex items-center justify-between px-1">
-              {!desktopSidebarCollapsed && <span className="text-[11px] text-subtle">Navigation</span>}
-              <button
-                onClick={() => setDesktopSidebarCollapsed((collapsed) => !collapsed)}
-                aria-controls={desktopSidebarId}
-                aria-expanded={!desktopSidebarCollapsed}
-                aria-label={desktopSidebarCollapsed ? 'Expand chapter sidebar' : 'Collapse chapter sidebar'}
-                className="ml-auto inline-flex items-center gap-1 rounded-lg border border-line bg-canvas px-2 py-1 text-[11px] text-subtle transition-colors hover:text-ink"
-              >
-                {desktopSidebarCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
-                <span>{desktopSidebarCollapsed ? 'Open' : 'Hide'}</span>
-              </button>
-            </div>
-            {!desktopSidebarCollapsed && (
+        {!desktopSidebarCollapsed && (
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2">
+              <div className="mb-2 flex items-center justify-between px-1">
+                <span className="text-[11px] text-subtle">Navigation</span>
+                <button
+                  onClick={() => setDesktopSidebarCollapsed(true)}
+                  aria-controls={desktopSidebarId}
+                  aria-expanded
+                  aria-label="Collapse chapter sidebar"
+                  className="ml-auto inline-flex items-center gap-1 rounded-lg border border-line bg-canvas px-2 py-1 text-[11px] text-subtle transition-colors hover:text-ink"
+                >
+                  <ChevronLeft className="h-3.5 w-3.5" />
+                  <span>Hide</span>
+                </button>
+              </div>
               <div id={desktopSidebarId}>
                 <ChapterSidebar activeChapterId={chapter.id} onSelectChapter={selectChapter} onJumpSection={jumpSection} />
               </div>
-            )}
-          </div>
-        </aside>
-
+            </div>
+          </aside>
+        )}
         {/* Mobile drawer */}
         {mobileSidebarOpen && (
           <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Chapter navigation">
@@ -115,6 +114,17 @@ export const LearnView: React.FC<LearnViewProps> = ({
             >
               <List className="h-4 w-4" /> Chapters
             </button>
+            {desktopSidebarCollapsed && (
+              <button
+                onClick={() => setDesktopSidebarCollapsed(false)}
+                aria-controls={desktopSidebarId}
+                aria-expanded={false}
+                aria-label="Expand chapter sidebar"
+                className="hidden items-center gap-2 rounded-xl border border-line bg-canvas px-3 py-2 text-[13px] font-medium text-body lg:flex"
+              >
+                <ChevronRight className="h-4 w-4" /> Navigation
+              </button>
+            )}
 
             <div className="ml-auto flex flex-wrap items-center gap-2">
               {onOpenAiMentor && (
