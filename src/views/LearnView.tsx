@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, BrainCircuit, Dices, HelpCircle, List, Sparkles, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight, BrainCircuit, ChevronLeft, ChevronRight, Dices, HelpCircle, List, Sparkles, X } from 'lucide-react';
 import { CHAPTERS, getChapterById } from '../content/chapters';
 import { NotesReader } from '../components/NotesReader';
 import { ChapterSidebar } from '../components/ChapterSidebar';
@@ -22,8 +22,11 @@ export const LearnView: React.FC<LearnViewProps> = ({
   onOpenPractice,
   onOpenAiMentor,
 }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
   const { visitChapter } = useProgress();
+  const desktopSidebarId = 'desktop-chapter-sidebar';
+  const mobileSidebarId = 'mobile-chapter-sidebar';
 
   const chapter = getChapterById(chapterId) ?? CHAPTERS[0];
   const index = CHAPTERS.findIndex((c) => c.id === chapter.id);
@@ -33,7 +36,7 @@ export const LearnView: React.FC<LearnViewProps> = ({
   const selectChapter = (id: string) => {
     onSelectChapter(id);
     visitChapter(id);
-    setSidebarOpen(false);
+    setMobileSidebarOpen(false);
     window.scrollTo({ top: 0 });
   };
 
@@ -41,24 +44,57 @@ export const LearnView: React.FC<LearnViewProps> = ({
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  useEffect(() => {
+    if (!mobileSidebarOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileSidebarOpen(false);
+      }
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileSidebarOpen]);
+
   return (
     <div className="mx-auto max-w-[1500px] px-4 py-7 sm:px-6 sm:py-9">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[268px_minmax(0,1fr)]">
+      <div className={`grid grid-cols-1 gap-6 ${desktopSidebarCollapsed ? 'lg:grid-cols-[74px_minmax(0,1fr)]' : 'lg:grid-cols-[268px_minmax(0,1fr)]'}`}>
         {/* Desktop sidebar */}
         <aside className="hidden lg:block">
           <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2">
-            <ChapterSidebar activeChapterId={chapter.id} onSelectChapter={selectChapter} onJumpSection={jumpSection} />
+            <div className="mb-2 flex items-center justify-between px-1">
+              {!desktopSidebarCollapsed && <span className="text-[11px] text-subtle">Navigation</span>}
+              <button
+                onClick={() => setDesktopSidebarCollapsed((collapsed) => !collapsed)}
+                aria-controls={desktopSidebarId}
+                aria-expanded={!desktopSidebarCollapsed}
+                aria-label={desktopSidebarCollapsed ? 'Expand chapter sidebar' : 'Collapse chapter sidebar'}
+                className="ml-auto inline-flex items-center gap-1 rounded-lg border border-line bg-canvas px-2 py-1 text-[11px] text-subtle transition-colors hover:text-ink"
+              >
+                {desktopSidebarCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
+                <span>{desktopSidebarCollapsed ? 'Open' : 'Hide'}</span>
+              </button>
+            </div>
+            {!desktopSidebarCollapsed && (
+              <div id={desktopSidebarId}>
+                <ChapterSidebar activeChapterId={chapter.id} onSelectChapter={selectChapter} onJumpSection={jumpSection} />
+              </div>
+            )}
           </div>
         </aside>
 
         {/* Mobile drawer */}
-        {sidebarOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden">
-            <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-            <div className="absolute left-0 top-0 h-full w-[300px] max-w-[86vw] overflow-y-auto border-r border-line bg-panel p-4">
+        {mobileSidebarOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Chapter navigation">
+            <button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={() => setMobileSidebarOpen(false)} aria-label="Close chapter navigation overlay" />
+            <div id={mobileSidebarId} className="absolute left-0 top-0 h-full w-[300px] max-w-[86vw] overflow-y-auto border-r border-line bg-panel p-4">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-[11px] text-subtle">Chapters</span>
-                <button onClick={() => setSidebarOpen(false)} aria-label="Close chapter list" className="rounded-lg p-1.5 text-subtle hover:bg-canvas">
+                <button onClick={() => setMobileSidebarOpen(false)} aria-label="Close chapter list" className="rounded-lg p-1.5 text-subtle hover:bg-canvas">
                   <X className="h-4 w-4" />
                 </button>
               </div>
@@ -72,7 +108,9 @@ export const LearnView: React.FC<LearnViewProps> = ({
           {/* Toolbar */}
           <div className="mb-6 flex flex-wrap items-center gap-2">
             <button
-              onClick={() => setSidebarOpen(true)}
+              onClick={() => setMobileSidebarOpen(true)}
+              aria-controls={mobileSidebarId}
+              aria-expanded={mobileSidebarOpen}
               className="flex items-center gap-2 rounded-xl border border-line bg-canvas px-3 py-2 text-[13px] font-medium text-body lg:hidden"
             >
               <List className="h-4 w-4" /> Chapters
